@@ -35,9 +35,9 @@ const Home = () => {
   ];
   return (
     <div>
-      <div className="flex justify-between w-5/6 mx-auto border-2 h-full">
+      <div className="flex justify-between w-5/6 mx-auto h-full">
         <motion.div
-          className=" basis-1/2 border-2"
+          className=" basis-1/2 "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           whileInView={{ opacity: 1 }}
@@ -71,7 +71,7 @@ const Home = () => {
       {/* Image Area */}
       <div>
         <motion.div
-          className="flex justify-between w-5/6 mx-auto border-2 h-full mt-20"
+          className="flex justify-between w-5/6 mx-auto  h-full mt-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
