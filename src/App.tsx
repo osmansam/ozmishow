@@ -1,9 +1,17 @@
 import React from "react";
-
+import Navbar from "./scenes/navbar";
+import Home from "./scenes/home";
 function App() {
   return (
     <div className="App">
-      <h1 className="capitalize font-bold text-3xl underline">osman</h1>
+      {/* <video autoPlay loop muted id="video" className="fixed z-[-1] w-full  ">
+        <source
+          src="https://www.ultimacollection.com/application/files/3016/1668/4590/cover.mp4"
+          type="video/mp4"
+        />
+      </video> */}
+      {/* <Navbar /> */}
+      <Home />
     </div>
   );
 }

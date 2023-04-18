@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-
+import contextSlice from "./features/context/contextSlice";
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    context: contextSlice,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
