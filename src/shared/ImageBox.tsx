@@ -5,12 +5,17 @@ type Props = {
   img: string;
   header: string;
   description: string;
+  height?: string;
 };
 
-const ImageBox = ({ img, header, description }: Props) => {
+const ImageBox = ({ img, header, description, height }: Props) => {
   return (
-    <div className="flex flex-col  w-1/4">
-      <img src={img} alt={header} className="object-cover w-full h-80" />
+    <div className="flex flex-col  w-1/4  transition duration-200  border-2 ">
+      <img
+        src={img}
+        alt={header}
+        className={`object-cover w-full h-${height}`}
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -35,16 +35,16 @@ const Home = () => {
   ];
   return (
     <div>
-      <div className="flex justify-between w-5/6 mx-auto h-full">
+      <div className="flex  justify-center w-5/6 mx-auto h-full md:justify-between  ">
         <motion.div
-          className=" basis-1/2 "
+          className=" md:basis-1/2 "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className=" flex justify-between pr-8 ">
+          <div className=" flex justify-between pr-8 mt-28 mb-8">
             <HText>
               Step Into the World of{" "}
               <span className="text-yellow-20">Ultima Collection</span>
@@ -87,6 +87,7 @@ const Home = () => {
               img={item.img}
               header={item.header}
               description={item.description}
+              height="80"
             />
           ))}
         </motion.div>

@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./scenes/navbar";
 import Home from "./scenes/home";
+import Services from "./scenes/services";
 function App() {
   return (
     <div className="App">
