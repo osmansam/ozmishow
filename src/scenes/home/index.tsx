@@ -71,7 +71,7 @@ const Home = () => {
       {/* Image Area */}
       <div>
         <motion.div
-          className="flex justify-between w-5/6 mx-auto  h-full mt-20"
+          className="flex justify-between w-5/6 mx-auto  h-full mt-20 flex-col md:flex-row"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

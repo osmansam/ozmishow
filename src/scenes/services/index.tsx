@@ -35,9 +35,9 @@ const Services = () => {
   ];
   return (
     <div className="bg-white-10 ">
-      <div className="flex justify-between w-5/6 mx-auto h-full">
+      <div className="flex  justify-center w-5/6 mx-auto h-full md:justify-between  ">
         <motion.div
-          className=" basis-3/5 "
+          className=" md:basis-3/5 "
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
@@ -64,7 +64,7 @@ const Services = () => {
       {/* Image Area */}
       <div>
         <motion.div
-          className="flex justify-between w-5/6 mx-auto  h-full mt-20 "
+          className="flex justify-between w-5/6 mx-auto  h-full mt-20 flex-col md:flex-row"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -80,7 +80,7 @@ const Services = () => {
               img={item.img}
               header={item.header}
               description={item.description}
-              height="100"
+              height="80"
             />
           ))}
         </motion.div>

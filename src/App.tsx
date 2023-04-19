@@ -13,6 +13,7 @@ function App() {
       </video> */}
       {/* <Navbar /> */}
       <Home />
+      <Services />
     </div>
   );
 }
