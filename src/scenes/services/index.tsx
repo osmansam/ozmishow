@@ -38,14 +38,11 @@ const Services = () => {
       <div className="flex  justify-center w-5/6 mx-auto h-full md:justify-between  ">
         <motion.div
           className=" md:basis-3/5 "
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 1 }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1 },
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5 }}
         >
           <div className="mb-8 mt-28 mx-auto ">
             <HText>
@@ -68,7 +65,7 @@ const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.5, staggerChildren: 0.5 }}
+          transition={{ duration: 0.5, staggerChildren: 0.2 }}
           variants={{
             hidden: { opacity: 0, y: 100 },
             visible: { opacity: 1, y: 0 },

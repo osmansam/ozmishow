@@ -10,20 +10,18 @@ type Props = {
 
 const ImageBox = ({ img, header, description, height }: Props) => {
   return (
-    <div className="flex flex-col  md:w-1/4  transition duration-200   ">
-      <img
+    <div className="flex flex-col  md:w-1/4  h-full  transition duration-200   ">
+      <motion.img
         src={img}
         alt={header}
         className={`object-cover w-full h-${height} mt-10`}
+        variants={{
+          hidden: { y: 100 },
+          visible: { y: 0 },
+        }}
       />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="mt-8 text-lg text-gray-40">{header}</h1>
+      <motion.div className=" mt-8">
+        <h1 className="text-lg text-gray-40">{header}</h1>
         <Ptext>{description}</Ptext>
       </motion.div>
     </div>

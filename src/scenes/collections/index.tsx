@@ -50,6 +50,8 @@ const Collections = () => {
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   const [scroll, setScroll] = useState(1);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const scrollContainerWidth = 460 * collections.length;
+
   useEffect(() => {
     setScroll(1);
     setScrollPosition((window.innerWidth * 3) / 4);
@@ -124,7 +126,7 @@ const Collections = () => {
         ref={containerRef}
         className="mx-20 mt-20 h-[400px] mx-auto w-5/6 overflow-x-auto overflow-y-hidden scrollbar-hide"
       >
-        <ul className="w-[2800px] whitespace-nowrap">
+        <ul className={`w-[${scrollContainerWidth}px] whitespace-nowrap`}>
           {collections.map((collection, index) => (
             <Collection
               key={index}
@@ -138,7 +140,7 @@ const Collections = () => {
         {/* underline */}
         {isAboveMediumScreens && (
           <div
-            className="h-[0.7px] my-4 w-5/6 mx-auto bg-scroll-gray mt-8"
+            className="h-[0.9px] my-4 w-5/6 mx-auto bg-scroll-gray mt-8"
             style={{ position: "sticky", top: 0, left: 50 }}
           >
             <div
