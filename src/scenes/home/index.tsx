@@ -90,6 +90,7 @@ const Home = () => {
               img={item.img}
               header={item.header}
               description={item.description}
+              height="400"
             />
           ))}
         </motion.div>

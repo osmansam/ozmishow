@@ -14,7 +14,7 @@ const ImageBox = ({ img, header, description, height }: Props) => {
       <motion.img
         src={img}
         alt={header}
-        className={`object-cover w-full h-${height} mt-10`}
+        className={`object-cover w-full h-[${height}px] mt-10`}
         variants={{
           hidden: { y: 100 },
           visible: { y: 0 },
