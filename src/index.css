@@ -9,3 +9,11 @@ body {
   overflow-x: hidden;
   overscroll-behavior-y: none;
 }
+@keyframes reveal-background {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 100%;
+  }
+}

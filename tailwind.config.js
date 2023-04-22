@@ -14,6 +14,7 @@ module.exports = {
         "scroll-gray": "#e0dbd5",
         "scroll-back": "#f9f7f7",
         "collections-background": "#f0ebe5",
+        "nav-gray": "#818b9e",
       },
     },
     plugins: [],

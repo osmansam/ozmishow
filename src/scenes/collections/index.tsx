@@ -98,7 +98,7 @@ const Collections = () => {
 
   return (
     <div className="bg-collections-background ">
-      <div className="flex  justify-center w-5/6 mx-auto h-full md:justify-between  ">
+      <div className="flex  justify-center w-5/6 pt-10 mx-auto h-full md:justify-between  ">
         <motion.div
           className=" md:basis-3/5 "
           initial="hidden"
