@@ -16,3 +16,24 @@ export interface PressType {
   header?: string;
   description: string;
 }
+export interface TwoPictureType {
+  img?: string;
+  header: string;
+  paragraphs: string[];
+  button?: string;
+}
+export interface TwoPictureContainerType {
+  mainHeader: string;
+  twoPictureArray: Array<TwoPictureType>;
+}
+export interface IconExplainType {
+  img?: string;
+  icon?: string;
+  header: string;
+  paragraphs: string[];
+  button?: string;
+}
+export interface IconExplainContainerType {
+  mainHeader: string;
+  iconExplainArray: Array<IconExplainType>;
+}
