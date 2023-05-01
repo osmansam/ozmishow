@@ -1,3 +1,20 @@
+import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+import { Action, AnyAction } from "redux";
+
+export type ThunkAPIType = {
+  dispatch: ThunkDispatch<RootState, void, AnyAction>;
+  state: RootState;
+  extra: any;
+  rejectValue: any;
+};
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
+
 export interface ImageBoxType {
   img: string;
   header: string;
@@ -20,7 +37,7 @@ export interface TwoPictureType {
   img?: string;
   header: string;
   paragraphs: string[];
-  button?: string;
+  buttons?: string[];
 }
 export interface TwoPictureContainerType {
   mainHeader: string;
@@ -36,4 +53,25 @@ export interface IconExplainType {
 export interface IconExplainContainerType {
   mainHeader: string;
   iconExplainArray: Array<IconExplainType>;
+}
+
+export const ComponentType = {
+  PictureAtRight: "PictureAtRight",
+  PictureAtLeft: "PictureAtLeft",
+  TwoPictureContainer: "TwoPictureContainer",
+  IconExplainContainer: "IconExplainContainer",
+};
+
+export const PageOptions = {
+  Home: "Home",
+  About: "About",
+  Contact: "Contact",
+  Press: "Press",
+  Collection: "Collection",
+};
+export interface ContainerType {
+  page: string;
+  mainHeader?: string;
+  componentName: string;
+  twoPictureArray: Array<TwoPictureType>;
 }

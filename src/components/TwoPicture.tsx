@@ -2,7 +2,7 @@ import React from "react";
 import ButtonUnderline from "./ButtonUnderline";
 import { TwoPictureType } from "../shared/types";
 
-const TwoPicture = ({ img, header, paragraphs, button }: TwoPictureType) => {
+const TwoPicture = ({ img, header, paragraphs, buttons }: TwoPictureType) => {
   return (
     <div className="flex flex-col gap-4 md:pr-6 w-full md:w-1/2a h-full mt-8">
       {img && <img src={img} alt={header} className="w-full h-100 " />}
@@ -17,16 +17,18 @@ const TwoPicture = ({ img, header, paragraphs, button }: TwoPictureType) => {
           {paragraph}
         </p>
       ))}
-      {button && (
-        <div className="mt-4">
-          <ButtonUnderline
-            text={button}
-            textColor="black"
-            underlineColorBefore="#e5e5e5"
-            underlineColorAfter="#414141"
-          ></ButtonUnderline>
-        </div>
-      )}
+
+      {buttons &&
+        buttons.map((button, index) => (
+          <div className="mt-4" key={index}>
+            <ButtonUnderline
+              text={button}
+              textColor="black"
+              underlineColorBefore="#e5e5e5"
+              underlineColorAfter="#414141"
+            ></ButtonUnderline>
+          </div>
+        ))}
     </div>
   );
 };

@@ -27,7 +27,7 @@ const data: TwoPictureContainerType = {
       paragraphs: [
         "Make the most of your time on the road on the platform with the largest network of active riders.",
       ],
-      button: "Sign up to drive",
+      buttons: ["Sign up to drive"],
     },
     {
       img: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_1116,h_744/v1597153245/assets/f3/d748e5-9df6-4841-8b9d-e3c5436412c4/original/UberIM_20079-large-1-3_2.jpg",
@@ -36,7 +36,7 @@ const data: TwoPictureContainerType = {
       paragraphs: [
         "Make the most of your time on the road on the platform with the largest network of active riders.",
       ],
-      button: "Sign up to drive",
+      buttons: ["Sign up to drive"],
     },
   ],
 };

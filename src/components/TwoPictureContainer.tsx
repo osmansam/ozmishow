@@ -15,14 +15,14 @@ const TwoPictureContainer = ({ twoPictureArrayContainer }: Props) => {
       </h1>
       <div className="w-full h-full md:flex md:justify-between mx-auto">
         {twoPictureArray.map((twoPicture, index) => {
-          const { img, header, paragraphs, button } = twoPicture;
+          const { img, header, paragraphs, buttons } = twoPicture;
           return (
             <TwoPicture
               key={index}
               img={img}
               header={header}
               paragraphs={paragraphs}
-              button={button}
+              buttons={buttons}
             ></TwoPicture>
           );
         })}
