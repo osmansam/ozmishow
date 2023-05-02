@@ -70,11 +70,6 @@ export const ComponentType = {
     pictureContainerNumber: 3,
     isMainHeader: true,
   },
-  PageOptions: {
-    name: "PageOptions",
-    pictureContainerNumber: 0,
-    isMainHeader: true,
-  },
 };
 
 export const PageOptions = {
@@ -84,6 +79,7 @@ export const PageOptions = {
   Press: "Press",
   Collection: "Collection",
   Furkan: "Furkan",
+  Osman: "Osman",
 };
 export interface ContainerType {
   _id?: string;
