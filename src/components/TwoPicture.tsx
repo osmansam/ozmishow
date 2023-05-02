@@ -18,17 +18,19 @@ const TwoPicture = ({ img, header, paragraphs, buttons }: TwoPictureType) => {
         </p>
       ))}
 
-      {buttons &&
-        buttons.map((button, index) => (
-          <div className="mt-4" key={index}>
-            <ButtonUnderline
-              text={button}
-              textColor="black"
-              underlineColorBefore="#e5e5e5"
-              underlineColorAfter="#414141"
-            ></ButtonUnderline>
-          </div>
-        ))}
+      <div className="w-full flex gap-8 flex-row">
+        {buttons &&
+          buttons.map((button, index) => (
+            <div className="mt-4" key={index}>
+              <ButtonUnderline
+                text={button}
+                textColor="black"
+                underlineColorBefore="#e5e5e5"
+                underlineColorAfter="#414141"
+              ></ButtonUnderline>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

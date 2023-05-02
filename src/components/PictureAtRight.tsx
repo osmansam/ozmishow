@@ -18,17 +18,19 @@ const PictureAtRight = ({
             {paragraph}
           </p>
         ))}
-        {buttons &&
-          buttons.map((button, index) => (
-            <div className="mt-4" key={index}>
-              <ButtonUnderline
-                text={button}
-                textColor="black"
-                underlineColorBefore="#e5e5e5"
-                underlineColorAfter="#414141"
-              ></ButtonUnderline>
-            </div>
-          ))}
+        <div className="w-full flex gap-8 flex-row">
+          {buttons &&
+            buttons.map((button, index) => (
+              <div className="mt-4" key={index}>
+                <ButtonUnderline
+                  text={button}
+                  textColor="black"
+                  underlineColorBefore="#e5e5e5"
+                  underlineColorAfter="#414141"
+                ></ButtonUnderline>
+              </div>
+            ))}
+        </div>
       </div>
       {/* right side  */}
       <img src={img} alt={header} className="w-full lg:basis-1/2 h-[400px]" />
