@@ -16,8 +16,10 @@ const PictureAtLeft = ({
       {/* right side  */}
 
       <div className="basis-1/2 ">
+        {/* if you want to have more wide paragraphs you need to decrease lg:pl-28 */}
         <div className="flex w-full lg:pl-28 gap-4 flex-col h-full  pt-20">
           <h1 className="font-[700] text-4xl">{header}</h1>
+          {/* paragraphs */}
           {paragraphs.map((paragraph, index) => (
             <p
               key={index}
@@ -27,6 +29,7 @@ const PictureAtLeft = ({
               {paragraph}
             </p>
           ))}
+          {/* buttons */}
           <div className="w-full flex gap-8 flex-row">
             {buttons &&
               buttons.map((button, index) => (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { getPageTwoPictures } from "../../features/twoPicture/twoPictureSlice";
@@ -14,7 +14,7 @@ interface Props {
 
 const Page = ({ page }: Props) => {
   const dispatch = useAppDispatch();
-
+  const [newContainer, setNewContainer] = useState([]);
   useEffect(() => {
     if (Object.values(PageOptions).includes(page as keyof typeof PageOptions)) {
       dispatch(
@@ -31,6 +31,9 @@ const Page = ({ page }: Props) => {
     // Sort the items in the container array based on the position property
     // const sortedContainer = container?.sort((a, b) => a.position - b.position);
     // Map the sorted container array and render the components
+    console.log("====================================");
+    console.log(container);
+    console.log("====================================");
     return container?.map((item, index) => {
       switch (item.componentName) {
         case "PictureAtRight":

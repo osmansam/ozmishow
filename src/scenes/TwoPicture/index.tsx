@@ -165,9 +165,7 @@ const TwoPictureForm = () => {
         {isMainHeader && (
           <div className="flex gap-5 w-full ">
             <label className="w-32" htmlFor="header">
-              {componentName === "PageOptions"
-                ? "Page Name :"
-                : "Main Header :"}
+              Main Header:
             </label>
             <input
               className="border-2 w-4/5 rounded-md"
