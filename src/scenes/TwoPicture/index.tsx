@@ -19,48 +19,86 @@ const TwoPictureForm = () => {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(PageOptions.Home);
   const [mainHeader, setMainHeader] = useState("");
+  const [isMainHeader, setIsMainHeader] = useState(false);
+  const [numContainers, setNumContainers] = useState(0);
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
   const [createContainer, setCreateContainer] = useState({} as ContainerType);
   const [componentName, setComponentName] =
     useState<keyof typeof ComponentType>();
-
-  const renderPictureContainers = () => {
-    let numContainers = 0;
-    switch (componentName) {
-      case ComponentType.PictureAtRight:
-      case ComponentType.PictureAtLeft:
-        numContainers = 1;
-        break;
-      case ComponentType.TwoPictureContainer:
-        numContainers = 2;
-        break;
-      case ComponentType.IconExplainContainer:
-        numContainers = 3;
-        break;
-      default:
-        return null;
+  //Set the number of picture containers according to the component type
+  //set the isMainHeader according to the component type
+  useEffect(() => {
+    if (componentName != null) {
+      setNumContainers(ComponentType[componentName].pictureContainerNumber);
+      setIsMainHeader(ComponentType[componentName].isMainHeader);
     }
+  }, [componentName]);
+  //Render picture containers according to the number of containers
+  const renderPictureContainers = (numContainers: number) => {
     const containers = [];
     for (let i = 0; i < numContainers; i++) {
       containers.push(<PictureContainer key={i} />);
     }
     return containers;
   };
-  const handleCreate = async () => {
-    if (!page || !componentName) return;
-    const newContainer = {
-      page,
-      componentName: ComponentType[componentName],
-      mainHeader,
-      twoPictureArray,
-    };
-    await dispatch(createTwoPicture(newContainer));
+
+  //Reset the inputs after creating the component
+  const resetInputs = () => {
     setMainHeader("");
-    setPage(PageOptions.Home);
+    setPage("Home");
     setComponentName(undefined);
+    setIsMainHeader(false);
     dispatch(resetTwoPictureArray());
+  };
+
+  const handleCreate = async () => {
+    switch (componentName) {
+      // case PictureAtRight and PictureAtLeft
+      case ComponentType.PictureAtRight.name:
+      case ComponentType.PictureAtLeft.name:
+        if (twoPictureArray.length !== 1) return;
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName: componentName,
+            twoPictureArray,
+          })
+        );
+        resetInputs();
+        break;
+      // case TwoPictureContainer
+      case ComponentType.TwoPictureContainer.name:
+        if (twoPictureArray.length !== 2) return;
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
+            twoPictureArray,
+          })
+        );
+        resetInputs();
+        break;
+      // case IconExplainContainer
+      case ComponentType.IconExplainContainer.name:
+        if (twoPictureArray.length !== 3) return;
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
+            twoPictureArray,
+          })
+        );
+        resetInputs();
+        break;
+
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -89,30 +127,31 @@ const TwoPictureForm = () => {
         <div className="w-full  flex gap-12">
           <p>Select component type:</p>
           <div className="flex gap-4">
-            {Object.keys(ComponentType).map((key) => (
-              <label key={key}>
+            {Object.values(ComponentType).map((component) => (
+              <label key={component.name}>
                 <input
                   type="radio"
                   name="componentType"
-                  value={key}
+                  value={component.name}
                   onChange={(e) =>
                     setComponentName(
                       e.target.value as keyof typeof ComponentType
                     )
                   }
                 />
-                {key}
+                {component.name}
               </label>
             ))}
             <br />
           </div>
         </div>
         {/* MainHeader */}
-        {(componentName === ComponentType.TwoPictureContainer ||
-          componentName === ComponentType.IconExplainContainer) && (
+        {isMainHeader && (
           <div className="flex gap-5 w-full ">
             <label className="w-32" htmlFor="header">
-              Main Header :
+              {componentName === "PageOptions"
+                ? "Page Name :"
+                : "Main Header :"}
             </label>
             <input
               className="border-2 w-4/5 rounded-md"
@@ -123,9 +162,10 @@ const TwoPictureForm = () => {
             />
           </div>
         )}
-
         {/* picture containers */}
-        {renderPictureContainers()}
+        {renderPictureContainers(numContainers)}
+        {/* create button */}
+
         <button
           className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={handleCreate}

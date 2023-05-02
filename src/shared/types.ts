@@ -50,10 +50,31 @@ export interface IconExplainContainerType {
 }
 
 export const ComponentType = {
-  PictureAtRight: "PictureAtRight",
-  PictureAtLeft: "PictureAtLeft",
-  TwoPictureContainer: "TwoPictureContainer",
-  IconExplainContainer: "IconExplainContainer",
+  PictureAtRight: {
+    name: "PictureAtRight",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+  },
+  PictureAtLeft: {
+    name: "PictureAtLeft",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+  },
+  TwoPictureContainer: {
+    name: "TwoPictureContainer",
+    pictureContainerNumber: 2,
+    isMainHeader: true,
+  },
+  IconExplainContainer: {
+    name: "IconExplainContainer",
+    pictureContainerNumber: 3,
+    isMainHeader: true,
+  },
+  PageOptions: {
+    name: "PageOptions",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+  },
 };
 
 export const PageOptions = {

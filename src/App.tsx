@@ -12,6 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<TwoPicture />} />
         {Object.values(PageOptions).map((page) => (
           <Route
             path={`/${page.toLowerCase()}`}
