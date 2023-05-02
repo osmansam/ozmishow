@@ -40,19 +40,13 @@ export interface TwoPictureType {
   buttons?: string[];
 }
 export interface TwoPictureContainerType {
-  mainHeader: string;
+  mainHeader?: string;
   twoPictureArray: Array<TwoPictureType>;
 }
-export interface IconExplainType {
-  img?: string;
-  icon?: string;
-  header: string;
-  paragraphs: string[];
-  button?: string;
-}
+
 export interface IconExplainContainerType {
-  mainHeader: string;
-  iconExplainArray: Array<IconExplainType>;
+  mainHeader?: string;
+  iconExplainArray: Array<TwoPictureType>;
 }
 
 export const ComponentType = {
@@ -70,6 +64,7 @@ export const PageOptions = {
   Collection: "Collection",
 };
 export interface ContainerType {
+  _id?: string;
   page: string;
   mainHeader?: string;
   componentName: string;

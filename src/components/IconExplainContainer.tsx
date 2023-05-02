@@ -1,12 +1,11 @@
 import React from "react";
 import { IconExplainContainerType } from "../shared/types";
 import IconExplain from "./IconExplain";
-type Props = {
-  iconExplainContainer: IconExplainContainerType;
-};
 
-const IconExplainContainer = ({ iconExplainContainer }: Props) => {
-  const { mainHeader, iconExplainArray } = iconExplainContainer;
+const IconExplainContainer = ({
+  mainHeader,
+  iconExplainArray,
+}: IconExplainContainerType) => {
   return (
     <div className="w-5/6 h-full mx-auto py-10 md:py-20">
       <h1
@@ -17,14 +16,14 @@ const IconExplainContainer = ({ iconExplainContainer }: Props) => {
       </h1>
       <div className="w-full h-full md:flex md:justify-between mx-auto">
         {iconExplainArray.map((iconExplain, index) => {
-          const { img, header, paragraphs, button } = iconExplain;
+          const { img, header, paragraphs, buttons } = iconExplain;
           return (
             <IconExplain
               key={index}
               img={img}
               header={header}
               paragraphs={paragraphs}
-              button={button}
+              buttons={buttons}
             ></IconExplain>
           );
         })}

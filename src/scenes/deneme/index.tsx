@@ -15,6 +15,7 @@ import Maxim from "../../components/maxim";
 import {
   IconExplainContainerType,
   TwoPictureContainerType,
+  TwoPictureType,
 } from "../../shared/types";
 type Props = {};
 const data: TwoPictureContainerType = {
@@ -49,7 +50,7 @@ const icon: IconExplainContainerType = {
       paragraphs: [
         "We’re building a culture within Uber that emphasizes doing the right thing, period, for riders, drivers, and employees. Find out more about the team that’s leading the way.",
       ],
-      button: "See our leadership",
+      buttons: ["See our leadership"],
     },
     {
       img: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_720,h_480/v1555540623/assets/cb/9b789f-167d-4a57-ac3a-c23060bfa9e8/original/170830_DaraAllHands_0I7A9940_R2.jpg",
@@ -57,28 +58,31 @@ const icon: IconExplainContainerType = {
       paragraphs: [
         "We’re building a culture within Uber that emphasizes doing the right thing, period, for riders, drivers, and employees. Find out more about the team that’s leading the way.",
       ],
-      button: "See our leadership",
+      buttons: ["See our leadership"],
     },
     {
       header: "Who's driving Uber",
       paragraphs: [
         "We’re building a culture within Uber that emphasizes doing the right thing, period, for riders, drivers, and employees. Find out more about the team that’s leading the way.",
       ],
-      button: "See our leadership",
+      buttons: ["See our leadership"],
     },
   ],
+};
+const dataThree: TwoPictureType = {
+  img: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_1116,h_744/v1597153245/assets/f3/d748e5-9df6-4841-8b9d-e3c5436412c4/original/UberIM_20079-large-1-3_2.jpg",
+  header: "Drive with Uber",
+  paragraphs: [
+    "Make the most of your time on the road on the platform with the largest network of active riders.",
+  ],
+  buttons: ["Sign up to drive"],
 };
 
 const Deneme = (props: Props) => {
   return (
     <div>
       <div className="h-fit ">
-        <PictureAtRight
-          img={ChessImage}
-          header="Peace of mind on every ride"
-          description="From driver screening and insurance to app features that let you track your trip and stay connected, your safety is a top priority."
-          message="Ride with confidence"
-        ></PictureAtRight>
+        <PictureAtRight {...dataThree}></PictureAtRight>
       </div>
       <div className="mt-8 bg-black h-40 items-center flex justify-center">
         <WhiteButton
@@ -121,8 +125,10 @@ const Deneme = (props: Props) => {
             "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_1076,h_717/v1602280707/assets/ca/8ba51a-ac4a-438d-a62e-776bf6920c1a/original/Reserve_Web-4_Trip.jpg"
           }
           header="Reserve a ride that's ready when you are"
-          description="Now more than ever, reservations are a way of life. Reserve a premium Uber experience, up to 30 days in advance, for whenever you’re ready to ride."
-          message="Learn more"
+          paragraphs={[
+            "Now more than ever, reservations are a way of life. Reserve a premium Uber experience, up to 30 days in advance, for whenever you’re ready to ride.",
+          ]}
+          buttons={["Learn more"]}
         ></PictureAtLeft>
       </div>
 
@@ -132,8 +138,10 @@ const Deneme = (props: Props) => {
             "https://www.uber-assets.com/image/upload/q_auto:eco,c_fill,w_1116,h_744/v1555433729/assets/13/b383de-93a1-4327-8812-91de86e3edd9/original/_background-01.svg"
           }
           header="Your safety drives us"
-          description="Whether you’re in the back seat or behind the wheel, your safety is essential. We are committed to doing our part, and technology is at the heart of our approach. We partner with safety advocates and develop new technologies and systems to help improve safety and help make it easier for everyone to get around."
-          message="Learn more"
+          paragraphs={[
+            "Whether you’re in the back seat or behind the wheel, your safety is essential. We are committed to doing our part, and technology is at the heart of our approach. We partner with safety advocates and develop new technologies and systems to help improve safety and help make it easier for everyone to get around.",
+          ]}
+          buttons={["Learn more"]}
         ></PictureAtRight>
       </div>
       <div className="w-5/6 flex flex-wrap  h-full  mx-auto py-10 md:py-20">
@@ -169,13 +177,6 @@ const Deneme = (props: Props) => {
           "Movement is what we power. It’s our lifeblood. It runs through our veins. It’s what gets us out of bed each morning. It pushes us to constantly reimagine how we can move better. For you. For all the places you want to go. For all the things you want to get. For all the ways you want to earn. Across the entire world. In real time. At the incredible speed of now.",
         ]}
       ></HeaderAndText>
-      <IconExplainContainer iconExplainContainer={icon}></IconExplainContainer>
-      <TwoPictureContainer
-        twoPictureArrayContainer={data}
-      ></TwoPictureContainer>
-      <TwoPictureContainer
-        twoPictureArrayContainer={data}
-      ></TwoPictureContainer>
     </div>
   );
 };

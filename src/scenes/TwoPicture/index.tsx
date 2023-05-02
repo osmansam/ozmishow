@@ -3,7 +3,10 @@ import PictureContainer from "./PictureContainer";
 import { ComponentType, ContainerType, PageOptions } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { createTwoPicture } from "../../features/twoPicture/twoPictureSlice";
+import {
+  createTwoPicture,
+  resetTwoPictureArray,
+} from "../../features/twoPicture/twoPictureSlice";
 
 type TwoPictureType = {
   img: string;
@@ -57,6 +60,7 @@ const TwoPictureForm = () => {
     setMainHeader("");
     setPage(PageOptions.Home);
     setComponentName(undefined);
+    dispatch(resetTwoPictureArray());
   };
 
   return (

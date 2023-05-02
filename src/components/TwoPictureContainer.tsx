@@ -2,9 +2,10 @@ import React from "react";
 import { TwoPictureContainerType } from "../shared/types";
 import TwoPicture from "./TwoPicture";
 
-type Props = { twoPictureArrayContainer: TwoPictureContainerType };
-const TwoPictureContainer = ({ twoPictureArrayContainer }: Props) => {
-  const { mainHeader, twoPictureArray } = twoPictureArrayContainer;
+const TwoPictureContainer = ({
+  mainHeader,
+  twoPictureArray,
+}: TwoPictureContainerType) => {
   return (
     <div className="w-5/6 h-full mx-auto py-10 md:py-20">
       <h1

@@ -15,8 +15,8 @@ const PictureContainer = (props: Props) => {
   const [img, setImg] = useState("");
   const [header, setHeader] = useState("");
   const [paragraphs, setParagraphs] = useState<string[]>([]);
-  const [paragraphNumber, setParagraphNumber] = useState(0);
-  const [buttonNumber, setButtonNumber] = useState(0);
+  const [paragraphNumber, setParagraphNumber] = useState(1);
+  const [buttonNumber, setButtonNumber] = useState(1);
   const [buttons, setButtons] = useState<string[]>([]);
 
   const handleNumberSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,6 +64,13 @@ const PictureContainer = (props: Props) => {
     setAllDone(true);
   };
 
+  const handleChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.name === "paragraphNumber") {
+      setParagraphNumber(parseInt(e.currentTarget.value));
+    } else if (e.currentTarget.name === "buttonNumber") {
+      setButtonNumber(parseInt(e.currentTarget.value));
+    }
+  };
   if (!ready) {
     return (
       <div className="w-full ">
@@ -79,6 +86,8 @@ const PictureContainer = (props: Props) => {
               className="border-2 w-16"
               type="number"
               name="paragraphNumber"
+              value={paragraphNumber}
+              onChange={handleChangeNumber}
             />
           </div>
           <div className="flex gap-5 w-full ">
@@ -89,6 +98,8 @@ const PictureContainer = (props: Props) => {
               className="border-2 w-16"
               type="number"
               name="buttonNumber"
+              value={buttonNumber}
+              onChange={handleChangeNumber}
             />
           </div>
           <button
