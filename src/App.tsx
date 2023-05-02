@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<TwoPicture />} />
         {Object.values(PageOptions).map((page) => (
           <Route
+            key={page}
             path={`/${page.toLowerCase()}`}
             element={<Page page={page} />}
           />

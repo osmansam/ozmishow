@@ -83,6 +83,7 @@ export const PageOptions = {
   Contact: "Contact",
   Press: "Press",
   Collection: "Collection",
+  Furkan: "Furkan",
 };
 export interface ContainerType {
   _id?: string;
@@ -90,4 +91,5 @@ export interface ContainerType {
   mainHeader?: string;
   componentName: string;
   twoPictureArray: Array<TwoPictureType>;
+  position: number;
 }

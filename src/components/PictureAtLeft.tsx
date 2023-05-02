@@ -18,8 +18,12 @@ const PictureAtLeft = ({
       <div className="basis-1/2 ">
         <div className="flex w-full lg:pl-28 gap-4 flex-col h-full  pt-20">
           <h1 className="font-[700] text-4xl">{header}</h1>
-          {paragraphs.map((paragraph) => (
-            <p className=" font-[400] leading-6 " style={{ color: "#333333" }}>
+          {paragraphs.map((paragraph, index) => (
+            <p
+              key={index}
+              className=" font-[400] leading-6 "
+              style={{ color: "#333333" }}
+            >
               {paragraph}
             </p>
           ))}

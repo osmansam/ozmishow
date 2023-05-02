@@ -11,25 +11,31 @@ const PictureAtRight = ({
   return (
     <div className="lg:flex w-4/5 lg:justify-between h-full mx-auto mt-8 py-10 md:py-20 ">
       {/* left side */}
-      <div className="basis-1/2 flex  gap-4 flex-col h-full  pt-16 ">
-        <h1 className="font-[700] text-4xl">{header}</h1>
-        {paragraphs.map((paragraph) => (
-          <p className=" font-[400] leading-6 " style={{ color: "#333333" }}>
-            {paragraph}
-          </p>
-        ))}
-        <div className="w-full flex gap-8 flex-row">
-          {buttons &&
-            buttons.map((button, index) => (
-              <div className="mt-4" key={index}>
-                <ButtonUnderline
-                  text={button}
-                  textColor="black"
-                  underlineColorBefore="#e5e5e5"
-                  underlineColorAfter="#414141"
-                ></ButtonUnderline>
-              </div>
-            ))}
+      <div className="basis-1/2 ">
+        <div className="flex w-full lg:pr-28 gap-4 flex-col h-full  pt-20">
+          <h1 className="font-[700] text-4xl">{header}</h1>
+          {paragraphs.map((paragraph, index) => (
+            <p
+              key={index}
+              className=" font-[400] leading-6 "
+              style={{ color: "#333333" }}
+            >
+              {paragraph}
+            </p>
+          ))}
+          <div className="w-full flex gap-8 flex-row">
+            {buttons &&
+              buttons.map((button, index) => (
+                <div className="mt-4" key={index}>
+                  <ButtonUnderline
+                    text={button}
+                    textColor="black"
+                    underlineColorBefore="#e5e5e5"
+                    underlineColorAfter="#414141"
+                  ></ButtonUnderline>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
       {/* right side  */}

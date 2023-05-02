@@ -28,6 +28,9 @@ const Page = ({ page }: Props) => {
   const { container } = useSelector((state: RootState) => state.twoPicture);
 
   const renderComponents = () => {
+    // Sort the items in the container array based on the position property
+    // const sortedContainer = container?.sort((a, b) => a.position - b.position);
+    // Map the sorted container array and render the components
     return container?.map((item, index) => {
       switch (item.componentName) {
         case "PictureAtRight":

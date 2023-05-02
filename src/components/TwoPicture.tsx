@@ -12,8 +12,12 @@ const TwoPicture = ({ img, header, paragraphs, buttons }: TwoPictureType) => {
       >
         {header}
       </h1>
-      {paragraphs.map((paragraph) => (
-        <p className=" font-[400] leading-6 " style={{ color: "#333333" }}>
+      {paragraphs.map((paragraph, index) => (
+        <p
+          key={index}
+          className=" font-[400] leading-6 "
+          style={{ color: "#333333" }}
+        >
           {paragraph}
         </p>
       ))}

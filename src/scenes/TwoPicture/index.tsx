@@ -6,6 +6,7 @@ import { RootState, useAppDispatch } from "../../store";
 import {
   createTwoPicture,
   resetTwoPictureArray,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 
 type TwoPictureType = {
@@ -20,6 +21,7 @@ const TwoPictureForm = () => {
   const [page, setPage] = useState(PageOptions.Home);
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);
+  const [position, setPosition] = useState(0);
   const [numContainers, setNumContainers] = useState(0);
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -27,6 +29,8 @@ const TwoPictureForm = () => {
   const [createContainer, setCreateContainer] = useState({} as ContainerType);
   const [componentName, setComponentName] =
     useState<keyof typeof ComponentType>();
+  const { container } = useSelector((state: RootState) => state.twoPicture);
+
   //Set the number of picture containers according to the component type
   //set the isMainHeader according to the component type
   useEffect(() => {
@@ -43,6 +47,14 @@ const TwoPictureForm = () => {
     }
     return containers;
   };
+  //get the ComponentContainers from the page
+  useEffect(() => {
+    dispatch(getPageTwoPictures(page));
+  }, [dispatch, page]);
+  //set the position of the new component
+  useEffect(() => {
+    setPosition(container.length);
+  }, [container]);
 
   //Reset the inputs after creating the component
   const resetInputs = () => {
@@ -51,6 +63,7 @@ const TwoPictureForm = () => {
     setComponentName(undefined);
     setIsMainHeader(false);
     dispatch(resetTwoPictureArray());
+    window.location.reload();
   };
 
   const handleCreate = async () => {
@@ -64,6 +77,7 @@ const TwoPictureForm = () => {
             page,
             componentName: componentName,
             twoPictureArray,
+            position,
           })
         );
         resetInputs();
@@ -77,6 +91,7 @@ const TwoPictureForm = () => {
             componentName,
             mainHeader,
             twoPictureArray,
+            position,
           })
         );
         resetInputs();
@@ -90,6 +105,7 @@ const TwoPictureForm = () => {
             componentName,
             mainHeader,
             twoPictureArray,
+            position,
           })
         );
         resetInputs();
@@ -165,7 +181,6 @@ const TwoPictureForm = () => {
         {/* picture containers */}
         {renderPictureContainers(numContainers)}
         {/* create button */}
-
         <button
           className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={handleCreate}
