@@ -7,14 +7,14 @@ import PictureAtLeft from "../../components/PictureAtLeft";
 import PictureAtRight from "../../components/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplainContainer";
 import TwoPictureContainer from "../../components/TwoPictureContainer";
-
+import { ContainerType } from "../../shared/types";
 interface Props {
   page: string;
 }
 
 const Page = ({ page }: Props) => {
   const dispatch = useAppDispatch();
-  const [newContainer, setNewContainer] = useState([]);
+  const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   useEffect(() => {
     if (Object.values(PageOptions).includes(page as keyof typeof PageOptions)) {
       dispatch(
@@ -26,15 +26,17 @@ const Page = ({ page }: Props) => {
   }, [dispatch, page]);
 
   const { container } = useSelector((state: RootState) => state.twoPicture);
+  useEffect(() => {
+    if (container.length > 0) {
+      const sortedContainer = container
+        .slice()
+        .sort((a, b) => a.position - b.position);
+      setNewContainer(sortedContainer);
+    }
+  }, [container]);
 
   const renderComponents = () => {
-    // Sort the items in the container array based on the position property
-    // const sortedContainer = container?.sort((a, b) => a.position - b.position);
-    // Map the sorted container array and render the components
-    console.log("====================================");
-    console.log(container);
-    console.log("====================================");
-    return container?.map((item, index) => {
+    return newContainer?.map((item, index) => {
       switch (item.componentName) {
         case "PictureAtRight":
           return <PictureAtRight key={index} {...item.twoPictureArray[0]} />;
