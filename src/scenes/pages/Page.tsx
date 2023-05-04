@@ -5,22 +5,25 @@ import {
   getPageTwoPictures,
   updateTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
-import { PageOptions } from "../../shared/types";
+import { LanguageOptions, PageOptions } from "../../shared/types";
 import PictureAtLeft from "../../components/PictureAtLeft";
 import PictureAtRight from "../../components/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplainContainer";
 import TwoPictureContainer from "../../components/TwoPictureContainer";
 import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
+import { setLanguage } from "../../features/context/contextSlice";
 interface Props {
   page: string;
 }
 
-const Page = ({ page }: Props) => {
+const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
+  const { language } = useSelector((state: RootState) => state.context);
   useEffect(() => {
     if (Object.values(PageOptions).includes(page as keyof typeof PageOptions)) {
+      window.scrollTo(0, 0);
       dispatch(
         getPageTwoPictures(PageOptions[page as keyof typeof PageOptions])
       );
@@ -32,43 +35,15 @@ const Page = ({ page }: Props) => {
   const { container } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
     if (container.length > 0) {
-      const sortedContainer = container
-        .slice()
-        .sort((a, b) => a.position - b.position);
+      let filteredContainer = container.filter((c) => c.language === language);
+      let sortedContainer = filteredContainer.sort(
+        (a, b) => a.position - b.position
+      );
       setNewContainer(sortedContainer);
     }
-  }, [container]);
+  }, [container, language]);
 
   const renderComponents = () => {
-    const moveItem = (index: number, direction: "up" | "down") => {
-      if (direction === "up" && index > 0) {
-        setNewContainer((prev) => {
-          const updatedContainer = prev.map((c) => ({ ...c })); // create new objects
-          const temp = updatedContainer[index];
-          updatedContainer[index] = updatedContainer[index - 1];
-          updatedContainer[index - 1] = temp;
-          updatedContainer.forEach((c, i) => {
-            c.position = i;
-            dispatch(updateTwoPicture(c));
-          });
-
-          return updatedContainer;
-        });
-      } else if (direction === "down" && index < newContainer.length - 1) {
-        setNewContainer((prev) => {
-          const updatedContainer = prev.map((c) => ({ ...c })); // create new objects
-          const temp = updatedContainer[index];
-          updatedContainer[index] = updatedContainer[index + 1];
-          updatedContainer[index + 1] = temp;
-          updatedContainer.forEach((c, i) => {
-            c.position = i;
-            dispatch(updateTwoPicture(c));
-          });
-          return updatedContainer;
-        });
-      }
-    };
-
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
         switch (item.componentName) {
@@ -76,40 +51,12 @@ const Page = ({ page }: Props) => {
             return (
               <div key={index}>
                 <PictureAtRight {...item.twoPictureArray[0]} />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
               </div>
             );
           case "PictureAtLeft":
             return (
               <div key={index}>
                 <PictureAtLeft {...item.twoPictureArray[0]} />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
               </div>
             );
           case "TwoPictureContainer":
@@ -119,20 +66,6 @@ const Page = ({ page }: Props) => {
                   mainHeader={item.mainHeader}
                   twoPictureArray={item.twoPictureArray}
                 />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
               </div>
             );
           case "IconExplainContainer":
@@ -143,40 +76,12 @@ const Page = ({ page }: Props) => {
                   mainHeader={mainHeader}
                   iconExplainArray={iconExplainArray}
                 />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
               </div>
             );
           case "MaximContainer":
             return (
               <div key={index}>
                 <MaximContainer {...item.twoPictureArray[0]} />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
               </div>
             );
 
@@ -187,7 +92,21 @@ const Page = ({ page }: Props) => {
     });
   };
 
-  return <div>{renderComponents()}</div>;
+  return (
+    <div>
+      <div className="w-5/6 flex justify-end">
+        {Object.values(LanguageOptions).map((option) => (
+          <button
+            className="border-2 rounded-md p-2 mt-4"
+            onClick={() => dispatch(setLanguage(option))}
+          >
+            {option.toUpperCase()}
+          </button>
+        ))}
+      </div>
+      {renderComponents()}
+    </div>
+  );
 };
 
-export default Page;
+export default PageAdmin;

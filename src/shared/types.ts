@@ -104,9 +104,14 @@ export interface ContainerType {
   componentName: string;
   twoPictureArray: Array<TwoPictureType>;
   position: number;
+  language: string;
 }
 
 export interface ButtonType {
   buttonName: string;
   buttonLink: string;
 }
+export const LanguageOptions = {
+  EN: "ENGLISH",
+  TR: "TURKISH",
+};
