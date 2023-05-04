@@ -9,16 +9,9 @@ import {
   getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 
-type TwoPictureType = {
-  img: string;
-  header: string;
-  paragraphs: string[];
-  buttons: string[];
-};
-
 const TwoPictureForm = () => {
   const dispatch = useAppDispatch();
-  const [page, setPage] = useState(PageOptions.Home);
+  const [page, setPage] = useState<string>("");
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);
   const [position, setPosition] = useState(0);
@@ -43,7 +36,19 @@ const TwoPictureForm = () => {
   const renderPictureContainers = (numContainers: number) => {
     const containers = [];
     for (let i = 0; i < numContainers; i++) {
-      containers.push(<PictureContainer key={i} />);
+      if (componentName != null) {
+        containers.push(
+          <PictureContainer
+            isPictureContainerImage={
+              ComponentType[componentName].isPictureContainerImage
+            }
+            isPictureContainerButton={
+              ComponentType[componentName].isPictureContainerButton
+            }
+            key={i}
+          />
+        );
+      }
     }
     return containers;
   };
@@ -59,7 +64,7 @@ const TwoPictureForm = () => {
   //Reset the inputs after creating the component
   const resetInputs = () => {
     setMainHeader("");
-    setPage("Home");
+    setPage("");
     setComponentName(undefined);
     setIsMainHeader(false);
     dispatch(resetTwoPictureArray());
@@ -110,7 +115,17 @@ const TwoPictureForm = () => {
         );
         resetInputs();
         break;
-
+      //case MaximContainer
+      case ComponentType.MaximContainer.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            twoPictureArray,
+            position,
+          })
+        );
+        resetInputs();
         break;
       default:
         break;
@@ -131,6 +146,7 @@ const TwoPictureForm = () => {
             value={page}
             onChange={(e) => setPage(e.target.value)}
           >
+            <option value="">Select a page</option>
             {Object.values(PageOptions).map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -182,6 +198,7 @@ const TwoPictureForm = () => {
         <button
           className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={handleCreate}
+          disabled={page === ""}
         >
           create
         </button>

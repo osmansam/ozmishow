@@ -20,7 +20,7 @@ const PictureAtLeft = ({
         <div className="flex w-full lg:pl-28 gap-4 flex-col h-full  pt-20">
           <h1 className="font-[700] text-4xl">{header}</h1>
           {/* paragraphs */}
-          {paragraphs.map((paragraph, index) => (
+          {paragraphs?.map((paragraph, index) => (
             <p
               key={index}
               className=" font-[400] leading-6 "
@@ -35,7 +35,8 @@ const PictureAtLeft = ({
               buttons.map((button, index) => (
                 <div className="mt-4" key={index}>
                   <ButtonUnderline
-                    text={button}
+                    text={button.buttonName}
+                    buttonLink={button.buttonLink}
                     textColor="black"
                     underlineColorBefore="#e5e5e5"
                     underlineColorAfter="#414141"

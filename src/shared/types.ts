@@ -35,9 +35,9 @@ export interface PressType {
 }
 export interface TwoPictureType {
   img?: string;
-  header: string;
-  paragraphs: string[];
-  buttons?: string[];
+  header?: string;
+  paragraphs?: string[];
+  buttons?: ButtonType[];
 }
 export interface TwoPictureContainerType {
   mainHeader?: string;
@@ -54,21 +54,36 @@ export const ComponentType = {
     name: "PictureAtRight",
     pictureContainerNumber: 1,
     isMainHeader: false,
+    isPictureContainerImage: true,
+    isPictureContainerButton: true,
   },
   PictureAtLeft: {
     name: "PictureAtLeft",
     pictureContainerNumber: 1,
     isMainHeader: false,
+    isPictureContainerImage: true,
+    isPictureContainerButton: true,
   },
   TwoPictureContainer: {
     name: "TwoPictureContainer",
     pictureContainerNumber: 2,
     isMainHeader: true,
+    isPictureContainerImage: true,
+    isPictureContainerButton: true,
   },
   IconExplainContainer: {
     name: "IconExplainContainer",
     pictureContainerNumber: 3,
     isMainHeader: true,
+    isPictureContainerImage: true,
+    isPictureContainerButton: true,
+  },
+  MaximContainer: {
+    name: "MaximContainer",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
   },
 };
 
@@ -80,6 +95,7 @@ export const PageOptions = {
   Collection: "Collection",
   Furkan: "Furkan",
   Osman: "Osman",
+  Sait: "Sait",
 };
 export interface ContainerType {
   _id?: string;
@@ -88,4 +104,9 @@ export interface ContainerType {
   componentName: string;
   twoPictureArray: Array<TwoPictureType>;
   position: number;
+}
+
+export interface ButtonType {
+  buttonName: string;
+  buttonLink: string;
 }

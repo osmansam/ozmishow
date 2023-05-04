@@ -41,6 +41,22 @@ export const getPageTwoPictures = createAsyncThunk(
   }
 );
 
+//update twoPicture
+export const updateTwoPicture = createAsyncThunk(
+  "twoPicture/updateTwoPicture",
+  async (updateTwoPicture: ContainerType, thunkAPI) => {
+    try {
+      const resp = await axios.patch(
+        `${baseURL}/${url}${updateTwoPicture._id}`,
+        updateTwoPicture
+      );
+      return resp;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 const twoPictureSlice = createSlice({
   name: "twoPicture",
   initialState,
@@ -78,6 +94,21 @@ const twoPictureSlice = createSlice({
       })
 
       .addCase(getPageTwoPictures.rejected, (state, action) => {
+        state.isLoading = false;
+        console.log("====================================");
+        console.log(action.payload);
+        console.log("====================================");
+      })
+      .addCase(updateTwoPicture.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateTwoPicture.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log("====================================");
+        console.log(action.payload);
+        console.log("====================================");
+      })
+      .addCase(updateTwoPicture.rejected, (state, action) => {
         state.isLoading = false;
         console.log("====================================");
         console.log(action.payload);

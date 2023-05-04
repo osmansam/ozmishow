@@ -12,7 +12,7 @@ const TwoPicture = ({ img, header, paragraphs, buttons }: TwoPictureType) => {
       >
         {header}
       </h1>
-      {paragraphs.map((paragraph, index) => (
+      {paragraphs?.map((paragraph, index) => (
         <p
           key={index}
           className=" font-[400] leading-6 "
@@ -27,7 +27,8 @@ const TwoPicture = ({ img, header, paragraphs, buttons }: TwoPictureType) => {
           buttons.map((button, index) => (
             <div className="mt-4" key={index}>
               <ButtonUnderline
-                text={button}
+                text={button.buttonName}
+                buttonLink={button.buttonLink}
                 textColor="black"
                 underlineColorBefore="#e5e5e5"
                 underlineColorAfter="#414141"

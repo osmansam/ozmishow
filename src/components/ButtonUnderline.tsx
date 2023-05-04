@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
+  buttonLink: string;
   text: string;
   textColor: string;
   underlineColorBefore: string;
@@ -9,11 +11,13 @@ type Props = {
 };
 
 const ButtonUnderline = ({
+  buttonLink,
   text,
   textColor,
   underlineColorBefore,
   underlineColorAfter,
 }: Props) => {
+  const navigate = useNavigate();
   const [isHover, setIsHover] = useState(false);
 
   const handleMouseOver = () => {
@@ -28,6 +32,7 @@ const ButtonUnderline = ({
       className="relative inline-block"
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
+      onClick={() => navigate(`/${buttonLink}`)}
     >
       <button className="leading-8" style={{ color: textColor }}>
         {text}

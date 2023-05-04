@@ -26,8 +26,10 @@ const FreqAsked = ({ text, description, message }: Props) => {
           <p className="mt-4 ">{description}</p>
           {message && (
             <div className="mt-4">
+              {/* burada message kismi yerine buttonla alakal bir input gerekli duzeltme lazim */}
               <ButtonUnderline
                 text={message}
+                buttonLink={"#"}
                 textColor="black"
                 underlineColorBefore="#e5e5e5"
                 underlineColorAfter="#414141"

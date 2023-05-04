@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
+import { ButtonType } from "../../shared/types";
+import { PageOptions } from "../../shared/types";
+type Props = {
+  isPictureContainerImage: boolean;
+  isPictureContainerButton: boolean;
+};
 
-type Props = {};
-
-const PictureContainer = (props: Props) => {
+const PictureContainer = ({
+  isPictureContainerImage,
+  isPictureContainerButton,
+}: Props) => {
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -17,12 +24,14 @@ const PictureContainer = (props: Props) => {
   const [paragraphs, setParagraphs] = useState<string[]>([]);
   const [paragraphNumber, setParagraphNumber] = useState(1);
   const [buttonNumber, setButtonNumber] = useState(1);
-  const [buttons, setButtons] = useState<string[]>([]);
+  const [buttons, setButtons] = useState<ButtonType[]>([]);
 
   const handleNumberSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setParagraphNumber(parseInt(e.currentTarget.paragraphNumber.value));
-    setButtonNumber(parseInt(e.currentTarget.buttonNumber.value));
+    if (isPictureContainerButton) {
+      setButtonNumber(parseInt(e.currentTarget.buttonNumber.value));
+    }
     setReady(true);
   };
 
@@ -30,30 +39,46 @@ const PictureContainer = (props: Props) => {
     e.preventDefault();
 
     const newParagraphs = [];
-    const newButtons = [];
 
     for (let i = 0; i < paragraphNumber; i++) {
       const newParagraph = e.currentTarget[`paragraph${i}`].value || "";
       newParagraphs.push(newParagraph);
       e.currentTarget[`paragraph${i}`].value = "";
     }
+    const updatedButtons: ButtonType[] = [];
 
-    for (let i = 0; i < buttonNumber; i++) {
-      const newButton = e.currentTarget[`button${i}`].value || "";
-      newButtons.push(newButton);
-      e.currentTarget[`button${i}`].value = "";
+    if (isPictureContainerButton) {
+      for (let i = 0; i < buttonNumber; i++) {
+        const buttonNameInput = e.currentTarget[
+          `buttonName${i}`
+        ] as HTMLInputElement;
+        const buttonLinkInput = e.currentTarget[
+          `buttonLink${i}`
+        ] as HTMLInputElement;
+        updatedButtons.push({
+          buttonName: buttonNameInput.value,
+          buttonLink: buttonLinkInput.value,
+        });
+      }
+      setButtons(updatedButtons);
     }
 
-    const newTwoPictureArray = {
-      img,
-      header,
-      paragraphs: newParagraphs,
-      buttons: newButtons,
-    };
-
-    console.log("====================================");
-    console.log(newTwoPictureArray);
-    console.log("====================================");
+    let newTwoPictureArray = {};
+    if (isPictureContainerButton) {
+      newTwoPictureArray = {
+        img,
+        header,
+        paragraphs: newParagraphs,
+        buttons: updatedButtons,
+      };
+    } else {
+      newTwoPictureArray = {
+        img,
+        header,
+        paragraphs: newParagraphs,
+        buttons: [],
+      };
+    }
 
     dispatch(setTwoPictureArray(newTwoPictureArray));
     setImg("");
@@ -67,7 +92,10 @@ const PictureContainer = (props: Props) => {
   const handleChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.name === "paragraphNumber") {
       setParagraphNumber(parseInt(e.currentTarget.value));
-    } else if (e.currentTarget.name === "buttonNumber") {
+    } else if (
+      isPictureContainerButton &&
+      e.currentTarget.name === "buttonNumber"
+    ) {
       setButtonNumber(parseInt(e.currentTarget.value));
     }
   };
@@ -90,18 +118,20 @@ const PictureContainer = (props: Props) => {
               onChange={handleChangeNumber}
             />
           </div>
-          <div className="flex gap-5 w-full ">
-            <label className="w-40" htmlFor="buttonNumber">
-              Button Number:
-            </label>
-            <input
-              className="border-2 w-16"
-              type="number"
-              name="buttonNumber"
-              value={buttonNumber}
-              onChange={handleChangeNumber}
-            />
-          </div>
+          {isPictureContainerButton && (
+            <div className="flex gap-5 w-full ">
+              <label className="w-40" htmlFor="buttonNumber">
+                Button Number:
+              </label>
+              <input
+                className="border-2 w-16"
+                type="number"
+                name="buttonNumber"
+                value={buttonNumber}
+                onChange={handleChangeNumber}
+              />
+            </div>
+          )}
           <button
             type="submit"
             className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
@@ -118,7 +148,7 @@ const PictureContainer = (props: Props) => {
 
   const paragraphInputs = [];
   const buttonInputs = [];
-
+  //setting the number of paragraphs
   for (let i = 0; i < paragraphNumber; i++) {
     paragraphInputs.push(
       <div key={i} className="flex gap-5 h-20 w-full ">
@@ -132,18 +162,41 @@ const PictureContainer = (props: Props) => {
       </div>
     );
   }
-
+  //setting the links and buttonNumber
   for (let i = 0; i < buttonNumber; i++) {
     buttonInputs.push(
       <div key={i} className="flex gap-5  w-full ">
-        <label className="w-24" htmlFor={`button${i}`}>
-          Button {i + 1} :
+        <label className="w-24" htmlFor={`buttonName${i}`}>
+          Button {i + 1} Name:
         </label>
         <input
           className="border-2 w-2/5 rounded-md"
           type="text"
-          name={`button${i}`}
+          name={`buttonName${i}`}
         />
+        <select
+          className="border-2 w-2/5 rounded-md"
+          name={`buttonLink${i}`}
+          value={buttons[i]?.buttonLink}
+          onChange={(e) => {
+            const value = e.target.value.toLowerCase();
+            setButtons((prevButtons) => {
+              const updatedButtons = [...prevButtons];
+              updatedButtons[i] = {
+                ...updatedButtons[i],
+                buttonLink: value,
+              };
+              return updatedButtons;
+            });
+          }}
+        >
+          <option value="">Select a page</option>
+          {Object.values(PageOptions).map((option) => (
+            <option key={option} value={option.toLowerCase()}>
+              {option}
+            </option>
+          ))}
+        </select>
       </div>
     );
   }
@@ -154,18 +207,22 @@ const PictureContainer = (props: Props) => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-center h-full w-5/6  mx-auto gap-2 rounded-md py-4 px-8 border-4"
       >
-        <div className="flex gap-5 w-full ">
-          <label className="w-24" htmlFor="img">
-            Image :
-          </label>
-          <input
-            className="border-2 rounded-md w-4/5"
-            type="text"
-            name="img"
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
-          />
-        </div>
+        {/* image */}
+        {isPictureContainerImage && (
+          <div className="flex gap-5 w-full ">
+            <label className="w-24" htmlFor="img">
+              Image :
+            </label>
+            <input
+              className="border-2 rounded-md w-4/5"
+              type="text"
+              name="img"
+              value={img}
+              onChange={(e) => setImg(e.target.value)}
+            />
+          </div>
+        )}
+        {/* header */}
         <div className="flex gap-5 w-full ">
           <label className="w-24" htmlFor="header">
             Header :
@@ -178,9 +235,8 @@ const PictureContainer = (props: Props) => {
             onChange={(e) => setHeader(e.target.value)}
           />
         </div>
-
         {paragraphInputs}
-        {buttonInputs}
+        {isPictureContainerButton ? buttonInputs : null}
         <button
           type="submit"
           className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
