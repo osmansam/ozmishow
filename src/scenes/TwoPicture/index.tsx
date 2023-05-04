@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PictureContainer from "./PictureContainer";
-import { ComponentType, ContainerType, PageOptions } from "../../shared/types";
+import {
+  ComponentType,
+  ContainerType,
+  LanguageOptions,
+  PageOptions,
+} from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
@@ -8,9 +13,12 @@ import {
   resetTwoPictureArray,
   getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
+import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
+import { useNavigate } from "react-router-dom";
 
 const TwoPictureForm = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [page, setPage] = useState<string>("");
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);
@@ -18,6 +26,9 @@ const TwoPictureForm = () => {
   const [numContainers, setNumContainers] = useState(0);
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
+  );
+  const { isAdmin, language } = useSelector(
+    (state: RootState) => state.context
   );
   const [createContainer, setCreateContainer] = useState({} as ContainerType);
   const [componentName, setComponentName] =
@@ -83,6 +94,7 @@ const TwoPictureForm = () => {
             componentName: componentName,
             twoPictureArray,
             position,
+            language,
           })
         );
         resetInputs();
@@ -97,6 +109,7 @@ const TwoPictureForm = () => {
             mainHeader,
             twoPictureArray,
             position,
+            language,
           })
         );
         resetInputs();
@@ -111,6 +124,7 @@ const TwoPictureForm = () => {
             mainHeader,
             twoPictureArray,
             position,
+            language,
           })
         );
         resetInputs();
@@ -123,6 +137,7 @@ const TwoPictureForm = () => {
             componentName,
             twoPictureArray,
             position,
+            language,
           })
         );
         resetInputs();
@@ -134,6 +149,17 @@ const TwoPictureForm = () => {
 
   return (
     <div className="w-5/6  mx-auto py-8">
+      {/* isAdmin  */}
+      <div className="w-full flex justify-end mb-2">
+        <button
+          className="border-2 rounded-md p-2 "
+          onClick={() => {
+            dispatch(setIsAdmin(!isAdmin));
+          }}
+        >
+          {isAdmin ? "Admin" : "User"}
+        </button>
+      </div>
       <div className="flex  flex-col gap-5 justify-center items-center h-full py-4 border-4 px-4">
         {/* Choose page*/}
         <div className="flex gap-5 w-full">
@@ -148,6 +174,25 @@ const TwoPictureForm = () => {
           >
             <option value="">Select a page</option>
             {Object.values(PageOptions).map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Choose Language*/}
+        <div className="flex gap-5 w-full">
+          <label className="w-32" htmlFor="page">
+            language:
+          </label>
+          <select
+            className="border-2 w-4/5 rounded-md"
+            name="page"
+            value={language}
+            onChange={(e) => dispatch(setLanguage(e.target.value))}
+          >
+            <option value="">Select a Language</option>
+            {Object.values(LanguageOptions).map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -198,11 +243,14 @@ const TwoPictureForm = () => {
         <button
           className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={handleCreate}
-          disabled={page === ""}
+          disabled={page === "" || language === ""}
         >
           create
         </button>
       </div>
+      <button className="border-2 p-2 mt-4" onClick={() => navigate("/home")}>
+        Home
+      </button>
     </div>
   );
 };
