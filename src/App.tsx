@@ -5,7 +5,7 @@ import { store } from "./store";
 import { RootState, useAppDispatch } from "./store";
 import { useSelector } from "react-redux";
 import Deneme from "./scenes/deneme";
-import TwoPicture from "./scenes/TwoPicture";
+import TwoPicture from "./scenes/ComponentContainer";
 import Page from "./scenes/pages/Page";
 import PageAdmin from "./scenes/pages/PageAdmin";
 import { PageOptions } from "./shared/types";

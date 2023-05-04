@@ -1,7 +1,7 @@
 import React from "react";
-import { TwoPictureType } from "../../shared/types";
+import { PictureType } from "../../shared/types";
 
-const Maxim = ({ header, paragraphs }: TwoPictureType) => {
+const Maxim = ({ header, paragraphs }: PictureType) => {
   return (
     <div
       className="w-full h-52  flex flex-col gap-10 justify-center items-center"

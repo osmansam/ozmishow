@@ -1,12 +1,12 @@
 import TwoPictureContainer from "../../components/TwoPictureContainer";
 import { ThunkAPIType, TwoPictureContainerType } from "./../../shared/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TwoPictureType, ContainerType } from "../../shared/types";
+import { PictureType, ContainerType } from "../../shared/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 interface TwoPictureState {
   isLoading: boolean;
-  twoPictureArray: Array<TwoPictureType>;
+  twoPictureArray: Array<PictureType>;
   container: Array<ContainerType>;
 }
 const initialState: TwoPictureState = {

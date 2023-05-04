@@ -1,13 +1,8 @@
 import React from "react";
 import ButtonUnderline from "./ButtonUnderline";
-import { TwoPictureType } from "../shared/types";
+import { PictureType } from "../shared/types";
 
-const PictureAtRight = ({
-  img,
-  header,
-  paragraphs,
-  buttons,
-}: TwoPictureType) => {
+const PictureAtRight = ({ img, header, paragraphs, buttons }: PictureType) => {
   return (
     <div className="lg:flex w-4/5 lg:justify-between h-full mx-auto mt-8 py-10 md:py-20 ">
       {/* left side */}

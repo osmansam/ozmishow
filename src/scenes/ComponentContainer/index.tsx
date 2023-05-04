@@ -16,7 +16,7 @@ import {
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import { useNavigate } from "react-router-dom";
 
-const TwoPictureForm = () => {
+const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [page, setPage] = useState<string>("");
@@ -81,7 +81,7 @@ const TwoPictureForm = () => {
     dispatch(resetTwoPictureArray());
     window.location.reload();
   };
-
+  // for each component arrange the  items to send backend
   const handleCreate = async () => {
     switch (componentName) {
       // case PictureAtRight and PictureAtLeft
@@ -191,7 +191,6 @@ const TwoPictureForm = () => {
             value={language}
             onChange={(e) => dispatch(setLanguage(e.target.value))}
           >
-            <option value="">Select a Language</option>
             {Object.values(LanguageOptions).map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -255,4 +254,4 @@ const TwoPictureForm = () => {
   );
 };
 
-export default TwoPictureForm;
+export default ComponentContainer;

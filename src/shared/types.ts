@@ -33,7 +33,7 @@ export interface PressType {
   header?: string;
   description: string;
 }
-export interface TwoPictureType {
+export interface PictureType {
   img?: string;
   header?: string;
   paragraphs?: string[];
@@ -41,12 +41,12 @@ export interface TwoPictureType {
 }
 export interface TwoPictureContainerType {
   mainHeader?: string;
-  twoPictureArray: Array<TwoPictureType>;
+  twoPictureArray: Array<PictureType>;
 }
 
 export interface IconExplainContainerType {
   mainHeader?: string;
-  iconExplainArray: Array<TwoPictureType>;
+  iconExplainArray: Array<PictureType>;
 }
 
 export const ComponentType = {
@@ -102,7 +102,7 @@ export interface ContainerType {
   page: string;
   mainHeader?: string;
   componentName: string;
-  twoPictureArray: Array<TwoPictureType>;
+  twoPictureArray: Array<PictureType>;
   position: number;
   language: string;
 }

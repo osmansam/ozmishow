@@ -1,8 +1,8 @@
 import React from "react";
 import ButtonUnderline from "./ButtonUnderline";
-import { TwoPictureType } from "../shared/types";
+import { PictureType } from "../shared/types";
 
-const IconExplain = ({ img, header, paragraphs, buttons }: TwoPictureType) => {
+const IconExplain = ({ img, header, paragraphs, buttons }: PictureType) => {
   return (
     <div className="flex flex-col gap-4 md:pr-6 w-full md:w-1/3 h-full mt-8">
       {img && <img src={img} alt={header} className="w-full h-60" />}
