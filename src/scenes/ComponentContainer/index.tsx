@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PictureContainer from "./PictureContainer";
 import {
-  ComponentType,
+  Components,
   ContainerType,
   LanguageOptions,
   PageOptions,
@@ -15,7 +15,7 @@ import {
 } from "../../features/twoPicture/twoPictureSlice";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import { useNavigate } from "react-router-dom";
-
+import Deneme from "../deneme";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -31,16 +31,15 @@ const ComponentContainer = () => {
     (state: RootState) => state.context
   );
   const [createContainer, setCreateContainer] = useState({} as ContainerType);
-  const [componentName, setComponentName] =
-    useState<keyof typeof ComponentType>();
+  const [componentName, setComponentName] = useState<keyof typeof Components>();
   const { container } = useSelector((state: RootState) => state.twoPicture);
 
   //Set the number of picture containers according to the component type
   //set the isMainHeader according to the component type
   useEffect(() => {
     if (componentName != null) {
-      setNumContainers(ComponentType[componentName].pictureContainerNumber);
-      setIsMainHeader(ComponentType[componentName].isMainHeader);
+      setNumContainers(Components[componentName].pictureContainerNumber);
+      setIsMainHeader(Components[componentName].isMainHeader);
     }
   }, [componentName]);
   //Render picture containers according to the number of containers
@@ -51,10 +50,13 @@ const ComponentContainer = () => {
         containers.push(
           <PictureContainer
             isPictureContainerImage={
-              ComponentType[componentName].isPictureContainerImage
+              Components[componentName].isPictureContainerImage
             }
             isPictureContainerButton={
-              ComponentType[componentName].isPictureContainerButton
+              Components[componentName].isPictureContainerButton
+            }
+            isPictureContainerParagraph={
+              Components[componentName].isPictureContainerParagraph
             }
             key={i}
           />
@@ -85,8 +87,8 @@ const ComponentContainer = () => {
   const handleCreate = async () => {
     switch (componentName) {
       // case PictureAtRight and PictureAtLeft
-      case ComponentType.PictureAtRight.name:
-      case ComponentType.PictureAtLeft.name:
+      case Components.PictureAtRight.name:
+      case Components.PictureAtLeft.name:
         if (twoPictureArray.length !== 1) return;
         await dispatch(
           createTwoPicture({
@@ -100,7 +102,7 @@ const ComponentContainer = () => {
         resetInputs();
         break;
       // case TwoPictureContainer
-      case ComponentType.TwoPictureContainer.name:
+      case Components.TwoPictureContainer.name:
         if (twoPictureArray.length !== 2) return;
         await dispatch(
           createTwoPicture({
@@ -115,7 +117,7 @@ const ComponentContainer = () => {
         resetInputs();
         break;
       // case IconExplainContainer
-      case ComponentType.IconExplainContainer.name:
+      case Components.IconExplainContainer.name:
         if (twoPictureArray.length !== 3) return;
         await dispatch(
           createTwoPicture({
@@ -130,11 +132,25 @@ const ComponentContainer = () => {
         resetInputs();
         break;
       //case MaximContainer
-      case ComponentType.MaximContainer.name:
+      case Components.MaximContainer.name:
         await dispatch(
           createTwoPicture({
             page,
             componentName,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
+        resetInputs();
+        break;
+      //case BorderBoxContainer
+      case Components.BorderBoxContainer.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
             twoPictureArray,
             position,
             language,
@@ -203,16 +219,14 @@ const ComponentContainer = () => {
         <div className="w-full  flex gap-12">
           <p>Select component type:</p>
           <div className="flex gap-4">
-            {Object.values(ComponentType).map((component) => (
+            {Object.values(Components).map((component) => (
               <label key={component.name}>
                 <input
                   type="radio"
-                  name="componentType"
+                  name="Components"
                   value={component.name}
                   onChange={(e) =>
-                    setComponentName(
-                      e.target.value as keyof typeof ComponentType
-                    )
+                    setComponentName(e.target.value as keyof typeof Components)
                   }
                 />
                 {component.name}
@@ -247,9 +261,7 @@ const ComponentContainer = () => {
           create
         </button>
       </div>
-      <button className="border-2 p-2 mt-4" onClick={() => navigate("/home")}>
-        Home
-      </button>
+      <Deneme />
     </div>
   );
 };

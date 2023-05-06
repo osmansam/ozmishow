@@ -1,11 +1,11 @@
 import React from "react";
-import { TwoPictureContainerType } from "../shared/types";
-import TwoPicture from "./TwoPicture";
+import { IconExplainContainerType } from "../../shared/types";
+import IconExplain from "./IconExplain";
 
-const TwoPictureContainer = ({
+const IconExplainContainer = ({
   mainHeader,
-  twoPictureArray,
-}: TwoPictureContainerType) => {
+  iconExplainArray,
+}: IconExplainContainerType) => {
   return (
     <div className="w-5/6 h-full mx-auto py-10 md:py-20">
       <h1
@@ -15,16 +15,16 @@ const TwoPictureContainer = ({
         {mainHeader}
       </h1>
       <div className="w-full h-full md:flex md:justify-between mx-auto">
-        {twoPictureArray.map((twoPicture, index) => {
-          const { img, header, paragraphs, buttons } = twoPicture;
+        {iconExplainArray.map((iconExplain, index) => {
+          const { img, header, paragraphs, buttons } = iconExplain;
           return (
-            <TwoPicture
+            <IconExplain
               key={index}
               img={img}
               header={header}
               paragraphs={paragraphs}
               buttons={buttons}
-            ></TwoPicture>
+            ></IconExplain>
           );
         })}
       </div>
@@ -32,4 +32,4 @@ const TwoPictureContainer = ({
   );
 };
 
-export default TwoPictureContainer;
+export default IconExplainContainer;

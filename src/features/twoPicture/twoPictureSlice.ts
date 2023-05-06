@@ -1,4 +1,4 @@
-import TwoPictureContainer from "../../components/TwoPictureContainer";
+import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
 import { ThunkAPIType, TwoPictureContainerType } from "./../../shared/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PictureType, ContainerType } from "../../shared/types";

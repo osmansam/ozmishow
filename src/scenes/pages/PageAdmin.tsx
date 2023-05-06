@@ -6,13 +6,15 @@ import {
   updateTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
 import { LanguageOptions, PageOptions } from "../../shared/types";
-import PictureAtLeft from "../../components/PictureAtLeft";
-import PictureAtRight from "../../components/PictureAtRight";
-import IconExplainContainer from "../../components/IconExplainContainer";
-import TwoPictureContainer from "../../components/TwoPictureContainer";
+import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
+import PictureAtRight from "../../components/pictureRight/PictureAtRight";
+import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
+import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
 import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
 import { setLanguage } from "../../features/context/contextSlice";
+import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
+import Deneme from "../deneme";
 interface Props {
   page: string;
 }
@@ -77,11 +79,13 @@ const PageAdmin = ({ page }: Props) => {
 
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
+        const { mainHeader, twoPictureArray } = item;
+
         switch (item.componentName) {
           case "PictureAtRight":
             return (
               <div key={index}>
-                <PictureAtRight {...item.twoPictureArray[0]} />
+                <PictureAtRight {...twoPictureArray[0]} />
                 <button
                   className="border-2 m-2"
                   disabled={index === 0}
@@ -101,7 +105,7 @@ const PageAdmin = ({ page }: Props) => {
           case "PictureAtLeft":
             return (
               <div key={index}>
-                <PictureAtLeft {...item.twoPictureArray[0]} />
+                <PictureAtLeft {...twoPictureArray[0]} />
                 <button
                   className="border-2 m-2"
                   disabled={index === 0}
@@ -123,7 +127,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <TwoPictureContainer
                   mainHeader={item.mainHeader}
-                  twoPictureArray={item.twoPictureArray}
+                  twoPictureArray={twoPictureArray}
                 />
                 <button
                   className="border-2 m-2"
@@ -142,12 +146,11 @@ const PageAdmin = ({ page }: Props) => {
               </div>
             );
           case "IconExplainContainer":
-            const { mainHeader, twoPictureArray: iconExplainArray } = item;
             return (
               <div key={index}>
                 <IconExplainContainer
                   mainHeader={mainHeader}
-                  iconExplainArray={iconExplainArray}
+                  iconExplainArray={twoPictureArray}
                 />
                 <button
                   className="border-2 m-2"
@@ -168,7 +171,7 @@ const PageAdmin = ({ page }: Props) => {
           case "MaximContainer":
             return (
               <div key={index}>
-                <MaximContainer {...item.twoPictureArray[0]} />
+                <MaximContainer {...twoPictureArray[0]} />
                 <button
                   className="border-2 m-2"
                   disabled={index === 0}
@@ -185,7 +188,29 @@ const PageAdmin = ({ page }: Props) => {
                 </button>
               </div>
             );
-
+          case "BorderBoxContainer":
+            return (
+              <div key={index}>
+                <BorderBoxContainer
+                  mainHeader={mainHeader}
+                  twoPictureArray={twoPictureArray}
+                />
+                <button
+                  className="border-2 m-2"
+                  disabled={index === 0}
+                  onClick={() => moveItem(index, "up")}
+                >
+                  Move Up
+                </button>
+                <button
+                  className="border-2 m-2"
+                  disabled={index === newContainer.length - 1}
+                  onClick={() => moveItem(index, "down")}
+                >
+                  Move Down
+                </button>
+              </div>
+            );
           default:
             return null;
         }
@@ -206,6 +231,7 @@ const PageAdmin = ({ page }: Props) => {
           </button>
         ))}
       </div>
+      <Deneme />
       {renderComponents()}
     </div>
   );

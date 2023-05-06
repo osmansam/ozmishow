@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import ButtonUnderline from "./ButtonUnderline";
+import ButtonUnderline from "./buttonUnderline/ButtonUnderline";
 
 type Props = {
   text: string;

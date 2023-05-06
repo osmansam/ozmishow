@@ -1,6 +1,6 @@
 import React from "react";
-import ButtonUnderline from "./ButtonUnderline";
-import { PictureType } from "../shared/types";
+import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
+import { PictureType } from "../../shared/types";
 
 const TwoPicture = ({ img, header, paragraphs, buttons }: PictureType) => {
   return (

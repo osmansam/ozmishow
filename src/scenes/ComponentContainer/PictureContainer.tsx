@@ -7,11 +7,13 @@ import { PageOptions } from "../../shared/types";
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;
+  isPictureContainerParagraph: boolean;
 };
 
 const PictureContainer = ({
   isPictureContainerImage,
   isPictureContainerButton,
+  isPictureContainerParagraph,
 }: Props) => {
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -39,12 +41,14 @@ const PictureContainer = ({
     e.preventDefault();
 
     const newParagraphs = [];
-
-    for (let i = 0; i < paragraphNumber; i++) {
-      const newParagraph = e.currentTarget[`paragraph${i}`].value || "";
-      newParagraphs.push(newParagraph);
-      e.currentTarget[`paragraph${i}`].value = "";
+    if (isPictureContainerParagraph) {
+      for (let i = 0; i < paragraphNumber; i++) {
+        const newParagraph = e.currentTarget[`paragraph${i}`].value || "";
+        newParagraphs.push(newParagraph);
+        e.currentTarget[`paragraph${i}`].value = "";
+      }
     }
+
     const updatedButtons: ButtonType[] = [];
 
     if (isPictureContainerButton) {
@@ -63,22 +67,12 @@ const PictureContainer = ({
       setButtons(updatedButtons);
     }
 
-    let newTwoPictureArray = {};
-    if (isPictureContainerButton) {
-      newTwoPictureArray = {
-        img,
-        header,
-        paragraphs: newParagraphs,
-        buttons: updatedButtons,
-      };
-    } else {
-      newTwoPictureArray = {
-        img,
-        header,
-        paragraphs: newParagraphs,
-        buttons: [],
-      };
-    }
+    const newTwoPictureArray = {
+      img,
+      header,
+      paragraphs: isPictureContainerParagraph ? newParagraphs : [],
+      buttons: isPictureContainerButton ? updatedButtons : [],
+    };
 
     dispatch(setTwoPictureArray(newTwoPictureArray));
     setImg("");
@@ -99,25 +93,27 @@ const PictureContainer = ({
       setButtonNumber(parseInt(e.currentTarget.value));
     }
   };
-  if (!ready) {
+  if (!ready && (isPictureContainerButton || isPictureContainerParagraph)) {
     return (
       <div className="w-full ">
         <form
           className="border-2 w-5/6 flex flex-col justify-between gap-2 mx-auto p-4"
           onSubmit={handleNumberSubmit}
         >
-          <div className="flex gap-5 w-full ">
-            <label className="w-40" htmlFor="paragraphNumber">
-              Paragraph Number:
-            </label>
-            <input
-              className="border-2 w-16"
-              type="number"
-              name="paragraphNumber"
-              value={paragraphNumber}
-              onChange={handleChangeNumber}
-            />
-          </div>
+          {isPictureContainerParagraph && (
+            <div className="flex gap-5 w-full ">
+              <label className="w-40" htmlFor="paragraphNumber">
+                Paragraph Number:
+              </label>
+              <input
+                className="border-2 w-16"
+                type="number"
+                name="paragraphNumber"
+                value={paragraphNumber}
+                onChange={handleChangeNumber}
+              />
+            </div>
+          )}
           {isPictureContainerButton && (
             <div className="flex gap-5 w-full ">
               <label className="w-40" htmlFor="buttonNumber">
@@ -235,7 +231,7 @@ const PictureContainer = ({
             onChange={(e) => setHeader(e.target.value)}
           />
         </div>
-        {paragraphInputs}
+        {isPictureContainerParagraph ? paragraphInputs : null}
         {isPictureContainerButton ? buttonInputs : null}
         <button
           type="submit"

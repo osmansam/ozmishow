@@ -48,14 +48,23 @@ export interface IconExplainContainerType {
   mainHeader?: string;
   iconExplainArray: Array<PictureType>;
 }
-
-export const ComponentType = {
+interface ComponentType {
+  name: string;
+  pictureContainerNumber: number;
+  isMainHeader: boolean;
+  isPictureContainerImage: boolean;
+  isPictureContainerButton: boolean;
+  isPictureContainerParagraph: boolean;
+}
+//add new component here
+export const Components: { [key: string]: ComponentType } = {
   PictureAtRight: {
     name: "PictureAtRight",
     pictureContainerNumber: 1,
     isMainHeader: false,
     isPictureContainerImage: true,
     isPictureContainerButton: true,
+    isPictureContainerParagraph: true,
   },
   PictureAtLeft: {
     name: "PictureAtLeft",
@@ -63,6 +72,7 @@ export const ComponentType = {
     isMainHeader: false,
     isPictureContainerImage: true,
     isPictureContainerButton: true,
+    isPictureContainerParagraph: true,
   },
   TwoPictureContainer: {
     name: "TwoPictureContainer",
@@ -70,6 +80,7 @@ export const ComponentType = {
     isMainHeader: true,
     isPictureContainerImage: true,
     isPictureContainerButton: true,
+    isPictureContainerParagraph: true,
   },
   IconExplainContainer: {
     name: "IconExplainContainer",
@@ -77,6 +88,7 @@ export const ComponentType = {
     isMainHeader: true,
     isPictureContainerImage: true,
     isPictureContainerButton: true,
+    isPictureContainerParagraph: true,
   },
   MaximContainer: {
     name: "MaximContainer",
@@ -84,6 +96,15 @@ export const ComponentType = {
     isMainHeader: false,
     isPictureContainerImage: false,
     isPictureContainerButton: false,
+    isPictureContainerParagraph: true,
+  },
+  BorderBoxContainer: {
+    name: "BorderBoxContainer",
+    pictureContainerNumber: 2,
+    isMainHeader: true,
+    isPictureContainerImage: true,
+    isPictureContainerButton: true,
+    isPictureContainerParagraph: false,
   },
 };
 
@@ -96,6 +117,7 @@ export const PageOptions = {
   Furkan: "Furkan",
   Osman: "Osman",
   Sait: "Sait",
+  Bilal: "Bilal",
 };
 export interface ContainerType {
   _id?: string;
