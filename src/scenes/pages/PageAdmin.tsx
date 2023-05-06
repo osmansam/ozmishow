@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
+  getPageOptions,
   getPageTwoPictures,
   updateTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
-import { LanguageOptions, PageOptions } from "../../shared/types";
+import { LanguageOptions } from "../../shared/types";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
 import PictureAtRight from "../../components/pictureRight/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
@@ -23,14 +24,15 @@ const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const { language } = useSelector((state: RootState) => state.context);
-  const { container } = useSelector((state: RootState) => state.twoPicture);
+  const { container, pageOptions } = useSelector(
+    (state: RootState) => state.twoPicture
+  );
   // make the page top and took the containers from database
   useEffect(() => {
-    if (Object.values(PageOptions).includes(page as keyof typeof PageOptions)) {
+    if (pageOptions.includes(page)) {
       window.scrollTo(0, 0);
-      dispatch(
-        getPageTwoPictures(PageOptions[page as keyof typeof PageOptions])
-      );
+      dispatch(getPageTwoPictures(page));
+      dispatch(getPageOptions());
     } else {
       console.error(`Invalid page: ${page}`);
     }
@@ -222,8 +224,9 @@ const PageAdmin = ({ page }: Props) => {
     <div>
       {/* language options  */}
       <div className="w-5/6 flex justify-end">
-        {Object.values(LanguageOptions).map((option) => (
+        {Object.values(LanguageOptions).map((option, index) => (
           <button
+            key={index}
             className="border-2 rounded-md p-2 mt-4"
             onClick={() => dispatch(setLanguage(option))}
           >

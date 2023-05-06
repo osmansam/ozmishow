@@ -1,17 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PageOptions } from "../../shared/types";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../../store";
 type Props = {};
 
 const Deneme = (props: Props) => {
   const navigate = useNavigate();
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   return (
     <div>
-      {Object.keys(PageOptions).map((key) => (
+      {pageOptions.map((key) => (
         <button
           key={key}
           className="border-2 p-2 m-2 mt-4"
-          onClick={() => navigate(`/${key as keyof typeof PageOptions}`)}
+          onClick={() => navigate(`/${key}`)}
         >
           {key}
         </button>

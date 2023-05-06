@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PictureContainer from "./PictureContainer";
-import {
-  Components,
-  ContainerType,
-  LanguageOptions,
-  PageOptions,
-} from "../../shared/types";
+import { Components, ContainerType, LanguageOptions } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
   createTwoPicture,
   resetTwoPictureArray,
   getPageTwoPictures,
+  createPageOptions,
 } from "../../features/twoPicture/twoPictureSlice";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +15,7 @@ import Deneme from "../deneme";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [page, setPage] = useState<string>("");
+  const [page, setPage] = useState<string>("Home");
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);
   const [position, setPosition] = useState(0);
@@ -32,7 +28,9 @@ const ComponentContainer = () => {
   );
   const [createContainer, setCreateContainer] = useState({} as ContainerType);
   const [componentName, setComponentName] = useState<keyof typeof Components>();
-  const { container } = useSelector((state: RootState) => state.twoPicture);
+  const { container, pageOptions } = useSelector(
+    (state: RootState) => state.twoPicture
+  );
 
   //Set the number of picture containers according to the component type
   //set the isMainHeader according to the component type
@@ -86,6 +84,13 @@ const ComponentContainer = () => {
   // for each component arrange the  items to send backend
   const handleCreate = async () => {
     switch (componentName) {
+      // case NewPage
+      case Components.NewPage.name:
+        if (mainHeader === "") return;
+        setMainHeader(mainHeader[0].toUpperCase() + mainHeader.slice(1));
+        await dispatch(createPageOptions(mainHeader));
+        resetInputs();
+        break;
       // case PictureAtRight and PictureAtLeft
       case Components.PictureAtRight.name:
       case Components.PictureAtLeft.name:
@@ -188,8 +193,7 @@ const ComponentContainer = () => {
             value={page}
             onChange={(e) => setPage(e.target.value)}
           >
-            <option value="">Select a page</option>
-            {Object.values(PageOptions).map((option) => (
+            {pageOptions.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -239,10 +243,10 @@ const ComponentContainer = () => {
         {isMainHeader && (
           <div className="flex gap-5 w-full ">
             <label className="w-32" htmlFor="header">
-              Main Header:
+              {componentName === "NewPage" ? "Page Name :" : "Main Header :"}
             </label>
             <input
-              className="border-2 w-4/5 rounded-md"
+              className="border-2 w-4/5 rounded-md  capitalize"
               type="text"
               name="header"
               value={mainHeader}

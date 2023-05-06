@@ -5,7 +5,7 @@ import {
   getPageTwoPictures,
   updateTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
-import { LanguageOptions, PageOptions } from "../../shared/types";
+import { LanguageOptions } from "../../shared/types";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
 import PictureAtRight from "../../components/pictureRight/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
@@ -23,12 +23,11 @@ const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const { language } = useSelector((state: RootState) => state.context);
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
-    if (Object.values(PageOptions).includes(page as keyof typeof PageOptions)) {
+    if (pageOptions.includes(page)) {
       window.scrollTo(0, 0);
-      dispatch(
-        getPageTwoPictures(PageOptions[page as keyof typeof PageOptions])
-      );
+      dispatch(getPageTwoPictures(page));
     } else {
       console.error(`Invalid page: ${page}`);
     }
@@ -105,6 +104,7 @@ const PageAdmin = ({ page }: Props) => {
 
   return (
     <div>
+      {/* language options development purposes  */}
       <div className="w-5/6 flex justify-end">
         {Object.values(LanguageOptions).map((option) => (
           <button

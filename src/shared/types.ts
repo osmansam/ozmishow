@@ -58,6 +58,14 @@ interface ComponentType {
 }
 //add new component here
 export const Components: { [key: string]: ComponentType } = {
+  NewPage: {
+    name: "NewPage",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
   PictureAtRight: {
     name: "PictureAtRight",
     pictureContainerNumber: 1,
@@ -108,17 +116,6 @@ export const Components: { [key: string]: ComponentType } = {
   },
 };
 
-export const PageOptions = {
-  Home: "Home",
-  About: "About",
-  Contact: "Contact",
-  Press: "Press",
-  Collection: "Collection",
-  Furkan: "Furkan",
-  Osman: "Osman",
-  Sait: "Sait",
-  Bilal: "Bilal",
-};
 export interface ContainerType {
   _id?: string;
   page: string;
@@ -137,3 +134,6 @@ export const LanguageOptions = {
   EN: "ENGLISH",
   TR: "TURKISH",
 };
+export interface PageOptionsType {
+  pageName: string;
+}

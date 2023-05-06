@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType } from "../../shared/types";
-import { PageOptions } from "../../shared/types";
+
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;
@@ -15,7 +15,7 @@ const PictureContainer = ({
   isPictureContainerButton,
   isPictureContainerParagraph,
 }: Props) => {
-  const { twoPictureArray } = useSelector(
+  const { twoPictureArray, pageOptions } = useSelector(
     (state: RootState) => state.twoPicture
   );
   const dispatch = useAppDispatch();
@@ -187,7 +187,7 @@ const PictureContainer = ({
           }}
         >
           <option value="">Select a page</option>
-          {Object.values(PageOptions).map((option) => (
+          {pageOptions.map((option) => (
             <option key={option} value={option.toLowerCase()}>
               {option}
             </option>

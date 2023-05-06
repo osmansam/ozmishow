@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { store } from "./store";
@@ -8,18 +8,21 @@ import Deneme from "./scenes/deneme";
 import TwoPicture from "./scenes/ComponentContainer";
 import Page from "./scenes/pages/Page";
 import PageAdmin from "./scenes/pages/PageAdmin";
-import { PageOptions } from "./shared/types";
-
+import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
 function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  useEffect(() => {
+    dispatch(getPageOptions());
+  }, []);
 
   const renderedComponent = () => {
     if (isAdmin) {
       return (
         <>
           <Route path="/" element={<TwoPicture />} />
-          {Object.values(PageOptions).map((page) => (
+          {pageOptions.map((page) => (
             <Route
               key={page}
               path={`/${page.toLowerCase()}`}
@@ -32,7 +35,7 @@ function App() {
       return (
         <>
           <Route path="/" element={<TwoPicture />} />
-          {Object.values(PageOptions).map((page) => (
+          {pageOptions.map((page) => (
             <Route
               key={page}
               path={`/${page.toLowerCase()}`}
