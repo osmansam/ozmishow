@@ -29,7 +29,7 @@ interface PageConfigurationButtonsProps {
   disableMoveDown: boolean;
   id: string;
 }
-
+// the buttons for the admin page configuration
 const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   index,
   moveItem,
@@ -40,6 +40,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   const dispatch = useAppDispatch();
   return (
     <>
+      {/* move the container up and down */}
       <button
         className="border-2 m-2"
         disabled={disableMoveUp}
@@ -54,6 +55,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
       >
         Move Down
       </button>
+      {/* Delete Container */}
       <button
         className="border-2 m-2"
         onClick={async () => {
