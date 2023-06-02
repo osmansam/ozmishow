@@ -1,11 +1,11 @@
 import React from "react";
 import useMediaQuery from "../../hooks/UseMediaQuery";
+import { PictureType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import { useSelector } from "react-redux";
 
-type Props = { img: string; header: string };
-
-const NewsBox = ({ img, header }: Props) => {
+const NewsBox = ({ img, header }: PictureType) => {
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
-
   return (
     <div className="w-1/3  pr-3 pt-3  ">
       <div

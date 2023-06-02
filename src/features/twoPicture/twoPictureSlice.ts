@@ -65,13 +65,26 @@ export const createTwoPicture = createAsyncThunk(
 //update component container
 export const updateTwoPicture = createAsyncThunk(
   "twoPicture/updateTwoPicture",
-  async (updateTwoPicture: ContainerType, thunkAPI) => {
+  async (updateTwoPicture: ContainerType) => {
     const url = "twoPicture/";
     try {
       const response = await axios.patch(
         `${baseURL}/${url}${updateTwoPicture._id}`,
         updateTwoPicture
       );
+      return extractHeaders(response);
+    } catch (error) {
+      return error;
+    }
+  }
+);
+//delete component container
+export const deleteTwoPicture = createAsyncThunk(
+  "twoPicture/deleteTwoPicture",
+  async (id: string) => {
+    const url = "twoPicture/";
+    try {
+      const response = await axios.delete(`${baseURL}/${url}${id}`);
       return extractHeaders(response);
     } catch (error) {
       return error;
@@ -104,6 +117,19 @@ export const createPageOptions = createAsyncThunk(
     }
   }
 );
+// add items into newsContainer
+export const updateContainer = createAsyncThunk(
+  "twoPicture/updateContainer",
+  async ({ container, id }: { container: PictureType[]; id: string }) => {
+    const url = `twoPicture/updateContainer/${id}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 const twoPictureSlice = createSlice({
   name: "twoPicture",
@@ -123,15 +149,9 @@ const twoPictureSlice = createSlice({
       })
       .addCase(createTwoPicture.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       })
       .addCase(createTwoPicture.rejected, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       })
       .addCase(getPageTwoPictures.pending, (state) => {
         state.isLoading = true;
@@ -143,24 +163,15 @@ const twoPictureSlice = createSlice({
 
       .addCase(getPageTwoPictures.rejected, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       })
       .addCase(updateTwoPicture.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(updateTwoPicture.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       })
       .addCase(updateTwoPicture.rejected, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       })
       .addCase(getPageOptions.pending, (state) => {
         state.isLoading = true;
@@ -170,15 +181,9 @@ const twoPictureSlice = createSlice({
         state.pageOptions = action.payload.data.pageOptions.map(
           (option: any) => option.pageName
         );
-        console.log("====================================");
-        console.log(state.pageOptions);
-        console.log("====================================");
       })
       .addCase(getPageOptions.rejected, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       })
       .addCase(createPageOptions.pending, (state) => {
         state.isLoading = true;
@@ -189,9 +194,6 @@ const twoPictureSlice = createSlice({
       })
       .addCase(createPageOptions.rejected, (state, action) => {
         state.isLoading = false;
-        console.log("====================================");
-        console.log(action.payload);
-        console.log("====================================");
       });
   },
 });

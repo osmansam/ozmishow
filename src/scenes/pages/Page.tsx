@@ -14,7 +14,9 @@ import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
 import { setLanguage } from "../../features/context/contextSlice";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
+import NewsContainer from "../../components/news/NewsContainer";
 import Deneme from "../deneme";
+import NewsBox from "../../components/news/NewsBox";
 interface Props {
   page: string;
 }
@@ -94,7 +96,16 @@ const PageAdmin = ({ page }: Props) => {
                 />
               </div>
             );
-
+          case "NewsContainer":
+            return (
+              <div key={index}>
+                <NewsContainer
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader}
+                  newsArray={twoPictureArray}
+                />
+              </div>
+            );
           default:
             return null;
         }

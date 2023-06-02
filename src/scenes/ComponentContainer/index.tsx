@@ -163,6 +163,20 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
+      case Components.NewsContainer.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
+        resetInputs();
+        break;
+
       default:
         break;
     }

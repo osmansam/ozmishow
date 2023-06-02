@@ -5,6 +5,7 @@ import {
   getPageOptions,
   getPageTwoPictures,
   updateTwoPicture,
+  deleteTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
 import { LanguageOptions } from "../../shared/types";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
@@ -16,9 +17,55 @@ import MaximContainer from "../../components/maxim";
 import { setLanguage } from "../../features/context/contextSlice";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import Deneme from "../deneme";
+import NewsBox from "../../components/news/NewsBox";
+import NewsContainer from "../../components/news/NewsContainer";
 interface Props {
   page: string;
 }
+interface PageConfigurationButtonsProps {
+  index: number;
+  moveItem: (index: number, direction: "up" | "down") => void;
+  disableMoveUp: boolean;
+  disableMoveDown: boolean;
+  id: string;
+}
+
+const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
+  index,
+  moveItem,
+  disableMoveUp,
+  disableMoveDown,
+  id,
+}) => {
+  const dispatch = useAppDispatch();
+  return (
+    <>
+      <button
+        className="border-2 m-2"
+        disabled={disableMoveUp}
+        onClick={() => moveItem(index, "up")}
+      >
+        Move Up
+      </button>
+      <button
+        className="border-2 m-2"
+        disabled={disableMoveDown}
+        onClick={() => moveItem(index, "down")}
+      >
+        Move Down
+      </button>
+      <button
+        className="border-2 m-2"
+        onClick={async () => {
+          await dispatch(deleteTwoPicture(id));
+          window.location.reload();
+        }}
+      >
+        Delete
+      </button>
+    </>
+  );
+};
 
 const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
@@ -81,47 +128,33 @@ const PageAdmin = ({ page }: Props) => {
 
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
-        const { mainHeader, twoPictureArray } = item;
+        const { mainHeader, twoPictureArray, _id } = item;
 
         switch (item.componentName) {
           case "PictureAtRight":
             return (
               <div key={index}>
                 <PictureAtRight {...twoPictureArray[0]} />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
               </div>
             );
           case "PictureAtLeft":
             return (
               <div key={index}>
                 <PictureAtLeft {...twoPictureArray[0]} />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
               </div>
             );
           case "TwoPictureContainer":
@@ -131,20 +164,13 @@ const PageAdmin = ({ page }: Props) => {
                   mainHeader={item.mainHeader}
                   twoPictureArray={twoPictureArray}
                 />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
               </div>
             );
           case "IconExplainContainer":
@@ -154,40 +180,26 @@ const PageAdmin = ({ page }: Props) => {
                   mainHeader={mainHeader}
                   iconExplainArray={twoPictureArray}
                 />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
               </div>
             );
           case "MaximContainer":
             return (
               <div key={index}>
                 <MaximContainer {...twoPictureArray[0]} />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
               </div>
             );
           case "BorderBoxContainer":
@@ -197,22 +209,33 @@ const PageAdmin = ({ page }: Props) => {
                   mainHeader={mainHeader}
                   twoPictureArray={twoPictureArray}
                 />
-                <button
-                  className="border-2 m-2"
-                  disabled={index === 0}
-                  onClick={() => moveItem(index, "up")}
-                >
-                  Move Up
-                </button>
-                <button
-                  className="border-2 m-2"
-                  disabled={index === newContainer.length - 1}
-                  onClick={() => moveItem(index, "down")}
-                >
-                  Move Down
-                </button>
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
               </div>
             );
+          case "NewsContainer":
+            return (
+              <div key={index}>
+                <NewsContainer
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader}
+                  newsArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
+              </div>
+            );
+
           default:
             return null;
         }
