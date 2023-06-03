@@ -17,8 +17,8 @@ import MaximContainer from "../../components/maxim";
 import { setLanguage } from "../../features/context/contextSlice";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import Deneme from "../deneme";
-import NewsBox from "../../components/news/NewsBox";
 import NewsContainer from "../../components/news/NewsContainer";
+import ExplanationBar from "../../components/ExplanationBar";
 interface Props {
   page: string;
 }
@@ -227,6 +227,23 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   newsArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
+              </div>
+            );
+          case "ExplanationBar":
+            return (
+              <div key={index}>
+                <ExplanationBar
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  explanationArray={twoPictureArray}
                 />
                 <PageConfigurationButtons
                   index={index}

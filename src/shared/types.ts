@@ -39,6 +39,7 @@ export interface PictureType {
   paragraphs?: string[];
   buttons?: ButtonType[];
   _id?: string;
+  mainHeader?: string;
 }
 export interface TwoPictureContainerType {
   mainHeader?: string;
@@ -53,6 +54,11 @@ export interface NewsContainerType {
   id: string;
   mainHeader?: string;
   newsArray: Array<PictureType>;
+}
+export interface ExplanationBarType {
+  id: string;
+  mainMainHeader?: string;
+  explanationArray: Array<PictureType>;
 }
 interface ComponentType {
   name: string;
@@ -127,6 +133,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: true,
     isPictureContainerButton: false,
     isPictureContainerParagraph: true,
+  },
+  ExplanationBar: {
+    name: "ExplanationBar",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
   },
 };
 

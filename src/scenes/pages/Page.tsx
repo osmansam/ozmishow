@@ -16,6 +16,7 @@ import { setLanguage } from "../../features/context/contextSlice";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import NewsContainer from "../../components/news/NewsContainer";
 import Deneme from "../deneme";
+import ExplanationBar from "../../components/ExplanationBar";
 import NewsBox from "../../components/news/NewsBox";
 interface Props {
   page: string;
@@ -103,6 +104,16 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   newsArray={twoPictureArray}
+                />
+              </div>
+            );
+          case "ExplanationBar":
+            return (
+              <div key={index}>
+                <ExplanationBar
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  explanationArray={twoPictureArray}
                 />
               </div>
             );

@@ -1,5 +1,9 @@
 import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
-import { ThunkAPIType, TwoPictureContainerType } from "./../../shared/types";
+import {
+  ThunkAPIType,
+  TwoPictureContainerType,
+  ExplanationBarType,
+} from "./../../shared/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PictureType, ContainerType } from "../../shared/types";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -130,7 +134,19 @@ export const updateContainer = createAsyncThunk(
     }
   }
 );
-
+// updateExplanationBar
+export const updateExplanationBar = createAsyncThunk(
+  "twoPicture/updateExplanationBar",
+  async ({ container, id }: { container: PictureType[]; id: string }) => {
+    const url = `twoPicture/updateExplanationBar/${id}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 const twoPictureSlice = createSlice({
   name: "twoPicture",
   initialState,

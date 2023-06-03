@@ -176,6 +176,19 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
+      case Components.ExplanationBar.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
+        resetInputs();
+        break;
 
       default:
         break;
@@ -236,7 +249,7 @@ const ComponentContainer = () => {
         {/* select component part */}
         <div className="w-full  flex gap-12">
           <p>Select component type:</p>
-          <div className="flex gap-4">
+          <div className="w-full flex flex-wrap gap-6">
             {Object.values(Components).map((component) => (
               <label key={component.name}>
                 <input
