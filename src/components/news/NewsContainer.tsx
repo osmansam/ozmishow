@@ -3,11 +3,11 @@ import { NewsContainerType } from "../../shared/types";
 import NewsBox from "./NewsBox";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../../store";
 import {
   updateContainer,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
-import { RootState, useAppDispatch } from "../../store";
 import { Components } from "../../shared/types";
 
 const NewsContainer = ({ id, mainHeader, newsArray }: NewsContainerType) => {
