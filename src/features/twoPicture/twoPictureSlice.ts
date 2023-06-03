@@ -147,6 +147,20 @@ export const updateExplanationBar = createAsyncThunk(
     }
   }
 );
+//Delete item in Container
+export const deleteItemInContainer = createAsyncThunk(
+  "twoPicture/deleteItemInContainer",
+  async ({ id, itemId }: { id: string; itemId: string }) => {
+    const url = `twoPicture/deleteItem/${id}/${itemId}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 const twoPictureSlice = createSlice({
   name: "twoPicture",
   initialState,
