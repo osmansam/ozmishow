@@ -17,7 +17,8 @@ import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import NewsContainer from "../../components/news/NewsContainer";
 import Deneme from "../deneme";
 import ExplanationBar from "../../components/ExplanationBar";
-import NewsBox from "../../components/news/NewsBox";
+import PageBanner from "../../components/PageBanner/PageBanner";
+
 interface Props {
   page: string;
 }
@@ -115,6 +116,12 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   explanationArray={twoPictureArray}
                 />
+              </div>
+            );
+          case "PageBanner":
+            return (
+              <div key={index}>
+                <PageBanner {...twoPictureArray[0]} />
               </div>
             );
           default:

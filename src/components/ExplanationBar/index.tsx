@@ -30,7 +30,6 @@ const ExplanationBar = ({
   };
   const barHeight = explanationArray.length * 25 + 50;
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full  w-full flex flex-col gap-4  justify-between mb-4  h-[${barHeight}px ] bg-[#f9f9f9] rounded-lg py-4 `;
-  console.log(barHeight);
   return (
     <div className="py-10">
       <h1 className="text-3xl font-bold p-4 ml-4 ">{mainMainHeader}</h1>
@@ -64,7 +63,7 @@ const ExplanationBar = ({
               {explanationArray[barSelection].img && (
                 <img
                   src={explanationArray[barSelection].img}
-                  alt="image"
+                  alt="explanationImage"
                   className="w-full h-96 object-fit "
                 />
               )}

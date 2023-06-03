@@ -19,6 +19,7 @@ import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import Deneme from "../deneme";
 import NewsContainer from "../../components/news/NewsContainer";
 import ExplanationBar from "../../components/ExplanationBar";
+import PageBanner from "../../components/PageBanner/PageBanner";
 interface Props {
   page: string;
 }
@@ -39,7 +40,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   return (
-    <>
+    <div className="pt-4">
       {/* move the container up and down */}
       <button
         className="border-2 m-2"
@@ -65,7 +66,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
       >
         Delete
       </button>
-    </>
+    </div>
   );
 };
 
@@ -245,6 +246,19 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   explanationArray={twoPictureArray}
                 />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
+              </div>
+            );
+          case "PageBanner":
+            return (
+              <div key={index}>
+                <PageBanner {...twoPictureArray[0]} />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

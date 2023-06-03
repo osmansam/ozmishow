@@ -142,6 +142,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
+  PageBanner: {
+    name: "PageBanner",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+    isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
 };
 
 export interface ContainerType {

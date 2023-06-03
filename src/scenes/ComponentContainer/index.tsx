@@ -189,7 +189,18 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
-
+      case Components.PageBanner.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
+        resetInputs();
+        break;
       default:
         break;
     }
