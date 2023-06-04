@@ -201,6 +201,20 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
+      case Components.FrequentlyAskedQuestions.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
+        resetInputs();
+        break;
+
       default:
         break;
     }

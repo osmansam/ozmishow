@@ -55,6 +55,10 @@ export interface NewsContainerType {
   mainHeader?: string;
   newsArray: Array<PictureType>;
 }
+export interface FreqAskedType {
+  id: string;
+  freqAskedArray: Array<PictureType>;
+}
 export interface ExplanationBarType {
   id: string;
   mainMainHeader?: string;
@@ -149,6 +153,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: true,
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
+  },
+  FrequentlyAskedQuestions: {
+    name: "FrequentlyAskedQuestions",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+    isPictureContainerImage: false,
+    isPictureContainerButton: true,
+    isPictureContainerParagraph: true,
   },
 };
 

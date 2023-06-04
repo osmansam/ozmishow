@@ -1,5 +1,5 @@
 import React from "react";
-import FreqAsked from "./FreqAsked";
+import FreqAsked from "./freqAsked/FreqAsked";
 type Props = { mainHeader: string; paragraphs: string[] };
 
 const HeaderAndText = ({ mainHeader, paragraphs }: Props) => {

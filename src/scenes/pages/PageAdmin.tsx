@@ -20,6 +20,7 @@ import Deneme from "../deneme";
 import NewsContainer from "../../components/news/NewsContainer";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
+import FreqAsked from "../../components/freqAsked/FreqAsked";
 interface Props {
   page: string;
 }
@@ -268,7 +269,22 @@ const PageAdmin = ({ page }: Props) => {
                 />
               </div>
             );
-
+          case "FrequentlyAskedQuestions":
+            return (
+              <div key={index}>
+                <FreqAsked
+                  id={item && item._id ? item._id : ""}
+                  freqAskedArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
+              </div>
+            );
           default:
             return null;
         }

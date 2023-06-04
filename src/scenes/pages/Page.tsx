@@ -13,6 +13,7 @@ import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer
 import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
 import { setLanguage } from "../../features/context/contextSlice";
+import FreqAsked from "../../components/freqAsked/FreqAsked";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import NewsContainer from "../../components/news/NewsContainer";
 import Deneme from "../deneme";
@@ -122,6 +123,15 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <PageBanner {...twoPictureArray[0]} />
+              </div>
+            );
+          case "FrequentlyAskedQuestions":
+            return (
+              <div key={index}>
+                <FreqAsked
+                  id={item && item._id ? item._id : ""}
+                  freqAskedArray={twoPictureArray}
+                />
               </div>
             );
           default:
