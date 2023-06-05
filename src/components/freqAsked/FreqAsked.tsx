@@ -8,6 +8,7 @@ import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
+  deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 
 const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
@@ -45,11 +46,11 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
 
   return (
     <div
-      className="w-4/5 mx-auto  my-auto h-full py-2  px-4"
+      className="w-4/5 mx-auto  my-auto h-full py-10  px-4"
       id="freqAskedContainer"
     >
       {freqAskedArray.map((freqAsked, index) => {
-        const { header, paragraphs, buttons } = freqAsked;
+        const { header, paragraphs, buttons, _id } = freqAsked;
         return (
           <div key={index} onClick={() => setSelection(index)}>
             <h1 className="font-[500] pt-2 px-4">{header}</h1>
@@ -82,6 +83,26 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
                     </div>
                   ))}
               </motion.div>
+            )}
+            {isAdmin && (
+              <button
+                className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+                onClick={async () => {
+                  try {
+                    await dispatch(
+                      deleteItemInContainer({
+                        id,
+                        itemId: _id ?? "",
+                      })
+                    );
+                    // window.location.reload();
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+              >
+                Delete
+              </button>
             )}
             {/* Underline color #e2e2e2 */}
             <div className="mx-auto h-px mt-4 font-[700] bg-freqUnderline"></div>

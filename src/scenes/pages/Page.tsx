@@ -19,6 +19,7 @@ import NewsContainer from "../../components/news/NewsContainer";
 import Deneme from "../deneme";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
+import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 
 interface Props {
   page: string;
@@ -131,6 +132,16 @@ const PageAdmin = ({ page }: Props) => {
                 <FreqAsked
                   id={item && item._id ? item._id : ""}
                   freqAskedArray={twoPictureArray}
+                />
+              </div>
+            );
+          case "WorkTeamBar":
+            return (
+              <div key={index}>
+                <WorkTeamBar
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  workTeamArray={twoPictureArray}
                 />
               </div>
             );

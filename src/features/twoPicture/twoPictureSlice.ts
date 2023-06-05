@@ -147,6 +147,19 @@ export const updateExplanationBar = createAsyncThunk(
     }
   }
 );
+// updateWorkTeamBar
+export const updateWorkTeamBar = createAsyncThunk(
+  "twoPicture/updateWorkTeamBar",
+  async ({ container, id }: { container: PictureType[]; id: string }) => {
+    const url = `twoPicture/updateWorkTeamBar/${id}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 //Delete item in Container
 export const deleteItemInContainer = createAsyncThunk(
   "twoPicture/deleteItemInContainer",

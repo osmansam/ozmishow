@@ -20,6 +20,7 @@ import Deneme from "../deneme";
 import NewsContainer from "../../components/news/NewsContainer";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
+import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
 interface Props {
   page: string;
@@ -275,6 +276,23 @@ const PageAdmin = ({ page }: Props) => {
                 <FreqAsked
                   id={item && item._id ? item._id : ""}
                   freqAskedArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                />
+              </div>
+            );
+          case "WorkTeamBar":
+            return (
+              <div key={index}>
+                <WorkTeamBar
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  workTeamArray={twoPictureArray}
                 />
                 <PageConfigurationButtons
                   index={index}
