@@ -26,7 +26,7 @@ const ComponentContainer = () => {
   const { isAdmin, language } = useSelector(
     (state: RootState) => state.context
   );
-  const [createContainer, setCreateContainer] = useState({} as ContainerType);
+
   const [componentName, setComponentName] = useState<keyof typeof Components>();
   const { container, pageOptions } = useSelector(
     (state: RootState) => state.twoPicture
@@ -214,7 +214,19 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
-
+      case Components.WorkTeamBar.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            mainHeader,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
+        resetInputs();
+        break;
       default:
         break;
     }

@@ -40,6 +40,7 @@ export interface PictureType {
   buttons?: ButtonType[];
   _id?: string;
   mainHeader?: string;
+  subHeaders?: string[];
 }
 export interface TwoPictureContainerType {
   mainHeader?: string;
@@ -63,6 +64,11 @@ export interface ExplanationBarType {
   id: string;
   mainMainHeader?: string;
   explanationArray: Array<PictureType>;
+}
+export interface WorkTeamBarType {
+  id: string;
+  mainMainHeader?: string;
+  workTeamArray: Array<PictureType>;
 }
 interface ComponentType {
   name: string;
@@ -161,6 +167,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: false,
     isPictureContainerButton: true,
     isPictureContainerParagraph: true,
+  },
+  WorkTeamBar: {
+    name: "WorkTeamBar",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
   },
 };
 
