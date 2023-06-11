@@ -72,7 +72,10 @@ const WorkTeamBar = ({
               (index === barSelection || index === hovered) && "text-[#e1241b] "
             }`;
             return (
-              <div className="flex justify-center items-center" key={index}>
+              <div
+                className="flex justify-center items-center cursor-pointer"
+                key={index}
+              >
                 <li
                   className={listClassName}
                   onClick={() => setBarSelection(index)}

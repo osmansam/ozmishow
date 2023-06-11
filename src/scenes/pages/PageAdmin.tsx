@@ -6,6 +6,7 @@ import {
   getPageTwoPictures,
   updateTwoPicture,
   deleteTwoPicture,
+  updatePageAndLanguage,
 } from "../../features/twoPicture/twoPictureSlice";
 import { LanguageOptions } from "../../shared/types";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
@@ -22,6 +23,7 @@ import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
+
 interface Props {
   page: string;
 }
@@ -31,6 +33,8 @@ interface PageConfigurationButtonsProps {
   disableMoveUp: boolean;
   disableMoveDown: boolean;
   id: string;
+  pageOptions: string[];
+  language: string;
 }
 // the buttons for the admin page configuration
 const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
@@ -39,35 +43,87 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   disableMoveUp,
   disableMoveDown,
   id,
+  pageOptions,
+  language,
 }) => {
+  const [updatePage, setUpdatePage] = useState(pageOptions[0]);
+  const [updateLanguage, setUpdateLanguage] = useState(language);
+
   const dispatch = useAppDispatch();
   return (
-    <div className="pt-4">
+    <div className="pt-4 flex flex-col">
       {/* move the container up and down */}
-      <button
-        className="border-2 m-2"
-        disabled={disableMoveUp}
-        onClick={() => moveItem(index, "up")}
-      >
-        Move Up
-      </button>
-      <button
-        className="border-2 m-2"
-        disabled={disableMoveDown}
-        onClick={() => moveItem(index, "down")}
-      >
-        Move Down
-      </button>
-      {/* Delete Container */}
-      <button
-        className="border-2 m-2"
-        onClick={async () => {
-          await dispatch(deleteTwoPicture(id));
-          window.location.reload();
-        }}
-      >
-        Delete
-      </button>
+      <div className="flex flex-row gap-6">
+        <button
+          className="border-2 m-2"
+          disabled={disableMoveUp}
+          onClick={() => moveItem(index, "up")}
+        >
+          Move Up
+        </button>
+        <button
+          className="border-2 m-2"
+          disabled={disableMoveDown}
+          onClick={() => moveItem(index, "down")}
+        >
+          Move Down
+        </button>
+        {/* Delete Container */}
+        <button
+          className="border-2 m-2"
+          onClick={async () => {
+            await dispatch(deleteTwoPicture(id));
+            window.location.reload();
+          }}
+        >
+          Delete
+        </button>
+      </div>
+      {/* change page and language  */}
+      <div className="flex flex-row gap-6  w-1/3 ">
+        <select
+          className="border-2 m-2"
+          onChange={(e) => {
+            setUpdatePage(e.target.value);
+          }}
+        >
+          {pageOptions.map((page) => (
+            <option key={page} value={page}>
+              {page}
+            </option>
+          ))}
+        </select>
+        <select
+          className="border-2 m-2 w-1/3"
+          onChange={(e) => {
+            setUpdateLanguage(e.target.value);
+          }}
+        >
+          {Object.entries(LanguageOptions).map(([value, label]) => (
+            <option
+              key={value}
+              value={LanguageOptions[label as keyof typeof LanguageOptions]}
+            >
+              {label}
+            </option>
+          ))}
+        </select>
+        <button
+          className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+          onClick={() => {
+            dispatch(
+              updatePageAndLanguage({
+                id,
+                page: updatePage,
+                language: updateLanguage,
+              })
+            );
+            window.location.reload();
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
@@ -80,6 +136,7 @@ const PageAdmin = ({ page }: Props) => {
     (state: RootState) => state.twoPicture
   );
   // make the page top and took the containers from database
+
   useEffect(() => {
     if (pageOptions.includes(page)) {
       window.scrollTo(0, 0);
@@ -146,6 +203,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -159,6 +218,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -175,6 +236,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -191,6 +254,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -204,6 +269,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -220,6 +287,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -237,6 +306,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -254,6 +325,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -267,6 +340,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -283,6 +358,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );
@@ -300,6 +377,8 @@ const PageAdmin = ({ page }: Props) => {
                   disableMoveUp={index === 0}
                   disableMoveDown={index === newContainer.length - 1}
                   id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
                 />
               </div>
             );

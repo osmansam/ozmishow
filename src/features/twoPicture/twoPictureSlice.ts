@@ -173,6 +173,30 @@ export const deleteItemInContainer = createAsyncThunk(
     }
   }
 );
+//update page and language
+export const updatePageAndLanguage = createAsyncThunk(
+  "twoPicture/updatePageAndLanguage",
+  async ({
+    id,
+    page,
+    language,
+  }: {
+    id: string;
+    page: string;
+    language: string;
+  }) => {
+    const url = `twoPicture/updatePageAndLanguage/${id}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, {
+        page,
+        language,
+      });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 const twoPictureSlice = createSlice({
   name: "twoPicture",

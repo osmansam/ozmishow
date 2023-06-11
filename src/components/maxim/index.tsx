@@ -4,7 +4,7 @@ import { PictureType } from "../../shared/types";
 const Maxim = ({ header, paragraphs }: PictureType) => {
   return (
     <div
-      className="w-full h-52  flex flex-col gap-10 justify-center items-center"
+      className="w-full h-52  flex flex-col gap-10 justify-center items-center py-20"
       style={{ backgroundColor: "#f6f6f6" }}
     >
       {paragraphs?.map((paragraph, index) => (
