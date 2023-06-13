@@ -8,7 +8,7 @@ import {
   deleteTwoPicture,
   updatePageAndLanguage,
 } from "../../features/twoPicture/twoPictureSlice";
-import { LanguageOptions } from "../../shared/types";
+import { LanguageOptions, PageOptionsType } from "../../shared/types";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
 import PictureAtRight from "../../components/pictureRight/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
@@ -23,6 +23,7 @@ import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
+import Navbar from "../../components/navbar/Navbar";
 
 interface Props {
   page: string;
@@ -33,7 +34,7 @@ interface PageConfigurationButtonsProps {
   disableMoveUp: boolean;
   disableMoveDown: boolean;
   id: string;
-  pageOptions: string[];
+  pageOptions: Array<PageOptionsType>;
   language: string;
 }
 // the buttons for the admin page configuration
@@ -46,7 +47,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   pageOptions,
   language,
 }) => {
-  const [updatePage, setUpdatePage] = useState(pageOptions[0]);
+  const [updatePage, setUpdatePage] = useState(pageOptions[0].pageName);
   const [updateLanguage, setUpdateLanguage] = useState(language);
 
   const dispatch = useAppDispatch();
@@ -87,9 +88,9 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
             setUpdatePage(e.target.value);
           }}
         >
-          {pageOptions.map((page) => (
-            <option key={page} value={page}>
-              {page}
+          {pageOptions.map((page, index) => (
+            <option key={index} value={page.pageName}>
+              {page.pageName}
             </option>
           ))}
         </select>
@@ -97,6 +98,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
           className="border-2 m-2 w-1/3"
           onChange={(e) => {
             setUpdateLanguage(e.target.value);
+            console.log(e.target.value);
           }}
         >
           {Object.entries(LanguageOptions).map(([value, label]) => (
@@ -111,6 +113,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
         <button
           className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={() => {
+            console.log(updateLanguage);
             dispatch(
               updatePageAndLanguage({
                 id,
@@ -138,13 +141,7 @@ const PageAdmin = ({ page }: Props) => {
   // make the page top and took the containers from database
 
   useEffect(() => {
-    if (pageOptions.includes(page)) {
-      window.scrollTo(0, 0);
-      dispatch(getPageTwoPictures(page));
-      dispatch(getPageOptions());
-    } else {
-      console.error(`Invalid page: ${page}`);
-    }
+    dispatch(getPageTwoPictures(page));
   }, [dispatch, page]);
 
   // filter the container by language and then sort it
@@ -389,21 +386,13 @@ const PageAdmin = ({ page }: Props) => {
     });
   };
 
+  const currentPage = pageOptions.find((item) => item.pageName === page);
+
   return (
     <div>
-      {/* language options  */}
-      <div className="w-5/6 flex justify-end">
-        {Object.values(LanguageOptions).map((option, index) => (
-          <button
-            key={index}
-            className="border-2 rounded-md p-2 mt-4"
-            onClick={() => dispatch(setLanguage(option))}
-          >
-            {option.toUpperCase()}
-          </button>
-        ))}
-      </div>
-      <Deneme />
+      {currentPage?.isNavbar && (
+        <Navbar currentPage={currentPage ? currentPage.pageName : ""} />
+      )}
       {renderComponents()}
     </div>
   );

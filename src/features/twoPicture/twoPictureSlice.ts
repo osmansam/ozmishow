@@ -5,15 +5,20 @@ import {
   ExplanationBarType,
 } from "./../../shared/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PictureType, ContainerType } from "../../shared/types";
+import {
+  PictureType,
+  ContainerType,
+  PageOptionsType,
+} from "../../shared/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import axios from "axios";
+
 interface ComponentState {
   isLoading: boolean;
   twoPictureArray: Array<PictureType>;
   container: Array<ContainerType>;
-  pageOptions: Array<string>;
+  pageOptions: Array<PageOptionsType>;
 }
 const initialState: ComponentState = {
   isLoading: false,
@@ -111,10 +116,16 @@ export const getPageOptions = createAsyncThunk(
 //create page options
 export const createPageOptions = createAsyncThunk(
   "twoPicture/createPageOptions",
-  async (pageName: string, thunkAPI) => {
+  async (
+    { pageName, isNavbar }: { pageName: string; isNavbar: boolean },
+    thunkAPI
+  ) => {
     const url = "pageOptions/";
     try {
-      const response = await axios.post(`${baseURL}/${url}`, { pageName });
+      const response = await axios.post(`${baseURL}/${url}`, {
+        pageName,
+        isNavbar,
+      });
       return extractHeaders(response);
     } catch (error) {
       return error;
@@ -245,9 +256,7 @@ const twoPictureSlice = createSlice({
       })
       .addCase(getPageOptions.fulfilled, (state, action: any) => {
         state.isLoading = false;
-        state.pageOptions = action.payload.data.pageOptions.map(
-          (option: any) => option.pageName
-        );
+        state.pageOptions = action.payload.data.pageOptions;
       })
       .addCase(getPageOptions.rejected, (state, action) => {
         state.isLoading = false;

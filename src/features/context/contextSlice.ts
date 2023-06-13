@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ContextSliceType {
   isTopOfPage: boolean;
   isAdmin: boolean;
+  isSidebarOpen?: boolean;
   flexBetween: string;
   language: string;
 }
@@ -12,6 +13,7 @@ const initialState: ContextSliceType = {
   isTopOfPage: false,
   isAdmin: true,
   flexBetween: "flex items-center justify-between",
+  isSidebarOpen: false,
   language: LanguageOptions.EN,
 };
 const contextSlice = createSlice({
@@ -27,8 +29,12 @@ const contextSlice = createSlice({
     setLanguage: (state, action) => {
       state.language = action.payload;
     },
+    setIsSidebarOpen: (state, action) => {
+      state.isSidebarOpen = action.payload;
+    },
   },
 });
 
-export const { setIsTopOfPage, setIsAdmin, setLanguage } = contextSlice.actions;
+export const { setIsTopOfPage, setIsAdmin, setLanguage, setIsSidebarOpen } =
+  contextSlice.actions;
 export default contextSlice.reducer;

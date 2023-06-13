@@ -189,9 +189,9 @@ const AddExplanationItem = ({
           }}
         >
           <option value="">Select a page</option>
-          {pageOptions.map((option) => (
-            <option key={option} value={option.toLowerCase()}>
-              {option}
+          {pageOptions.map((option, index) => (
+            <option key={index} value={option.pageName.toLowerCase()}>
+              {option.pageName}
             </option>
           ))}
         </select>

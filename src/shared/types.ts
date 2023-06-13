@@ -193,9 +193,10 @@ export interface ButtonType {
   buttonLink: string;
 }
 export const LanguageOptions = {
-  EN: "ENGLISH",
-  TR: "TURKISH",
+  EN: "EN",
+  TR: "TR",
 };
 export interface PageOptionsType {
   pageName: string;
+  isNavbar: boolean;
 }

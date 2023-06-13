@@ -8,7 +8,7 @@ const PageBanner = ({ img, header }: PictureType) => {
       {/* image */}
       <img src={img} alt="pageImage" className="w-full h-72 object-cover" />
       {/* Description */}
-      <div className="absolute bottom-[-20px] left-20  bg-[#e1241b] text-white">
+      <div className="absolute bottom-[-20px] left-20  bg-[#9f000f] text-white">
         <p className="text-xl uppercase px-4 py-2 font-[700]">{header}</p>
       </div>
     </div>

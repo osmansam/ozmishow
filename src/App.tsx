@@ -22,11 +22,11 @@ function App() {
       return (
         <>
           <Route path="/" element={<TwoPicture />} />
-          {pageOptions.map((page) => (
+          {pageOptions.map((page, index) => (
             <Route
-              key={page}
-              path={`/${page.toLowerCase()}`}
-              element={<PageAdmin page={page} />}
+              key={index}
+              path={`/${page.pageName.toLowerCase()}`}
+              element={<PageAdmin page={page.pageName} />}
             />
           ))}
         </>
@@ -35,11 +35,11 @@ function App() {
       return (
         <>
           <Route path="/" element={<TwoPicture />} />
-          {pageOptions.map((page) => (
+          {pageOptions.map((page, index) => (
             <Route
-              key={page}
-              path={`/${page.toLowerCase()}`}
-              element={<Page page={page} />}
+              key={index}
+              path={`/${page.pageName.toLowerCase()}`}
+              element={<Page page={page.pageName} />}
             />
           ))}
         </>

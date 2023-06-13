@@ -9,13 +9,13 @@ const Deneme = (props: Props) => {
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   return (
     <div>
-      {pageOptions.map((key) => (
+      {pageOptions.map((page, index) => (
         <button
-          key={key}
+          key={index}
           className="border-2 p-2 m-2 mt-4"
-          onClick={() => navigate(`/${key}`)}
+          onClick={() => navigate(`/${page.pageName}`)}
         >
-          {key}
+          {page.pageName}
         </button>
       ))}
       <button className="border-2 p-2 m-2 mt-4" onClick={() => navigate(`/`)}>

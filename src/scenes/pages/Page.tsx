@@ -20,7 +20,7 @@ import Deneme from "../deneme";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
-
+import Navbar from "../../components/navbar/Navbar";
 interface Props {
   page: string;
 }
@@ -31,12 +31,7 @@ const PageAdmin = ({ page }: Props) => {
   const { language } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
-    if (pageOptions.includes(page)) {
-      window.scrollTo(0, 0);
-      dispatch(getPageTwoPictures(page));
-    } else {
-      console.error(`Invalid page: ${page}`);
-    }
+    dispatch(getPageTwoPictures(page));
   }, [dispatch, page]);
 
   const { container } = useSelector((state: RootState) => state.twoPicture);
@@ -151,22 +146,13 @@ const PageAdmin = ({ page }: Props) => {
       }
     });
   };
+  const currentPage = pageOptions.find((item) => item.pageName === page);
 
   return (
     <div>
-      {/* language options development purposes  */}
-      <div className="w-5/6 flex justify-end">
-        {Object.values(LanguageOptions).map((option) => (
-          <button
-            className="border-2 rounded-md p-2 mt-4"
-            onClick={() => dispatch(setLanguage(option))}
-          >
-            {option.toUpperCase()}
-          </button>
-        ))}
-      </div>
-      {/* burasi deneme silinecek */}
-      <Deneme />
+      {currentPage?.isNavbar && (
+        <Navbar currentPage={currentPage ? currentPage.pageName : ""} />
+      )}
       {renderComponents()}
     </div>
   );

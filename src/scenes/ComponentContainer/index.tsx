@@ -15,6 +15,7 @@ import Deneme from "../deneme";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isNavbar, setIsNavbar] = useState(false);
   const [page, setPage] = useState<string>("Home");
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);
@@ -88,7 +89,9 @@ const ComponentContainer = () => {
       case Components.NewPage.name:
         if (mainHeader === "") return;
         setMainHeader(mainHeader[0].toUpperCase() + mainHeader.slice(1));
-        await dispatch(createPageOptions(mainHeader));
+        await dispatch(
+          createPageOptions({ pageName: mainHeader, isNavbar: isNavbar })
+        );
         resetInputs();
         break;
       // case PictureAtRight and PictureAtLeft
@@ -257,9 +260,9 @@ const ComponentContainer = () => {
             value={page}
             onChange={(e) => setPage(e.target.value)}
           >
-            {pageOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
+            {pageOptions.map((option, index) => (
+              <option key={index} value={option.pageName}>
+                {option.pageName}
               </option>
             ))}
           </select>
@@ -316,6 +319,38 @@ const ComponentContainer = () => {
               value={mainHeader}
               onChange={(e) => setMainHeader(e.target.value)}
             />
+          </div>
+        )}
+        {/* newPage navbar */}
+        {componentName === "NewPage" && (
+          <div className="flex gap-5 w-full">
+            <label className="w-32" htmlFor="header">
+              Navbar
+            </label>
+            <div>
+              <input
+                className="border-2 w-4/5 rounded-md capitalize"
+                type="radio"
+                id="navbar-yes"
+                name="navbar"
+                value="true"
+                checked={isNavbar === true}
+                onChange={() => setIsNavbar(true)}
+              />
+              <label htmlFor="navbar-yes">Evet</label>
+            </div>
+            <div>
+              <input
+                className="border-2 w-4/5 rounded-md capitalize"
+                type="radio"
+                id="navbar-no"
+                name="navbar"
+                value="false"
+                checked={isNavbar === false}
+                onChange={() => setIsNavbar(false)}
+              />
+              <label htmlFor="navbar-no">Hayır</label>
+            </div>
           </div>
         )}
         {/* picture containers */}
