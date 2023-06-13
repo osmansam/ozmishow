@@ -8,6 +8,7 @@ import {
 } from "../../features/context/contextSlice";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 type Props = {
   currentPage: string;
@@ -23,11 +24,12 @@ const Navbar = ({ currentPage }: Props) => {
   return (
     <nav className="h-60 flex flex-col ">
       {/* logo and language options  */}
-      <div className="w-3/4 flex flex-row justify-between mx-auto">
+      <div className="w-5/6 flex flex-row justify-between mx-auto">
         {/* logo */}
         <div className="w-1/3">
           <img
-            src="https://via.placeholder.com/150"
+            className="py-2 cursor-pointer h-36"
+            src={logo}
             alt="logo"
             onClick={() => {
               navigate("/");
@@ -62,16 +64,16 @@ const Navbar = ({ currentPage }: Props) => {
         </div>
         {/* links */}
         <div className="hidden lg:block">
-          <ul className="w-4/5 flex flex-row justify-between mx-auto flex-wrap ">
+          <ul className="w-3/4 flex flex-row justify-between mx-auto flex-wrap ">
             {" "}
             {pageOptions.map(
               (page, index) =>
                 page.isNavbar && (
                   <li
                     key={index}
-                    className={`p-2 m-2 mt-4 ${
+                    className={`p-2 m-2 mt-4 uppercase cursor-pointer hover:underline ${
                       currentPage === page.pageName &&
-                      "bg-[#9f000f] text-white rounded-md"
+                      "bg-[#9f000f] text-white rounded-md hover:no-underline"
                     }`}
                     onClick={() => navigate(`/${page.pageName}`)}
                   >

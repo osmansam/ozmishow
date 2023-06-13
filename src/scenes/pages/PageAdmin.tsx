@@ -24,6 +24,7 @@ import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
 import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../components/sidebar";
 
 interface Props {
   page: string;
@@ -134,7 +135,9 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
 const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
-  const { language } = useSelector((state: RootState) => state.context);
+  const { language, isSidebarOpen } = useSelector(
+    (state: RootState) => state.context
+  );
   const { container, pageOptions } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -391,7 +394,12 @@ const PageAdmin = ({ page }: Props) => {
   return (
     <div>
       {currentPage?.isNavbar && (
-        <Navbar currentPage={currentPage ? currentPage.pageName : ""} />
+        <div>
+          {isSidebarOpen && (
+            <Sidebar currentPage={currentPage ? currentPage.pageName : ""} />
+          )}
+          <Navbar currentPage={currentPage ? currentPage.pageName : ""} />
+        </div>
       )}
       {renderComponents()}
     </div>
