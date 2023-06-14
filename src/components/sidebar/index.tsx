@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setIsSidebarOpen } from "../../features/context/contextSlice";
+import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
 
 type Props = { currentPage: string };
 
@@ -15,7 +15,9 @@ const Sidebar = ({ currentPage }: Props) => {
   const isSidebarOpen = useSelector(
     (state: RootState) => state.context?.isSidebarOpen || false
   );
-  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const { pageOptions, logo } = useSelector(
+    (state: RootState) => state.twoPicture
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,6 +33,10 @@ const Sidebar = ({ currentPage }: Props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [dispatch]);
+  //   get the logo
+  useEffect(() => {
+    dispatch(getNavbar());
+  }, [dispatch]);
   return (
     <div className="z-40">
       <div className={`${isSidebarOpen ? "" : "hidden"}  z-30`}>
@@ -41,10 +47,10 @@ const Sidebar = ({ currentPage }: Props) => {
           onClick={() => dispatch(setIsSidebarOpen(false))}
         ></div>
         <div className="w-[250px] lg:w-1/6 h-screen bg-[#343a3b] fixed flex flex-col z-50">
-          <div className="mx-auto">
+          <div className="mx-auto ">
             <img
-              className="py-2 cursor-pointer h-36 "
-              src={logo}
+              className="py-2 cursor-pointer rounded-xl h-36 bg-[#343a3b] "
+              src={logo ? logo : "https://via.placeholder.com/150"}
               alt="logo"
               onClick={() => {
                 navigate("/");
@@ -58,7 +64,7 @@ const Sidebar = ({ currentPage }: Props) => {
                 page.isNavbar && (
                   <li
                     key={index}
-                    className={`pl-4 pt-2 m-2  text-white uppercase cursor-pointer hover:underline ${
+                    className={` pl-4 py-2 m-2  text-white uppercase cursor-pointer hover:underline ${
                       currentPage === page.pageName &&
                       "bg-[#9f000f] text-black rounded-md hover:no-underline"
                     }`}

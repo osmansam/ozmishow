@@ -176,6 +176,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
+  Navbar: {
+    name: "Navbar",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+    isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
 };
 
 export interface ContainerType {

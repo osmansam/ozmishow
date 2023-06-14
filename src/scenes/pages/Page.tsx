@@ -22,6 +22,7 @@ import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar";
+import Footer from "../../components/footer";
 interface Props {
   page: string;
 }
@@ -35,6 +36,7 @@ const PageAdmin = ({ page }: Props) => {
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
     dispatch(getPageTwoPictures(page));
+    window.scrollTo(0, 0);
   }, [dispatch, page]);
 
   const { container } = useSelector((state: RootState) => state.twoPicture);
@@ -162,6 +164,9 @@ const PageAdmin = ({ page }: Props) => {
         </div>
       )}
       {renderComponents()}
+      {currentPage?.isNavbar && (
+        <Footer currentPage={currentPage ? currentPage.pageName : ""} />
+      )}
     </div>
   );
 };

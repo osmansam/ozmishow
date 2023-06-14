@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
-  getPageOptions,
   getPageTwoPictures,
   updateTwoPicture,
   deleteTwoPicture,
@@ -15,9 +14,7 @@ import IconExplainContainer from "../../components/IconExplain/IconExplainContai
 import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
 import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
-import { setLanguage } from "../../features/context/contextSlice";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
-import Deneme from "../deneme";
 import NewsContainer from "../../components/news/NewsContainer";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
@@ -25,6 +22,8 @@ import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar";
+import AddFooter from "../../components/footer/AddFooter";
+import Footer from "../../components/footer";
 
 interface Props {
   page: string;
@@ -145,6 +144,7 @@ const PageAdmin = ({ page }: Props) => {
 
   useEffect(() => {
     dispatch(getPageTwoPictures(page));
+    window.scrollTo(0, 0);
   }, [dispatch, page]);
 
   // filter the container by language and then sort it
@@ -402,6 +402,9 @@ const PageAdmin = ({ page }: Props) => {
         </div>
       )}
       {renderComponents()}
+      {currentPage?.isNavbar && (
+        <Footer currentPage={currentPage ? currentPage.pageName : ""} />
+      )}
     </div>
   );
 };

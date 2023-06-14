@@ -8,6 +8,7 @@ import {
   resetTwoPictureArray,
   getPageTwoPictures,
   createPageOptions,
+  createNavbar,
 } from "../../features/twoPicture/twoPictureSlice";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import { useNavigate } from "react-router-dom";
@@ -228,6 +229,15 @@ const ComponentContainer = () => {
             language,
           })
         );
+        resetInputs();
+        break;
+      case Components.Navbar.name:
+        await dispatch(
+          createNavbar(
+            twoPictureArray ? (twoPictureArray[0].img as string) : ""
+          )
+        );
+
         resetInputs();
         break;
       default:

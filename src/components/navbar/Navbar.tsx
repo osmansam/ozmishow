@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { LanguageOptions } from "../../shared/types";
@@ -6,9 +6,9 @@ import {
   setLanguage,
   setIsSidebarOpen,
 } from "../../features/context/contextSlice";
+import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
 
 type Props = {
   currentPage: string;
@@ -17,10 +17,16 @@ type Props = {
 const Navbar = ({ currentPage }: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const { pageOptions, logo } = useSelector(
+    (state: RootState) => state.twoPicture
+  );
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
   );
+  //   get the logo
+  useEffect(() => {
+    dispatch(getNavbar());
+  }, [dispatch]);
   return (
     <nav className="h-60 flex flex-col ">
       {/* logo and language options  */}
@@ -29,7 +35,7 @@ const Navbar = ({ currentPage }: Props) => {
         <div className="w-1/3">
           <img
             className="py-2 cursor-pointer h-36"
-            src={logo}
+            src={logo ? logo : "https://via.placeholder.com/150"}
             alt="logo"
             onClick={() => {
               navigate("/");
@@ -56,7 +62,7 @@ const Navbar = ({ currentPage }: Props) => {
         {/* button */}
         <div className="w-5/6 mx-auto flex justify-end">
           <FaBars
-            className="w-8 h-5 my-auto mt-3 lg:hidden cursor-pointer"
+            className="w-8 h-6 my-auto mt-3 lg:hidden cursor-pointer"
             onClick={() => {
               dispatch(setIsSidebarOpen(!isSidebarOpen));
             }}

@@ -13,18 +13,23 @@ import {
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import axios from "axios";
+import { logDOM } from "@testing-library/react";
 
 interface ComponentState {
   isLoading: boolean;
   twoPictureArray: Array<PictureType>;
   container: Array<ContainerType>;
   pageOptions: Array<PageOptionsType>;
+  logo: string;
+  footer: any;
 }
 const initialState: ComponentState = {
   isLoading: false,
   twoPictureArray: [],
   container: [],
   pageOptions: [],
+  logo: "",
+  footer: {},
 };
 
 const serializeHeaders = (headers: any) => {
@@ -209,6 +214,70 @@ export const updatePageAndLanguage = createAsyncThunk(
   }
 );
 
+//create navbar
+export const createNavbar = createAsyncThunk(
+  "twoPicture/createNavbar",
+  async (logo: string) => {
+    const url = `pageOptions/navbar`;
+    try {
+      const response = await axios.post(`${baseURL}/${url}`, {
+        logo,
+      });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+// get navbar
+export const getNavbar = createAsyncThunk("twoPicture/getNavbar", async () => {
+  const url = `pageOptions/navbar`;
+  try {
+    const response = await axios.get(`${baseURL}/${url}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+});
+//create footer
+export const createFooter = createAsyncThunk(
+  "twoPicture/createFooter",
+  async ({
+    adress,
+    phone,
+    fax,
+    email,
+  }: {
+    adress: string;
+    phone: string;
+    fax: string;
+    email: string;
+  }) => {
+    const url = `pageOptions/footer`;
+    try {
+      const response = await axios.post(`${baseURL}/${url}`, {
+        adress,
+        phone,
+        fax,
+        email,
+      });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+//get footer
+export const getFooter = createAsyncThunk("twoPicture/getFooter", async () => {
+  const url = `pageOptions/footer`;
+  try {
+    const response = await axios.get(`${baseURL}/${url}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+});
+
 const twoPictureSlice = createSlice({
   name: "twoPicture",
   initialState,
@@ -269,6 +338,26 @@ const twoPictureSlice = createSlice({
         state.pageOptions = [...state.pageOptions, action.payload.data];
       })
       .addCase(createPageOptions.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(getNavbar.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getNavbar.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.logo = action.payload.navbar[0].logo;
+      })
+      .addCase(getNavbar.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(getFooter.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getFooter.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.footer = action.payload.footer[0];
+      })
+      .addCase(getFooter.rejected, (state, action) => {
         state.isLoading = false;
       });
   },
