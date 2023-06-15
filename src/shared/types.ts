@@ -39,8 +39,10 @@ export interface PictureType {
   paragraphs?: string[];
   buttons?: ButtonType[];
   _id?: string;
+  twoPictureId?: string;
   mainHeader?: string;
   subHeaders?: string[];
+  page?: string;
 }
 export interface TwoPictureContainerType {
   mainHeader?: string;
@@ -52,6 +54,7 @@ export interface IconExplainContainerType {
   iconExplainArray: Array<PictureType>;
 }
 export interface NewsContainerType {
+  page: string;
   id: string;
   mainHeader?: string;
   newsArray: Array<PictureType>;

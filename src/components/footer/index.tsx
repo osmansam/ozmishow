@@ -32,7 +32,7 @@ const Footer = ({ currentPage }: Props) => {
   }, [dispatch]);
 
   return (
-    <footer className="h-full lg:h-48 flex flex-col gap-5 bg-black pb-10 ">
+    <footer className="h-full lg:h-48 flex flex-col gap-5 bg-black  ">
       {/* links */}
       <ul className="flex flex-row  flex-wrap justify-between mx-auto w-5/6">
         {" "}

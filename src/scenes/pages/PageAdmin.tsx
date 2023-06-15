@@ -299,6 +299,7 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   newsArray={twoPictureArray}
+                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}

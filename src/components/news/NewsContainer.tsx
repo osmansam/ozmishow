@@ -10,7 +10,12 @@ import {
 } from "../../features/twoPicture/twoPictureSlice";
 import { Components } from "../../shared/types";
 
-const NewsContainer = ({ id, mainHeader, newsArray }: NewsContainerType) => {
+const NewsContainer = ({
+  page,
+  id,
+  mainHeader,
+  newsArray,
+}: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -28,7 +33,16 @@ const NewsContainer = ({ id, mainHeader, newsArray }: NewsContainerType) => {
       <div className="w-5/6 h-full flex-wrap flex  mx-auto py-10  mb-4">
         {newsArray.map((news, index) => {
           const { img, header } = news;
-          return <NewsBox key={index} img={img} header={header} />;
+          return (
+            <NewsBox
+              key={index}
+              _id={news._id}
+              twoPictureId={id}
+              page={page}
+              img={img}
+              header={header}
+            />
+          );
         })}
       </div>
       {!isAddNewItem && isAdmin && (
