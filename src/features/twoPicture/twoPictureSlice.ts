@@ -122,13 +122,18 @@ export const getPageOptions = createAsyncThunk(
 export const createPageOptions = createAsyncThunk(
   "twoPicture/createPageOptions",
   async (
-    { pageName, isNavbar }: { pageName: string; isNavbar: boolean },
+    {
+      pageNameTR,
+      pageNameEN,
+      isNavbar,
+    }: { pageNameTR: string; pageNameEN: string; isNavbar: boolean },
     thunkAPI
   ) => {
     const url = "pageOptions/";
     try {
       const response = await axios.post(`${baseURL}/${url}`, {
-        pageName,
+        pageNameTR,
+        pageNameEN,
         isNavbar,
       });
       return extractHeaders(response);

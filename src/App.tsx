@@ -25,8 +25,8 @@ function App() {
           {pageOptions.map((page, index) => (
             <Route
               key={index}
-              path={`/${page.pageName.toLowerCase()}`}
-              element={<PageAdmin page={page.pageName} />}
+              path={`/${page.pageNameEN.toLowerCase()}`}
+              element={<PageAdmin page={page.pageNameEN} />}
             />
           ))}
         </>
@@ -38,8 +38,8 @@ function App() {
           {pageOptions.map((page, index) => (
             <Route
               key={index}
-              path={`/${page.pageName.toLowerCase()}`}
-              element={<Page page={page.pageName} />}
+              path={`/${page.pageNameEN.toLowerCase()}`}
+              element={<Page page={page.pageNameEN} />}
             />
           ))}
         </>

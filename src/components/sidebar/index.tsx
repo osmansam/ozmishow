@@ -5,6 +5,7 @@ import { RootState, useAppDispatch } from "../../store";
 import { setIsSidebarOpen } from "../../features/context/contextSlice";
 import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
 import { useNavigate } from "react-router-dom";
+import { LanguageOptions } from "../../shared/types";
 
 type Props = { currentPage: string };
 
@@ -18,6 +19,7 @@ const Sidebar = ({ currentPage }: Props) => {
   const { pageOptions, logo } = useSelector(
     (state: RootState) => state.twoPicture
   );
+  const { language } = useSelector((state: RootState) => state.context);
 
   useEffect(() => {
     const handleResize = () => {
@@ -65,12 +67,14 @@ const Sidebar = ({ currentPage }: Props) => {
                   <li
                     key={index}
                     className={` pl-4 py-2 m-2  text-white uppercase cursor-pointer hover:underline ${
-                      currentPage === page.pageName &&
+                      currentPage === page.pageNameEN &&
                       "bg-[#9f000f] text-black rounded-md hover:no-underline"
                     }`}
-                    onClick={() => navigate(`/${page.pageName}`)}
+                    onClick={() => navigate(`/${page.pageNameEN}`)}
                   >
-                    {page.pageName}
+                    {language === LanguageOptions.EN
+                      ? page.pageNameEN
+                      : page.pageNameTR}
                   </li>
                 )
             )}

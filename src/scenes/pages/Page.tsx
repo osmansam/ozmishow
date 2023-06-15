@@ -151,21 +151,21 @@ const PageAdmin = ({ page }: Props) => {
       }
     });
   };
-  const currentPage = pageOptions.find((item) => item.pageName === page);
+  const currentPage = pageOptions.find((item) => item.pageNameEN === page);
 
   return (
     <div>
       {currentPage?.isNavbar && (
         <div>
           {isSidebarOpen && (
-            <Sidebar currentPage={currentPage ? currentPage.pageName : ""} />
+            <Sidebar currentPage={currentPage ? currentPage.pageNameEN : ""} />
           )}
-          <Navbar currentPage={currentPage ? currentPage.pageName : ""} />
+          <Navbar currentPage={currentPage ? currentPage.pageNameEN : ""} />
         </div>
       )}
       {renderComponents()}
       {currentPage?.isNavbar && (
-        <Footer currentPage={currentPage ? currentPage.pageName : ""} />
+        <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
       )}
     </div>
   );

@@ -10,6 +10,7 @@ import { GoLocation } from "react-icons/go";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaFax } from "react-icons/fa";
+import { LanguageOptions } from "../../shared/types";
 import AddFooter from "./AddFooter";
 type Props = {
   currentPage: string;
@@ -20,7 +21,9 @@ const Footer = ({ currentPage }: Props) => {
   const { footer, pageOptions } = useSelector(
     (state: RootState) => state.twoPicture
   );
-  const { isAdmin } = useSelector((state: RootState) => state.context);
+  const { isAdmin, language } = useSelector(
+    (state: RootState) => state.context
+  );
   const navigate = useNavigate();
   const [isAddFooter, setIsAddFooter] = useState(false);
   //get the footer data
@@ -39,13 +42,15 @@ const Footer = ({ currentPage }: Props) => {
               <li
                 key={index}
                 className={`p-2 m-2 mt-4 uppercase cursor-pointer hover:underline ${
-                  currentPage === page.pageName
+                  currentPage === page.pageNameEN
                     ? "text-white rounded-md hover:no-underline"
                     : "text-[#888888]"
                 }`}
-                onClick={() => navigate(`/${page.pageName}`)}
+                onClick={() => navigate(`/${page.pageNameEN}`)}
               >
-                {page.pageName}
+                {language === LanguageOptions.EN
+                  ? page.pageNameEN
+                  : page.pageNameTR}
               </li>
             )
         )}

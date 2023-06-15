@@ -13,9 +13,9 @@ const Deneme = (props: Props) => {
         <button
           key={index}
           className="border-2 p-2 m-2 mt-4"
-          onClick={() => navigate(`/${page.pageName}`)}
+          onClick={() => navigate(`/${page.pageNameEN}`)}
         >
-          {page.pageName}
+          {page.pageNameEN}
         </button>
       ))}
       <button className="border-2 p-2 m-2 mt-4" onClick={() => navigate(`/`)}>

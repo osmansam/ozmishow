@@ -78,12 +78,14 @@ const Navbar = ({ currentPage }: Props) => {
                   <li
                     key={index}
                     className={`p-2 m-2 mt-4 uppercase cursor-pointer hover:underline ${
-                      currentPage === page.pageName &&
+                      currentPage === page.pageNameEN &&
                       "bg-[#9f000f] text-white rounded-md hover:no-underline"
                     }`}
-                    onClick={() => navigate(`/${page.pageName}`)}
+                    onClick={() => navigate(`/${page.pageNameEN}`)}
                   >
-                    {page.pageName}
+                    {language === LanguageOptions.EN
+                      ? page.pageNameEN
+                      : page.pageNameTR}
                   </li>
                 )
             )}

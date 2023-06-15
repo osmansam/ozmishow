@@ -83,7 +83,7 @@ export const Components: { [key: string]: ComponentType } = {
   NewPage: {
     name: "NewPage",
     pictureContainerNumber: 0,
-    isMainHeader: true,
+    isMainHeader: false,
     isPictureContainerImage: false,
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
@@ -205,6 +205,7 @@ export const LanguageOptions = {
   TR: "TR",
 };
 export interface PageOptionsType {
-  pageName: string;
+  pageNameTR: string;
+  pageNameEN: string;
   isNavbar: boolean;
 }

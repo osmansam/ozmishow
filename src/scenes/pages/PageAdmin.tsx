@@ -47,7 +47,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   pageOptions,
   language,
 }) => {
-  const [updatePage, setUpdatePage] = useState(pageOptions[0].pageName);
+  const [updatePage, setUpdatePage] = useState(pageOptions[0].pageNameEN);
   const [updateLanguage, setUpdateLanguage] = useState(language);
 
   const dispatch = useAppDispatch();
@@ -89,8 +89,8 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
           }}
         >
           {pageOptions.map((page, index) => (
-            <option key={index} value={page.pageName}>
-              {page.pageName}
+            <option key={index} value={page.pageNameEN}>
+              {page.pageNameEN}
             </option>
           ))}
         </select>
@@ -389,21 +389,21 @@ const PageAdmin = ({ page }: Props) => {
     });
   };
 
-  const currentPage = pageOptions.find((item) => item.pageName === page);
+  const currentPage = pageOptions.find((item) => item.pageNameEN === page);
 
   return (
     <div>
       {currentPage?.isNavbar && (
         <div>
           {isSidebarOpen && (
-            <Sidebar currentPage={currentPage ? currentPage.pageName : ""} />
+            <Sidebar currentPage={currentPage ? currentPage.pageNameEN : ""} />
           )}
-          <Navbar currentPage={currentPage ? currentPage.pageName : ""} />
+          <Navbar currentPage={currentPage ? currentPage.pageNameEN : ""} />
         </div>
       )}
       {renderComponents()}
       {currentPage?.isNavbar && (
-        <Footer currentPage={currentPage ? currentPage.pageName : ""} />
+        <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
       )}
     </div>
   );

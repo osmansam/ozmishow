@@ -10,6 +10,7 @@ import {
   createPageOptions,
   createNavbar,
 } from "../../features/twoPicture/twoPictureSlice";
+import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import { useNavigate } from "react-router-dom";
 import Deneme from "../deneme";
@@ -86,15 +87,6 @@ const ComponentContainer = () => {
   // for each component arrange the  items to send backend
   const handleCreate = async () => {
     switch (componentName) {
-      // case NewPage
-      case Components.NewPage.name:
-        if (mainHeader === "") return;
-        setMainHeader(mainHeader[0].toUpperCase() + mainHeader.slice(1));
-        await dispatch(
-          createPageOptions({ pageName: mainHeader, isNavbar: isNavbar })
-        );
-        resetInputs();
-        break;
       // case PictureAtRight and PictureAtLeft
       case Components.PictureAtRight.name:
       case Components.PictureAtLeft.name:
@@ -271,8 +263,8 @@ const ComponentContainer = () => {
             onChange={(e) => setPage(e.target.value)}
           >
             {pageOptions.map((option, index) => (
-              <option key={index} value={option.pageName}>
-                {option.pageName}
+              <option key={index} value={option.pageNameEN}>
+                {option.pageNameEN}
               </option>
             ))}
           </select>
@@ -320,7 +312,7 @@ const ComponentContainer = () => {
         {isMainHeader && (
           <div className="flex gap-5 w-full ">
             <label className="w-32" htmlFor="header">
-              {componentName === "NewPage" ? "Page Name :" : "Main Header :"}
+              "Main Header
             </label>
             <input
               className="border-2 w-4/5 rounded-md  capitalize"
@@ -332,47 +324,19 @@ const ComponentContainer = () => {
           </div>
         )}
         {/* newPage navbar */}
-        {componentName === "NewPage" && (
-          <div className="flex gap-5 w-full">
-            <label className="w-32" htmlFor="header">
-              Navbar
-            </label>
-            <div>
-              <input
-                className="border-2 w-4/5 rounded-md capitalize"
-                type="radio"
-                id="navbar-yes"
-                name="navbar"
-                value="true"
-                checked={isNavbar === true}
-                onChange={() => setIsNavbar(true)}
-              />
-              <label htmlFor="navbar-yes">Evet</label>
-            </div>
-            <div>
-              <input
-                className="border-2 w-4/5 rounded-md capitalize"
-                type="radio"
-                id="navbar-no"
-                name="navbar"
-                value="false"
-                checked={isNavbar === false}
-                onChange={() => setIsNavbar(false)}
-              />
-              <label htmlFor="navbar-no">Hayır</label>
-            </div>
-          </div>
-        )}
+        {componentName === "NewPage" && <AddNewPage />}
         {/* picture containers */}
         {renderPictureContainers(numContainers)}
         {/* create button */}
-        <button
-          className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
-          onClick={handleCreate}
-          disabled={page === "" || language === ""}
-        >
-          create
-        </button>
+        {componentName !== "NewPage" && (
+          <button
+            className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+            onClick={handleCreate}
+            disabled={page === "" || language === ""}
+          >
+            create
+          </button>
+        )}
       </div>
       <Deneme />
     </div>
