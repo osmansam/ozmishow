@@ -9,6 +9,7 @@ import {
   PictureType,
   ContainerType,
   PageOptionsType,
+  MapType,
 } from "../../shared/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
@@ -22,6 +23,7 @@ interface ComponentState {
   pageOptions: Array<PageOptionsType>;
   logo: string;
   footer: any;
+  map: MapType;
 }
 const initialState: ComponentState = {
   isLoading: false,
@@ -30,6 +32,7 @@ const initialState: ComponentState = {
   pageOptions: [],
   logo: "",
   footer: {},
+  map: { lat: 0, lng: 0 },
 };
 
 const serializeHeaders = (headers: any) => {
@@ -282,6 +285,32 @@ export const getFooter = createAsyncThunk("twoPicture/getFooter", async () => {
     return error;
   }
 });
+//create map
+export const createMap = createAsyncThunk(
+  "twoPicture/createMap",
+  async ({ lat, lng }: { lat: number; lng: number }) => {
+    const url = `twoPicture/createMap/`;
+    try {
+      const response = await axios.post(`${baseURL}/${url}`, {
+        lat,
+        lng,
+      });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+//getMap
+export const getMap = createAsyncThunk("twoPicture/getMap", async () => {
+  const url = `twoPicture/getMap`;
+  try {
+    const response = await axios.get(`${baseURL}/${url}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+});
 
 const twoPictureSlice = createSlice({
   name: "twoPicture",
@@ -363,6 +392,16 @@ const twoPictureSlice = createSlice({
         state.footer = action.payload.footer[0];
       })
       .addCase(getFooter.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(getMap.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMap.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.map = action.payload.map[0];
+      })
+      .addCase(getMap.rejected, (state, action) => {
         state.isLoading = false;
       });
   },

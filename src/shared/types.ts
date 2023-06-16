@@ -44,6 +44,10 @@ export interface PictureType {
   subHeaders?: string[];
   page?: string;
 }
+export interface MapType {
+  lat: number;
+  lng: number;
+}
 export interface TwoPictureContainerType {
   mainHeader?: string;
   twoPictureArray: Array<PictureType>;
@@ -184,6 +188,38 @@ export const Components: { [key: string]: ComponentType } = {
     pictureContainerNumber: 1,
     isMainHeader: false,
     isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  ContactFormEn: {
+    name: "ContactFormEn",
+    pictureContainerNumber: 0,
+    isMainHeader: false,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  ContactFormTr: {
+    name: "ContactFormTr",
+    pictureContainerNumber: 0,
+    isMainHeader: false,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  Map: {
+    name: "Map",
+    pictureContainerNumber: 0,
+    isMainHeader: false,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  ContactContainer: {
+    name: "ContactContainer",
+    pictureContainerNumber: 0,
+    isMainHeader: false,
+    isPictureContainerImage: false,
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },

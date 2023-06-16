@@ -23,6 +23,10 @@ import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar";
 import Footer from "../../components/footer";
+import ContactFormEn from "../../components/contactForm/ContactFormEn";
+import ContactFormTr from "../../components/contactForm/ContactFormTr";
+import ContactContainer from "../../components/contactContainer/ContactContainer";
+import Map from "../../components/map";
 interface Props {
   page: string;
 }
@@ -144,6 +148,30 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   workTeamArray={twoPictureArray}
                 />
+              </div>
+            );
+          case "ContactFormEn":
+            return (
+              <div key={index}>
+                <ContactFormEn />
+              </div>
+            );
+          case "ContactFormTr":
+            return (
+              <div key={index}>
+                <ContactFormTr />
+              </div>
+            );
+          case "Map":
+            return (
+              <div key={index}>
+                <Map />
+              </div>
+            );
+          case "ContactContainer":
+            return (
+              <div key={index}>
+                <ContactContainer />
               </div>
             );
           default:

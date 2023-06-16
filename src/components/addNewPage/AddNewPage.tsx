@@ -28,31 +28,31 @@ const AddNewPage = (props: Props) => {
       {" "}
       <div className="flex flex-col gap-5 w-full ">
         <div>
-          <label className="w-32" htmlFor="header">
+          <label className="w-32" htmlFor="pageNameTr">
             PageName TR
           </label>
           <input
             className="border-2 w-4/5 rounded-md  capitalize"
             type="text"
-            name="header"
+            name="pageNameTr"
             value={pageNameTR}
             onChange={(e) => setPageNameTR(e.target.value)}
           />
         </div>
         <div>
-          <label className="w-32" htmlFor="header">
+          <label className="w-32" htmlFor="pageNameEn">
             PageName EN
           </label>
           <input
             className="border-2 w-4/5 rounded-md  capitalize"
             type="text"
-            name="header"
+            name="pageNameEn"
             value={pageNameEN}
             onChange={(e) => setPageNameEN(e.target.value)}
           />
         </div>
         <div className="flex gap-5 w-full">
-          <label className="w-32" htmlFor="header">
+          <label className="w-32" htmlFor="isNavbar">
             Navbar
           </label>
           <div>
@@ -60,7 +60,7 @@ const AddNewPage = (props: Props) => {
               className="border-2 w-4/5 rounded-md capitalize"
               type="radio"
               id="navbar-yes"
-              name="navbar"
+              name="isNavbar"
               value="true"
               checked={isNavbar === true}
               onChange={() => setIsNavbar(true)}

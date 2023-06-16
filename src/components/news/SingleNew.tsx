@@ -25,11 +25,13 @@ const SingleNew = (props: Props) => {
         {news?.header}
       </h1>
       {/* img */}
-      <img
-        src={news?.img}
-        alt="img"
-        className="w-5/6 lg:w-2/3  mx-auto lg:h-[450px] sm:h-72 py-10"
-      />
+      {news.img && (
+        <img
+          src={news.img}
+          alt="img"
+          className="w-5/6 lg:w-2/3  mx-auto lg:h-[450px] sm:h-72 py-10"
+        />
+      )}
       {/* paragraphs */}
       {news?.paragraphs?.map((paragraph, index) => (
         <p

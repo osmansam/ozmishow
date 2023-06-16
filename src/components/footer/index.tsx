@@ -62,7 +62,9 @@ const Footer = ({ currentPage }: Props) => {
           {/* icon */}
           <div className="flex flex-row gap-2">
             <GoLocation className="w-8 h-6" style={{ color: "#888888" }} />
-            <h2 className="text-[#888888]">Adres</h2>
+            <h2 className="text-[#888888]">
+              {language === LanguageOptions.EN ? "Adress:" : "Adres:"}
+            </h2>
           </div>
 
           {/* adress info */}
@@ -75,7 +77,9 @@ const Footer = ({ currentPage }: Props) => {
           {/* tel */}
           <div className="flex flex-row gap-4">
             <BsTelephone className="w-8 h-6" style={{ color: "#888888" }} />
-            <h2 className="text-[#888888]">Tel:</h2>
+            <h2 className="text-[#888888]">
+              {language === LanguageOptions.EN ? "Phone:" : "Telefon:"}
+            </h2>
             <p className="text-sm text-[#888888]">{footer.phone}</p>
           </div>
           {/* fax */}
@@ -87,7 +91,9 @@ const Footer = ({ currentPage }: Props) => {
           {/* email */}
           <div className="flex flex-row gap-4">
             <AiOutlineMail className="w-8 h-6" style={{ color: "#888888" }} />
-            <h2 className="text-[#888888]">Email:</h2>
+            <h2 className="text-[#888888]">
+              {language === LanguageOptions.EN ? "Email:" : "E-Posta:"}
+            </h2>
             <p className="text-sm text-[#888888]">{footer.email}</p>
           </div>
         </div>

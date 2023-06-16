@@ -22,8 +22,11 @@ import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar";
-import AddFooter from "../../components/footer/AddFooter";
 import Footer from "../../components/footer";
+import ContactFormEn from "../../components/contactForm/ContactFormEn";
+import ContactFormTr from "../../components/contactForm/ContactFormTr";
+import Map from "../../components/map";
+import ContactContainer from "../../components/contactContainer/ContactContainer";
 
 interface Props {
   page: string;
@@ -372,6 +375,66 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   workTeamArray={twoPictureArray}
                 />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "ContactFormEn":
+            return (
+              <div key={index}>
+                <ContactFormEn />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "ContactFormTr":
+            return (
+              <div key={index}>
+                <ContactFormTr />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "Map":
+            return (
+              <div key={index}>
+                <Map />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "ContactContainer":
+            return (
+              <div key={index}>
+                <ContactContainer />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

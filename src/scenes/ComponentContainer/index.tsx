@@ -14,6 +14,7 @@ import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import { useNavigate } from "react-router-dom";
 import Deneme from "../deneme";
+import ContactFormEn from "../../components/contactForm/ContactFormEn";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -132,19 +133,6 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
-      //case MaximContainer
-      case Components.MaximContainer.name:
-        await dispatch(
-          createTwoPicture({
-            page,
-            componentName,
-            twoPictureArray,
-            position,
-            language,
-          })
-        );
-        resetInputs();
-        break;
       //case BorderBoxContainer
       case Components.BorderBoxContainer.name:
         await dispatch(
@@ -185,18 +173,6 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
-      case Components.PageBanner.name:
-        await dispatch(
-          createTwoPicture({
-            page,
-            componentName,
-            twoPictureArray,
-            position,
-            language,
-          })
-        );
-        resetInputs();
-        break;
       case Components.FrequentlyAskedQuestions.name:
         await dispatch(
           createTwoPicture({
@@ -230,6 +206,23 @@ const ComponentContainer = () => {
           )
         );
 
+        resetInputs();
+        break;
+      case Components.ContactFormEn.name:
+      case Components.ContactFormTr.name:
+      case Components.Map.name:
+      case Components.PageBanner.name:
+      case Components.MaximContainer.name:
+      case Components.ContactContainer.name:
+        await dispatch(
+          createTwoPicture({
+            page,
+            componentName,
+            twoPictureArray,
+            position,
+            language,
+          })
+        );
         resetInputs();
         break;
       default:

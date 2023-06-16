@@ -9,7 +9,7 @@ const NewsBox = ({ twoPictureId, _id, page, img, header }: PictureType) => {
   const navigate = useNavigate();
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   return (
-    <div className="w-1/3  pr-3 pt-3  ">
+    <div className="w-full md:w-1/2 lg:w-1/3  pr-3 pt-3  ">
       <div
         className="hover:shadow-2xl transition duration-300 flex flex-col gap-10 h-[400px] "
         style={{ backgroundColor: "#f8f8f9" }}
