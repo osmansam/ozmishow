@@ -183,7 +183,7 @@ const PageAdmin = ({ page }: Props) => {
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
 
   return (
-    <div>
+    <div className="flex flex-col h-full min-h-screen">
       {currentPage?.isNavbar && (
         <div>
           {isSidebarOpen && (
