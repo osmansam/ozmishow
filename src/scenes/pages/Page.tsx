@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import {
-  getPageTwoPictures,
-  updateTwoPicture,
-} from "../../features/twoPicture/twoPictureSlice";
-import { LanguageOptions } from "../../shared/types";
+import { getPageTwoPictures } from "../../features/twoPicture/twoPictureSlice";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
 import PictureAtRight from "../../components/pictureRight/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
 import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
 import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
-import { setLanguage } from "../../features/context/contextSlice";
 import FreqAsked from "../../components/freqAsked/FreqAsked";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
 import NewsContainer from "../../components/news/NewsContainer";
-import Deneme from "../deneme";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";

@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PictureContainer from "./PictureContainer";
-import { Components, ContainerType, LanguageOptions } from "../../shared/types";
+import { Components, LanguageOptions } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
   createTwoPicture,
   resetTwoPictureArray,
   getPageTwoPictures,
-  createPageOptions,
   createNavbar,
 } from "../../features/twoPicture/twoPictureSlice";
 import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
-import { useNavigate } from "react-router-dom";
 import Deneme from "../deneme";
-import ContactFormEn from "../../components/contactForm/ContactFormEn";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [isNavbar, setIsNavbar] = useState(false);
   const [page, setPage] = useState<string>("Home");
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);

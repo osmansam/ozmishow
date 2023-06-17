@@ -6,7 +6,11 @@ const PictureAtLeft = ({ img, header, paragraphs, buttons }: PictureType) => {
   return (
     <div className="lg:flex w-4/5 lg:justify-between h-full mx-auto  py-10 ">
       {/* left side */}
-      <img src={img} alt="img" className="w-full lg:basis-1/2 h-[400px]" />
+      <img
+        src={img}
+        alt="img"
+        className="w-full lg:basis-1/2 h-[400px] sm:py-5 md:py-0"
+      />
 
       {/* right side  */}
 
