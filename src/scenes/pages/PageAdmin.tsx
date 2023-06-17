@@ -27,6 +27,7 @@ import ContactFormEn from "../../components/contactForm/ContactFormEn";
 import ContactFormTr from "../../components/contactForm/ContactFormTr";
 import Map from "../../components/map";
 import ContactContainer from "../../components/contactContainer/ContactContainer";
+import FullPageItem from "../../components/fullPageItem";
 
 interface Props {
   page: string;
@@ -435,6 +436,25 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <ContactContainer />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "FullPageItem":
+            return (
+              <div key={index}>
+                <FullPageItem
+                  mainMainHeader={mainHeader}
+                  fullPageItemArray={twoPictureArray}
+                  id={item && item._id ? item._id : ""}
+                />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

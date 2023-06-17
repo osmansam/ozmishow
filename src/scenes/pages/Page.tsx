@@ -27,6 +27,7 @@ import ContactFormEn from "../../components/contactForm/ContactFormEn";
 import ContactFormTr from "../../components/contactForm/ContactFormTr";
 import ContactContainer from "../../components/contactContainer/ContactContainer";
 import Map from "../../components/map";
+import FullPageItem from "../../components/fullPageItem";
 interface Props {
   page: string;
 }
@@ -174,6 +175,17 @@ const PageAdmin = ({ page }: Props) => {
                 <ContactContainer />
               </div>
             );
+          case "FullPageItem":
+            return (
+              <div key={index}>
+                <FullPageItem
+                  mainMainHeader={mainHeader}
+                  fullPageItemArray={twoPictureArray}
+                  id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+
           default:
             return null;
         }
