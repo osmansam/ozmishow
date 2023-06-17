@@ -67,6 +67,11 @@ export interface FreqAskedType {
   id: string;
   freqAskedArray: Array<PictureType>;
 }
+export interface FullPageItemType {
+  mainMainHeader?: string;
+  fullPageItemArray: Array<PictureType>;
+  id: string;
+}
 export interface ExplanationBarType {
   id: string;
   mainMainHeader?: string;
@@ -222,6 +227,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: false,
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
+  },
+  FullPageItem: {
+    name: "FullPageItem",
+    pictureContainerNumber: 1,
+    isMainHeader: true,
+    isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: true,
   },
 };
 
