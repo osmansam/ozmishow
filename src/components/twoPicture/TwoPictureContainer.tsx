@@ -7,7 +7,7 @@ const TwoPictureContainer = ({
   twoPictureArray,
 }: TwoPictureContainerType) => {
   return (
-    <div className="w-5/6 h-full mx-auto py-10 md:py-20">
+    <div className="w-5/6 h-full mx-auto py-10 ">
       <h1
         className="font-[700] text-4xl leading-[44px] pb-3"
         style={{ color: "#333333" }}
