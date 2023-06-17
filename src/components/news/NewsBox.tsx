@@ -4,8 +4,19 @@ import { PictureType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { LanguageOptions } from "../../shared/types";
 
-const NewsBox = ({ twoPictureId, _id, page, img, header }: PictureType) => {
+const NewsBox = ({
+  twoPictureId,
+  _id,
+  page,
+  img,
+  header,
+  date,
+}: PictureType) => {
+  const dispatch = useAppDispatch();
+  const { language } = useSelector((state: RootState) => state.context);
+  console.log(date);
   const navigate = useNavigate();
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   return (
@@ -23,7 +34,7 @@ const NewsBox = ({ twoPictureId, _id, page, img, header }: PictureType) => {
             className="font-[400] text-[12px] leading-[19px]"
             style={{ color: "#77797a" }}
           >
-            US | Mar 9
+            {date ? date : "2021-09-09"}
           </p>
           <h1 className="font-[500] text-2xl leading-7">{header}</h1>
         </div>

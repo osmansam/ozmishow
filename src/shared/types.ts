@@ -43,6 +43,7 @@ export interface PictureType {
   mainHeader?: string;
   subHeaders?: string[];
   page?: string;
+  date?: String;
 }
 export interface MapType {
   lat: number;

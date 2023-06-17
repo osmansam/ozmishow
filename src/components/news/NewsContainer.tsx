@@ -32,7 +32,7 @@ const NewsContainer = ({
     <div className="w-full flex flex-col gap-4 mx-auto">
       <div className="w-5/6 h-full flex-wrap flex  mx-auto py-10  mb-4">
         {newsArray.map((news, index) => {
-          const { img, header } = news;
+          const { img, header, date } = news;
           return (
             <NewsBox
               key={index}
@@ -41,6 +41,7 @@ const NewsContainer = ({
               page={page}
               img={img}
               header={header}
+              date={date ? date.slice(0, 10) : ""}
             />
           );
         })}

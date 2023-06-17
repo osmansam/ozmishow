@@ -4,7 +4,7 @@ type Props = {};
 
 const PageBanner = ({ img, header }: PictureType) => {
   return (
-    <div className="relative w-full pt-10">
+    <div className="relative w-full pt-10 mb-10">
       {/* image */}
       <img src={img} alt="pageImage" className="w-full h-72 object-cover" />
       {/* Description */}
