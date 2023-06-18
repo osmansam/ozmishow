@@ -1,10 +1,10 @@
 import React from "react";
-import useMediaQuery from "../../hooks/UseMediaQuery";
-import { PictureType } from "../../shared/types";
-import { RootState, useAppDispatch } from "../../store";
+import useMediaQuery from "../../../hooks/UseMediaQuery";
+import { PictureType } from "../../../shared/types";
+import { RootState, useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LanguageOptions } from "../../shared/types";
+import { LanguageOptions } from "../../../shared/types";
 
 const NewsBox = ({
   twoPictureId,

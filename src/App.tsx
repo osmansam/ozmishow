@@ -8,7 +8,7 @@ import TwoPicture from "./scenes/ComponentContainer";
 import Page from "./scenes/pages/Page";
 import PageAdmin from "./scenes/pages/PageAdmin";
 import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
-import SingleNew from "./components/news/SingleNew";
+import SingleNew from "./components/news/newsType1/SingleNew";
 
 function App() {
   const dispatch = useAppDispatch();

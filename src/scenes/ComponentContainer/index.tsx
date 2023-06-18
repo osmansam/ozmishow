@@ -143,6 +143,7 @@ const ComponentContainer = () => {
         resetInputs();
         break;
       case Components.NewsContainer.name:
+      case Components.NewsContainer2.name:
       case Components.FullPageItem.name:
         await dispatch(
           createTwoPicture({

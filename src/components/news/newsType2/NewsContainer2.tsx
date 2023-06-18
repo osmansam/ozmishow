@@ -1,42 +1,62 @@
 import React, { useEffect, useState } from "react";
-import { LanguageOptions, NewsContainerType } from "../../shared/types";
-import NewsBox from "./NewsBox";
-import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
+import { LanguageOptions, NewsContainerType } from "../../../shared/types";
+import PictureContainer from "../../../scenes/ComponentContainer/PictureContainer";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import { RootState, useAppDispatch } from "../../../store";
 import axios from "axios";
 import { FiSearch } from "react-icons/fi";
-import { PictureType } from "../../shared/types";
+import { PictureType, Components } from "../../../shared/types";
+import { Pagination } from "../../pagination/Pagination";
+import NewsBox2 from "./NewsBox2";
 import {
   updateContainer,
   resetTwoPictureArray,
-} from "../../features/twoPicture/twoPictureSlice";
-import { Components } from "../../shared/types";
+} from "../../../features/twoPicture/twoPictureSlice";
 
-const NewsContainer = ({
-  page,
-  id,
-  mainHeader,
-  newsArray,
-}: NewsContainerType) => {
+const NewsContainer2 = ({ page, id, mainHeader }: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
   const { language } = useSelector((state: RootState) => state.context);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [limit, setLimit] = useState(6);
+
   const [news, setNews] = useState<PictureType[]>();
-
+  const [isPagination, setIsPagination] = useState(true);
+  //getNews function
+  const getNews = async () => {
+    const response = await axios.get(
+      `http://localhost:3002/api/v1/twoPicture/getNews/${id}?page=${currentPage}&limit=${limit}`
+    );
+    setCurrentPage(response.data.currentPage);
+    setTotalPages(response.data.totalPages);
+    setTotalItems(response.data.totalItems);
+    setNews(response.data.news);
+  };
+  //set the news when the page first rendered
   useEffect(() => {
-    setNews(newsArray);
-    setSearch("");
-  }, []);
+    setIsPagination(true);
+    getNews();
+  }, [currentPage, limit, id]);
 
+  //handle search
   const handleSearch = async () => {
     const response = await axios.get(
       `http://localhost:3002/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
     );
+    setIsPagination(false);
     setNews(response.data.news);
+  };
+  //handle page click
+  const handlePageClick = (num: number) => {
+    if (num >= 1 && num <= totalPages) {
+      // Check if the clicked page is within the valid range
+      setCurrentPage(num);
+    }
   };
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const handleCreate = async () => {
@@ -72,21 +92,33 @@ const NewsContainer = ({
           </button>
         </div>
       )}
-      <div className="w-5/6 h-full flex-wrap flex  mx-auto py-10  mb-4">
+      <div className="w-5/6 h-full flex-col flex  mx-auto py-10  mb-4">
         {news?.map((item, index) => {
-          const { img, header, date } = item;
+          const { img, header, date, paragraphs } = item;
           return (
-            <NewsBox
+            <NewsBox2
               key={index}
               _id={item._id}
               twoPictureId={id}
               page={page}
               img={img}
               header={header}
+              paragraphs={paragraphs}
               date={date ? date.slice(0, 10) : ""}
             />
           );
         })}
+      </div>
+      <div className="w-5/6 mx-auto">
+        {totalPages > 1 && isPagination && (
+          <Pagination
+            page={currentPage}
+            limitPerPage={10}
+            itemsCount={totalItems}
+            totalPages={totalPages}
+            handleClick={handlePageClick}
+          />
+        )}
       </div>
       {!isAddNewItem && isAdmin && (
         <button
@@ -100,13 +132,13 @@ const NewsContainer = ({
         <div className="flex flex-col justify-between gap-4">
           <PictureContainer
             isPictureContainerImage={
-              Components[NewsContainer.name].isPictureContainerImage
+              Components[NewsContainer2.name].isPictureContainerImage
             }
             isPictureContainerButton={
-              Components[NewsContainer.name].isPictureContainerButton
+              Components[NewsContainer2.name].isPictureContainerButton
             }
             isPictureContainerParagraph={
-              Components[NewsContainer.name].isPictureContainerParagraph
+              Components[NewsContainer2.name].isPictureContainerParagraph
             }
           />
           <button
@@ -121,4 +153,4 @@ const NewsContainer = ({
   );
 };
 
-export default NewsContainer;
+export default NewsContainer2;

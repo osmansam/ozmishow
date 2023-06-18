@@ -157,6 +157,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: true,
   },
+  NewsContainer2: {
+    name: "NewsContainer2",
+    pictureContainerNumber: 1,
+    isMainHeader: true,
+    isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: true,
+  },
   ExplanationBar: {
     name: "ExplanationBar",
     pictureContainerNumber: 0,

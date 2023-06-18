@@ -15,7 +15,8 @@ import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer
 import { ContainerType } from "../../shared/types";
 import MaximContainer from "../../components/maxim";
 import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
-import NewsContainer from "../../components/news/NewsContainer";
+import NewsContainer from "../../components/news/newsType1/NewsContainer";
+import NewsContainer2 from "../../components/news/newsType2/NewsContainer2";
 import ExplanationBar from "../../components/ExplanationBar";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
@@ -300,6 +301,26 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <NewsContainer
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader}
+                  newsArray={twoPictureArray}
+                  page={page}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "NewsContainer2":
+            return (
+              <div key={index}>
+                <NewsContainer2
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   newsArray={twoPictureArray}
