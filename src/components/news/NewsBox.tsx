@@ -16,7 +16,7 @@ const NewsBox = ({
 }: PictureType) => {
   const dispatch = useAppDispatch();
   const { language } = useSelector((state: RootState) => state.context);
-  console.log(date);
+
   const navigate = useNavigate();
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   return (
