@@ -41,14 +41,15 @@ const Sidebar = ({ currentPage }: Props) => {
   }, [dispatch]);
   return (
     <div className="z-40">
-      <div className={`${isSidebarOpen ? "" : "hidden"}  z-30`}>
+      <div className={`${isSidebarOpen ? "" : "hidden"}  z-30 `}>
         <div
           className={`${
             isSidebarOpen ? "" : "hidden"
           } lg:hidden fixed top-0  w-full h-full z-10`}
           onClick={() => dispatch(setIsSidebarOpen(false))}
         ></div>
-        <div className="w-[250px] lg:w-1/6 h-screen bg-[#343a3b] fixed flex flex-col z-50">
+        <div className="w-[250px] lg:w-1/6 h-screen bg-[#343a3b] fixed flex flex-col z-50 ">
+          {/* image  */}
           <div className="mx-auto ">
             <img
               className="py-2 cursor-pointer rounded-xl h-36 bg-[#343a3b] "
@@ -59,7 +60,7 @@ const Sidebar = ({ currentPage }: Props) => {
               }}
             />
           </div>
-          <ul className="w-3/4 flex flex-col justify-between mx-auto flex-wrap pt-4 ">
+          <ul className="w-3/4  my-auto flex flex-col justify-between mx-auto  pt-4 overflow-y-auto no-scrollbar">
             {" "}
             {pageOptions.map(
               (page, index) =>

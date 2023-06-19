@@ -23,7 +23,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(4);
 
   const [news, setNews] = useState<PictureType[]>();
   const [isPagination, setIsPagination] = useState(true);
