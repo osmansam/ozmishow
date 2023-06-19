@@ -106,8 +106,6 @@ const PageAdmin = ({ page }: Props) => {
                 <NewsContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
-                  newsArray={twoPictureArray}
-                  page={page}
                 />
               </div>
             );
@@ -117,8 +115,6 @@ const PageAdmin = ({ page }: Props) => {
                 <NewsContainer2
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
-                  newsArray={twoPictureArray}
-                  page={page}
                 />
               </div>
             );

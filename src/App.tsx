@@ -32,7 +32,7 @@ function App() {
               />
               <Route
                 key={`news-${page.pageNameEN.toLowerCase()}`}
-                path={`/${page.pageNameEN.toLowerCase()}/news/:twoPictureId/:id`}
+                path={`/news/:twoPictureId/:id/:type`}
                 element={<SingleNew />}
               />
             </React.Fragment>
@@ -51,7 +51,7 @@ function App() {
                 element={<Page page={page.pageNameEN} />}
               />
               <Route
-                path={`/${page.pageNameEN.toLowerCase()}/news/:twoPictureId/:id`}
+                path={`/news/:twoPictureId/:id/:type`}
                 element={<SingleNew />}
               />
             </React.Fragment>

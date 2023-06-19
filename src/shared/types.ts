@@ -59,10 +59,8 @@ export interface IconExplainContainerType {
   iconExplainArray: Array<PictureType>;
 }
 export interface NewsContainerType {
-  page: string;
   id: string;
   mainHeader?: string;
-  newsArray: Array<PictureType>;
 }
 export interface FreqAskedType {
   id: string;

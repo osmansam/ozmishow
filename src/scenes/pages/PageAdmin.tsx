@@ -29,6 +29,8 @@ import ContactFormTr from "../../components/contactForm/ContactFormTr";
 import Map from "../../components/map";
 import ContactContainer from "../../components/contactContainer/ContactContainer";
 import FullPageItem from "../../components/fullPageItem";
+import ConfirmationModal from "../../components/confirmation";
+import { set } from "react-hook-form";
 
 interface Props {
   page: string;
@@ -52,12 +54,27 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   pageOptions,
   language,
 }) => {
+  const dispatch = useAppDispatch();
+
   const [updatePage, setUpdatePage] = useState(pageOptions[0].pageNameEN);
   const [updateLanguage, setUpdateLanguage] = useState(language);
+  const handleConfirmDelete = async () => {
+    await dispatch(deleteTwoPicture(id));
+    window.location.reload();
+  };
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const handleCancelDelete = () => {
+    setShowConfirmationModal(false);
+  };
 
-  const dispatch = useAppDispatch();
   return (
     <div className="pt-4 flex flex-col">
+      {showConfirmationModal && (
+        <ConfirmationModal
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
       {/* move the container up and down */}
       <div className="flex flex-row gap-6">
         <button
@@ -78,8 +95,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
         <button
           className="border-2 m-2"
           onClick={async () => {
-            await dispatch(deleteTwoPicture(id));
-            window.location.reload();
+            setShowConfirmationModal(true);
           }}
         >
           Delete
@@ -303,8 +319,6 @@ const PageAdmin = ({ page }: Props) => {
                 <NewsContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
-                  newsArray={twoPictureArray}
-                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -323,8 +337,6 @@ const PageAdmin = ({ page }: Props) => {
                 <NewsContainer2
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
-                  newsArray={twoPictureArray}
-                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}

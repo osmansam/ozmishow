@@ -13,8 +13,9 @@ import {
   updateContainer,
   resetTwoPictureArray,
 } from "../../../features/twoPicture/twoPictureSlice";
+import { BsWindowSidebar } from "react-icons/bs";
 
-const NewsContainer = ({ page, id, mainHeader }: NewsContainerType) => {
+const NewsContainer = ({ id, mainHeader }: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -57,6 +58,7 @@ const NewsContainer = ({ page, id, mainHeader }: NewsContainerType) => {
     if (num >= 1 && num <= totalPages) {
       // Check if the clicked page is within the valid range
       setCurrentPage(num);
+      window.scrollTo(0, 0);
     }
   };
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -74,25 +76,22 @@ const NewsContainer = ({ page, id, mainHeader }: NewsContainerType) => {
   const [isAddNewItem, setIsAddNewItem] = useState(false);
   return (
     <div className="w-full flex flex-col gap-4 mx-auto">
-      {isAdmin && (
-        <div className="w-5/6 mx-auto flex justify-end items-center px-4 pt-2 ">
-          <input
-            type="text"
-            placeholder={`${
-              language === LanguageOptions.EN ? "Search" : "Ara"
-            }`}
-            className="border rounded-l py-1 px-2 w-32 focus:outline-none"
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
-          <button
-            className="bg-[#f8f9fa] h-8 rounded-r px-2"
-            onClick={handleSearch}
-          >
-            <FiSearch />
-          </button>
-        </div>
-      )}
+      <div className="w-5/6 mx-auto flex justify-end items-center px-4 pt-2 ">
+        <input
+          type="text"
+          placeholder={`${language === LanguageOptions.EN ? "Search" : "Ara"}`}
+          className="border rounded-l py-1 px-2 w-32 focus:outline-none"
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button
+          className="bg-[#f8f9fa] h-8 rounded-r px-2"
+          onClick={handleSearch}
+        >
+          <FiSearch />
+        </button>
+      </div>
+
       <div className="w-5/6 h-full flex-wrap flex  mx-auto py-10  mb-4">
         {news?.map((item, index) => {
           const { img, header, date } = item;
@@ -101,7 +100,6 @@ const NewsContainer = ({ page, id, mainHeader }: NewsContainerType) => {
               key={index}
               _id={item._id}
               twoPictureId={id}
-              page={page}
               img={img}
               header={header}
               date={date ? date.slice(0, 10) : ""}

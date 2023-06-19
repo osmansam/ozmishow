@@ -14,18 +14,15 @@ const NewsBox = ({
   header,
   date,
 }: PictureType) => {
-  const dispatch = useAppDispatch();
-  const { language } = useSelector((state: RootState) => state.context);
-
   const navigate = useNavigate();
-  const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
+  const type = "Type1";
   return (
     <div className="w-full md:w-1/2 lg:w-1/3  pr-3 pt-3  ">
       <div
-        className="hover:shadow-2xl transition duration-300 flex flex-col gap-10 h-[400px] "
+        className="hover:shadow-2xl transition duration-300 flex flex-col gap-10 h-[350px] cursor-pointer"
         style={{ backgroundColor: "#f8f8f9" }}
         onClick={() => {
-          navigate(`/${page}/news/${twoPictureId}/${_id}`);
+          navigate(`/news/${twoPictureId}/${_id}/${type}`);
         }}
       >
         <img src={img} alt={header} className="h-1/2 w-full" />

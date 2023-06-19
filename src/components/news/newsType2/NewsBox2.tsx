@@ -9,22 +9,18 @@ import { LanguageOptions } from "../../../shared/types";
 const NewsBox2 = ({
   twoPictureId,
   _id,
-  page,
   img,
   header,
   paragraphs,
   date,
 }: PictureType) => {
-  const dispatch = useAppDispatch();
-  const { language } = useSelector((state: RootState) => state.context);
-
   const navigate = useNavigate();
-  const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
+  const type = "Type2";
   return (
     <div
-      className="w-5/6 py-4 flex flex-col gap-2 mx-auto  "
+      className="w-5/6 py-4 flex flex-col gap-2 mx-auto  cursor-pointer"
       onClick={() => {
-        navigate(`/${page}/news/${twoPictureId}/${_id}`);
+        navigate(`/news/${twoPictureId}/${_id}/${type}`);
       }}
     >
       {/* header */}

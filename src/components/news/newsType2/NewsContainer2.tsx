@@ -13,7 +13,7 @@ import {
   resetTwoPictureArray,
 } from "../../../features/twoPicture/twoPictureSlice";
 
-const NewsContainer2 = ({ page, id, mainHeader }: NewsContainerType) => {
+const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -23,7 +23,7 @@ const NewsContainer2 = ({ page, id, mainHeader }: NewsContainerType) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(5);
 
   const [news, setNews] = useState<PictureType[]>();
   const [isPagination, setIsPagination] = useState(true);
@@ -73,25 +73,22 @@ const NewsContainer2 = ({ page, id, mainHeader }: NewsContainerType) => {
   const [isAddNewItem, setIsAddNewItem] = useState(false);
   return (
     <div className="w-full flex flex-col gap-4 mx-auto">
-      {isAdmin && (
-        <div className="w-5/6 mx-auto flex justify-end items-center px-4 pt-2 ">
-          <input
-            type="text"
-            placeholder={`${
-              language === LanguageOptions.EN ? "Search" : "Ara"
-            }`}
-            className="border rounded-l py-1 px-2 w-32 focus:outline-none"
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
-          <button
-            className="bg-[#f8f9fa] h-8 rounded-r px-2"
-            onClick={handleSearch}
-          >
-            <FiSearch />
-          </button>
-        </div>
-      )}
+      <div className="w-5/6 mx-auto flex justify-end  px-4 pt-2 ">
+        <input
+          type="text"
+          placeholder={`${language === LanguageOptions.EN ? "Search" : "Ara"}`}
+          className="border rounded-l py-1 px-2 w-32  focus:outline-none"
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button
+          className="bg-[#f8f9fa] h-8 rounded-r px-2"
+          onClick={handleSearch}
+        >
+          <FiSearch />
+        </button>
+      </div>
+
       <div className="w-5/6 h-full flex-col flex  mx-auto py-10  mb-4">
         {news?.map((item, index) => {
           const { img, header, date, paragraphs } = item;
@@ -100,7 +97,6 @@ const NewsContainer2 = ({ page, id, mainHeader }: NewsContainerType) => {
               key={index}
               _id={item._id}
               twoPictureId={id}
-              page={page}
               img={img}
               header={header}
               paragraphs={paragraphs}
