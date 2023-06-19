@@ -47,11 +47,17 @@ const NewsContainer = ({ id, mainHeader }: NewsContainerType) => {
 
   //handle search
   const handleSearch = async () => {
-    const response = await axios.get(
-      `http://localhost:3002/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
-    );
-    setIsPagination(false);
-    setNews(response.data.news);
+    if (search === "") {
+      setIsPagination(true);
+
+      getNews();
+    } else {
+      const response = await axios.get(
+        `http://localhost:3002/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
+      );
+      setIsPagination(false);
+      setNews(response.data.news);
+    }
   };
   //handle page click
   const handlePageClick = (num: number) => {
