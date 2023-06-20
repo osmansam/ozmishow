@@ -31,7 +31,7 @@ export function Pagination({
         )}
         {page > 1 && (
           <button
-            className="py-2 px-3 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800"
+            className="py-2 px-3 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
             onClick={() => handleClick(page - 1)}
           >
             {page - 1}
