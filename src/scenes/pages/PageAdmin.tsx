@@ -119,7 +119,6 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
           className="border-2 m-2 w-1/3"
           onChange={(e) => {
             setUpdateLanguage(e.target.value);
-            console.log(e.target.value);
           }}
         >
           {Object.entries(LanguageOptions).map(([value, label]) => (
@@ -133,9 +132,8 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
         </select>
         <button
           className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
-          onClick={() => {
-            console.log(updateLanguage);
-            dispatch(
+          onClick={async () => {
+            await dispatch(
               updatePageAndLanguage({
                 id,
                 page: updatePage,
