@@ -129,7 +129,19 @@ export const createPageOptions = createAsyncThunk(
       pageNameTR,
       pageNameEN,
       isNavbar,
-    }: { pageNameTR: string; pageNameEN: string; isNavbar: boolean },
+      isSubpage,
+      hasSubpage,
+      motherPageTR,
+      motherPageEN,
+    }: {
+      pageNameTR: string;
+      pageNameEN: string;
+      isNavbar: boolean;
+      isSubpage: boolean;
+      hasSubpage: boolean;
+      motherPageTR: string;
+      motherPageEN: string;
+    },
     thunkAPI
   ) => {
     const url = "pageOptions/";
@@ -138,6 +150,10 @@ export const createPageOptions = createAsyncThunk(
         pageNameTR,
         pageNameEN,
         isNavbar,
+        isSubpage,
+        hasSubpage,
+        motherPageTR,
+        motherPageEN,
       });
       return extractHeaders(response);
     } catch (error) {

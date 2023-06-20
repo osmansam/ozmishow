@@ -9,18 +9,36 @@ const AddNewPage = (props: Props) => {
   const [pageNameTR, setPageNameTR] = useState("");
   const [pageNameEN, setPageNameEN] = useState("");
   const [isNavbar, setIsNavbar] = useState(false);
+  const [isSubpage, setIsSubpage] = useState(false);
+  const [hasSubpage, setHasSubpage] = useState(false);
+  const [motherPageTR, setMotherPageTR] = useState("");
+  const [motherPageEN, setMotherPageEN] = useState("");
   //reset inputs after submit
   const resetInputs = () => {
     setPageNameEN("");
     setPageNameTR("");
     setIsNavbar(false);
+    setIsSubpage(false);
+    setHasSubpage(false);
+    setMotherPageTR("");
+    setMotherPageEN("");
   };
   //handle the submit page
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPageNameTR(pageNameTR[0].toUpperCase() + pageNameTR.slice(1));
     setPageNameEN(pageNameEN[0].toUpperCase() + pageNameEN.slice(1));
-    await dispatch(createPageOptions({ pageNameEN, pageNameTR, isNavbar }));
+    await dispatch(
+      createPageOptions({
+        pageNameEN,
+        pageNameTR,
+        isNavbar,
+        isSubpage,
+        hasSubpage,
+        motherPageTR,
+        motherPageEN,
+      })
+    );
     resetInputs();
   };
   return (
@@ -72,12 +90,70 @@ const AddNewPage = (props: Props) => {
               className="border-2 w-4/5 rounded-md capitalize"
               type="radio"
               id="navbar-no"
-              name="navbar"
+              name="isNavbar"
               value="false"
               checked={isNavbar === false}
               onChange={() => setIsNavbar(false)}
             />
             <label htmlFor="navbar-no">Hayır</label>
+          </div>
+        </div>
+        <div className="flex gap-5 w-full">
+          <label className="w-32" htmlFor="isNavbar">
+            SubPage
+          </label>
+          <div>
+            <input
+              className="border-2 w-4/5 rounded-md capitalize"
+              type="radio"
+              id="isSubpage-yes"
+              name="isSubpage"
+              value="true"
+              checked={isSubpage === true}
+              onChange={() => setIsSubpage(true)}
+            />
+            <label htmlFor="isSubpage-yes">Evet</label>
+          </div>
+          <div>
+            <input
+              className="border-2 w-4/5 rounded-md capitalize"
+              type="radio"
+              id="isSubpage-no"
+              name="isSubpage"
+              value="false"
+              checked={isSubpage === false}
+              onChange={() => setIsSubpage(false)}
+            />
+            <label htmlFor="isSubpage-no">Hayır</label>
+          </div>
+        </div>
+        <div className="flex gap-5 w-full">
+          <label className="w-32" htmlFor="isNavbar">
+            HasSubpage
+          </label>
+          <div>
+            <input
+              className="border-2 w-4/5 rounded-md capitalize"
+              type="radio"
+              id="hasSubpage-yes"
+              name="hasSubpage"
+              value="true"
+              checked={hasSubpage === true}
+              onChange={() => setHasSubpage(true)}
+            />
+            <label htmlFor="hasSubpage-yes">Evet</label>
+          </div>
+          <div>
+            <input
+              className="border-2 w-4/5 rounded-md capitalize"
+              type="radio"
+              id="hasSubpage-no"
+              name="hasSubpage"
+              value="false"
+              checked={hasSubpage === false}
+              onChange={() => setHasSubpage(false)}
+            />
+            <label htmlFor="hasSubpage-no">Hayır</label>
           </div>
         </div>
         <button
