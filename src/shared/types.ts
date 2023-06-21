@@ -267,4 +267,10 @@ export interface PageOptionsType {
   pageNameTR: string;
   pageNameEN: string;
   isNavbar: boolean;
+  _id: string;
+  isSubpage: boolean;
+
+  hasSubpage: boolean;
+  motherPageTR: string;
+  motherPageEN: string;
 }
