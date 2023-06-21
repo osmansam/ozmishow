@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { LanguageOptions } from "../../shared/types";
+import { LanguageOptions, PageOptionsType } from "../../shared/types";
 import {
   setLanguage,
   setIsSidebarOpen,
@@ -9,14 +9,18 @@ import {
 import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineDown } from "react-icons/ai";
 
 type Props = {
-  currentPage: string;
+  currentPage?: PageOptionsType;
 };
 
 const Navbar = ({ currentPage }: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isHover, setIsHover] = useState("");
+  const [navbarHover, setNavbarHover] = useState("");
+
   const { pageOptions, logo } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -27,6 +31,11 @@ const Navbar = ({ currentPage }: Props) => {
   useEffect(() => {
     dispatch(getNavbar());
   }, [dispatch]);
+  const renderSubpages = (page: string) => {
+    return pageOptions.filter(
+      (item) => item.motherPageEN === page || item.motherPageTR === page
+    );
+  };
   return (
     <nav className="h-60 flex flex-col ">
       {/* logo and language options  */}
@@ -75,18 +84,58 @@ const Navbar = ({ currentPage }: Props) => {
             {pageOptions.map(
               (page, index) =>
                 page.isNavbar && (
-                  <li
+                  <div
                     key={index}
-                    className={`p-2 m-2 mt-4 uppercase cursor-pointer hover:underline ${
-                      currentPage === page.pageNameEN &&
-                      "bg-[#9f000f] text-white rounded-md hover:no-underline"
-                    }`}
-                    onClick={() => navigate(`/${page.pageNameEN}`)}
+                    onMouseOver={() => setIsHover(page._id)}
+                    onMouseOut={() => setIsHover("")}
                   >
-                    {language === LanguageOptions.EN
-                      ? page.pageNameEN
-                      : page.pageNameTR}
-                  </li>
+                    <li
+                      className={`p-2 m-2 mt-4 w-fit flex items-center mx-auto uppercase cursor-pointer hover:underline ${
+                        (currentPage?.pageNameEN === page.pageNameEN ||
+                          currentPage?.motherPageEN === page.pageNameEN) &&
+                        "bg-[#9f000f] text-white rounded-md hover:no-underline justify-center"
+                      }`}
+                      onClick={() => {
+                        if (!page.hasSubpage) {
+                          navigate(`/${page.pageNameEN}`);
+                        }
+                      }}
+                    >
+                      {language === LanguageOptions.EN
+                        ? page.pageNameEN
+                        : page.pageNameTR}
+                    </li>
+
+                    {isHover === page._id && page.hasSubpage && (
+                      <div className="flex flex-col ">
+                        {(() => {
+                          const subpages = renderSubpages(page.pageNameEN);
+                          return (
+                            <ul
+                              className=" z-50 bg-[#f9f9f9] px-4"
+                              onMouseOver={() => setIsHover(page._id)}
+                            >
+                              {subpages.map((subpage, index) => (
+                                <li
+                                  key={index}
+                                  className="flex  justify-start py-2 pr-5 pl-2 cursor-pointer text-[#a7a7a7]  leading-5 font-[400] hover:text-[#e1241b]"
+                                  onClick={() => {
+                                    if (!subpage.hasSubpage) {
+                                      navigate(`/${subpage.pageNameEN}`);
+                                    }
+                                  }}
+                                >
+                                  {language === LanguageOptions.EN
+                                    ? subpage.pageNameEN
+                                    : subpage.pageNameTR}
+                                </li>
+                              ))}
+                            </ul>
+                          );
+                        })()}
+                      </div>
+                    )}
+                  </div>
                 )
             )}
           </ul>

@@ -11,8 +11,9 @@ const AddNewPage = (props: Props) => {
   const [isNavbar, setIsNavbar] = useState(false);
   const [isSubpage, setIsSubpage] = useState(false);
   const [hasSubpage, setHasSubpage] = useState(false);
-  const [motherPageTR, setMotherPageTR] = useState("");
-  const [motherPageEN, setMotherPageEN] = useState("");
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const [motherPageTR, setMotherPageTR] = useState(pageOptions[0].pageNameTR);
+  const [motherPageEN, setMotherPageEN] = useState(pageOptions[0].pageNameEN);
   //reset inputs after submit
   const resetInputs = () => {
     setPageNameEN("");
@@ -28,6 +29,10 @@ const AddNewPage = (props: Props) => {
     e.preventDefault();
     setPageNameTR(pageNameTR[0].toUpperCase() + pageNameTR.slice(1));
     setPageNameEN(pageNameEN[0].toUpperCase() + pageNameEN.slice(1));
+    if (!isSubpage) {
+      setMotherPageEN("");
+      setMotherPageTR("");
+    }
     await dispatch(
       createPageOptions({
         pageNameEN,
@@ -45,6 +50,7 @@ const AddNewPage = (props: Props) => {
     <form onSubmit={handleSubmit}>
       {" "}
       <div className="flex flex-col gap-5 w-full ">
+        {/* pageName tr */}
         <div>
           <label className="w-32" htmlFor="pageNameTr">
             PageName TR
@@ -57,6 +63,7 @@ const AddNewPage = (props: Props) => {
             onChange={(e) => setPageNameTR(e.target.value)}
           />
         </div>
+        {/* pagename en */}
         <div>
           <label className="w-32" htmlFor="pageNameEn">
             PageName EN
@@ -69,6 +76,7 @@ const AddNewPage = (props: Props) => {
             onChange={(e) => setPageNameEN(e.target.value)}
           />
         </div>
+        {/* isNavbar option */}
         <div className="flex gap-5 w-full">
           <label className="w-32" htmlFor="isNavbar">
             Navbar
@@ -98,6 +106,7 @@ const AddNewPage = (props: Props) => {
             <label htmlFor="navbar-no">Hayır</label>
           </div>
         </div>
+        {/* isSubpage option */}
         <div className="flex gap-5 w-full">
           <label className="w-32" htmlFor="isNavbar">
             SubPage
@@ -127,6 +136,7 @@ const AddNewPage = (props: Props) => {
             <label htmlFor="isSubpage-no">Hayır</label>
           </div>
         </div>
+        {/* hassubpage option */}
         <div className="flex gap-5 w-full">
           <label className="w-32" htmlFor="isNavbar">
             HasSubpage
@@ -156,6 +166,49 @@ const AddNewPage = (props: Props) => {
             <label htmlFor="hasSubpage-no">Hayır</label>
           </div>
         </div>
+        {/* motherPage en */}
+
+        {isSubpage && (
+          <div className="flex gap-5 w-full">
+            <label className="w-32" htmlFor="page">
+              motherPageEN:
+            </label>
+            <select
+              className="border-2 w-4/5 rounded-md"
+              name="motherPageEN"
+              value={motherPageEN}
+              onChange={(e) => setMotherPageEN(e.target.value)}
+            >
+              {pageOptions.map((option, index) => (
+                <option key={index} value={option.pageNameEN}>
+                  {option.pageNameEN}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        {/* motherPage tr */}
+        {isSubpage && (
+          <div className="flex gap-5 w-full">
+            <label className="w-32" htmlFor="page">
+              motherPageTR:
+            </label>
+            <select
+              className="border-2 w-4/5 rounded-md"
+              name="motherPageTR"
+              value={motherPageTR}
+              onChange={(e) => setMotherPageTR(e.target.value)}
+            >
+              {pageOptions.map((option, index) => (
+                <option key={index} value={option.pageNameTR}>
+                  {option.pageNameTR}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* submit */}
         <button
           type="submit"
           className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"

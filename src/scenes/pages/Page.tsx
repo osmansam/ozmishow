@@ -198,16 +198,16 @@ const PageAdmin = ({ page }: Props) => {
 
   return (
     <div className="flex flex-col h-full min-h-screen">
-      {currentPage?.isNavbar && (
+      {(currentPage?.isNavbar || currentPage?.isSubpage) && (
         <div>
           {isSidebarOpen && (
             <Sidebar currentPage={currentPage ? currentPage.pageNameEN : ""} />
           )}
-          <Navbar currentPage={currentPage ? currentPage.pageNameEN : ""} />
+          <Navbar currentPage={currentPage} />
         </div>
       )}
       {renderComponents()}
-      {currentPage?.isNavbar && (
+      {(currentPage?.isNavbar || currentPage?.isSubpage) && (
         <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
       )}
     </div>

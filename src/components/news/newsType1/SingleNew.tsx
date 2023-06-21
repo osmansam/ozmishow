@@ -24,7 +24,7 @@ const SingleNew = () => {
 
   return (
     <div>
-      <Navbar currentPage={""} />
+      <Navbar />
       <div className="flex flex-col py-10">
         {/* header */}
         <h1 className="w-5/6 lg:w-2/3 mx-auto font-[700] text-4xl">
