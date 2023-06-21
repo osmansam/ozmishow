@@ -327,6 +327,19 @@ export const getMap = createAsyncThunk("twoPicture/getMap", async () => {
     return error;
   }
 });
+//delete page
+export const deletePage = createAsyncThunk(
+  "twoPicture/deletePage",
+  async (id: string) => {
+    const url = `pageOptions/${id}`;
+    try {
+      const response = await axios.delete(`${baseURL}/${url}`);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 const twoPictureSlice = createSlice({
   name: "twoPicture",

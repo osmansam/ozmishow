@@ -12,8 +12,8 @@ const AddNewPage = (props: Props) => {
   const [isSubpage, setIsSubpage] = useState(false);
   const [hasSubpage, setHasSubpage] = useState(false);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
-  const [motherPageTR, setMotherPageTR] = useState(pageOptions[0].pageNameTR);
-  const [motherPageEN, setMotherPageEN] = useState(pageOptions[0].pageNameEN);
+  const [motherPageTR, setMotherPageTR] = useState("");
+  const [motherPageEN, setMotherPageEN] = useState("");
   //reset inputs after submit
   const resetInputs = () => {
     setPageNameEN("");
@@ -45,6 +45,7 @@ const AddNewPage = (props: Props) => {
       })
     );
     resetInputs();
+    window.location.reload();
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -179,6 +180,8 @@ const AddNewPage = (props: Props) => {
               value={motherPageEN}
               onChange={(e) => setMotherPageEN(e.target.value)}
             >
+              <option value="">Seciniz</option>
+
               {pageOptions.map((option, index) => (
                 <option key={index} value={option.pageNameEN}>
                   {option.pageNameEN}
@@ -193,12 +196,14 @@ const AddNewPage = (props: Props) => {
             <label className="w-32" htmlFor="page">
               motherPageTR:
             </label>
+
             <select
               className="border-2 w-4/5 rounded-md"
               name="motherPageTR"
               value={motherPageTR}
               onChange={(e) => setMotherPageTR(e.target.value)}
             >
+              <option value="">Seciniz</option>
               {pageOptions.map((option, index) => (
                 <option key={index} value={option.pageNameTR}>
                   {option.pageNameTR}

@@ -6,10 +6,16 @@ import {
   setLanguage,
   setIsSidebarOpen,
 } from "../../features/context/contextSlice";
-import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
+import {
+  getNavbar,
+  deletePage,
+} from "../../features/twoPicture/twoPictureSlice";
 import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineDown } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
+
+// import { AiOutlineDown } from "react-icons/ai";
 
 type Props = {
   currentPage?: PageOptionsType;
@@ -19,7 +25,6 @@ const Navbar = ({ currentPage }: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isHover, setIsHover] = useState("");
-  const [navbarHover, setNavbarHover] = useState("");
 
   const { pageOptions, logo } = useSelector(
     (state: RootState) => state.twoPicture
@@ -36,6 +41,8 @@ const Navbar = ({ currentPage }: Props) => {
       (item) => item.motherPageEN === page || item.motherPageTR === page
     );
   };
+  const { isAdmin } = useSelector((state: RootState) => state.context);
+
   return (
     <nav className="h-60 flex flex-col ">
       {/* logo and language options  */}
@@ -89,22 +96,33 @@ const Navbar = ({ currentPage }: Props) => {
                     onMouseOver={() => setIsHover(page._id)}
                     onMouseOut={() => setIsHover("")}
                   >
-                    <li
-                      className={`p-2 m-2 mt-4 w-fit flex items-center mx-auto uppercase cursor-pointer hover:underline ${
-                        (currentPage?.pageNameEN === page.pageNameEN ||
-                          currentPage?.motherPageEN === page.pageNameEN) &&
-                        "bg-[#9f000f] text-white rounded-md hover:no-underline justify-center"
-                      }`}
-                      onClick={() => {
-                        if (!page.hasSubpage) {
-                          navigate(`/${page.pageNameEN}`);
-                        }
-                      }}
-                    >
-                      {language === LanguageOptions.EN
-                        ? page.pageNameEN
-                        : page.pageNameTR}
-                    </li>
+                    <div className="flex flex-row">
+                      <li
+                        className={`p-2 m-2 mt-4 w-fit flex items-center mx-auto uppercase cursor-pointer hover:underline ${
+                          (currentPage?.pageNameEN === page.pageNameEN ||
+                            currentPage?.motherPageEN === page.pageNameEN) &&
+                          "bg-[#9f000f] text-white rounded-md hover:no-underline justify-center"
+                        }`}
+                        onClick={() => {
+                          if (!page.hasSubpage) {
+                            navigate(`/${page.pageNameEN}`);
+                          }
+                        }}
+                      >
+                        {language === LanguageOptions.EN
+                          ? page.pageNameEN
+                          : page.pageNameTR}
+                      </li>
+                      {isAdmin && (
+                        <AiOutlineDelete
+                          className="w-6 h-6 my-auto mt-3 cursor-pointer hover:text-[#e1241b]"
+                          onClick={async () => {
+                            await dispatch(deletePage(page._id));
+                            window.location.reload();
+                          }}
+                        />
+                      )}
+                    </div>
 
                     {isHover === page._id && page.hasSubpage && (
                       <div className="flex flex-col ">
