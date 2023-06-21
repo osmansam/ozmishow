@@ -14,6 +14,7 @@ import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import ConfirmationModal from "../confirmation";
 
 // import { AiOutlineDown } from "react-icons/ai";
 
@@ -25,6 +26,7 @@ const Navbar = ({ currentPage }: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isHover, setIsHover] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const { pageOptions, logo } = useSelector(
     (state: RootState) => state.twoPicture
@@ -32,6 +34,13 @@ const Navbar = ({ currentPage }: Props) => {
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
   );
+  const handleCancelDelete = () => {
+    setShowConfirmationModal(false);
+  };
+  const handleConfirmDelete = async (id: string) => {
+    await dispatch(deletePage(id));
+    window.location.reload();
+  };
   //   get the logo
   useEffect(() => {
     dispatch(getNavbar());
@@ -114,13 +123,20 @@ const Navbar = ({ currentPage }: Props) => {
                           : page.pageNameTR}
                       </li>
                       {isAdmin && (
-                        <AiOutlineDelete
-                          className="w-6 h-6 my-auto mt-3 cursor-pointer hover:text-[#e1241b]"
-                          onClick={async () => {
-                            await dispatch(deletePage(page._id));
-                            window.location.reload();
-                          }}
-                        />
+                        <div>
+                          {showConfirmationModal && (
+                            <ConfirmationModal
+                              onConfirm={() => handleConfirmDelete(page._id)}
+                              onCancel={handleCancelDelete}
+                            />
+                          )}
+                          <AiOutlineDelete
+                            className="w-6 h-6 my-auto mt-3 cursor-pointer hover:text-[#e1241b]"
+                            onClick={async () => {
+                              setShowConfirmationModal(true);
+                            }}
+                          />
+                        </div>
                       )}
                     </div>
 
