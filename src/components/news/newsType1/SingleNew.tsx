@@ -4,14 +4,17 @@ import { useParams } from "react-router-dom";
 import { PictureType } from "../../../shared/types";
 import { RootState, useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
+import { deleteItemInContainer } from "../../../features/twoPicture/twoPictureSlice";
 import Navbar from "../../navbar/Navbar";
 import NewsContainer from "./NewsContainer";
 import NewsContainer2 from "../newsType2/NewsContainer2";
 
 const SingleNew = () => {
   const { id, twoPictureId, type } = useParams();
+  const dispatch = useAppDispatch();
   const [news, setNews] = useState({} as PictureType);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const { isAdmin } = useSelector((state: RootState) => state.context);
   const getSingleNew = async () => {
     const response = await axios.get(
       `http://localhost:3002/api/v1/twoPicture/getSingleNew/${twoPictureId}/${id}`
@@ -48,13 +51,27 @@ const SingleNew = () => {
             {paragraph}
           </p>
         ))}
+        {isAdmin && (
+          <button
+            className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+            onClick={async () => {
+              try {
+                await dispatch(
+                  deleteItemInContainer({
+                    id: twoPictureId ? twoPictureId : "",
+                    itemId: id ? id : "",
+                  })
+                );
+                window.location.reload();
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          >
+            Delete
+          </button>
+        )}
       </div>
-      {/* burasi tercihe gore eklenebilir */}
-      {/* {type === "Type1" ? (
-        <NewsContainer id={twoPictureId ? twoPictureId : ""} />
-      ) : (
-        <NewsContainer2 id={twoPictureId ? twoPictureId : ""} />
-      )} */}
     </div>
   );
 };
