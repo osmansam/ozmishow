@@ -34,7 +34,7 @@ const ExplanationBar = ({
   const barHeight = explanationArray.length * 25 + 50;
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full  w-full flex flex-col gap-4  justify-between mb-4  h-[${barHeight}px ] bg-[#f9f9f9] rounded-lg py-4 `;
   return (
-    <div className="py-10">
+    <div className="py-10 flex flex-col items-center">
       <h1 className="text-3xl font-bold p-4 ml-4 ">{mainMainHeader}</h1>
       <div className="w-5/6 mx-auto flex lg:flex-row flex-col items-center sm:items-start ">
         {/* Bar part */}
@@ -114,7 +114,7 @@ const ExplanationBar = ({
       {/* Button to add new item */}
       {!isAddExplanationItem && isAdmin && (
         <button
-          className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+          className="capitalize border-2 rounded-lg cursor-pointer w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={() => setIsAddExplanationItem(true)}
         >
           Add New item

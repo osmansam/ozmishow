@@ -68,7 +68,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
   };
 
   return (
-    <div className="pt-4 flex flex-col">
+    <div className="pt-4 flex flex-col items-center">
       {showConfirmationModal && (
         <ConfirmationModal
           onConfirm={handleConfirmDelete}
@@ -78,14 +78,14 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
       {/* move the container up and down */}
       <div className="flex flex-row gap-6">
         <button
-          className="border-2 m-2"
+          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
           disabled={disableMoveUp}
           onClick={() => moveItem(index, "up")}
         >
           Move Up
         </button>
         <button
-          className="border-2 m-2"
+          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
           disabled={disableMoveDown}
           onClick={() => moveItem(index, "down")}
         >
@@ -93,7 +93,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
         </button>
         {/* Delete Container */}
         <button
-          className="border-2 m-2"
+          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
           onClick={async () => {
             setShowConfirmationModal(true);
           }}
@@ -104,7 +104,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
       {/* change page and language  */}
       <div className="flex flex-row gap-6  w-1/3 ">
         <select
-          className="border-2 m-2"
+          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
           onChange={(e) => {
             setUpdatePage(e.target.value);
           }}
@@ -116,7 +116,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
           ))}
         </select>
         <select
-          className="border-2 m-2 w-1/3"
+          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer w-1/3"
           onChange={(e) => {
             setUpdateLanguage(e.target.value);
           }}
