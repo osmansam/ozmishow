@@ -39,7 +39,7 @@ const Navbar = ({ currentPage }: Props) => {
   };
   const handleConfirmDelete = async (id: string) => {
     await dispatch(deletePage(id));
-    window.location.reload();
+    navigate("/");
   };
   //   get the logo
   useEffect(() => {

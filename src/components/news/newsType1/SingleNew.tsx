@@ -8,6 +8,7 @@ import { deleteItemInContainer } from "../../../features/twoPicture/twoPictureSl
 import Navbar from "../../navbar/Navbar";
 import NewsContainer from "./NewsContainer";
 import NewsContainer2 from "../newsType2/NewsContainer2";
+import Footer from "../../footer";
 
 const SingleNew = () => {
   const { id, twoPictureId, type } = useParams();
@@ -72,6 +73,7 @@ const SingleNew = () => {
           </button>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

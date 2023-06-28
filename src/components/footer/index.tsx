@@ -13,7 +13,7 @@ import { FaFax } from "react-icons/fa";
 import { LanguageOptions } from "../../shared/types";
 import AddFooter from "./AddFooter";
 type Props = {
-  currentPage: string;
+  currentPage?: string;
 };
 
 const Footer = ({ currentPage }: Props) => {
