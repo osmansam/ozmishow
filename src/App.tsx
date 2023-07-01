@@ -16,7 +16,7 @@ function App() {
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
     dispatch(getPageOptions());
-  }, []);
+  }, [dispatch]);
 
   const renderedComponent = () => {
     if (isAdmin) {
