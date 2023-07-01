@@ -1,6 +1,7 @@
 {
   "name": "hotel-1",
   "version": "0.1.0",
+  "homepage": "./build",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.0.17",
