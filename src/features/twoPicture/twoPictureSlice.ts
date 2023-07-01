@@ -52,7 +52,7 @@ function extractHeaders(response: AxiosResponse) {
   };
 }
 
-const baseURL = "/api/v1";
+const baseURL = "https://ozmishow-back.onrender.com/api/v1";
 //get Componont container
 export const getPageTwoPictures = createAsyncThunk(
   "twoPicture/getPageTwoPictures",
