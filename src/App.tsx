@@ -23,7 +23,7 @@ function App() {
       return (
         <>
           <Route path="/" element={<TwoPicture />} />
-          {pageOptions.map((page, index) => (
+          {pageOptions?.map((page, index) => (
             <React.Fragment key={index}>
               <Route
                 key={`page-${page.pageNameEN.toLowerCase()}`}
@@ -43,7 +43,7 @@ function App() {
       return (
         <>
           <Route path="/" element={<TwoPicture />} />
-          {pageOptions.map((page, index) => (
+          {pageOptions?.map((page, index) => (
             <React.Fragment key={index}>
               <Route
                 key={index}
