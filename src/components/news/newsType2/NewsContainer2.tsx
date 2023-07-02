@@ -66,7 +66,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   };
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const handleCreate = async () => {
-    dispatch(updateContainer({ container: twoPictureArray, id }));
+    await dispatch(updateContainer({ container: twoPictureArray, id }));
     setIsAddNewItem(false);
     dispatch(resetTwoPictureArray());
     window.location.reload();
