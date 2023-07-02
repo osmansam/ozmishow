@@ -30,7 +30,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   //getNews function
   const getNews = async () => {
     const response = await axios.get(
-      `http://localhost:3002/api/v1/twoPicture/getNews/${id}?page=${currentPage}&limit=${limit}`
+      `https://ozmishow-back.onrender.com/api/v1/twoPicture/getNews/${id}?page=${currentPage}&limit=${limit}`
     );
     setCurrentPage(response.data.currentPage);
     setTotalPages(response.data.totalPages);
