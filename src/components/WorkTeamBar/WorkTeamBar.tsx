@@ -58,7 +58,7 @@ const WorkTeamBar = ({
     );
 
   const barHeight = groupedWorkTeams.length * 25 + 50;
-  const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full w-full flex flex-col gap-4 justify-between mb-4 h-[${barHeight}px] bg-[#f9f9f9] rounded-lg py-4`;
+  const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full w-full  flex flex-col gap-4 justify-between mb-4 h-[${barHeight}px] bg-[#f9f9f9] rounded-lg py-4`;
 
   return (
     <div className="py-10">
@@ -73,7 +73,7 @@ const WorkTeamBar = ({
             }`;
             return (
               <div
-                className="flex justify-center items-center cursor-pointer"
+                className="flex  justify-center items-center cursor-pointer"
                 key={index}
               >
                 <li
@@ -93,12 +93,15 @@ const WorkTeamBar = ({
           {groupedWorkTeams[barSelection] && (
             <>
               {groupedWorkTeams[barSelection].items.map((workTeam, index) => (
-                <div key={index} className="flex md:flex-row sm:flex-col py-5 ">
+                <div
+                  key={index}
+                  className="flex md:flex-row flex-col py-5  gap-5 justify-center items-center md:justify-normal md:items-start "
+                >
                   {workTeam.img && (
                     <img
                       src={workTeam.img}
                       alt="explanationImage"
-                      className="w-40 h-44 object-fit mr-10 rounded-md"
+                      className="w-40 h-44 object-fit rounded-md"
                     />
                   )}
                   <div>

@@ -25,40 +25,38 @@ const ContactContainer = (props: Props) => {
     <div className="flex flex-col lg:flex-row w-5/6 mx-auto py-10 ">
       {/* left side  */}
       <div className="flex flex-col lg:w-1/2 w-full lg:pr-5 gap-4">
-        <div className="flex flex-row gap-4">
-          {/* icons  */}
+        <div className="flex flex-col gap-4">
+          {/* icons and footer values */}
           <div className="flex flex-col gap-2">
-            <div className="flex flex-row gap-4">
-              <GoLocation className="w-8 h-6" />{" "}
-              <h2 className=" uppercase  p">
-                {language === LanguageOptions.EN ? "Adress:" : "Adres:"}{" "}
+            <div className="flex flex-row items-center gap-4">
+              <GoLocation className="w-8 h-6" />
+              <h2 className="uppercase w-20 ">
+                {language === LanguageOptions.EN ? "Adress:" : "Adres:"}
               </h2>
+              <p className="text-sm">{footer.adress}</p>
             </div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row items-center gap-4">
               <BsTelephone className="w-8 h-6" />
-              <h2 className=" uppercase  pr-10 ">
+              <h2 className="uppercase w-20 ">
                 {language === LanguageOptions.EN ? "Phone:" : "Telefon:"}
               </h2>
+              <p className="text-sm">{footer.phone}</p>
             </div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row items-center gap-4">
               <AiOutlineMail className="w-8 h-6" />
-              <h2 className=" uppercase  pr-10 ">
+              <h2 className="uppercase w-20 ">
                 {language === LanguageOptions.EN ? "Email:" : "E-Posta:"}
               </h2>
+              <p className="text-sm">{footer.email}</p>
             </div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row items-center gap-4">
               <FaFax className="w-8 h-6" />
-              <h2 className=" uppercase  pr-10 ">Fax:</h2>
+              <h2 className="uppercase w-20 ">Fax:</h2>
+              <p className="text-sm">{footer.fax}</p>
             </div>
-          </div>
-          {/* footer values */}
-          <div className="flex flex-col gap-3">
-            <p className="text-sm">{footer.adress}</p>
-            <p className="text-sm">{footer.phone}</p>
-            <p className="text-sm">{footer.email}</p>
-            <p className="text-sm">{footer.fax}</p>
           </div>
         </div>
+
         <Map />
       </div>
       {/* right side  */}
