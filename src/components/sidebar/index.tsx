@@ -128,7 +128,7 @@ const Sidebar = ({ currentPage }: Props) => {
               }}
             />
           </div>
-          <ul className="w-3/4 my-auto flex flex-col justify-between mx-auto pt-4 overflow-y-auto no-scrollbar">
+          <ul className="w-3/4 my-auto flex flex-col justify-between mx-auto pt-4 overflow-y-auto no-scrollbar py-8">
             {renderNavigationLinks()}
           </ul>
         </div>

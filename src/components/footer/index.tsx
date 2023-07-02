@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
 import {
   createFooter,
   getFooter,
@@ -10,8 +11,9 @@ import { GoLocation } from "react-icons/go";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { FaFax } from "react-icons/fa";
-import { LanguageOptions } from "../../shared/types";
+import { LanguageOptions, PageOptionsType } from "../../shared/types";
 import AddFooter from "./AddFooter";
+
 type Props = {
   currentPage?: string;
 };
@@ -27,35 +29,88 @@ const Footer = ({ currentPage }: Props) => {
   const navigate = useNavigate();
   const [isAddFooter, setIsAddFooter] = useState(false);
   //get the footer data
+  const [activeMotherPage, setActiveMotherPage] = useState<string>("");
   useEffect(() => {
     setIsAddFooter(false);
     dispatch(getFooter());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getNavbar());
+  }, [dispatch]);
+  useEffect(() => {
+    setActiveMotherPage(""); // Reset activeMotherPage when currentPage changes
+  }, [currentPage]);
+  const getSubpages = (motherPage: string) => {
+    return pageOptions.filter(
+      (item) =>
+        item.motherPageEN === motherPage || item.motherPageTR === motherPage
+    );
+  };
+
+  const renderSubpages = (subpages: PageOptionsType[]) => {
+    return subpages.map((subpage, index) => (
+      <li
+        key={index}
+        className={`p-2 m-2 mt-4 text-xs uppercase cursor-pointer hover:underline ${
+          currentPage === subpage.pageNameEN
+            ? "text-white rounded-md hover:no-underline"
+            : "text-[#888888]"
+        }`}
+        onClick={() => navigate(`/${subpage.pageNameEN}`)}
+      >
+        {language === LanguageOptions.EN
+          ? subpage.pageNameEN
+          : subpage.pageNameTR}
+      </li>
+    ));
+  };
+
+  const renderNavigationLinks = () => {
+    return pageOptions.map((page, index) => {
+      if (page.isNavbar) {
+        const subpages = getSubpages(page.pageNameEN);
+        const isActiveMotherPage = activeMotherPage === page.pageNameEN;
+        return (
+          <React.Fragment key={index}>
+            <li
+              className={`p-2 m-2 mt-4  uppercase cursor-pointer hover:underline ${
+                currentPage === page.pageNameEN
+                  ? "text-white rounded-md hover:no-underline"
+                  : "text-[#888888]"
+              }`}
+              onClick={() => {
+                if (subpages.length > 0) {
+                  setActiveMotherPage(
+                    isActiveMotherPage ? "" : page.pageNameEN
+                  );
+                } else {
+                  navigate(`/${page.pageNameEN}`);
+                }
+              }}
+            >
+              {language === LanguageOptions.EN
+                ? page.pageNameEN
+                : page.pageNameTR}
+            </li>
+            {isActiveMotherPage && (
+              <ul className="pl-4">{renderSubpages(subpages)}</ul>
+            )}
+          </React.Fragment>
+        );
+      } else {
+        return null;
+      }
+    });
+  };
+
+  const navigationLinks = renderNavigationLinks();
+
   return (
-    <footer className=" h-full lg:h-48 bg-black  mt-auto">
-      <div className=" flex  flex-col gap-5">
-        {/* links */}
-        <ul className="flex flex-row  flex-wrap justify-between mx-auto w-5/6">
-          {" "}
-          {pageOptions.map(
-            (page, index) =>
-              page.isNavbar && (
-                <li
-                  key={index}
-                  className={`p-2 m-2 mt-4 uppercase cursor-pointer hover:underline ${
-                    currentPage === page.pageNameEN
-                      ? "text-white rounded-md hover:no-underline"
-                      : "text-[#888888]"
-                  }`}
-                  onClick={() => navigate(`/${page.pageNameEN}`)}
-                >
-                  {language === LanguageOptions.EN
-                    ? page.pageNameEN
-                    : page.pageNameTR}
-                </li>
-              )
-          )}
+    <footer className="h-full lg:h-48 bg-black mt-auto">
+      <div className="flex flex-col gap-5">
+        <ul className="flex flex-row flex-wrap justify-between mx-auto w-5/6">
+          {navigationLinks}
         </ul>
         {/* Adress and tel fax email */}
         <div className="flex flex-row flex-wrap gap-6  w-5/6 mx-auto">
