@@ -18,7 +18,7 @@ const SingleNew = () => {
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const getSingleNew = async () => {
     const response = await axios.get(
-      `http://localhost:3002/api/v1/twoPicture/getSingleNew/${twoPictureId}/${id}`
+      `https://ozmishow-back.onrender.com/api/v1/twoPicture/getSingleNew/${twoPictureId}/${id}`
     );
     setNews(response.data.news);
   };
