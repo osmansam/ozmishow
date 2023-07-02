@@ -69,7 +69,7 @@ const ExplanationBar = ({
                 <img
                   src={explanationArray[barSelection].img}
                   alt="explanationImage"
-                  className="w-full h-96 object-fit "
+                  className="w-full lg:h-96 sm:h-60 object-fit "
                 />
               )}
               <h2 className="text-2xl leading-7 font-[500] text-[#212529] capitalize p-2">

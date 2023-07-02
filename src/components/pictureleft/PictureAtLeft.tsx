@@ -9,7 +9,7 @@ const PictureAtLeft = ({ img, header, paragraphs, buttons }: PictureType) => {
       <img
         src={img}
         alt="img"
-        className="w-full lg:basis-1/2 h-[400px] sm:py-5 md:py-0"
+        className="w-full lg:basis-1/2 lg:h-[400px] sm:h-[250px] sm:py-5 md:py-0"
       />
 
       {/* right side  */}
