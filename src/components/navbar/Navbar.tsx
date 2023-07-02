@@ -63,7 +63,7 @@ const Navbar = ({ currentPage }: Props) => {
             src={logo ? logo : "https://via.placeholder.com/150"}
             alt="logo"
             onClick={() => {
-              navigate("/");
+              navigate("/admin");
             }}
           />
         </div>

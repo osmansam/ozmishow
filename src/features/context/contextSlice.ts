@@ -11,7 +11,7 @@ interface ContextSliceType {
 
 const initialState: ContextSliceType = {
   isTopOfPage: false,
-  isAdmin: true,
+  isAdmin: false,
   flexBetween: "flex items-center justify-between",
   isSidebarOpen: false,
   language: LanguageOptions.EN,
