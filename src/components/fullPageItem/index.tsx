@@ -43,7 +43,7 @@ const FullPageItem = ({
               <img
                 src={img}
                 alt={header}
-                className="w-full md:w-5/6 mx-auto h-80"
+                className="w-full md:w-5/6 mx-auto lg:h-80 sm:h-60"
               />
             )}
             <h1

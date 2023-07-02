@@ -93,7 +93,7 @@ const WorkTeamBar = ({
           {groupedWorkTeams[barSelection] && (
             <>
               {groupedWorkTeams[barSelection].items.map((workTeam, index) => (
-                <div key={index} className="flex flex-row py-5 ">
+                <div key={index} className="flex md:flex-row sm:flex-col py-5 ">
                   {workTeam.img && (
                     <img
                       src={workTeam.img}

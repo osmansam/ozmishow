@@ -39,7 +39,7 @@ const SingleNew = () => {
           <img
             src={news.img}
             alt="img"
-            className="w-5/6 lg:w-2/3  mx-auto lg:h-[450px] sm:h-72 py-10"
+            className="w-5/6 lg:w-2/3  mx-auto lg:h-[450px] sm:h-60 py-10"
           />
         )}
         {/* paragraphs */}
