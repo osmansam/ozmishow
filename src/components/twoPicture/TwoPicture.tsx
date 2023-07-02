@@ -5,7 +5,7 @@ import { PictureType } from "../../shared/types";
 const TwoPicture = ({ img, header, paragraphs, buttons }: PictureType) => {
   return (
     <div className="flex flex-col gap-4 md:pr-6 w-full md:w-1/2a h-full mt-8">
-      {img && <img src={img} alt={header} className="w-full h-100 " />}
+      {img && <img src={img} alt={header} className="w-full" />}
       <h1
         className="text-lg font-[500] leading-6 pt-2"
         style={{ color: "#333333" }}
