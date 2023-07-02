@@ -133,15 +133,9 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
       {isAddNewItem && isAdmin && (
         <div className="flex flex-col justify-between gap-4">
           <PictureContainer
-            isPictureContainerImage={
-              Components[NewsContainer2.name].isPictureContainerImage
-            }
-            isPictureContainerButton={
-              Components[NewsContainer2.name].isPictureContainerButton
-            }
-            isPictureContainerParagraph={
-              Components[NewsContainer2.name].isPictureContainerParagraph
-            }
+            isPictureContainerImage={true}
+            isPictureContainerButton={false}
+            isPictureContainerParagraph={true}
           />
           <button
             className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
