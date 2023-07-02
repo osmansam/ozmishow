@@ -53,7 +53,7 @@ const NewsContainer = ({ id, mainHeader }: NewsContainerType) => {
       getNews();
     } else {
       const response = await axios.get(
-        `http://localhost:3002/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
+        `https://ozmishow-back.onrender.com/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
       );
       setIsPagination(false);
       setNews(response.data.news);
