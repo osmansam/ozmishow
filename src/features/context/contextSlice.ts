@@ -18,7 +18,7 @@ const initialState: ContextSliceType = {
 };
 const contextSlice = createSlice({
   name: "context",
-  initialState,
+  initialState: initialState,
   reducers: {
     setIsTopOfPage: (state, action) => {
       state.isTopOfPage = action.payload;

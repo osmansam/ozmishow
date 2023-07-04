@@ -5,7 +5,9 @@ import { LanguageOptions, PageOptionsType } from "../../shared/types";
 import {
   setLanguage,
   setIsSidebarOpen,
+  setIsAdmin,
 } from "../../features/context/contextSlice";
+import { logout } from "../../features/user/userSlice";
 import {
   getNavbar,
   deletePage,
@@ -27,7 +29,7 @@ const Navbar = ({ currentPage }: Props) => {
   const navigate = useNavigate();
   const [isHover, setIsHover] = useState("");
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-
+  const { user } = useSelector((state: RootState) => state.user);
   const { pageOptions, logo } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -63,7 +65,7 @@ const Navbar = ({ currentPage }: Props) => {
             src={logo ? logo : "https://via.placeholder.com/150"}
             alt="logo"
             onClick={() => {
-              navigate("/admin");
+              isAdmin ? navigate("/admin") : navigate("/");
             }}
           />
         </div>
@@ -80,6 +82,18 @@ const Navbar = ({ currentPage }: Props) => {
               {option.toUpperCase()}
             </li>
           ))}
+          {isAdmin && (
+            <button
+              className="border-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer h-fit py-2 mt-2"
+              onClick={async () => {
+                await dispatch(logout(user.userId));
+                dispatch(setIsAdmin(false));
+                navigate("/");
+              }}
+            >
+              Logout
+            </button>
+          )}
         </ul>
       </div>
       {/* links  */}
@@ -122,7 +136,7 @@ const Navbar = ({ currentPage }: Props) => {
                           ? page.pageNameEN
                           : page.pageNameTR}
                       </li>
-                      {isAdmin && (
+                      {isAdmin && user.role === "superAdmin" && (
                         <div>
                           {showConfirmationModal && (
                             <ConfirmationModal

@@ -38,7 +38,7 @@ const FullPageItem = ({
       {fullPageItemArray.map((fullPageItem, index) => {
         const { header, paragraphs, buttons, img, _id } = fullPageItem;
         return (
-          <div key={_id} className="w-full">
+          <div key={index} className="w-full">
             {img && (
               <img
                 src={img}

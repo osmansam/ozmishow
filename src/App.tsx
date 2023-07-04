@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { store } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store";
 import { RootState, useAppDispatch } from "./store";
 import { useSelector } from "react-redux";
 import TwoPicture from "./scenes/ComponentContainer";
 import Page from "./scenes/pages/Page";
 import PageAdmin from "./scenes/pages/PageAdmin";
+import Login from "./scenes/login";
 import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
 import SingleNew from "./components/news/newsType1/SingleNew";
 import Loading from "./components/loading";
+
 function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const fetchPageOptions = async () => {
       await dispatch(getPageOptions());
@@ -30,6 +32,8 @@ function App() {
         <>
           <Route path="/admin" element={<TwoPicture />} />
           <Route path="/" element={<PageAdmin page="CANSU" />} />
+          <Route path="/login" element={<Login />} />
+
           {pageOptions?.map((page, index) => (
             <React.Fragment key={index}>
               <Route
@@ -51,6 +55,8 @@ function App() {
         <>
           <Route path="/admin" element={<TwoPicture />} />
           <Route path="/" element={<Page page="CANSU" />} />
+          <Route path="/login" element={<Login />} />
+
           {pageOptions?.map((page, index) => (
             <React.Fragment key={index}>
               <Route
@@ -70,15 +76,16 @@ function App() {
   };
 
   if (isLoading) {
-    // Show loading state or placeholder until pageOptions are fetched
     return <Loading />;
   }
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>{renderedComponent()}</Routes>
-      </BrowserRouter>
+      <PersistGate loading={<Loading />} persistor={persistor}>
+        <BrowserRouter>
+          <Routes>{renderedComponent()}</Routes>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 }

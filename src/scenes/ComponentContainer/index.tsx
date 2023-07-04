@@ -12,8 +12,10 @@ import {
 import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import Deneme from "../deneme";
+import { useNavigate } from "react-router-dom";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [page, setPage] = useState<string>("Home");
   const [mainHeader, setMainHeader] = useState("");
   const [isMainHeader, setIsMainHeader] = useState(false);
@@ -25,7 +27,7 @@ const ComponentContainer = () => {
   const { isAdmin, language } = useSelector(
     (state: RootState) => state.context
   );
-
+  const { user } = useSelector((state: RootState) => state.user);
   const [componentName, setComponentName] = useState<keyof typeof Components>();
   const { container, pageOptions } = useSelector(
     (state: RootState) => state.twoPicture
@@ -226,7 +228,11 @@ const ComponentContainer = () => {
         break;
     }
   };
-
+  useEffect(() => {
+    if (user && !(user.role === "admin" || user.role === "superAdmin")) {
+      navigate("/login");
+    }
+  }, [dispatch, page, user]);
   return (
     <div className="w-5/6  mx-auto py-8">
       {/* isAdmin  */}

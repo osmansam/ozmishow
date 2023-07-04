@@ -45,6 +45,14 @@ export interface PictureType {
   page?: string;
   date?: String;
 }
+export interface UserType {
+  name: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  role: string;
+  userId: string;
+}
 export interface MapType {
   lat: number;
   lng: number;
