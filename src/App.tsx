@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import { RootState, useAppDispatch } from "./store";
@@ -9,23 +9,23 @@ import TwoPicture from "./scenes/ComponentContainer";
 import Page from "./scenes/pages/Page";
 import PageAdmin from "./scenes/pages/PageAdmin";
 import Login from "./scenes/login";
-
+import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
 import SingleNew from "./components/news/newsType1/SingleNew";
 import Loading from "./components/loading";
 
 function App() {
+  const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const fetchPageOptions = async () => {
+      await dispatch(getPageOptions());
+      setIsLoading(false);
+    };
+    fetchPageOptions();
+  }, [dispatch]);
 
-  const PageAdminWrapper = () => {
-    const { page } = useParams();
-
-    return <PageAdmin page={page ? page : ""} />;
-  };
-  const PageWrapper = () => {
-    const { page } = useParams();
-
-    return <Page page={page ? page : ""} />;
-  };
   const renderedComponent = () => {
     if (isAdmin) {
       return (
@@ -33,11 +33,21 @@ function App() {
           <Route path="/admin" element={<TwoPicture />} />
           <Route path="/" element={<PageAdmin page="CANSU" />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/:page" element={<PageAdminWrapper />} />
-          <Route
-            path={`/news/:twoPictureId/:id/:type`}
-            element={<SingleNew />}
-          />
+
+          {pageOptions?.map((page, index) => (
+            <React.Fragment key={index}>
+              <Route
+                key={`page-${page.pageNameEN.toLowerCase()}`}
+                path={`/${page.pageNameEN.toLowerCase()}`}
+                element={<PageAdmin page={page.pageNameEN} />}
+              />
+              <Route
+                key={`news-${page.pageNameEN.toLowerCase()}`}
+                path={`/news/:twoPictureId/:id/:type`}
+                element={<SingleNew />}
+              />
+            </React.Fragment>
+          ))}
         </>
       );
     } else {
@@ -46,15 +56,28 @@ function App() {
           <Route path="/admin" element={<TwoPicture />} />
           <Route path="/" element={<Page page="CANSU" />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/:page" element={<PageWrapper />} />
-          <Route
-            path={`/news/:twoPictureId/:id/:type`}
-            element={<SingleNew />}
-          />
+
+          {pageOptions?.map((page, index) => (
+            <React.Fragment key={index}>
+              <Route
+                key={index}
+                path={`/${page.pageNameEN.toLowerCase()}`}
+                element={<Page page={page.pageNameEN} />}
+              />
+              <Route
+                path={`/news/:twoPictureId/:id/:type`}
+                element={<SingleNew />}
+              />
+            </React.Fragment>
+          ))}
         </>
       );
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Provider store={store}>
