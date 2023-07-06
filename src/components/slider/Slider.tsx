@@ -55,31 +55,37 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
   const { img, header, name, lastName, paragraphs, title } = currentSlide;
 
   return (
-    <div className="py-10 flex flex-col items-center w-full">
-      <div className="flex flex-col border-2 w-5/6 lg:w-2/3">
+    <div className="py-10 flex flex-col  w-full">
+      <h1 className="font-[700] text-[#102a42] text-3xl flex justify-start py-2 items-start px-4 mx-auto">
+        {mainMainHeader}
+      </h1>
+      <div className="flex flex-col  py-6 shadow-2xl bg-white w-5/6 lg:w-2/5 h-[400px] mx-auto relative">
         <div className="relative flex justify-center items-center">
           <div className="radius-ball absolute top-1/2  ml-3 transform translate-y-[-50%] w-40 h-40 rounded-full bg-blue-400 z-0"></div>
-          <img src={img} alt={header} className="w-40 h-40 rounded-full z-10" />
+          <img
+            src={img}
+            alt={header}
+            className="w-40 h-40 rounded-full z-10 object-cover"
+          />
           {/* <FaQuoteRight className="z-40" /> */}
         </div>
 
-        <h2 className="text-2xl leading-7 font-[500] text-center text-[#212529] capitalize p-2">
+        <h2 className="text-lg leading-7 font-[700] text-center text-[#102a42] capitalize p-1">
           {name + "  " + lastName}
         </h2>
-        <p className="text-center text-[#212529] font-[400] leading-6">
+        <p className="text-center text-[#617d98]  font-[400] leading-6">
           {title}
         </p>
-        <p className="mb-2">{`${name} ${lastName}`}</p>
         {paragraphs?.map((paragraph, index) => (
           <p
             key={index}
-            className=" font-[400] leading-6"
-            style={{ color: "#333333" }}
+            className=" font-[400] leading-6 text-sm text-center px-6 "
+            style={{ color: "#617d98" }}
           >
             {paragraph}
           </p>
         ))}
-        <div className="flex justify-center items-center">
+        <div className="absolute bottom-5 left-0 flex justify-center items-center w-full">
           <button
             className="prev text-xl text-primary-7 border-0 bg-transparent text-[#99d0fa]"
             onClick={handlePrev}

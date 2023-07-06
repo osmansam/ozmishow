@@ -267,32 +267,6 @@ const AddSliderItem = ({
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        {/* MainHeader */}
-        <div className="flex gap-5 w-full ">
-          <label className="w-28" htmlFor="mainHeader">
-            Main Header :
-          </label>
-          <input
-            className="border-2 w-4/5 rounded-md"
-            type="text"
-            name="mainHeader"
-            value={mainHeader}
-            onChange={(e) => setMainHeader(e.target.value)}
-          />
-        </div>
-        {/* header */}
-        <div className="flex gap-5 w-full ">
-          <label className="w-28" htmlFor="header">
-            Header :
-          </label>
-          <input
-            className="border-2 w-4/5 rounded-md"
-            type="text"
-            name="header"
-            value={header}
-            onChange={(e) => setHeader(e.target.value)}
-          />
-        </div>
         {isPictureContainerParagraph ? paragraphInputs : null}
         {isPictureContainerButton ? buttonInputs : null}
         <button
