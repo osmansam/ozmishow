@@ -73,6 +73,9 @@ export interface NewsContainerType {
   id: string;
   mainHeader?: string;
 }
+export interface YoutubeType {
+  embedId: string;
+}
 export interface FreqAskedType {
   id: string;
   freqAskedArray: Array<PictureType>;
@@ -274,6 +277,14 @@ export const Components: { [key: string]: ComponentType } = {
   },
   Carousel: {
     name: "Carousel",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  YoutubeVideo: {
+    name: "YoutubeVideo",
     pictureContainerNumber: 0,
     isMainHeader: true,
     isPictureContainerImage: false,

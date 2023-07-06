@@ -162,6 +162,7 @@ const ComponentContainer = () => {
       case Components.ExplanationBar.name:
       case Components.Slider.name:
       case Components.Carousel.name:
+      case Components.YoutubeVideo.name:
         await dispatch(
           createTwoPicture({
             page,
@@ -310,7 +311,7 @@ const ComponentContainer = () => {
         {isMainHeader && (
           <div className="flex gap-5 w-full ">
             <label className="w-32" htmlFor="header">
-              "Main Header
+              {componentName === "YoutubeVideo" ? "embedId" : "Main Header"}
             </label>
             <input
               className="border-2 w-4/5 rounded-md  capitalize"

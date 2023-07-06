@@ -32,6 +32,7 @@ import FullPageItem from "../../components/fullPageItem";
 import ConfirmationModal from "../../components/confirmation";
 import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
+import YoutubeVideo from "../../components/youtube";
 interface Props {
   page: string;
 }
@@ -393,6 +394,21 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   carouselArray={twoPictureArray}
                 />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "YoutubeVideo":
+            return (
+              <div key={index}>
+                <YoutubeVideo embedId={mainHeader ? mainHeader : ""} />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

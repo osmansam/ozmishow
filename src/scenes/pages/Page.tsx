@@ -25,6 +25,7 @@ import Map from "../../components/map";
 import FullPageItem from "../../components/fullPageItem";
 import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
+import YoutubeVideo from "../../components/youtube";
 interface Props {
   page: string;
 }
@@ -148,6 +149,12 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   carouselArray={twoPictureArray}
                 />
+              </div>
+            );
+          case "YoutubeVideo":
+            return (
+              <div key={index}>
+                <YoutubeVideo embedId={mainHeader ? mainHeader : ""} />
               </div>
             );
           case "PageBanner":
