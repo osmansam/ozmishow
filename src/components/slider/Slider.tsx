@@ -79,7 +79,7 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
         {paragraphs?.map((paragraph, index) => (
           <p
             key={index}
-            className=" font-[400] leading-6 text-sm text-center px-6 "
+            className=" font-[400] leading-6 text-sm text-center px-6 py-2"
             style={{ color: "#617d98" }}
           >
             {paragraph}
