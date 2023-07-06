@@ -42,6 +42,9 @@ export interface PictureType {
   twoPictureId?: string;
   mainHeader?: string;
   subHeaders?: string[];
+  name?: string;
+  lastName?: string;
+  title?: string;
   page?: string;
   date?: String;
 }
@@ -83,6 +86,11 @@ export interface ExplanationBarType {
   id: string;
   mainMainHeader?: string;
   explanationArray: Array<PictureType>;
+}
+export interface SliderType {
+  id: string;
+  mainMainHeader?: string;
+  sliderArray: Array<PictureType>;
 }
 export interface WorkTeamBarType {
   id: string;
@@ -250,6 +258,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: true,
     isPictureContainerButton: false,
     isPictureContainerParagraph: true,
+  },
+  Slider: {
+    name: "Slider",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
   },
 };
 

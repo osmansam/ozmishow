@@ -160,6 +160,7 @@ const ComponentContainer = () => {
         resetInputs();
         break;
       case Components.ExplanationBar.name:
+      case Components.Slider.name:
         await dispatch(
           createTwoPicture({
             page,

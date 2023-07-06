@@ -23,6 +23,7 @@ import ContactFormTr from "../../components/contactForm/ContactFormTr";
 import ContactContainer from "../../components/contactContainer/ContactContainer";
 import Map from "../../components/map";
 import FullPageItem from "../../components/fullPageItem";
+import Slider from "../../components/slider/Slider";
 interface Props {
   page: string;
 }
@@ -125,6 +126,16 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
                   explanationArray={twoPictureArray}
+                />
+              </div>
+            );
+          case "Slider":
+            return (
+              <div key={index}>
+                <Slider
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  sliderArray={twoPictureArray}
                 />
               </div>
             );
