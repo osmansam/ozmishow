@@ -25,7 +25,7 @@ const ExplanationBar = ({
 
   //handle create new explanation item
   const handleCreate = async () => {
-    dispatch(updateExplanationBar({ container: twoPictureArray, id }));
+    await dispatch(updateExplanationBar({ container: twoPictureArray, id }));
     setIsAddExplanationItem(false);
     dispatch(resetTwoPictureArray());
     window.location.reload();

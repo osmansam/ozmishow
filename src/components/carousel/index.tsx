@@ -20,7 +20,7 @@ const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
 
   //handle create new carousel item
   const handleCreate = async () => {
-    dispatch(updateExplanationBar({ container: twoPictureArray, id }));
+    await dispatch(updateExplanationBar({ container: twoPictureArray, id }));
     setIsAddCarousel(false);
     dispatch(resetTwoPictureArray());
     window.location.reload();
