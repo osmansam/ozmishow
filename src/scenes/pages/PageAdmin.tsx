@@ -31,6 +31,7 @@ import ContactContainer from "../../components/contactContainer/ContactContainer
 import FullPageItem from "../../components/fullPageItem";
 import ConfirmationModal from "../../components/confirmation";
 import Slider from "../../components/slider/Slider";
+import Carousel from "../../components/carousel";
 interface Props {
   page: string;
 }
@@ -372,6 +373,25 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
                   sliderArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "Carousel":
+            return (
+              <div key={index}>
+                <Carousel
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  carouselArray={twoPictureArray}
                 />
                 <PageConfigurationButtons
                   index={index}

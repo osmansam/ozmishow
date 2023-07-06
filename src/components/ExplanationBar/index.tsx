@@ -114,14 +114,14 @@ const ExplanationBar = ({
       {/* Button to add new item */}
       {!isAddExplanationItem && isAdmin && (
         <button
-          className="capitalize border-2 rounded-lg cursor-pointer w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+          className="capitalize border-2  cursor-pointer w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
           onClick={() => setIsAddExplanationItem(true)}
         >
           Add New item
         </button>
       )}
       {isAddExplanationItem && isAdmin && (
-        <div>
+        <div className="w-full mx-auto">
           <AddExplanationItem
             isPictureContainerImage={true}
             isPictureContainerButton={false}

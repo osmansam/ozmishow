@@ -59,7 +59,7 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
       <h1 className="font-[700] text-[#102a42] text-3xl flex justify-start py-2 items-start px-4 mx-auto">
         {mainMainHeader}
       </h1>
-      <div className="flex flex-col  py-6 shadow-2xl bg-white w-5/6 lg:w-2/5 h-[400px] mx-auto relative">
+      <div className="flex flex-col  py-6 shadow-2xl bg-white w-5/6 lg:w-2/5 min-h-[400px] mx-auto relative">
         <div className="relative flex justify-center items-center">
           <div className="radius-ball absolute top-1/2  ml-3 transform translate-y-[-50%] w-40 h-40 rounded-full bg-blue-400 z-0"></div>
           <img
@@ -85,7 +85,7 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
             {paragraph}
           </p>
         ))}
-        <div className="absolute bottom-5 left-0 flex justify-center items-center w-full">
+        <div className="absolute bottom-3 left-0 flex justify-center items-center w-full">
           <button
             className="prev text-xl text-primary-7 border-0 bg-transparent text-[#99d0fa]"
             onClick={handlePrev}

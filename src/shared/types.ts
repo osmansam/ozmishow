@@ -87,6 +87,11 @@ export interface ExplanationBarType {
   mainMainHeader?: string;
   explanationArray: Array<PictureType>;
 }
+export interface CarouselType {
+  id: string;
+  mainMainHeader?: string;
+  carouselArray: Array<PictureType>;
+}
 export interface SliderType {
   id: string;
   mainMainHeader?: string;
@@ -261,6 +266,14 @@ export const Components: { [key: string]: ComponentType } = {
   },
   Slider: {
     name: "Slider",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  Carousel: {
+    name: "Carousel",
     pictureContainerNumber: 0,
     isMainHeader: true,
     isPictureContainerImage: false,

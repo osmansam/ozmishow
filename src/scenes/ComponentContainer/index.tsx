@@ -161,6 +161,7 @@ const ComponentContainer = () => {
         break;
       case Components.ExplanationBar.name:
       case Components.Slider.name:
+      case Components.Carousel.name:
         await dispatch(
           createTwoPicture({
             page,
