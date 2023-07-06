@@ -3,7 +3,7 @@ import React from "react";
 type Props = { embedId: string };
 
 const YoutubeEmbed = ({ embedId }: Props) => (
-  <div className="overflow-hidden h-full w-full  ">
+  <div className="overflow-hidden h-full w-full   ">
     <iframe
       src={`https://www.youtube.com/embed/${embedId}`}
       frameBorder="0"

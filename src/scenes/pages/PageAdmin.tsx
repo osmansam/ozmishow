@@ -408,7 +408,12 @@ const PageAdmin = ({ page }: Props) => {
           case "YoutubeVideo":
             return (
               <div key={index}>
-                <YoutubeVideo embedId={mainHeader ? mainHeader : ""} />
+                <YoutubeVideo
+                  embedId={mainHeader ? mainHeader : ""}
+                  header={
+                    twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                  }
+                />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

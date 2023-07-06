@@ -75,6 +75,7 @@ export interface NewsContainerType {
 }
 export interface YoutubeType {
   embedId: string;
+  header: string;
 }
 export interface FreqAskedType {
   id: string;
@@ -285,7 +286,7 @@ export const Components: { [key: string]: ComponentType } = {
   },
   YoutubeVideo: {
     name: "YoutubeVideo",
-    pictureContainerNumber: 0,
+    pictureContainerNumber: 1,
     isMainHeader: true,
     isPictureContainerImage: false,
     isPictureContainerButton: false,
