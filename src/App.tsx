@@ -19,11 +19,8 @@ function App() {
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    const fetchPageOptions = async () => {
-      await dispatch(getPageOptions());
-      setIsLoading(false);
-    };
-    fetchPageOptions();
+    dispatch(getPageOptions());
+    setIsLoading(false);
   }, [dispatch]);
 
   const renderedComponent = () => {

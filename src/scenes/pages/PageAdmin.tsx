@@ -6,6 +6,7 @@ import {
   updateTwoPicture,
   deleteTwoPicture,
   updatePageAndLanguage,
+  getPageOptions,
 } from "../../features/twoPicture/twoPictureSlice";
 import { LanguageOptions, PageOptionsType } from "../../shared/types";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
@@ -163,6 +164,7 @@ const PageAdmin = ({ page }: Props) => {
   // make the page top and took the containers from database
 
   useEffect(() => {
+    dispatch(getPageOptions());
     dispatch(getPageTwoPictures(page));
     window.scrollTo(0, 0);
   }, [dispatch, page]);

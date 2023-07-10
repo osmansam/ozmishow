@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { getPageTwoPictures } from "../../features/twoPicture/twoPictureSlice";
+import {
+  getPageOptions,
+  getPageTwoPictures,
+} from "../../features/twoPicture/twoPictureSlice";
 import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
 import PictureAtRight from "../../components/pictureRight/PictureAtRight";
 import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
@@ -38,6 +41,7 @@ const PageAdmin = ({ page }: Props) => {
   );
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
+    dispatch(getPageOptions());
     dispatch(getPageTwoPictures(page));
     window.scrollTo(0, 0);
   }, [dispatch, page]);
