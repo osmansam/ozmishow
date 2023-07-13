@@ -29,6 +29,7 @@ import FullPageItem from "../../components/fullPageItem";
 import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
 import YoutubeVideo from "../../components/youtube";
+import TypingEffect from "../../components/TypingEffect/TypingEffect";
 interface Props {
   page: string;
 }
@@ -244,6 +245,15 @@ const PageAdmin = ({ page }: Props) => {
           <Navbar currentPage={currentPage} />
         </div>
       )}
+      <div className="h-10 w-full">
+        <TypingEffect
+          texts={[
+            "I m a developer. ",
+            "I m Osman Erdogan. ",
+            "I m a freelancer. ",
+          ]}
+        ></TypingEffect>
+      </div>
       {renderComponents()}
       {(currentPage?.isNavbar || currentPage?.isSubpage) && (
         <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
