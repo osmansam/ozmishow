@@ -11,28 +11,38 @@ const TypingEffect = ({
   texts,
   typingSpeed = 100,
   deleteSpeed = 60,
-  delay = 4000,
+  delay = 2000,
 }: Props) => {
   const [textIndex, setTextIndex] = useState(0);
   const [typingText, setTypingText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCursorVisible, setIsCursorVisible] = useState(true);
 
+  let currentIndex = typingText.length;
+  let currentText = texts[textIndex];
+
   useEffect(() => {
     let timerId: NodeJS.Timeout;
 
     const typeText = () => {
-      const currentText = texts[textIndex];
-      const currentIndex = typingText.length;
-
       if (isDeleting) {
         if (currentIndex > 0) {
           setTypingText((prevText) => prevText.slice(0, currentIndex - 1));
           timerId = setTimeout(typeText, deleteSpeed);
         } else {
           setIsDeleting(false);
-          setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-          timerId = setTimeout(typeText, delay);
+          if (
+            currentIndex === currentText.length &&
+            textIndex === texts.length - 1
+          ) {
+            // Reached the end of the last element in the texts array
+            // Restart from the beginning
+            setTextIndex(0);
+            timerId = setTimeout(typeText, delay);
+          } else {
+            setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+            timerId = setTimeout(typeText, delay);
+          }
         }
       } else {
         if (currentIndex < currentText.length) {
@@ -43,9 +53,11 @@ const TypingEffect = ({
           timerId = setTimeout(typeText, typingSpeed);
         }
       }
+
+      currentIndex = typingText.length; // Update currentIndex based on the current state
     };
 
-    if (!isDeleting && typingText === "") {
+    if (!isDeleting && currentIndex === currentText.length) {
       timerId = setTimeout(typeText, delay);
     } else {
       timerId = setTimeout(typeText, isDeleting ? deleteSpeed : typingSpeed);
@@ -84,6 +96,7 @@ const TypingEffect = ({
           }`}
         ></span>
       </span>
+      <h2>osman</h2>
     </div>
   );
 };

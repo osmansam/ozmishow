@@ -30,6 +30,7 @@ import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
 import YoutubeVideo from "../../components/youtube";
 import TypingEffect from "../../components/TypingEffect/TypingEffect";
+import Loading from "../../components/loading";
 interface Props {
   page: string;
 }
@@ -37,14 +38,19 @@ interface Props {
 const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
   );
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   useEffect(() => {
-    dispatch(getPageOptions());
-    dispatch(getPageTwoPictures(page));
-    window.scrollTo(0, 0);
+    const fetchData = async () => {
+      await dispatch(getPageOptions());
+      await dispatch(getPageTwoPictures(page));
+      setIsLoading(false);
+      window.scrollTo(0, 0);
+    };
+    fetchData();
   }, [dispatch, page]);
 
   const { container } = useSelector((state: RootState) => state.twoPicture);
@@ -234,7 +240,7 @@ const PageAdmin = ({ page }: Props) => {
     });
   };
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
-
+  if (isLoading) return <Loading />;
   return (
     <div className="flex flex-col h-full min-h-screen">
       {(currentPage?.isNavbar || currentPage?.isSubpage) && (
@@ -245,15 +251,7 @@ const PageAdmin = ({ page }: Props) => {
           <Navbar currentPage={currentPage} />
         </div>
       )}
-      <div className="h-10 w-full">
-        <TypingEffect
-          texts={[
-            "I m a developer. ",
-            "I m Osman Erdogan. ",
-            "I m a freelancer. ",
-          ]}
-        ></TypingEffect>
-      </div>
+
       {renderComponents()}
       {(currentPage?.isNavbar || currentPage?.isSubpage) && (
         <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />

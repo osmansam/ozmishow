@@ -34,6 +34,7 @@ import ConfirmationModal from "../../components/confirmation";
 import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
 import YoutubeVideo from "../../components/youtube";
+import Loading from "../../components/loading";
 interface Props {
   page: string;
 }
@@ -154,6 +155,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
 
 const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
@@ -164,9 +166,13 @@ const PageAdmin = ({ page }: Props) => {
   // make the page top and took the containers from database
 
   useEffect(() => {
-    dispatch(getPageOptions());
-    dispatch(getPageTwoPictures(page));
-    window.scrollTo(0, 0);
+    const fetchData = async () => {
+      await dispatch(getPageOptions());
+      await dispatch(getPageTwoPictures(page));
+      setIsLoading(false);
+      window.scrollTo(0, 0);
+    };
+    fetchData();
   }, [dispatch, page]);
 
   // filter the container by language and then sort it
@@ -566,6 +572,7 @@ const PageAdmin = ({ page }: Props) => {
   };
 
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
+  if (isLoading) return <Loading />;
 
   return (
     <div className="flex flex-col h-full min-h-screen">
