@@ -18,6 +18,8 @@ function App() {
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const [isLoading, setIsLoading] = useState(true);
+  const [key, setKey] = useState(0); // Add the key state
+
   useEffect(() => {
     dispatch(getPageOptions());
     setIsLoading(false);
@@ -79,7 +81,9 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
-        <BrowserRouter>
+        <BrowserRouter key={key}>
+          {" "}
+          {/* Add the key prop here */}
           <Routes>{renderedComponent()}</Routes>
         </BrowserRouter>
       </PersistGate>
