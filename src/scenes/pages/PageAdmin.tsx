@@ -35,6 +35,7 @@ import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
 import YoutubeVideo from "../../components/youtube";
 import Loading from "../../components/loading";
+import TypingEffectContainer from "../../components/TypingEffect/TypingEffectContainer";
 interface Props {
   page: string;
 }
@@ -344,6 +345,28 @@ const PageAdmin = ({ page }: Props) => {
                 <NewsContainer2
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "TypingEffectContainer":
+            return (
+              <div key={index}>
+                <TypingEffectContainer
+                  img={twoPictureArray[0].img ? twoPictureArray[0].img : ""}
+                  paragraphs={
+                    twoPictureArray[0].paragraphs
+                      ? twoPictureArray[0].paragraphs
+                      : []
+                  }
                 />
                 <PageConfigurationButtons
                   index={index}

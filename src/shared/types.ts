@@ -292,6 +292,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
+  TypingEffectContainer: {
+    name: "TypingEffectContainer",
+    pictureContainerNumber: 1,
+    isMainHeader: false,
+    isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: true,
+  },
 };
 
 export interface ContainerType {

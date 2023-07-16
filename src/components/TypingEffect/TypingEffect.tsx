@@ -87,16 +87,28 @@ const TypingEffect = ({
   }, []);
 
   return (
-    <div className="h-full">
-      <span className="relative">
+    <div className="h-fit text-center ">
+      <span
+        contentEditable
+        suppressContentEditableWarning
+        className="relative text-3xl font-mono"
+      >
         {typingText}
         <span
-          className={`absolute h-5 w-1 bg-black ${
+          className={`absolute h-8 w-1 bg-white ${
             isCursorVisible ? "opacity-100" : "opacity-0"
           }`}
+          style={{ animation: "blink 1s step-end infinite" }}
         ></span>
       </span>
-      <h2>osman</h2>
+      <style>
+        {`
+          @keyframes blink {
+            0%, 100% { opacity: 0 }
+            50% { opacity: 1 }
+          }
+        `}
+      </style>
     </div>
   );
 };

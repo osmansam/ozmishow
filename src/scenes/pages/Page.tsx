@@ -30,6 +30,7 @@ import Slider from "../../components/slider/Slider";
 import Carousel from "../../components/carousel";
 import YoutubeVideo from "../../components/youtube";
 import TypingEffect from "../../components/TypingEffect/TypingEffect";
+import TypingEffectContainer from "../../components/TypingEffect/TypingEffectContainer";
 import Loading from "../../components/loading";
 interface Props {
   page: string;
@@ -232,7 +233,19 @@ const PageAdmin = ({ page }: Props) => {
                 />
               </div>
             );
-
+          case "TypingEffectContainer":
+            return (
+              <div key={index}>
+                <TypingEffectContainer
+                  img={twoPictureArray[0].img ? twoPictureArray[0].img : ""}
+                  paragraphs={
+                    twoPictureArray[0].paragraphs
+                      ? twoPictureArray[0].paragraphs
+                      : []
+                  }
+                />
+              </div>
+            );
           default:
             return null;
         }

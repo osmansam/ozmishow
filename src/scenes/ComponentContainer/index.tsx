@@ -147,6 +147,7 @@ const ComponentContainer = () => {
       case Components.NewsContainer.name:
       case Components.NewsContainer2.name:
       case Components.FullPageItem.name:
+      case Components.TypingEffectContainer.name:
         await dispatch(
           createTwoPicture({
             page,
