@@ -651,7 +651,7 @@ const PageAdmin = ({ page }: Props) => {
   if (isLoading) return <Loading />;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <div className="flex flex-col h-full min-h-screen">
         {(currentPage?.isNavbar || currentPage?.isSubpage) && (
           <div>

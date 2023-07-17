@@ -296,7 +296,7 @@ const Page = ({ page }: Props) => {
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
   if (isLoading) return <Loading />;
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <div className="flex flex-col h-full min-h-screen">
         {(currentPage?.isNavbar || currentPage?.isSubpage) && (
           <div>
