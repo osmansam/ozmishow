@@ -47,6 +47,7 @@ export interface PictureType {
   title?: string;
   page?: string;
   date?: String;
+  percentage?: number;
 }
 export interface UserType {
   name: string;
@@ -72,6 +73,11 @@ export interface IconExplainContainerType {
 export interface NewsContainerType {
   id: string;
   mainHeader?: string;
+}
+export interface ProgressBarContainerType {
+  id: string;
+  mainHeader?: string;
+  progressBarArray: Array<PictureType>;
 }
 export interface YoutubeType {
   embedId: string;
@@ -299,6 +305,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: true,
     isPictureContainerButton: false,
     isPictureContainerParagraph: true,
+  },
+  ProgressBar: {
+    name: "ProgressBar",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
   },
 };
 

@@ -1,42 +1,73 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
   getPageOptions,
   getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
-import PictureAtLeft from "../../components/pictureleft/PictureAtLeft";
-import PictureAtRight from "../../components/pictureRight/PictureAtRight";
-import IconExplainContainer from "../../components/IconExplain/IconExplainContainer";
-import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
 import { ContainerType } from "../../shared/types";
-import MaximContainer from "../../components/maxim";
-import FreqAsked from "../../components/freqAsked/FreqAsked";
-import BorderBoxContainer from "../../components/borderBox/BorderBoxContainer";
-import NewsContainer from "../../components/news/newsType1/NewsContainer";
-import NewsContainer2 from "../../components/news/newsType2/NewsContainer2";
-import ExplanationBar from "../../components/ExplanationBar";
-import PageBanner from "../../components/PageBanner/PageBanner";
-import WorkTeamBar from "../../components/WorkTeamBar/WorkTeamBar";
-import Navbar from "../../components/navbar/Navbar";
-import Sidebar from "../../components/sidebar";
-import Footer from "../../components/footer";
-import ContactFormEn from "../../components/contactForm/ContactFormEn";
-import ContactFormTr from "../../components/contactForm/ContactFormTr";
-import ContactContainer from "../../components/contactContainer/ContactContainer";
-import Map from "../../components/map";
-import FullPageItem from "../../components/fullPageItem";
-import Slider from "../../components/slider/Slider";
-import Carousel from "../../components/carousel";
-import YoutubeVideo from "../../components/youtube";
-import TypingEffect from "../../components/TypingEffect/TypingEffect";
-import TypingEffectContainer from "../../components/TypingEffect/TypingEffectContainer";
 import Loading from "../../components/loading";
+const PictureAtLeft = lazy(
+  () => import("../../components/pictureleft/PictureAtLeft")
+);
+const PictureAtRight = lazy(
+  () => import("../../components/pictureRight/PictureAtRight")
+);
+const IconExplainContainer = lazy(
+  () => import("../../components/IconExplain/IconExplainContainer")
+);
+const TwoPictureContainer = lazy(
+  () => import("../../components/twoPicture/TwoPictureContainer")
+);
+const MaximContainer = lazy(() => import("../../components/maxim"));
+const FreqAsked = lazy(() => import("../../components/freqAsked/FreqAsked"));
+const BorderBoxContainer = lazy(
+  () => import("../../components/borderBox/BorderBoxContainer")
+);
+const NewsContainer = lazy(
+  () => import("../../components/news/newsType1/NewsContainer")
+);
+const NewsContainer2 = lazy(
+  () => import("../../components/news/newsType2/NewsContainer2")
+);
+const ExplanationBar = lazy(() => import("../../components/ExplanationBar"));
+const PageBanner = lazy(() => import("../../components/PageBanner/PageBanner"));
+const WorkTeamBar = lazy(
+  () => import("../../components/WorkTeamBar/WorkTeamBar")
+);
+const Navbar = lazy(() => import("../../components/navbar/Navbar"));
+const Sidebar = lazy(() => import("../../components/sidebar"));
+const Footer = lazy(() => import("../../components/footer"));
+const ContactFormEn = lazy(
+  () => import("../../components/contactForm/ContactFormEn")
+);
+const ContactFormTr = lazy(
+  () => import("../../components/contactForm/ContactFormTr")
+);
+const ContactContainer = lazy(
+  () => import("../../components/contactContainer/ContactContainer")
+);
+const Map = lazy(() => import("../../components/map"));
+const FullPageItem = lazy(() => import("../../components/fullPageItem"));
+const Slider = lazy(() => import("../../components/slider/Slider"));
+const Carousel = lazy(() => import("../../components/carousel"));
+const YoutubeVideo = lazy(() => import("../../components/youtube"));
+const TypingEffect = lazy(
+  () => import("../../components/TypingEffect/TypingEffect")
+);
+const TypingEffectContainer = lazy(
+  () => import("../../components/TypingEffect/TypingEffectContainer")
+);
+const ProgressBarContainer = lazy(
+  () => import("../../components/ProgressBar/ProgressBarContainer")
+);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 interface Props {
   page: string;
 }
 
-const PageAdmin = ({ page }: Props) => {
+const Page = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -199,6 +230,16 @@ const PageAdmin = ({ page }: Props) => {
                 />
               </div>
             );
+          case "ProgressBar":
+            return (
+              <div key={index}>
+                <ProgressBarContainer
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader ? mainHeader : ""}
+                  progressBarArray={twoPictureArray}
+                />
+              </div>
+            );
           case "ContactFormEn":
             return (
               <div key={index}>
@@ -255,22 +296,26 @@ const PageAdmin = ({ page }: Props) => {
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
   if (isLoading) return <Loading />;
   return (
-    <div className="flex flex-col h-full min-h-screen">
-      {(currentPage?.isNavbar || currentPage?.isSubpage) && (
-        <div>
-          {isSidebarOpen && (
-            <Sidebar currentPage={currentPage ? currentPage.pageNameEN : ""} />
-          )}
-          <Navbar currentPage={currentPage} />
-        </div>
-      )}
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="flex flex-col h-full min-h-screen">
+        {(currentPage?.isNavbar || currentPage?.isSubpage) && (
+          <div>
+            {isSidebarOpen && (
+              <Sidebar
+                currentPage={currentPage ? currentPage.pageNameEN : ""}
+              />
+            )}
+            <Navbar currentPage={currentPage} />
+          </div>
+        )}
 
-      {renderComponents()}
-      {(currentPage?.isNavbar || currentPage?.isSubpage) && (
-        <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
-      )}
-    </div>
+        {renderComponents()}
+        {(currentPage?.isNavbar || currentPage?.isSubpage) && (
+          <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
+        )}
+      </div>
+    </Suspense>
   );
 };
 
-export default PageAdmin;
+export default Page;

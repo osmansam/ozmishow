@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState, Suspense } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
@@ -6,12 +6,12 @@ import { store, persistor } from "./store";
 import { RootState, useAppDispatch } from "./store";
 import { useSelector } from "react-redux";
 import TwoPicture from "./scenes/ComponentContainer";
-import Page from "./scenes/pages/Page";
-import PageAdmin from "./scenes/pages/PageAdmin";
 import Login from "./scenes/login";
 import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
 import SingleNew from "./components/news/newsType1/SingleNew";
 import Loading from "./components/loading";
+const Page = lazy(() => import("./scenes/pages/Page"));
+const PageAdmin = lazy(() => import("./scenes/pages/PageAdmin"));
 
 function App() {
   const dispatch = useAppDispatch();
@@ -82,9 +82,10 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
         <BrowserRouter key={key}>
-          {" "}
-          {/* Add the key prop here */}
-          <Routes>{renderedComponent()}</Routes>
+          {/* Add Suspense and fallback prop */}
+          <Suspense fallback={<Loading />}>
+            <Routes>{renderedComponent()}</Routes>
+          </Suspense>
         </BrowserRouter>
       </PersistGate>
     </Provider>

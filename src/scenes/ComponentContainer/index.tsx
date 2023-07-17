@@ -176,19 +176,8 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
+      case Components.ProgressBar.name:
       case Components.FrequentlyAskedQuestions.name:
-        await dispatch(
-          createTwoPicture({
-            page,
-            componentName,
-            mainHeader,
-            twoPictureArray,
-            position,
-            language,
-          })
-        );
-        resetInputs();
-        break;
       case Components.WorkTeamBar.name:
         await dispatch(
           createTwoPicture({
