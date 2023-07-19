@@ -18,19 +18,14 @@ function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPageOptions = async () => {
       await dispatch(getPageOptions());
-      setIsLoading(false);
     };
     fetchPageOptions();
   }, [dispatch]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <Provider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>

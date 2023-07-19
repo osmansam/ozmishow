@@ -190,7 +190,7 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
 
 const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading } = useSelector((state: RootState) => state.twoPicture);
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
@@ -204,7 +204,6 @@ const PageAdmin = ({ page }: Props) => {
     const fetchData = async () => {
       await dispatch(getPageOptions());
       await dispatch(getPageTwoPictures(page));
-      setIsLoading(false);
       window.scrollTo(0, 0);
     };
     fetchData();

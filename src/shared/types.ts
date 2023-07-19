@@ -79,6 +79,11 @@ export interface ProgressBarContainerType {
   mainHeader?: string;
   progressBarArray: Array<PictureType>;
 }
+export interface ResumeBoxContainerType {
+  id: string;
+  mainHeader?: string;
+  resumeBoxArray: Array<PictureType>;
+}
 export interface YoutubeType {
   embedId: string;
   header: string;

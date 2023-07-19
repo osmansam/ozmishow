@@ -42,7 +42,7 @@ interface Props {
 const Page = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
   );
@@ -50,7 +50,6 @@ const Page = ({ page }: Props) => {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getPageTwoPictures(page));
-      setIsLoading(false);
       window.scrollTo(0, 0);
     };
     fetchData();
@@ -65,9 +64,6 @@ const Page = ({ page }: Props) => {
       setNewContainer(sortedContainer);
     }
   }, [container, language]);
-  if (isLoading) {
-    return <Loading />;
-  }
 
   const renderComponents = () => {
     return newContainer?.map((item, index) => {
@@ -267,7 +263,6 @@ const Page = ({ page }: Props) => {
     });
   };
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
-  if (isLoading) return <Loading />;
   return (
     <div className="flex flex-col h-full min-h-screen">
       {(currentPage?.isNavbar || currentPage?.isSubpage) && (
