@@ -190,7 +190,6 @@ const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
 
 const PageAdmin = ({ page }: Props) => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useSelector((state: RootState) => state.twoPicture);
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
@@ -647,7 +646,6 @@ const PageAdmin = ({ page }: Props) => {
   };
 
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
-  if (isLoading) return <Loading />;
 
   return (
     <Suspense fallback={<Loading />}>
