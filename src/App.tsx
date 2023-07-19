@@ -6,10 +6,11 @@ import { store, persistor } from "./store";
 import { RootState, useAppDispatch } from "./store";
 import { useSelector } from "react-redux";
 import TwoPicture from "./scenes/ComponentContainer";
-import Login from "./scenes/login";
 import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
-import SingleNew from "./components/news/newsType1/SingleNew";
-import Loading from "./components/loading";
+import { PageOptionsType } from "./shared/types";
+const Login = lazy(() => import("./scenes/login"));
+const SingleNew = lazy(() => import("./components/news/newsType1/SingleNew"));
+const Loading = lazy(() => import("./components/loading"));
 const Page = lazy(() => import("./scenes/pages/Page"));
 const PageAdmin = lazy(() => import("./scenes/pages/PageAdmin"));
 
@@ -18,73 +19,54 @@ function App() {
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const [isLoading, setIsLoading] = useState(true);
-  const [key, setKey] = useState(0); // Add the key state
 
   useEffect(() => {
-    dispatch(getPageOptions());
-    setIsLoading(false);
+    const fetchPageOptions = async () => {
+      await dispatch(getPageOptions());
+      setIsLoading(false);
+    };
+    fetchPageOptions();
   }, [dispatch]);
-
-  const renderedComponent = () => {
-    if (isAdmin) {
-      return (
-        <>
-          <Route path="/admin" element={<TwoPicture />} />
-          <Route path="/" element={<PageAdmin page="CANSU" />} />
-          <Route path="/login" element={<Login />} />
-
-          {pageOptions?.map((page, index) => (
-            <React.Fragment key={index}>
-              <Route
-                key={`page-${page.pageNameEN.toLowerCase()}`}
-                path={`/${page.pageNameEN.toLowerCase()}`}
-                element={<PageAdmin page={page.pageNameEN} />}
-              />
-              <Route
-                key={`news-${page.pageNameEN.toLowerCase()}`}
-                path={`/news/:twoPictureId/:id/:type`}
-                element={<SingleNew />}
-              />
-            </React.Fragment>
-          ))}
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Route path="/admin" element={<TwoPicture />} />
-          <Route path="/" element={<Page page="CANSU" />} />
-          <Route path="/login" element={<Login />} />
-
-          {pageOptions?.map((page, index) => (
-            <React.Fragment key={index}>
-              <Route
-                key={index}
-                path={`/${page.pageNameEN.toLowerCase()}`}
-                element={<Page page={page.pageNameEN} />}
-              />
-              <Route
-                path={`/news/:twoPictureId/:id/:type`}
-                element={<SingleNew />}
-              />
-            </React.Fragment>
-          ))}
-        </>
-      );
-    }
-  };
 
   if (isLoading) {
     return <Loading />;
   }
-
   return (
     <Provider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
-        <BrowserRouter key={key}>
+        <BrowserRouter>
           {/* Add Suspense and fallback prop */}
           <Suspense fallback={<Loading />}>
-            <Routes>{renderedComponent()}</Routes>
+            <Routes>
+              {/* Common routes */}
+              <Route path="/admin" element={<TwoPicture />} />
+              <Route path="/login" element={<Login />} />
+
+              {/* Conditional routes based on isAdmin */}
+              {isAdmin ? (
+                <>
+                  <Route path="/" element={<PageAdmin page="CANSU" />} />
+                  {pageOptions?.map((page, index) => (
+                    <Route
+                      key={`page-${page.pageNameEN.toLowerCase()}`}
+                      path={`/${page.pageNameEN.toLowerCase()}`}
+                      element={<PageAdmin page={page.pageNameEN} />}
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  <Route path="/" element={<Page page="CANSU" />} />
+                  {pageOptions?.map((page, index) => (
+                    <Route
+                      key={index}
+                      path={`/${page.pageNameEN.toLowerCase()}`}
+                      element={<Page page={page.pageNameEN} />}
+                    />
+                  ))}
+                </>
+              )}
+            </Routes>
           </Suspense>
         </BrowserRouter>
       </PersistGate>
