@@ -200,6 +200,19 @@ export const updateProgressBar = createAsyncThunk(
     }
   }
 );
+//updateResumeBox
+export const updateResumeBox = createAsyncThunk(
+  "twoPicture/updateResumeBox",
+  async ({ container, id }: { container: PictureType[]; id: string }) => {
+    const url = `twoPicture/updateResumeBox/${id}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 // updateWorkTeamBar
 export const updateWorkTeamBar = createAsyncThunk(
   "twoPicture/updateWorkTeamBar",
