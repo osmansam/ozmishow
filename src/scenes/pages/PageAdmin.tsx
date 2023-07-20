@@ -69,6 +69,9 @@ const ProgressBarContainer = lazy(
 const TypingEffectContainer = lazy(
   () => import("../../components/TypingEffect/TypingEffectContainer")
 );
+const ResumeBox = lazy(
+  () => import("../../components/resumeBox/ResumeBoxContainer")
+);
 
 interface Props {
   page: string;
@@ -437,6 +440,25 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader ? mainHeader : ""}
                   progressBarArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "ResumeBox":
+            return (
+              <div key={index}>
+                <ResumeBox
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader ? mainHeader : ""}
+                  resumeBoxArray={twoPictureArray}
                 />
                 <PageConfigurationButtons
                   index={index}

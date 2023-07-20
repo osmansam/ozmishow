@@ -3,7 +3,7 @@ import { ResumeBoxContainerType } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
-  updateProgressBar,
+  updateResumeBox,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
 
@@ -23,8 +23,8 @@ const ResumeBoxContainer = ({
   const dispatch = useAppDispatch();
   //handle create new resumeBox item
   const handleCreate = async () => {
-    await dispatch(updateProgressBar({ container: twoPictureArray, id }));
-    // setIsAddProgressBar(false);
+    await dispatch(updateResumeBox({ container: twoPictureArray, id }));
+    setIsAddResumeBox(false);
     dispatch(resetTwoPictureArray());
     window.location.reload();
   };
@@ -37,16 +37,19 @@ const ResumeBoxContainer = ({
       >
         {mainHeader}
       </h1>
+      {/* resume Box container */}
       <div className="flex flex-wrap w-5/6 mx-auto pb-6">
         {resumeBoxArray.map((resumeBox, index) => {
-          const { header, percentage } = resumeBox;
+          const { header, year1, year2, paragraph, university } = resumeBox;
           return (
-            // <ResumeBox
-            //   key={index}
-            //   header={header ? header : ""}
-            //   percentage={percentage ? percentage : 0}
-            // ></ResumeBox>
-            <div>osman</div>
+            <ResumeBox
+              key={index}
+              header={header ? header : ""}
+              year1={year1 ? year1 : ""}
+              year2={year2 ? year2 : ""}
+              paragraph={paragraph ? paragraph : ""}
+              university={university ? university : ""}
+            ></ResumeBox>
           );
         })}
       </div>
@@ -61,11 +64,7 @@ const ResumeBoxContainer = ({
       )}
       {isAddResumeBox && isAdmin && (
         <div className="w-full mx-auto">
-          <AddResumeBox
-            isPictureContainerImage={false}
-            isPictureContainerButton={false}
-            isPictureContainerParagraph={false}
-          />
+          <AddResumeBox />
           <button
             className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
             onClick={handleCreate}

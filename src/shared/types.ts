@@ -48,6 +48,10 @@ export interface PictureType {
   page?: string;
   date?: String;
   percentage?: number;
+  year1?: string;
+  year2?: string;
+  university?: string;
+  paragraph?: string;
 }
 export interface UserType {
   name: string;
@@ -313,6 +317,14 @@ export const Components: { [key: string]: ComponentType } = {
   },
   ProgressBar: {
     name: "ProgressBar",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  ResumeBox: {
+    name: "ResumeBox",
     pictureContainerNumber: 0,
     isMainHeader: true,
     isPictureContainerImage: false,

@@ -177,6 +177,7 @@ const ComponentContainer = () => {
         resetInputs();
         break;
       case Components.ProgressBar.name:
+      case Components.ResumeBox.name:
       case Components.FrequentlyAskedQuestions.name:
       case Components.WorkTeamBar.name:
         await dispatch(
