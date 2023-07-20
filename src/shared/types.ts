@@ -52,6 +52,7 @@ export interface PictureType {
   year2?: string;
   university?: string;
   paragraph?: string;
+  icon?: string;
 }
 export interface UserType {
   name: string;
@@ -82,6 +83,11 @@ export interface ProgressBarContainerType {
   id: string;
   mainHeader?: string;
   progressBarArray: Array<PictureType>;
+}
+export interface ResumeIconContainerType {
+  id: string;
+  mainHeader?: string;
+  resumeIconArray: Array<PictureType>;
 }
 export interface ResumeBoxContainerType {
   id: string;
@@ -325,6 +331,14 @@ export const Components: { [key: string]: ComponentType } = {
   },
   ResumeBox: {
     name: "ResumeBox",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
+  ResumeIcon: {
+    name: "ResumeIcon",
     pictureContainerNumber: 0,
     isMainHeader: true,
     isPictureContainerImage: false,

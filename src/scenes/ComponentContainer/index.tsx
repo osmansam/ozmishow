@@ -179,6 +179,7 @@ const ComponentContainer = () => {
       case Components.ProgressBar.name:
       case Components.BackgroundHeader.name:
       case Components.ResumeBox.name:
+      case Components.ResumeIcon.name:
       case Components.FrequentlyAskedQuestions.name:
       case Components.WorkTeamBar.name:
         await dispatch(

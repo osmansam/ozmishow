@@ -68,6 +68,9 @@ const ResumeBox = lazy(
 const BackgroundHeader = lazy(
   () => import("../../components/BackgroundHeader/BackgroundHeader")
 );
+const ResumeIcon = lazy(
+  () => import("../../components/resumeIcon/ResumeIconContainer")
+);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 interface Props {
   page: string;
@@ -250,6 +253,16 @@ const Page = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader ? mainHeader : ""}
                   resumeBoxArray={twoPictureArray}
+                />
+              </div>
+            );
+          case "ResumeIcon":
+            return (
+              <div key={index}>
+                <ResumeIcon
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader ? mainHeader : ""}
+                  resumeIconArray={twoPictureArray}
                 />
               </div>
             );

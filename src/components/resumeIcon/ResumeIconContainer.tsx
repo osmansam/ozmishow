@@ -1,21 +1,24 @@
 import React, { lazy } from "react";
-import { ProgressBarContainerType } from "../../shared/types";
+import {
+  ProgressBarContainerType,
+  ResumeIconContainerType,
+} from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
   updateProgressBar,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
+import AddResumeIcon from "./AddResumeIcon";
 
-const ProgressBar = lazy(() => import("./ProgressBar"));
-const AddProgressBar = lazy(() => import("./AddProgressBar"));
+const ResumeIcon = lazy(() => import("./ResumeIcon"));
 
-const ProgressBarContainer = ({
+const ResumeIconContainer = ({
   id,
   mainHeader,
-  progressBarArray,
-}: ProgressBarContainerType) => {
-  const [isAddProgressBar, setIsAddProgressBar] = React.useState(false);
+  resumeIconArray,
+}: ResumeIconContainerType) => {
+  const [isAddResumeIcon, setIsAddResumeIcon] = React.useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -24,7 +27,7 @@ const ProgressBarContainer = ({
   //handle create new progressBar item
   const handleCreate = async () => {
     await dispatch(updateProgressBar({ container: twoPictureArray, id }));
-    setIsAddProgressBar(false);
+    setIsAddResumeIcon(false);
     dispatch(resetTwoPictureArray());
     window.location.reload();
   };
@@ -38,33 +41,30 @@ const ProgressBarContainer = ({
         {mainHeader}
       </h1>
       <div className="flex flex-wrap w-5/6 mx-auto pb-6">
-        {progressBarArray.map((progressBar, index) => {
-          const { header, percentage } = progressBar;
+        {resumeIconArray.map((resumeIcon, index) => {
+          const { header, icon, paragraph } = resumeIcon;
           return (
-            <ProgressBar
+            <ResumeIcon
               key={index}
               header={header ? header : ""}
-              percentage={percentage ? percentage : 0}
-            ></ProgressBar>
+              icon={icon ? icon : ""}
+              paragraph={paragraph ? paragraph : ""}
+            ></ResumeIcon>
           );
         })}
       </div>
       {/* Button to add new item */}
-      {!isAddProgressBar && isAdmin && (
+      {!isAddResumeIcon && isAdmin && (
         <button
           className="capitalize border-2 rounded-lg cursor-pointer w-fit p-2  mx-auto mt-4 pointer hover:bg-slate-300"
-          onClick={() => setIsAddProgressBar(true)}
+          onClick={() => setIsAddResumeIcon(true)}
         >
           Add New item
         </button>
       )}
-      {isAddProgressBar && isAdmin && (
+      {isAddResumeIcon && isAdmin && (
         <div className="w-full mx-auto">
-          <AddProgressBar
-            isPictureContainerImage={false}
-            isPictureContainerButton={false}
-            isPictureContainerParagraph={false}
-          />
+          <AddResumeIcon />
           <button
             className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
             onClick={handleCreate}
@@ -77,4 +77,4 @@ const ProgressBarContainer = ({
   );
 };
 
-export default ProgressBarContainer;
+export default ResumeIconContainer;

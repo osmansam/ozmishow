@@ -75,6 +75,9 @@ const ResumeBox = lazy(
 const BackgroundHeader = lazy(
   () => import("../../components/BackgroundHeader/BackgroundHeader")
 );
+const ResumeIcon = lazy(
+  () => import("../../components/resumeIcon/ResumeIconContainer")
+);
 
 interface Props {
   page: string;
@@ -500,6 +503,25 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
                   carouselArray={twoPictureArray}
+                />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "ResumeIcon":
+            return (
+              <div key={index}>
+                <ResumeIcon
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader ? mainHeader : ""}
+                  resumeIconArray={twoPictureArray}
                 />
                 <PageConfigurationButtons
                   index={index}

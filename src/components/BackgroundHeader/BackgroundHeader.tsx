@@ -17,7 +17,7 @@ const BackgroundHeader = ({ header, mainHeader }: Props) => {
         </div>
 
         <h2
-          className="absolute  font-[600] font-[Poppins,sans-serif] text-8xl md:text-8xl lg:text-[132px] leading-[54px] text-[#dee3e4] uppercase w-full text-center opacity-40"
+          className="absolute  font-[600] font-[Poppins,sans-serif] text-7xl md:text-8xl lg:text-[132px] leading-[54px] text-[#dee3e4] uppercase w-full text-center opacity-40 "
           style={{
             top: "50%",
             left: "50%",
