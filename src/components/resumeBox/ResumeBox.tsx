@@ -10,7 +10,7 @@ type Props = {
 
 const ResumeBox = ({ year1, year2, header, paragraph, university }: Props) => {
   return (
-    <div className="w-full md:w-1/2 px-4 py-4">
+    <div className="w-full md:w-1/2 md:px-4 py-4">
       <div className=" py-8 flex flex-col gap-4  border-2 rounded-lg px-2">
         {/* years */}
         <div className="rounded-3xl bg-[#fd7e14] text-center w-fit px-3">
