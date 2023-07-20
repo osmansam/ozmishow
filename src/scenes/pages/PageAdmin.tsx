@@ -72,6 +72,9 @@ const TypingEffectContainer = lazy(
 const ResumeBox = lazy(
   () => import("../../components/resumeBox/ResumeBoxContainer")
 );
+const BackgroundHeader = lazy(
+  () => import("../../components/BackgroundHeader/BackgroundHeader")
+);
 
 interface Props {
   page: string;
@@ -630,6 +633,26 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <ContactContainer />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "BackgroundHeader":
+            return (
+              <div key={index}>
+                <BackgroundHeader
+                  mainHeader={mainHeader ? mainHeader : ""}
+                  header={
+                    twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                  }
+                />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

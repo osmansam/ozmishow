@@ -331,6 +331,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
+  BackgroundHeader: {
+    name: "BackgroundHeader",
+    pictureContainerNumber: 1,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
 };
 
 export interface ContainerType {

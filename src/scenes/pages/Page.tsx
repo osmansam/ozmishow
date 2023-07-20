@@ -65,7 +65,9 @@ const TypingEffectContainer = lazy(
 const ResumeBox = lazy(
   () => import("../../components/resumeBox/ResumeBoxContainer")
 );
-
+const BackgroundHeader = lazy(
+  () => import("../../components/BackgroundHeader/BackgroundHeader")
+);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 interface Props {
   page: string;
@@ -285,6 +287,18 @@ const Page = ({ page }: Props) => {
                 />
               </div>
             );
+          case "BackgroundHeader":
+            return (
+              <div key={index}>
+                <BackgroundHeader
+                  mainHeader={mainHeader ? mainHeader : ""}
+                  header={
+                    twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                  }
+                />
+              </div>
+            );
+
           case "TypingEffectContainer":
             return (
               <div key={index}>
