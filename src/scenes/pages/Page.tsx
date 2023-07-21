@@ -1,7 +1,10 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { getPageTwoPictures } from "../../features/twoPicture/twoPictureSlice";
+import {
+  getPageTwoPictures,
+  getAllTwoPicture,
+} from "../../features/twoPicture/twoPictureSlice";
 import { ContainerType } from "../../shared/types";
 import Loading from "../../components/loading";
 import { renderComponents } from "./RenderComponents";
@@ -16,28 +19,36 @@ interface Props {
 const Page = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
-
+  const [firstContainer, setFirstContainer] = useState<ContainerType[]>([]);
   const { language, isSidebarOpen } = useSelector(
     (state: RootState) => state.context
   );
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const { container } = useSelector((state: RootState) => state.twoPicture);
+  // fetching all pages data
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(getPageTwoPictures(page));
+      await dispatch(getAllTwoPicture());
       window.scrollTo(0, 0);
     };
     fetchData();
-  }, [dispatch, page]);
-  const { container } = useSelector((state: RootState) => state.twoPicture);
+  }, [dispatch]);
+  // setting page spesific container
   useEffect(() => {
-    if (container.length > 0) {
-      let filteredContainer = container.filter((c) => c.language === language);
+    setFirstContainer(container.filter((c) => c.page === page));
+  }, [container, page]);
+  // setting page spesific container positions
+  useEffect(() => {
+    if (firstContainer.length > 0) {
+      let filteredContainer = firstContainer.filter(
+        (c) => c.language === language
+      );
       let sortedContainer = filteredContainer.sort(
         (a, b) => a.position - b.position
       );
       setNewContainer(sortedContainer);
     }
-  }, [container, language]);
+  }, [firstContainer, language]);
 
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
   return (
