@@ -20,6 +20,7 @@ interface Props {
 const SectionPage = ({ page }: Props) => {
   const dispatch = useAppDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
+  const [firstContainer, setFirstContainer] = useState<ContainerType[]>([]);
   const { language, isSidebarOpen, selectedSection } = useSelector(
     (state: RootState) => state.context
   );
@@ -28,22 +29,21 @@ const SectionPage = ({ page }: Props) => {
 
   // when page first load take the page component from the store
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getPageTwoPictures(page));
-      window.scrollTo(0, 0);
-    };
-    fetchData();
-  }, [dispatch, page]);
+    setFirstContainer(container.filter((c) => c.page === page));
+    console.log(firstContainer);
+  }, []);
 
   useEffect(() => {
-    if (container.length > 0) {
-      let filteredContainer = container.filter((c) => c.language === language);
+    if (firstContainer.length > 0) {
+      let filteredContainer = firstContainer.filter(
+        (c) => c.language === language
+      );
       let sortedContainer = filteredContainer.sort(
         (a, b) => a.position - b.position
       );
       setNewContainer(sortedContainer);
     }
-  }, [container, language]);
+  }, [firstContainer]);
 
   const sections = pageOptions.find(
     (item) => item.pageNameEN === page
