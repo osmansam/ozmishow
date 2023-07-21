@@ -42,22 +42,35 @@ function App() {
                 <>
                   <Route path="/" element={<PageAdmin page="CANSU" />} />
                   {pageOptions?.map((page, index) => (
-                    <Route
-                      key={`page-${page.pageNameEN.toLowerCase()}`}
-                      path={`/${page.pageNameEN.toLowerCase()}`}
-                      element={<PageAdmin page={page.pageNameEN} />}
-                    />
+                    <React.Fragment key={index}>
+                      <Route
+                        key={`page-${page.pageNameEN.toLowerCase()}`}
+                        path={`/${page.pageNameEN.toLowerCase()}`}
+                        element={<PageAdmin page={page.pageNameEN} />}
+                      />
+                      <Route
+                        key={`news-${page.pageNameEN.toLowerCase()}`}
+                        path={`/news/:twoPictureId/:id/:type`}
+                        element={<SingleNew />}
+                      />
+                    </React.Fragment>
                   ))}
                 </>
               ) : (
                 <>
                   <Route path="/" element={<Page page="CANSU" />} />
                   {pageOptions?.map((page, index) => (
-                    <Route
-                      key={index}
-                      path={`/${page.pageNameEN.toLowerCase()}`}
-                      element={<Page page={page.pageNameEN} />}
-                    />
+                    <React.Fragment key={index}>
+                      <Route
+                        key={index}
+                        path={`/${page.pageNameEN.toLowerCase()}`}
+                        element={<Page page={page.pageNameEN} />}
+                      />
+                      <Route
+                        path={`/news/:twoPictureId/:id/:type`}
+                        element={<SingleNew />}
+                      />
+                    </React.Fragment>
                   ))}
                 </>
               )}

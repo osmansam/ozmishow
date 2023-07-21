@@ -60,9 +60,6 @@ const FullPageItem = lazy(() => import("../../components/fullPageItem"));
 const Slider = lazy(() => import("../../components/slider/Slider"));
 const Carousel = lazy(() => import("../../components/carousel"));
 const YoutubeVideo = lazy(() => import("../../components/youtube"));
-const TypingEffect = lazy(
-  () => import("../../components/TypingEffect/TypingEffect")
-);
 const ProgressBarContainer = lazy(
   () => import("../../components/ProgressBar/ProgressBarContainer")
 );
