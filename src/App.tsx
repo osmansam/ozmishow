@@ -13,7 +13,7 @@ const SingleNew = lazy(() => import("./components/news/newsType1/SingleNew"));
 const Loading = lazy(() => import("./components/loading"));
 const Page = lazy(() => import("./scenes/pages/Page"));
 const PageAdmin = lazy(() => import("./scenes/pages/PageAdmin"));
-
+const SectionPage = lazy(() => import("./scenes/pages/SectionPage"));
 function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -61,11 +61,20 @@ function App() {
                   <Route path="/" element={<Page page="CANSU" />} />
                   {pageOptions?.map((page, index) => (
                     <React.Fragment key={index}>
-                      <Route
-                        key={index}
-                        path={`/${page.pageNameEN.toLowerCase()}`}
-                        element={<Page page={page.pageNameEN} />}
-                      />
+                      {page.isSectionPage && (
+                        <Route
+                          key={index}
+                          path={`/${page.pageNameEN.toLowerCase()}`}
+                          element={<SectionPage page={page.pageNameEN} />}
+                        />
+                      )}
+                      {!page.isSectionPage && (
+                        <Route
+                          key={index}
+                          path={`/${page.pageNameEN.toLowerCase()}`}
+                          element={<Page page={page.pageNameEN} />}
+                        />
+                      )}
                       <Route
                         path={`/news/:twoPictureId/:id/:type`}
                         element={<SingleNew />}

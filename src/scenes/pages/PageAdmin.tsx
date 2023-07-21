@@ -89,7 +89,9 @@ interface PageConfigurationButtonsProps {
   language: string;
 }
 // the buttons for the admin page configuration
-const PageConfigurationButtons: React.FC<PageConfigurationButtonsProps> = ({
+export const PageConfigurationButtons: React.FC<
+  PageConfigurationButtonsProps
+> = ({
   index,
   moveItem,
   disableMoveUp,
@@ -225,36 +227,35 @@ const PageAdmin = ({ page }: Props) => {
     }
   }, [container, language]);
   // render containers by the component name
+  const moveItem = (index: number, direction: "up" | "down") => {
+    if (direction === "up" && index > 0) {
+      setNewContainer((prev) => {
+        const updatedContainer = prev.map((c) => ({ ...c })); // create new objects
+        const temp = updatedContainer[index];
+        updatedContainer[index] = updatedContainer[index - 1];
+        updatedContainer[index - 1] = temp;
+        updatedContainer.forEach((c, i) => {
+          c.position = i;
+          dispatch(updateTwoPicture(c));
+        });
+
+        return updatedContainer;
+      });
+    } else if (direction === "down" && index < newContainer.length - 1) {
+      setNewContainer((prev) => {
+        const updatedContainer = prev.map((c) => ({ ...c })); // create new objects
+        const temp = updatedContainer[index];
+        updatedContainer[index] = updatedContainer[index + 1];
+        updatedContainer[index + 1] = temp;
+        updatedContainer.forEach((c, i) => {
+          c.position = i;
+          dispatch(updateTwoPicture(c));
+        });
+        return updatedContainer;
+      });
+    }
+  };
   const renderComponents = () => {
-    const moveItem = (index: number, direction: "up" | "down") => {
-      if (direction === "up" && index > 0) {
-        setNewContainer((prev) => {
-          const updatedContainer = prev.map((c) => ({ ...c })); // create new objects
-          const temp = updatedContainer[index];
-          updatedContainer[index] = updatedContainer[index - 1];
-          updatedContainer[index - 1] = temp;
-          updatedContainer.forEach((c, i) => {
-            c.position = i;
-            dispatch(updateTwoPicture(c));
-          });
-
-          return updatedContainer;
-        });
-      } else if (direction === "down" && index < newContainer.length - 1) {
-        setNewContainer((prev) => {
-          const updatedContainer = prev.map((c) => ({ ...c })); // create new objects
-          const temp = updatedContainer[index];
-          updatedContainer[index] = updatedContainer[index + 1];
-          updatedContainer[index + 1] = temp;
-          updatedContainer.forEach((c, i) => {
-            c.position = i;
-            dispatch(updateTwoPicture(c));
-          });
-          return updatedContainer;
-        });
-      }
-    };
-
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
         const { mainHeader, twoPictureArray, _id } = item;

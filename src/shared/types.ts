@@ -359,6 +359,7 @@ export interface ContainerType {
   _id?: string;
   page: string;
   mainHeader?: string;
+  selectedSection?: string;
   componentName: string;
   twoPictureArray: Array<PictureType>;
   position: number;
@@ -379,7 +380,8 @@ export interface PageOptionsType {
   isNavbar: boolean;
   _id: string;
   isSubpage: boolean;
-
+  sections: string[];
+  isSectionPage: boolean;
   hasSubpage: boolean;
   motherPageTR: string;
   motherPageEN: string;

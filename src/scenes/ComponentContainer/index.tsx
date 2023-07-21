@@ -21,6 +21,7 @@ const ComponentContainer = () => {
   const [isMainHeader, setIsMainHeader] = useState(false);
   const [position, setPosition] = useState(0);
   const [numContainers, setNumContainers] = useState(0);
+  const [selectedSection, setSelectedSection] = useState<string>("");
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -79,6 +80,7 @@ const ComponentContainer = () => {
     setPage("");
     setComponentName(undefined);
     setIsMainHeader(false);
+    setSelectedSection("");
     dispatch(resetTwoPictureArray());
     window.location.reload();
   };
@@ -151,6 +153,7 @@ const ComponentContainer = () => {
         await dispatch(
           createTwoPicture({
             page,
+            selectedSection,
             componentName,
             mainHeader,
             twoPictureArray,
@@ -167,6 +170,7 @@ const ComponentContainer = () => {
         await dispatch(
           createTwoPicture({
             page,
+            selectedSection,
             componentName,
             mainHeader,
             twoPictureArray,
@@ -185,6 +189,7 @@ const ComponentContainer = () => {
         await dispatch(
           createTwoPicture({
             page,
+            selectedSection,
             componentName,
             mainHeader,
             twoPictureArray,
@@ -212,6 +217,7 @@ const ComponentContainer = () => {
         await dispatch(
           createTwoPicture({
             page,
+            selectedSection,
             componentName,
             twoPictureArray,
             position,
@@ -261,6 +267,36 @@ const ComponentContainer = () => {
             ))}
           </select>
         </div>
+        {/* sections */}
+        {pageOptions.some(
+          (option) => option.pageNameEN === page && option.isSectionPage
+        ) && (
+          <div className="flex gap-5 w-full">
+            <label className="w-32" htmlFor="section">
+              Section:
+            </label>
+            <select
+              className="border-2 w-4/5 rounded-md"
+              name="section"
+              value={selectedSection}
+              onChange={(e) => setSelectedSection(e.target.value)}
+            >
+              <option value="">Select a section</option>
+
+              {pageOptions
+                .filter(
+                  (option) => option.pageNameEN === page && option.isSectionPage
+                )
+                .map((option) =>
+                  option.sections.map((section, index) => (
+                    <option key={index} value={section}>
+                      {section}
+                    </option>
+                  ))
+                )}
+            </select>
+          </div>
+        )}
         {/* Choose Language*/}
         <div className="flex gap-5 w-full">
           <label className="w-32" htmlFor="page">
@@ -300,6 +336,7 @@ const ComponentContainer = () => {
             <br />
           </div>
         </div>
+
         {/* MainHeader */}
         {isMainHeader && (
           <div className="flex gap-5 w-full ">

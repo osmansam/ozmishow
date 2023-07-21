@@ -7,7 +7,7 @@ type Props = {
 
 const BackgroundHeader = ({ header, mainHeader }: Props) => {
   return (
-    <div className=" flex items-center justify-center w-full pt-24 pb-10 ">
+    <div className=" flex items-center justify-center w-full pt-10 pb-10 ">
       <div className="w-full flex items-center justify-center relative py-10">
         <div className="z-10">
           <h1 className="font-semibold text-4xl font-[Poppins,sans-serif] text-gray-800 capitalize leading-[54px] ">

@@ -129,6 +129,8 @@ export const createPageOptions = createAsyncThunk(
       pageNameTR,
       pageNameEN,
       isNavbar,
+      sections,
+      isSectionPage,
       isSubpage,
       hasSubpage,
       motherPageTR,
@@ -137,7 +139,9 @@ export const createPageOptions = createAsyncThunk(
       pageNameTR: string;
       pageNameEN: string;
       isNavbar: boolean;
+      sections: string[];
       isSubpage: boolean;
+      isSectionPage: boolean;
       hasSubpage: boolean;
       motherPageTR: string;
       motherPageEN: string;
@@ -150,6 +154,9 @@ export const createPageOptions = createAsyncThunk(
         pageNameTR,
         pageNameEN,
         isNavbar,
+        sections,
+
+        isSectionPage,
         isSubpage,
         hasSubpage,
         motherPageTR,

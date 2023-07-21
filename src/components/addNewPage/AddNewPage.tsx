@@ -9,22 +9,46 @@ const AddNewPage = (props: Props) => {
   const [pageNameTR, setPageNameTR] = useState("");
   const [pageNameEN, setPageNameEN] = useState("");
   const [isNavbar, setIsNavbar] = useState(false);
+  const [isSectionPage, setIsSectionPage] = useState(false);
   const [isSubpage, setIsSubpage] = useState(false);
   const [hasSubpage, setHasSubpage] = useState(false);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+  const [showSectionForm, setShowSectionForm] = useState(false);
   const [motherPageTR, setMotherPageTR] = useState("");
   const [motherPageEN, setMotherPageEN] = useState("");
-  //reset inputs after submit
+  const [sectionQuantity, setSectionQuantity] = useState(1);
+  const [sections, setSections] = useState<string[]>([]);
+
+  const handleSectionQuantitySubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newSections: string[] = [];
+    for (let i = 0; i < sectionQuantity; i++) {
+      newSections.push("");
+    }
+    setSections(newSections);
+    setShowSectionForm(false); // Close the section form after submitting sections
+  };
+
+  const handleSectionNameChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const newSections = [...sections];
+    newSections[index] = e.target.value;
+    setSections(newSections);
+  };
+
   const resetInputs = () => {
     setPageNameEN("");
     setPageNameTR("");
     setIsNavbar(false);
     setIsSubpage(false);
+    setIsSectionPage(false);
     setHasSubpage(false);
     setMotherPageTR("");
     setMotherPageEN("");
   };
-  //handle the submit page
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPageNameTR(pageNameTR[0].toUpperCase() + pageNameTR.slice(1));
@@ -38,7 +62,9 @@ const AddNewPage = (props: Props) => {
         pageNameEN,
         pageNameTR,
         isNavbar,
+        sections,
         isSubpage,
+        isSectionPage,
         hasSubpage,
         motherPageTR,
         motherPageEN,
@@ -107,9 +133,39 @@ const AddNewPage = (props: Props) => {
             <label htmlFor="navbar-no">Hayır</label>
           </div>
         </div>
+        {/* isSection option */}
+        <div className="flex gap-5 w-full">
+          <label className="w-32" htmlFor="isSectionPage">
+            isSectionPage
+          </label>
+          <div>
+            <input
+              className="border-2 w-4/5 rounded-md capitalize"
+              type="radio"
+              id="isSectionPage-yes"
+              name="isSectionPage"
+              value="true"
+              checked={isSectionPage === true}
+              onChange={() => setIsSectionPage(true)}
+            />
+            <label htmlFor="isSectionPage-yes">Evet</label>
+          </div>
+          <div>
+            <input
+              className="border-2 w-4/5 rounded-md capitalize"
+              type="radio"
+              id="isSectionPage-no"
+              name="isSectionPage"
+              value="false"
+              checked={isSectionPage === false}
+              onChange={() => setIsSectionPage(false)}
+            />
+            <label htmlFor="isSectionPage-no">Hayır</label>
+          </div>
+        </div>
         {/* isSubpage option */}
         <div className="flex gap-5 w-full">
-          <label className="w-32" htmlFor="isNavbar">
+          <label className="w-32" htmlFor="isSubpage">
             SubPage
           </label>
           <div>
@@ -139,7 +195,7 @@ const AddNewPage = (props: Props) => {
         </div>
         {/* hassubpage option */}
         <div className="flex gap-5 w-full">
-          <label className="w-32" htmlFor="isNavbar">
+          <label className="w-32" htmlFor="hasSubpage">
             HasSubpage
           </label>
           <div>
@@ -212,8 +268,55 @@ const AddNewPage = (props: Props) => {
             </select>
           </div>
         )}
-
-        {/* submit */}
+        {isSectionPage && (
+          <div>
+            <button
+              type="button"
+              onClick={() => setShowSectionForm(true)}
+              className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
+            >
+              Add Sections
+            </button>
+          </div>
+        )}
+        {showSectionForm && (
+          <div>
+            <div className="flex gap-5 w-full">
+              <label className="w-32" htmlFor="sectionQuantity">
+                Section Quantity
+              </label>
+              <input
+                className="border-2 w-4/5 rounded-md"
+                type="number"
+                name="sectionQuantity"
+                value={sectionQuantity}
+                onChange={(e) => setSectionQuantity(parseInt(e.target.value))}
+              />
+            </div>
+            <div className="flex flex-col gap-5 w-full">
+              {[...Array(sectionQuantity)].map((_, index) => (
+                <div key={index} className="flex gap-5 w-full">
+                  <label className="w-32" htmlFor={`sectionName${index}`}>
+                    Section Name {index + 1}:
+                  </label>
+                  <input
+                    className="border-2 w-4/5 rounded-md capitalize"
+                    type="text"
+                    name={`sectionName${index}`}
+                    value={sections[index] || ""}
+                    onChange={(e) => handleSectionNameChange(e, index)}
+                  />
+                </div>
+              ))}
+              <button
+                type="submit"
+                className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
+              >
+                Submit Sections
+              </button>
+            </div>
+          </div>
+        )}
         <button
           type="submit"
           className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
