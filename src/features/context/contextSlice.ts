@@ -5,6 +5,7 @@ interface ContextSliceType {
   isTopOfPage: boolean;
   isAdmin: boolean;
   isSidebarOpen?: boolean;
+  selectedSection?: string;
   flexBetween: string;
   language: string;
 }
@@ -15,6 +16,7 @@ const initialState: ContextSliceType = {
   flexBetween: "flex items-center justify-between",
   isSidebarOpen: false,
   language: LanguageOptions.EN,
+  selectedSection: "Home",
 };
 const contextSlice = createSlice({
   name: "context",
@@ -32,9 +34,17 @@ const contextSlice = createSlice({
     setIsSidebarOpen: (state, action) => {
       state.isSidebarOpen = action.payload;
     },
+    setSelectedSection: (state, action) => {
+      state.selectedSection = action.payload;
+    },
   },
 });
 
-export const { setIsTopOfPage, setIsAdmin, setLanguage, setIsSidebarOpen } =
-  contextSlice.actions;
+export const {
+  setIsTopOfPage,
+  setIsAdmin,
+  setLanguage,
+  setIsSidebarOpen,
+  setSelectedSection,
+} = contextSlice.actions;
 export default contextSlice.reducer;
