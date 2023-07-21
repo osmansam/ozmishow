@@ -79,6 +79,20 @@ export const createTwoPicture = createAsyncThunk(
     }
   }
 );
+//get all TwoPicture
+export const getAllTwoPicture = createAsyncThunk(
+  "twoPicture/getAllTwoPicture",
+  async (thunkAPI) => {
+    const url = "twoPicture/";
+    try {
+      const response = await axios.get(`${baseURL}/${url}`);
+      return extractHeaders(response);
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 //update component container
 export const updateTwoPicture = createAsyncThunk(
   "twoPicture/updateTwoPicture",
@@ -418,6 +432,17 @@ const twoPictureSlice = createSlice({
       })
 
       .addCase(getPageTwoPictures.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(getAllTwoPicture.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllTwoPicture.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.container = action.payload.data.data;
+      })
+
+      .addCase(getAllTwoPicture.rejected, (state, action) => {
         state.isLoading = false;
       })
       .addCase(updateTwoPicture.pending, (state) => {
