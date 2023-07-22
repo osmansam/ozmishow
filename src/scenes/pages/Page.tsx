@@ -25,7 +25,7 @@ const Page = ({ page }: Props) => {
   );
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const { container } = useSelector((state: RootState) => state.twoPicture);
-  // fetching all pages data
+
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getAllTwoPicture());
@@ -33,11 +33,9 @@ const Page = ({ page }: Props) => {
     };
     fetchData();
   }, [dispatch]);
-  // setting page spesific container
   useEffect(() => {
     setFirstContainer(container.filter((c) => c.page === page));
   }, [container, page]);
-  // setting page spesific container positions
   useEffect(() => {
     if (firstContainer.length > 0) {
       let filteredContainer = firstContainer.filter(
