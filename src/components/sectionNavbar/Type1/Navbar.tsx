@@ -43,7 +43,7 @@ const Navbar = ({ links }: Props) => {
             <h1>osman erdogan</h1>
             {/* RIGHT SIDE */}
 
-            <div className={`${flexBetween} w-full hidden md:flex `}>
+            <div className={`${flexBetween}  hidden md:flex `}>
               <div className={`${flexBetween} gap-8 text-sm`}>
                 {links.map((link) => (
                   <Link page={link} />
