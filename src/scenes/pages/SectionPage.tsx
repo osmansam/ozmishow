@@ -62,12 +62,8 @@ const SectionPage = ({ page }: Props) => {
   }, []);
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar
-        links={sections ? sections : [""]}
-        img="https://media.licdn.com/dms/image/D4E03AQFMtHrbjJivmQ/profile-displayphoto-shrink_100_100/0/1681161894112?e=1694649600&v=beta&t=UUnS386vMxx596HY-lYS_Zf8aXxwIEJLwHj3j8yEffY"
-        name="osman erdogan"
-      />
-      <div style={{ flex: 1, marginLeft: "200px" }}>
+      <Navbar links={sections ? sections : []} />
+      <div className=" mx-auto">
         {sections?.map((section, index) => {
           return (
             <section
