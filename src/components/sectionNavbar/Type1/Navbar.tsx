@@ -30,7 +30,9 @@ const Navbar = ({ links }: Props) => {
   });
 
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
-
+  const handleOverlayClick = () => {
+    setIsMenuToggled(false);
+  };
   return (
     <nav>
       <div
@@ -69,21 +71,30 @@ const Navbar = ({ links }: Props) => {
 
       {/* MOBILE MENU MODAL */}
       {isMenuToggled && (
-        <div className="fixed right-0 bottom-0 z-40 h-full w-[200px] text-center bg-transparent  drop-shadow-xl md:hidden">
-          {/* CLOSE ICON */}
-          <div className="flex justify-end px-12 py-6">
-            <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
-              <XMarkIcon className="h-6 w-6 text-gray-400" />
-            </button>
-          </div>
+        <>
+          {/* Overlay to close the mobile menu */}
+          <div
+            className="fixed inset-0 bg-black opacity-50 z-20"
+            onClick={handleOverlayClick}
+          ></div>
 
-          {/* MENU ITEMS */}
-          <div className=" flex flex-col h-full gap-10 text-2xl py-8 bg-white overflow-y-auto no-scrollbar">
-            {links.map((link) => (
-              <Link page={link} />
-            ))}
+          {/* Mobile menu */}
+          <div className="fixed right-0 bottom-0 z-40 h-full w-[200px] text-center bg-transparent drop-shadow-xl md:hidden">
+            {/* CLOSE ICON */}
+            <div className="flex justify-end px-12 py-6">
+              <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
+                <XMarkIcon className="h-6 w-6 text-gray-400" />
+              </button>
+            </div>
+
+            {/* MENU ITEMS */}
+            <div className=" flex flex-col h-full gap-10 text-2xl py-8 bg-white overflow-y-auto no-scrollbar">
+              {links.map((link) => (
+                <Link page={link} />
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );
