@@ -12,6 +12,7 @@ import {
   updateContainer,
   resetTwoPictureArray,
 } from "../../../features/twoPicture/twoPictureSlice";
+import Loading from "../../loading";
 
 const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   const dispatch = useAppDispatch();
@@ -19,12 +20,13 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     (state: RootState) => state.twoPicture
   );
   const { language } = useSelector((state: RootState) => state.context);
+  const [initialRender, setInitialRender] = useState(true);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [limit, setLimit] = useState(4);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState<PictureType[]>();
   const [isPagination, setIsPagination] = useState(true);
   //getNews function
@@ -37,11 +39,17 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     setTotalItems(response.data.totalItems);
     setNews(response.data.news);
   };
-  //set the news when the page first rendered
   useEffect(() => {
+    // Check if it's the initial render, if yes, set it to false
+    if (initialRender) {
+      setInitialRender(false);
+    }
+
+    // The effect will run on currentPage, limit, or id changes or initial render
     setIsPagination(true);
     getNews();
-  }, [currentPage, limit, id]);
+    setIsLoading(false);
+  }, [currentPage, limit, id, initialRender]);
 
   //handle search
 
@@ -49,6 +57,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     if (search === "") {
       setIsPagination(true);
       getNews();
+      setIsLoading(false);
     } else {
       const response = await axios.get(
         `https://ozmishow-back.onrender.com/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
@@ -77,6 +86,9 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     }
   };
   const [isAddNewItem, setIsAddNewItem] = useState(false);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div className="w-full flex flex-col gap-4 mx-auto">
       <div className="w-5/6 mx-auto flex justify-end  px-4 pt-2 ">
