@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import { setSelectedSection } from "../../features/context/contextSlice";
+import {
+  setIsTopOfPage,
+  setSelectedSection,
+} from "../../features/context/contextSlice";
 import { ContainerType } from "../../shared/types";
 import { motion } from "framer-motion";
 import { renderComponents } from "./RenderComponents";
 import Navbar from "../../components/sectionNavbar/Type1/Navbar";
+
 interface Props {
   page: string;
 }
@@ -76,10 +80,20 @@ const SectionPage = ({ page }: Props) => {
     (item) => item.pageNameEN === page
   )?.sections;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        dispatch(setIsTopOfPage(true));
+        dispatch(setSelectedSection("Home"));
+      }
+      if (window.scrollY !== 0) dispatch(setIsTopOfPage(false));
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div>
-      <Navbar links={sections ? sections : []} />{" "}
-      {/* Add the Navbar with links */}
+      <Navbar links={sections ? sections : []} />
       <div className="mx-auto">
         {sections?.map((section, index) => {
           return (
