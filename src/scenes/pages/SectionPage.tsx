@@ -1,37 +1,28 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { getPageTwoPictures } from "../../features/twoPicture/twoPictureSlice";
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
+import { setSelectedSection } from "../../features/context/contextSlice";
 import { ContainerType } from "../../shared/types";
-import Loading from "../../components/loading";
 import { motion } from "framer-motion";
 import { renderComponents } from "./RenderComponents";
-import {
-  setSelectedSection,
-  setIsTopOfPage,
-} from "../../features/context/contextSlice";
-import Sidebar from "../../components/sectionNavbar/Type1/Sidebar";
 import Navbar from "../../components/sectionNavbar/Type1/Navbar";
-
 interface Props {
   page: string;
 }
 
 const SectionPage = ({ page }: Props) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const [firstContainer, setFirstContainer] = useState<ContainerType[]>([]);
-  const { language, isSidebarOpen, selectedSection } = useSelector(
-    (state: RootState) => state.context
-  );
+  const { language } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const { container } = useSelector((state: RootState) => state.twoPicture);
 
-  // when page first load take the page component from the store
+  const sectionRefs = useRef<HTMLElement[]>([]);
+
   useEffect(() => {
     setFirstContainer(container.filter((c) => c.page === page));
-    console.log(firstContainer);
-  }, []);
+  }, [container, page]);
 
   useEffect(() => {
     if (firstContainer.length > 0) {
@@ -43,40 +34,66 @@ const SectionPage = ({ page }: Props) => {
       );
       setNewContainer(sortedContainer);
     }
-  }, [firstContainer]);
+  }, [firstContainer, language]);
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null, // use the viewport as the root
+      rootMargin: "0px",
+      threshold: 0.5, // when 50% of the section is visible
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute("id");
+          if (sectionId) {
+            dispatch(setSelectedSection(sectionId));
+          }
+        }
+      });
+    };
+
+    // Create an Intersection Observer instance
+    const observer = new IntersectionObserver(
+      handleIntersection,
+      observerOptions
+    );
+
+    // Observe each section element
+    sectionRefs.current.forEach((sectionRef) => {
+      observer.observe(sectionRef);
+    });
+
+    // Clean up the observer when component unmounts
+    return () => {
+      observer.disconnect();
+    };
+  }, [pageOptions, dispatch]);
+
+  // Assuming sections is the array of section names
   const sections = pageOptions.find(
     (item) => item.pageNameEN === page
   )?.sections;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY === 0) {
-        dispatch(setIsTopOfPage(true));
-        dispatch(setSelectedSection("Home"));
-      }
-      if (window.scrollY !== 0) dispatch(setIsTopOfPage(false));
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
   return (
-    <div style={{ display: "flex" }}>
-      <Navbar links={sections ? sections : []} />
-      <div className=" mx-auto">
+    <div>
+      <Navbar links={sections ? sections : []} />{" "}
+      {/* Add the Navbar with links */}
+      <div className="mx-auto">
         {sections?.map((section, index) => {
           return (
             <section
               key={index}
               id={section}
-              style={{ paddingTop: "60px" }} // Add padding to account for the fixed sidebar height
+              style={{ paddingTop: "60px" }}
+              ref={(el) => {
+                if (el && !sectionRefs.current.includes(el)) {
+                  sectionRefs.current.push(el);
+                }
+              }}
             >
-              <motion.div
-                className="min-h-screen"
-                onViewportEnter={() => {
-                  dispatch(setSelectedSection(section));
-                }}
-              >
+              <motion.div className="min-h-screen">
                 {renderComponents(
                   newContainer.filter((c) => c.selectedSection === section)
                 )}
