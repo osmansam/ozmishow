@@ -18,7 +18,7 @@ function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
-
+  // fetching page options
   useEffect(() => {
     const fetchPageOptions = async () => {
       await dispatch(getPageOptions());
