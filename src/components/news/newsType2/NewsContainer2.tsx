@@ -20,7 +20,6 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     (state: RootState) => state.twoPicture
   );
   const { language } = useSelector((state: RootState) => state.context);
-  const [initialRender, setInitialRender] = useState(true);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -40,16 +39,11 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     setNews(response.data.news);
   };
   useEffect(() => {
-    // Check if it's the initial render, if yes, set it to false
-    if (initialRender) {
-      setInitialRender(false);
-    }
-
     // The effect will run on currentPage, limit, or id changes or initial render
     setIsPagination(true);
     getNews();
     setIsLoading(false);
-  }, [currentPage, limit, id, initialRender]);
+  }, [currentPage, limit, id]);
 
   //handle search
 
