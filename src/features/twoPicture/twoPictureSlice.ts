@@ -11,10 +11,9 @@ import {
   PageOptionsType,
   MapType,
 } from "../../shared/types";
-import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import axios from "axios";
-import { logDOM } from "@testing-library/react";
+import { REHYDRATE } from "redux-persist";
 
 interface ComponentState {
   isLoading: boolean;
@@ -149,6 +148,7 @@ export const createPageOptions = createAsyncThunk(
       hasSubpage,
       motherPageTR,
       motherPageEN,
+      sectionPageType,
     }: {
       pageNameTR: string;
       pageNameEN: string;
@@ -159,6 +159,7 @@ export const createPageOptions = createAsyncThunk(
       hasSubpage: boolean;
       motherPageTR: string;
       motherPageEN: string;
+      sectionPageType: string;
     },
     thunkAPI
   ) => {
@@ -169,12 +170,12 @@ export const createPageOptions = createAsyncThunk(
         pageNameEN,
         isNavbar,
         sections,
-
         isSectionPage,
         isSubpage,
         hasSubpage,
         motherPageTR,
         motherPageEN,
+        sectionPageType,
       });
       return extractHeaders(response);
     } catch (error) {
@@ -412,98 +413,104 @@ const twoPictureSlice = createSlice({
       state.twoPictureArray = [];
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(createTwoPicture.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(createTwoPicture.fulfilled, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(createTwoPicture.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(getPageTwoPictures.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getPageTwoPictures.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.container = action.payload.data.data;
-      })
 
-      .addCase(getPageTwoPictures.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(getAllTwoPicture.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getAllTwoPicture.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.container = action.payload.data.data;
-      })
+  extraReducers: {
+    [REHYDRATE]: (state, action) => {
+      state.container = action.payload?.twoPicture.container;
+      state.pageOptions = action.payload?.twoPicture.pageOptions;
+      state.logo = action.payload?.twoPicture.logo;
+      state.footer = action.payload?.twoPicture.footer;
+      state.map = action.payload?.twoPicture.map;
+    },
 
-      .addCase(getAllTwoPicture.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(updateTwoPicture.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(updateTwoPicture.fulfilled, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(updateTwoPicture.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(getPageOptions.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getPageOptions.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.pageOptions = action.payload.data.pageOptions;
-      })
-      .addCase(getPageOptions.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(createPageOptions.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(createPageOptions.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.pageOptions = [...state.pageOptions, action.payload.data];
-      })
-      .addCase(createPageOptions.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(getNavbar.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getNavbar.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.logo = action.payload.navbar[0].logo;
-      })
-      .addCase(getNavbar.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(getFooter.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getFooter.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.footer = action.payload.footer[0];
-      })
-      .addCase(getFooter.rejected, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(getMap.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getMap.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.map = action.payload.map[0];
-      })
-      .addCase(getMap.rejected, (state, action) => {
-        state.isLoading = false;
-      });
+    [createTwoPicture.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [createTwoPicture.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [createTwoPicture.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [getPageTwoPictures.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getPageTwoPictures.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.container = action.payload.data.data;
+    },
+    [getPageTwoPictures.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [getAllTwoPicture.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllTwoPicture.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.container = action.payload.data.data;
+    },
+    [getAllTwoPicture.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [updateTwoPicture.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [updateTwoPicture.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [updateTwoPicture.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [getPageOptions.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getPageOptions.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.pageOptions = action.payload.data.pageOptions;
+    },
+    [getPageOptions.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [createPageOptions.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [createPageOptions.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.pageOptions = [...state.pageOptions, action.payload.data];
+    },
+    [createPageOptions.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [getNavbar.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getNavbar.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.logo = action.payload.navbar[0].logo;
+    },
+    [getNavbar.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [getFooter.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getFooter.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.footer = action.payload.footer[0];
+    },
+    [getFooter.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
+    [getMap.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getMap.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.map = action.payload.map[0];
+    },
+    [getMap.rejected.type]: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 

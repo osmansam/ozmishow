@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { createPageOptions } from "../../features/twoPicture/twoPictureSlice";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import { SectionPageTypes } from "../../shared/types";
+
 type Props = {};
 
 const AddNewPage = (props: Props) => {
@@ -18,6 +20,7 @@ const AddNewPage = (props: Props) => {
   const [motherPageEN, setMotherPageEN] = useState("");
   const [sectionQuantity, setSectionQuantity] = useState(1);
   const [sections, setSections] = useState<string[]>([]);
+  const [sectionPageType, setSectionPageType] = useState("");
 
   const handleSectionQuantitySubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +50,7 @@ const AddNewPage = (props: Props) => {
     setHasSubpage(false);
     setMotherPageTR("");
     setMotherPageEN("");
+    setSectionPageType("");
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,6 +72,7 @@ const AddNewPage = (props: Props) => {
         hasSubpage,
         motherPageTR,
         motherPageEN,
+        sectionPageType,
       })
     );
     resetInputs();
@@ -268,6 +273,29 @@ const AddNewPage = (props: Props) => {
             </select>
           </div>
         )}
+        {isSectionPage && (
+          <div className="flex gap-5 w-full">
+            <label className="w-32" htmlFor="page">
+              Type Sec
+            </label>
+            <select
+              className="border-2 w-4/5 rounded-md"
+              name="sectionType"
+              value={sectionPageType}
+              onChange={(e) => setSectionPageType(e.target.value)}
+            >
+              <option value="">Seciniz</option>
+              {/* i need to map the section page types  please do it for me */}
+
+              {Object.keys(SectionPageTypes).map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        {/* add sections */}
         {isSectionPage && (
           <div>
             <button

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import { RootState, useAppDispatch } from "../../../store";
 type Props = {};
 
 const Deneme = (props: Props) => {

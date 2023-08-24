@@ -374,6 +374,10 @@ export const LanguageOptions = {
   EN: "EN",
   TR: "TR",
 };
+export const SectionPageTypes = {
+  Type1: "Type1",
+  Type2: "Type2",
+};
 export interface PageOptionsType {
   pageNameTR: string;
   pageNameEN: string;
@@ -385,4 +389,5 @@ export interface PageOptionsType {
   hasSubpage: boolean;
   motherPageTR: string;
   motherPageEN: string;
+  sectionPageType: string;
 }

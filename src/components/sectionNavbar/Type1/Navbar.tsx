@@ -16,10 +16,8 @@ interface Props {
 }
 const Navbar = ({ links }: Props) => {
   const dispatch = useAppDispatch();
-  const { flexBetween, isTopOfPage } = useSelector(
-    (state: RootState) => state.context
-  );
-
+  const { isTopOfPage } = useSelector((state: RootState) => state.context);
+  const flexBetween = "flex justify-between items-center";
   const navbarBackground = classNames({
     "bg-white text-black": !isTopOfPage,
     "bg-black transition-colors duration-500 ease-in-out": isTopOfPage,
@@ -47,8 +45,8 @@ const Navbar = ({ links }: Props) => {
 
             <div className={`${flexBetween}  hidden md:flex `}>
               <div className={`${flexBetween} gap-8 text-sm`}>
-                {links.map((link) => (
-                  <Link page={link} />
+                {links.map((link, index) => (
+                  <Link key={index} page={link} />
                 ))}
               </div>
             </div>
@@ -89,8 +87,8 @@ const Navbar = ({ links }: Props) => {
 
             {/* MENU ITEMS */}
             <div className=" flex flex-col h-full gap-10 text-2xl py-8 bg-white overflow-y-auto no-scrollbar">
-              {links.map((link) => (
-                <Link page={link} />
+              {links.map((link, index) => (
+                <Link key={index} page={link} />
               ))}
             </div>
           </div>

@@ -14,7 +14,7 @@ interface Props {
   page: string;
 }
 
-const SectionPage = ({ page }: Props) => {
+const SectionPageType1 = ({ page }: Props) => {
   const dispatch = useDispatch();
   const [newContainer, setNewContainer] = useState<ContainerType[]>([]);
   const [firstContainer, setFirstContainer] = useState<ContainerType[]>([]);
@@ -120,4 +120,4 @@ const SectionPage = ({ page }: Props) => {
   );
 };
 
-export default SectionPage;
+export default SectionPageType1;

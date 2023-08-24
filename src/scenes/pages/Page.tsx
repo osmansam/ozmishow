@@ -26,7 +26,9 @@ const Page = ({ page }: Props) => {
   );
   const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const { container } = useSelector((state: RootState) => state.twoPicture);
+  const currentPage = pageOptions.find((item) => item.pageNameEN === page);
 
+  // first get all the two pictures from the database
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getAllTwoPicture());
@@ -37,6 +39,7 @@ const Page = ({ page }: Props) => {
   useEffect(() => {
     setFirstContainer(container.filter((c) => c.page === page));
   }, [container, page]);
+  // then get the two pictures for the current page
   useEffect(() => {
     if (firstContainer.length > 0) {
       let filteredContainer = firstContainer.filter(
@@ -49,7 +52,6 @@ const Page = ({ page }: Props) => {
     }
   }, [firstContainer, language]);
 
-  const currentPage = pageOptions.find((item) => item.pageNameEN === page);
   return (
     <Suspense fallback={<Loading />}>
       <div className="flex flex-col h-full min-h-screen">

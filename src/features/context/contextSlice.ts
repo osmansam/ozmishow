@@ -1,6 +1,6 @@
 import { LanguageOptions } from "./../../shared/types";
 import { createSlice } from "@reduxjs/toolkit";
-
+import { REHYDRATE } from "redux-persist";
 interface ContextSliceType {
   isTopOfPage: boolean;
   isAdmin: boolean;
@@ -36,6 +36,20 @@ const contextSlice = createSlice({
     },
     setSelectedSection: (state, action) => {
       state.selectedSection = action.payload;
+    },
+  },
+  extraReducers: {
+    [REHYDRATE]: (state, action) => {
+      const rehydratedContext = action.payload?.context;
+
+      if (rehydratedContext) {
+        state.isTopOfPage = rehydratedContext.isTopOfPage;
+        state.isAdmin = rehydratedContext.isAdmin;
+        state.language = rehydratedContext.language;
+        state.isSidebarOpen = rehydratedContext.isSidebarOpen;
+        state.flexBetween = rehydratedContext.flexBetween; // Corrected line
+        state.selectedSection = rehydratedContext.selectedSection;
+      }
     },
   },
 });

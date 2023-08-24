@@ -13,7 +13,7 @@ const SingleNew = lazy(() => import("./components/news/newsType1/SingleNew"));
 const Loading = lazy(() => import("./components/loading"));
 const Page = lazy(() => import("./scenes/pages/Page"));
 const PageAdmin = lazy(() => import("./scenes/pages/PageAdmin"));
-const SectionPage = lazy(() => import("./scenes/pages/SectionPage"));
+const SectionPageType1 = lazy(() => import("./scenes/pages/SectionPageType1"));
 function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -61,13 +61,26 @@ function App() {
                   <Route path="/" element={<Page page="CANSU" />} />
                   {pageOptions?.map((page, index) => (
                     <React.Fragment key={index}>
-                      {page.isSectionPage && (
-                        <Route
-                          key={index}
-                          path={`/${page.pageNameEN.toLowerCase()}`}
-                          element={<SectionPage page={page.pageNameEN} />}
-                        />
-                      )}
+                      {page.isSectionPage &&
+                        page.sectionPageType === "Type1" && (
+                          <Route
+                            key={index}
+                            path={`/${page.pageNameEN.toLowerCase()}`}
+                            element={
+                              <SectionPageType1 page={page.pageNameEN} />
+                            }
+                          />
+                        )}
+                      {page.isSectionPage &&
+                        page.sectionPageType === "Type2" && (
+                          <Route
+                            key={index}
+                            path={`/${page.pageNameEN.toLowerCase()}`}
+                            element={
+                              <SectionPageType1 page={page.pageNameEN} />
+                            }
+                          />
+                        )}
                       {!page.isSectionPage && (
                         <Route
                           key={index}

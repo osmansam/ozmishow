@@ -11,7 +11,7 @@ import {
 } from "../../features/twoPicture/twoPictureSlice";
 import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
-import Deneme from "../deneme";
+import Deneme from "./adminPageOptions";
 import { useNavigate } from "react-router-dom";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
