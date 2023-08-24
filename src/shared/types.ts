@@ -353,6 +353,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
+  SpeedReader: {
+    name: "SpeedReader",
+    pictureContainerNumber: 0,
+    isMainHeader: false,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
 };
 
 export interface ContainerType {

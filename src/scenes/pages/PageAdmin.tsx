@@ -75,7 +75,9 @@ const BackgroundHeader = lazy(
 const ResumeIcon = lazy(
   () => import("../../components/resumeIcon/ResumeIconContainer")
 );
-
+const SpeedReader = lazy(
+  () => import("../../components/speedReader/SpeedReader")
+);
 interface Props {
   page: string;
 }
@@ -298,6 +300,21 @@ const PageAdmin = ({ page }: Props) => {
                   mainHeader={item.mainHeader}
                   twoPictureArray={twoPictureArray}
                 />
+                <PageConfigurationButtons
+                  index={index}
+                  moveItem={moveItem}
+                  disableMoveUp={index === 0}
+                  disableMoveDown={index === newContainer.length - 1}
+                  id={_id ? _id : ""}
+                  pageOptions={pageOptions}
+                  language={language}
+                />
+              </div>
+            );
+          case "SpeedReader":
+            return (
+              <div key={index}>
+                <SpeedReader />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

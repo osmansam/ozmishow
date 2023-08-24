@@ -82,7 +82,7 @@ const SpeedReader = () => {
   }, [progress]);
 
   return (
-    <div className="flex flex-col gap-4 items-center p-4 py-40 w-full ">
+    <div className="flex flex-col gap-4 items-center p-4 py-10 md:py-20 w-full ">
       {/* text area */}
       {!isPlaying && (
         <div className="w-1/2 h-80  p-4 border border-gray-300 rounded-md ">
@@ -126,7 +126,10 @@ const SpeedReader = () => {
           </button>
         </div>
         {/* progress  */}
-        <div className="w-full max-w-md border border-gray-300 rounded-md p-4">
+        <div
+          className="w-full max-w-md border border-gray-300 rounded-md p-4"
+          // style={{ width: "" }}
+        >
           <div
             className="progress-bar cursor-pointer relative border-2 border-gray-300  bg-slate-300"
             ref={progressBarRef}

@@ -180,6 +180,7 @@ const ComponentContainer = () => {
         );
         resetInputs();
         break;
+      case Components.SpeedReader.name:
       case Components.ProgressBar.name:
       case Components.BackgroundHeader.name:
       case Components.ResumeBox.name:

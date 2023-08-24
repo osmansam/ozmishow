@@ -63,6 +63,9 @@ const BackgroundHeader = lazy(
 const ResumeIcon = lazy(
   () => import("../../components/resumeIcon/ResumeIconContainer")
 );
+const SpeedReader = lazy(
+  () => import("../../components/speedReader/SpeedReader")
+);
 ////
 type Props = {};
 
@@ -198,6 +201,12 @@ export const renderComponents = (newContainer: ContainerType[]) => {
                 mainMainHeader={mainHeader}
                 workTeamArray={twoPictureArray}
               />
+            </div>
+          );
+        case "SpeedReader":
+          return (
+            <div key={index}>
+              <SpeedReader />
             </div>
           );
         case "ProgressBar":

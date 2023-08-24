@@ -23,6 +23,9 @@ const SectionPageType2 = ({ page }: Props) => {
   const { container } = useSelector((state: RootState) => state.twoPicture);
   const { selectedSection } = useSelector((state: RootState) => state.context);
   const sectionRefs = useRef<HTMLElement[]>([]);
+  const sections = pageOptions.find(
+    (item) => item.pageNameEN === page
+  )?.sections;
 
   useEffect(() => {
     setFirstContainer(container?.filter((c) => c.page === page));
@@ -40,9 +43,10 @@ const SectionPageType2 = ({ page }: Props) => {
   }, [firstContainer, language]);
 
   // Assuming sections is the array of section names
-  const sections = pageOptions.find(
-    (item) => item.pageNameEN === page
-  )?.sections;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedSection]);
 
   useEffect(() => {
     const handleScroll = () => {
