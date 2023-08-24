@@ -39,15 +39,14 @@ const NewsContainer = ({ id, mainHeader }: NewsContainerType) => {
     setTotalPages(response.data.totalPages);
     setTotalItems(response.data.totalItems);
     setNews(response.data.news);
+    setIsLoading(false); // Data has been fetched, loading is done
   };
 
   //set the news when the page first rendered
   useEffect(() => {
-    // Check if it's the initial render, if yes, set it to false
-    // The effect will run on currentPage, limit, or id changes or initial render
+    setIsLoading(true); // Start loading when the effect runs
     setIsPagination(true);
     getNews();
-    setIsLoading(false);
   }, [currentPage, limit, id]);
   //handle search
   const handleSearch = async () => {
