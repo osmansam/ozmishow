@@ -20,11 +20,12 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     (state: RootState) => state.twoPicture
   );
   const { language } = useSelector((state: RootState) => state.context);
+  // const [initialRender, setInitialRender] = useState(true);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(6);
   const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState<PictureType[]>();
   const [isPagination, setIsPagination] = useState(true);
@@ -37,17 +38,20 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     setTotalPages(response.data.totalPages);
     setTotalItems(response.data.totalItems);
     setNews(response.data.news);
+    setIsLoading(false); // Data has been fetched, loading is done
   };
+
+  //set the news when the page first rendered
   useEffect(() => {
     setIsLoading(true); // Start loading when the effect runs
     setIsPagination(true);
     getNews();
   }, [currentPage, limit, id]);
   //handle search
-
   const handleSearch = async () => {
     if (search === "") {
       setIsPagination(true);
+
       getNews();
       setIsLoading(false);
     } else {
@@ -63,6 +67,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     if (num >= 1 && num <= totalPages) {
       // Check if the clicked page is within the valid range
       setCurrentPage(num);
+      window.scrollTo(0, 0);
     }
   };
   const { isAdmin } = useSelector((state: RootState) => state.context);
