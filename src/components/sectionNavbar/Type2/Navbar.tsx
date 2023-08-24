@@ -3,8 +3,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Link from "./Link";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store";
-
 import classNames from "classnames";
+import { setSelectedSection } from "../../../features/context/contextSlice";
 
 interface Props {
   links: string[];
@@ -35,15 +35,17 @@ const Navbar = ({ links }: Props) => {
           <div className={`${flexBetween} w-full gap-16`}>
             {/* LEFT SIDE */}
             {/* name surname */}
-            <h1>osman erdogan</h1>
+            <h1 onClick={() => dispatch(setSelectedSection(""))}>
+              osman erdogan
+            </h1>
             {/* RIGHT SIDE */}
 
             <div className={`${flexBetween}  hidden md:flex `}>
-              <div className={`${flexBetween} gap-8 text-sm`}>
+              <ul className={`${flexBetween} gap-8 text-sm`}>
                 {links.map((link, index) => (
                   <Link key={index} page={link} />
                 ))}
-              </div>
+              </ul>
             </div>
 
             <button
@@ -81,11 +83,11 @@ const Navbar = ({ links }: Props) => {
             </div>
 
             {/* MENU ITEMS */}
-            <div className=" flex flex-col h-full gap-10 text-2xl py-8 bg-white overflow-y-auto no-scrollbar">
+            <ul className=" flex flex-col h-full gap-10 text-2xl py-8 bg-white overflow-y-auto no-scrollbar">
               {links.map((link, index) => (
                 <Link key={index} page={link} />
               ))}
-            </div>
+            </ul>
           </div>
         </>
       )}

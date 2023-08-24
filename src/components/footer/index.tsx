@@ -126,7 +126,7 @@ const Footer = ({ currentPage }: Props) => {
 
             {/* adress info */}
             <p className="text-sm flex flex-wrap w-1/2 text-[#888888] leading-8">
-              {footer.adress}
+              {footer?.adress}
             </p>
           </div>
           {/* tel fax email */}
@@ -137,13 +137,13 @@ const Footer = ({ currentPage }: Props) => {
               <h2 className="text-[#888888]">
                 {language === LanguageOptions.EN ? "Phone:" : "Telefon:"}
               </h2>
-              <p className="text-sm text-[#888888]">{footer.phone}</p>
+              <p className="text-sm text-[#888888]">{footer?.phone}</p>
             </div>
             {/* fax */}
             <div className="flex flex-row gap-4">
               <FaFax className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">Fax:</h2>
-              <p className="text-sm text-[#888888]">{footer.fax}</p>
+              <p className="text-sm text-[#888888]">{footer?.fax}</p>
             </div>
             {/* email */}
             <div className="flex flex-row gap-4">
@@ -151,7 +151,7 @@ const Footer = ({ currentPage }: Props) => {
               <h2 className="text-[#888888]">
                 {language === LanguageOptions.EN ? "Email:" : "E-Posta:"}
               </h2>
-              <p className="text-sm text-[#888888]">{footer.email}</p>
+              <p className="text-sm text-[#888888]">{footer?.email}</p>
             </div>
           </div>
         </div>

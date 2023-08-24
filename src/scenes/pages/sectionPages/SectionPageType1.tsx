@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../../../store";
 import {
   setIsTopOfPage,
   setSelectedSection,
-} from "../../features/context/contextSlice";
-import { ContainerType } from "../../shared/types";
+} from "../../../features/context/contextSlice";
+import { ContainerType } from "../../../shared/types";
 import { motion } from "framer-motion";
-import { renderComponents } from "./RenderComponents";
-import Navbar from "../../components/sectionNavbar/Type1/Navbar";
+import { renderComponents } from "../RenderComponents";
+import Navbar from "../../../components/sectionNavbar/Type1/Navbar";
 
 interface Props {
   page: string;
@@ -107,7 +107,7 @@ const SectionPageType1 = ({ page }: Props) => {
                 }
               }}
             >
-              <motion.div className="min-h-screen">
+              <motion.div className="min-h-screen ">
                 {renderComponents(
                   newContainer.filter((c) => c.selectedSection === section)
                 )}

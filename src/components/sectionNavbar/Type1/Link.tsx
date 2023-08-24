@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store";
-import { setSelectedSection } from "../../../features/context/contextSlice";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import { setSelectedSection } from "../../../features/context/contextSlice";
 
 type Props = {
   page: string;

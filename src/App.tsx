@@ -13,7 +13,13 @@ const SingleNew = lazy(() => import("./components/news/newsType1/SingleNew"));
 const Loading = lazy(() => import("./components/loading"));
 const Page = lazy(() => import("./scenes/pages/Page"));
 const PageAdmin = lazy(() => import("./scenes/pages/PageAdmin"));
-const SectionPageType1 = lazy(() => import("./scenes/pages/SectionPageType1"));
+const SectionPageType1 = lazy(
+  () => import("./scenes/pages/sectionPages/SectionPageType1")
+);
+const SectionPageType2 = lazy(
+  () => import("./scenes/pages/sectionPages/SectionPageType2")
+);
+
 function App() {
   const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -77,7 +83,7 @@ function App() {
                             key={index}
                             path={`/${page.pageNameEN.toLowerCase()}`}
                             element={
-                              <SectionPageType1 page={page.pageNameEN} />
+                              <SectionPageType2 page={page.pageNameEN} />
                             }
                           />
                         )}

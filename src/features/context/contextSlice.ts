@@ -16,7 +16,7 @@ const initialState: ContextSliceType = {
   flexBetween: "flex items-center justify-between",
   isSidebarOpen: false,
   language: LanguageOptions.EN,
-  selectedSection: "Home",
+  selectedSection: "",
 };
 const contextSlice = createSlice({
   name: "context",
