@@ -6,7 +6,6 @@ import {
   getAllTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
 import { ContainerType } from "../../shared/types";
-import SpeedReader from "../../components/speedReader/SpeedReader";
 import Loading from "../../components/loading";
 import { renderComponents } from "./RenderComponents";
 const Navbar = lazy(() => import("../../components/navbar/Navbar"));
@@ -66,7 +65,6 @@ const Page = ({ page }: Props) => {
         )}
 
         {renderComponents(newContainer)}
-        <SpeedReader />
         {(currentPage?.isNavbar || currentPage?.isSubpage) && (
           <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
         )}
