@@ -82,19 +82,32 @@ const SpeedReader = () => {
   }, [progress]);
 
   return (
-    <div className="flex flex-col items-center p-4 py-40">
-      <div className="w-full max-w-md p-4 border border-gray-300 rounded-md mb-4">
-        <textarea
-          className="w-full h-20 p-2 bg-gray-100 border border-gray-300 rounded-md"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      </div>
-      <div className="flex flex-col items-center border-2 rounded-md p-4 mb-4">
-        <p className="text-center font-semibold text-lg">
-          {words[currentIndex]}
-        </p>
-        <div className="flex flex-row mt-4 gap-4">
+    <div className="flex flex-col gap-4 items-center p-4 py-40 w-full ">
+      {/* text area */}
+      {!isPlaying && (
+        <div className="w-1/2 h-80  p-4 border border-gray-300 rounded-md ">
+          <textarea
+            className="w-full h-full p-2 bg-gray-100 border border-gray-300 rounded-md"
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+              setCurrentIndex(0);
+              setProgress(0);
+            }}
+          />
+        </div>
+      )}
+      {/* show area */}
+      {isPlaying && (
+        <div className="flex flex-col w-1/2 h-80 justify-center items-center border-2 rounded-md p-4 ">
+          <p className="text-center font-semibold text-lg">
+            {words[currentIndex]}
+          </p>
+        </div>
+      )}
+      <div className="flex flex-row gap-4 w-full justify-center ">
+        {/* buttons */}
+        <div className="flex flex-row  gap-4">
           <button
             className="py-1 px-3 bg-blue-500 text-white rounded-md"
             onClick={() => {
@@ -112,26 +125,27 @@ const SpeedReader = () => {
             {isPlaying ? "||" : ">"}
           </button>
         </div>
-      </div>
-      <div className="w-full max-w-md border border-gray-300 rounded-md p-4">
-        <div
-          className="progress-bar cursor-pointer relative"
-          ref={progressBarRef}
-          onMouseDown={handleDragStart}
-          onMouseMove={handleDrag}
-          onMouseUp={handleDragEnd}
-          onMouseLeave={handleDragEnd}
-          onClick={handleProgressBarClick}
-        >
+        {/* progress  */}
+        <div className="w-full max-w-md border border-gray-300 rounded-md p-4">
           <div
-            className="played-progress h-2 bg-green-500 "
-            style={{ width: `${progress}%` }}
-          />
-          {/* <div className="absolute border-4 top-1/2 -translate-y-1/2 bg-slate-400 w-full h-3"></div> */}
-          <div
-            className="progress-handle h-4 w-4 bg-blue-500 rounded-full cursor-pointer absolute top-1/2 -translate-y-1/2"
-            ref={progressHandleRef}
-          />
+            className="progress-bar cursor-pointer relative border-2 border-gray-300  bg-slate-300"
+            ref={progressBarRef}
+            onMouseDown={handleDragStart}
+            onMouseMove={handleDrag}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
+            onClick={handleProgressBarClick}
+          >
+            <div
+              className="played-progress h-2 bg-green-500 "
+              style={{ width: `${progress}%` }}
+            />
+
+            <div
+              className="progress-handle h-4 w-4 bg-blue-500 rounded-full cursor-pointer absolute top-1/2 -translate-y-1/2"
+              ref={progressHandleRef}
+            />
+          </div>
         </div>
       </div>
     </div>
