@@ -9,6 +9,7 @@ import { FaFax } from "react-icons/fa";
 import { LanguageOptions } from "../../shared/types";
 import ContactFormEn from "../contactForm/ContactFormEn";
 import ContactFormTr from "../contactForm/ContactFormTr";
+import translations from "../../translations.json";
 import Map from "../map";
 type Props = {};
 
@@ -31,21 +32,21 @@ const ContactContainer = (props: Props) => {
             <div className="flex flex-row items-center gap-4">
               <GoLocation className="w-8 h-6" />
               <h2 className="uppercase w-20 ">
-                {language === LanguageOptions.EN ? "Adress:" : "Adres:"}
+                {translations[language as keyof typeof translations].address}
               </h2>
               <p className="text-sm">{footer.adress}</p>
             </div>
             <div className="flex flex-row items-center gap-4">
               <BsTelephone className="w-8 h-6" />
               <h2 className="uppercase w-20 ">
-                {language === LanguageOptions.EN ? "Phone:" : "Telefon:"}
+                {translations[language as keyof typeof translations].phone}
               </h2>
               <p className="text-sm">{footer.phone}</p>
             </div>
             <div className="flex flex-row items-center gap-4">
               <AiOutlineMail className="w-8 h-6" />
               <h2 className="uppercase w-20 ">
-                {language === LanguageOptions.EN ? "Email:" : "E-Posta:"}
+                {translations[language as keyof typeof translations].email}
               </h2>
               <p className="text-sm">{footer.email}</p>
             </div>
@@ -62,7 +63,7 @@ const ContactContainer = (props: Props) => {
       {/* right side  */}
       <div className="lg:w-1/2 w-full flex flex-col lg:pl-5 mt-2 py-10">
         <h2 className="flex px-10 rounded-lg font-[500] text-lg py-2 bg-black text-white w-fit items-center justify-center ">
-          {language === LanguageOptions.EN ? "CONTACT FORM" : "ILETISIM FORMU"}
+          {translations[language as keyof typeof translations].contactForm}
         </h2>
         {language === LanguageOptions.EN ? (
           <ContactFormEn />

@@ -13,6 +13,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FaFax } from "react-icons/fa";
 import { LanguageOptions, PageOptionsType } from "../../shared/types";
 import AddFooter from "./AddFooter";
+import translations from "../../translations.json";
 
 type Props = {
   currentPage?: string;
@@ -120,7 +121,7 @@ const Footer = ({ currentPage }: Props) => {
             <div className="flex flex-row gap-2">
               <GoLocation className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">
-                {language === LanguageOptions.EN ? "Adress:" : "Adres:"}
+                {translations[language as keyof typeof translations].address}
               </h2>
             </div>
 
@@ -135,7 +136,7 @@ const Footer = ({ currentPage }: Props) => {
             <div className="flex flex-row gap-4">
               <BsTelephone className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">
-                {language === LanguageOptions.EN ? "Phone:" : "Telefon:"}
+                {translations[language as keyof typeof translations].phone}
               </h2>
               <p className="text-sm text-[#888888]">{footer?.phone}</p>
             </div>
@@ -149,7 +150,7 @@ const Footer = ({ currentPage }: Props) => {
             <div className="flex flex-row gap-4">
               <AiOutlineMail className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">
-                {language === LanguageOptions.EN ? "Email:" : "E-Posta:"}
+                {translations[language as keyof typeof translations].email}
               </h2>
               <p className="text-sm text-[#888888]">{footer?.email}</p>
             </div>

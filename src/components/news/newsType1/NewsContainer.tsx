@@ -13,7 +13,7 @@ import {
   updateContainer,
   resetTwoPictureArray,
 } from "../../../features/twoPicture/twoPictureSlice";
-import { BsWindowSidebar } from "react-icons/bs";
+import translations from "../../../translations.json";
 
 const NewsContainer = ({ id, mainHeader }: NewsContainerType) => {
   const dispatch = useAppDispatch();
@@ -92,7 +92,9 @@ const NewsContainer = ({ id, mainHeader }: NewsContainerType) => {
       <div className="w-5/6 mx-auto flex justify-end items-center px-4 pt-2 ">
         <input
           type="text"
-          placeholder={`${language === LanguageOptions.EN ? "Search" : "Ara"}`}
+          placeholder={
+            translations[language as keyof typeof translations].search
+          }
           className="border rounded-l py-1 px-2 w-32 focus:outline-none"
           onChange={(e) => setSearch(e.target.value)}
           onKeyPress={handleKeyPress}
