@@ -31,6 +31,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   const [isPagination, setIsPagination] = useState(true);
   //getNews function
   const getNews = async () => {
+    setIsLoading(true); // Start loading
     const response = await axios.get(
       `https://ozmishow-back.onrender.com/api/v1/twoPicture/getNews/${id}?page=${currentPage}&limit=${limit}`
     );
@@ -38,22 +39,18 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     setTotalPages(response.data.totalPages);
     setTotalItems(response.data.totalItems);
     setNews(response.data.news);
-    setIsLoading(false); // Data has been fetched, loading is done
+    setIsPagination(true);
+    setIsLoading(false); // Loading completed
   };
 
-  //set the news when the page first rendered
   useEffect(() => {
-    setIsLoading(true); // Start loading when the effect runs
-    setIsPagination(true);
     getNews();
-  }, [currentPage, limit, id]);
-  //handle search
+  }, [currentPage, limit, id]); // Combine currentPage and limit
+
   const handleSearch = async () => {
     if (search === "") {
       setIsPagination(true);
-
       getNews();
-      setIsLoading(false);
     } else {
       const response = await axios.get(
         `https://ozmishow-back.onrender.com/api/v1/twoPicture/searchNews/${id}?searchQuery=${search}`
