@@ -1,7 +1,12 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { ContainerType } from "../../shared/types";
+import {
+  ContainerType,
+  ContentStyleType,
+  PictureType,
+  PictureWithStyleType,
+} from "../../shared/types";
 const PictureAtLeft = lazy(
   () => import("../../components/pictureleft/PictureAtLeft")
 );
@@ -77,13 +82,13 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "PictureAtRight":
           return (
             <div key={index}>
-              <PictureAtRight {...item.twoPictureArray[0]} />
+              <PictureAtRight {...(item.twoPictureArray[0] as PictureType)} />
             </div>
           );
         case "PictureAtLeft":
           return (
             <div key={index}>
-              <PictureAtLeft {...item.twoPictureArray[0]} />
+              <PictureAtLeft {...(item.twoPictureArray[0] as PictureType)} />
             </div>
           );
         case "TwoPictureContainer":
@@ -91,7 +96,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <TwoPictureContainer
                 mainHeader={item.mainHeader}
-                twoPictureArray={twoPictureArray}
+                twoPictureArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -100,14 +105,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <IconExplainContainer
                 mainHeader={mainHeader}
-                iconExplainArray={twoPictureArray}
+                iconExplainArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
         case "MaximContainer":
           return (
             <div key={index}>
-              <MaximContainer {...item.twoPictureArray[0]} />
+              <MaximContainer {...(item.twoPictureArray[0] as PictureType)} />
             </div>
           );
         case "BorderBoxContainer":
@@ -115,7 +120,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <BorderBoxContainer
                 mainHeader={mainHeader}
-                twoPictureArray={twoPictureArray}
+                twoPictureArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -142,8 +147,8 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <ExplanationBar
                 id={item && item._id ? item._id : ""}
-                mainMainHeader={mainHeader}
-                explanationArray={twoPictureArray}
+                mainMainHeader={mainHeader as ContentStyleType}
+                explanationArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );
@@ -153,7 +158,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <Slider
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
-                sliderArray={twoPictureArray}
+                sliderArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -163,7 +168,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <Carousel
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
-                carouselArray={twoPictureArray}
+                carouselArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -173,7 +178,9 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <YoutubeVideo
                 embedId={mainHeader ? mainHeader : ""}
                 header={
-                  twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                  twoPictureArray[0].header
+                    ? (twoPictureArray[0].header as string)
+                    : ""
                 }
               />
             </div>
@@ -181,7 +188,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "PageBanner":
           return (
             <div key={index}>
-              <PageBanner {...twoPictureArray[0]} />
+              <PageBanner {...(item.twoPictureArray[0] as PictureType)} />
             </div>
           );
         case "FrequentlyAskedQuestions":
@@ -189,7 +196,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <FreqAsked
                 id={item && item._id ? item._id : ""}
-                freqAskedArray={twoPictureArray}
+                freqAskedArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -199,7 +206,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <WorkTeamBar
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
-                workTeamArray={twoPictureArray}
+                workTeamArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -215,7 +222,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <ProgressBarContainer
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader ? mainHeader : ""}
-                progressBarArray={twoPictureArray}
+                progressBarArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -225,7 +232,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <ResumeBox
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader ? mainHeader : ""}
-                resumeBoxArray={twoPictureArray}
+                resumeBoxArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -235,7 +242,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <ResumeIcon
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader ? mainHeader : ""}
-                resumeIconArray={twoPictureArray}
+                resumeIconArray={twoPictureArray as PictureType[]}
               />
             </div>
           );
@@ -268,7 +275,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <FullPageItem
                 mainMainHeader={mainHeader}
-                fullPageItemArray={twoPictureArray}
+                fullPageItemArray={twoPictureArray as PictureType[]}
                 id={item && item._id ? item._id : ""}
               />
             </div>
@@ -279,7 +286,9 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <BackgroundHeader
                 mainHeader={mainHeader ? mainHeader : ""}
                 header={
-                  twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                  twoPictureArray[0].header
+                    ? (twoPictureArray[0].header as string)
+                    : ""
                 }
               />
             </div>

@@ -12,6 +12,9 @@ import {
   LanguageOptions,
   PageOptionsType,
   ContainerType,
+  PictureType,
+  PictureWithStyleType,
+  ContentStyleType,
 } from "../../shared/types";
 import ConfirmationModal from "../../components/confirmation";
 import Loading from "../../components/loading";
@@ -266,7 +269,7 @@ const PageAdmin = ({ page }: Props) => {
           case "PictureAtRight":
             return (
               <div key={index}>
-                <PictureAtRight {...twoPictureArray[0]} />
+                <PictureAtRight {...(item.twoPictureArray[0] as PictureType)} />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}
@@ -281,7 +284,7 @@ const PageAdmin = ({ page }: Props) => {
           case "PictureAtLeft":
             return (
               <div key={index}>
-                <PictureAtLeft {...twoPictureArray[0]} />
+                <PictureAtLeft {...(item.twoPictureArray[0] as PictureType)} />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}
@@ -298,7 +301,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <TwoPictureContainer
                   mainHeader={item.mainHeader}
-                  twoPictureArray={twoPictureArray}
+                  twoPictureArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -331,7 +334,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <IconExplainContainer
                   mainHeader={mainHeader}
-                  iconExplainArray={twoPictureArray}
+                  iconExplainArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -347,7 +350,7 @@ const PageAdmin = ({ page }: Props) => {
           case "MaximContainer":
             return (
               <div key={index}>
-                <MaximContainer {...twoPictureArray[0]} />
+                <MaximContainer {...(item.twoPictureArray[0] as PictureType)} />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}
@@ -364,7 +367,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <BorderBoxContainer
                   mainHeader={mainHeader}
-                  twoPictureArray={twoPictureArray}
+                  twoPictureArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -440,8 +443,8 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <ExplanationBar
                   id={item && item._id ? item._id : ""}
-                  mainMainHeader={mainHeader}
-                  explanationArray={twoPictureArray}
+                  mainMainHeader={mainHeader as ContentStyleType}
+                  explanationArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -460,7 +463,7 @@ const PageAdmin = ({ page }: Props) => {
                 <ProgressBarContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader ? mainHeader : ""}
-                  progressBarArray={twoPictureArray}
+                  progressBarArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -479,7 +482,7 @@ const PageAdmin = ({ page }: Props) => {
                 <ResumeBox
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader ? mainHeader : ""}
-                  resumeBoxArray={twoPictureArray}
+                  resumeBoxArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -498,7 +501,7 @@ const PageAdmin = ({ page }: Props) => {
                 <Slider
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
-                  sliderArray={twoPictureArray}
+                  sliderArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -517,7 +520,7 @@ const PageAdmin = ({ page }: Props) => {
                 <Carousel
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
-                  carouselArray={twoPictureArray}
+                  carouselArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -536,7 +539,7 @@ const PageAdmin = ({ page }: Props) => {
                 <ResumeIcon
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader ? mainHeader : ""}
-                  resumeIconArray={twoPictureArray}
+                  resumeIconArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -555,7 +558,9 @@ const PageAdmin = ({ page }: Props) => {
                 <YoutubeVideo
                   embedId={mainHeader ? mainHeader : ""}
                   header={
-                    twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                    twoPictureArray[0].header
+                      ? (twoPictureArray[0].header as string)
+                      : ""
                   }
                 />
                 <PageConfigurationButtons
@@ -572,7 +577,7 @@ const PageAdmin = ({ page }: Props) => {
           case "PageBanner":
             return (
               <div key={index}>
-                <PageBanner {...twoPictureArray[0]} />
+                <PageBanner {...(item.twoPictureArray[0] as PictureType)} />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}
@@ -589,7 +594,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <FreqAsked
                   id={item && item._id ? item._id : ""}
-                  freqAskedArray={twoPictureArray}
+                  freqAskedArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -608,7 +613,7 @@ const PageAdmin = ({ page }: Props) => {
                 <WorkTeamBar
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
-                  workTeamArray={twoPictureArray}
+                  workTeamArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -687,7 +692,9 @@ const PageAdmin = ({ page }: Props) => {
                 <BackgroundHeader
                   mainHeader={mainHeader ? mainHeader : ""}
                   header={
-                    twoPictureArray[0].header ? twoPictureArray[0].header : ""
+                    twoPictureArray[0].header
+                      ? (twoPictureArray[0].header as string)
+                      : ""
                   }
                 />
                 <PageConfigurationButtons
@@ -706,7 +713,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <FullPageItem
                   mainMainHeader={mainHeader}
-                  fullPageItemArray={twoPictureArray}
+                  fullPageItemArray={twoPictureArray as PictureType[]}
                   id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons

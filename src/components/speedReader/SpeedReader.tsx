@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import pdfjs from "pdfjs-dist";
+import "pdfjs-dist/build/pdf.worker.entry";
 const SpeedReader = () => {
   const [text, setText] = useState("Hello world!");
   const [isPlaying, setIsPlaying] = useState(false);
@@ -20,6 +21,33 @@ const SpeedReader = () => {
 
   const handleDragStart = () => {
     isDragging.current = true;
+  };
+  const handleTextareaPDFDrop = async (
+    e: React.DragEvent<HTMLTextAreaElement>
+  ) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+
+    if (file.type === "application/pdf") {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        // ... (rest of the code to extract PDF text)
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  };
+
+  const handleDivPDFDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+
+    if (file.type === "application/pdf") {
+      const reader = new FileReader();
+      reader.onload = async () => {
+        // ... (rest of the code to extract PDF text)
+      };
+      reader.readAsArrayBuffer(file);
+    }
   };
 
   const handleDrag = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -85,10 +113,15 @@ const SpeedReader = () => {
     <div className="flex flex-col gap-4 items-center p-4 py-10 md:py-20 w-full ">
       {/* text area */}
       {!isPlaying && (
-        <div className="w-1/2 h-80  p-4 border border-gray-300 rounded-md ">
+        <div
+          className="w-1/2 h-80 p-4 border border-gray-300 rounded-md"
+          onDrop={handleDivPDFDrop} // Attach the event to the div
+          onDragOver={(e) => e.preventDefault()}
+        >
           <textarea
             className="w-full h-full p-2 bg-gray-100 border border-gray-300 rounded-md"
             value={text}
+            onDrop={handleTextareaPDFDrop} // Attach the event to the textarea
             onChange={(e) => {
               setText(e.target.value);
               setCurrentIndex(0);
