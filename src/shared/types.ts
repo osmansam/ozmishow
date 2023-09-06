@@ -109,9 +109,43 @@ export interface FullPageItemType {
 }
 export interface ExplanationBarType {
   id: string;
-  mainMainHeader?: string;
-  explanationArray: Array<PictureType>;
+  mainMainHeader?: ContentStyleType;
+  explanationArray: Array<PictureWithStyleType>;
 }
+export interface ContentStyleType {
+  content?: string;
+  style?: {
+    color?: string;
+    "text-size"?: string;
+    backgroundColor?: string;
+    padding?: string;
+    "font-size"?: string;
+  };
+}
+
+export interface PictureWithStyleType {
+  img?: string;
+  header?: ContentStyleType;
+  paragraphs?: string[];
+  buttons?: ButtonType[];
+  _id?: string;
+  twoPictureId?: string;
+  mainHeader?: ContentStyleType;
+  subHeaders?: string[];
+  name?: string;
+  lastName?: string;
+  title?: string;
+  page?: string;
+  date?: string; // Change this from 'String' to 'string'
+  percentage?: number;
+  year1?: string;
+  year2?: string;
+  university?: string;
+  paragraph?: ContentStyleType;
+  paragraphStyle?: ContentStyleType;
+  icon?: string;
+}
+
 export interface CarouselType {
   id: string;
   mainMainHeader?: string;
@@ -369,7 +403,7 @@ export interface ContainerType {
   mainHeader?: string;
   selectedSection?: string;
   componentName: string;
-  twoPictureArray: Array<PictureType>;
+  twoPictureArray: Array<PictureType> | Array<PictureWithStyleType>;
   position: number;
   language: string;
 }
