@@ -9,6 +9,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   PictureType,
   ContainerType,
+  ContentStyleType,
   PageOptionsType,
   MapType,
 } from "../../shared/types";
@@ -251,6 +252,31 @@ export const updateWorkTeamBar = createAsyncThunk(
     }
   }
 );
+//editExplanationBar
+export const editExplanationBar = createAsyncThunk(
+  "twoPicture/editExplanationBar",
+  async ({
+    container,
+    twoPictureId,
+    explanationBarId,
+  }: {
+    container: any;
+    twoPictureId: string;
+    explanationBarId: string;
+  }) => {
+    const url = `twoPicture/editExplanationBar/${twoPictureId}/${explanationBarId}`;
+    try {
+      const response = await axios.patch(
+        `http://localhost:3002/api/v1/${url}`,
+        { container }
+      );
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 // updateSlider
 export const updateSlider = createAsyncThunk(
   "twoPicture/updateSlider",

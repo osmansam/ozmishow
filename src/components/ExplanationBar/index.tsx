@@ -9,7 +9,7 @@ import {
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 import StyledModal from "../../hooks/StyledModal";
-
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 const ExplanationBar = ({
   mainMainHeader,
   explanationArray,
@@ -21,16 +21,21 @@ const ExplanationBar = ({
     content: "",
     style: {
       color: "",
-      "text-size": "",
+      fontWeight: "",
       backgroundColor: "",
       padding: "",
-      "font-size": "",
+      fontSize: "",
+      fontFamily: "",
+      hover: "",
+      effectAll: true,
     },
   });
 
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [barSelection, setBarSelection] = useState(0);
   const [hovered, setHovered] = useState(Number);
+  const [contentType, setContentType] = useState("");
+  const [mainHeaderId, setMainHeaderId] = useState("");
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -53,7 +58,7 @@ const ExplanationBar = ({
   return (
     <div className="py-10 flex flex-col items-center">
       <h1
-        className="text-3xl font-bold p-4 ml-4 "
+        className="text-3xl font-bold p-4 ml-4"
         style={mainMainHeader?.style ? mainMainHeader.style : {}}
       >
         {mainMainHeader?.content}
@@ -61,52 +66,71 @@ const ExplanationBar = ({
       <div className="w-5/6 mx-auto flex lg:flex-row flex-col items-center sm:items-start ">
         {/* Bar part */}
         <div className={barClassName}>
-          {explanationArray.map((explanation, index) => {
-            const { mainHeader } = explanation;
-            const explanationId = explanation._id;
+          <div className="w-max  gap-4 mx-auto justify-center items-center cursor-pointer">
+            {explanationArray.map((explanation, index) => {
+              const { mainHeader } = explanation;
+              const explanationId = explanation._id;
 
-            const listClassName = `list-none capitalize pointer  z-10 items-center mx-auto px-4 py-1  ${
-              (index === barSelection || index === hovered) && "text-[#e1241b] "
-            }`;
-            return (
-              <div
-                className="flex justify-center items-center cursor-pointer"
-                key={index}
-              >
-                <li
-                  className={listClassName}
-                  style={mainHeader?.style ? mainHeader.style : {}}
-                  onClick={() => setBarSelection(index)}
-                  onMouseOver={() => setHovered(index)}
-                  onMouseLeave={() => setHovered(barSelection)}
+              return (
+                <div
+                  className="flex flex-row my-4 justify-center items-center"
+                  key={index}
                 >
-                  {mainHeader?.content}
+                  <li
+                    className="  !w-full px-8 rounded-lg  list-none capitalize pointer  z-10  justify-center  items-center mx-auto  py-1  "
+                    style={
+                      mainHeader?.style
+                        ? {
+                            ...mainHeader.style,
+                            color:
+                              index === barSelection
+                                ? mainHeader.style.hover
+                                  ? mainHeader.style.hover
+                                  : "#e1241b"
+                                : index === hovered
+                                ? mainHeader.style.hover
+                                  ? mainHeader.style.hover
+                                  : mainHeader.style.color
+                                : mainHeader.style.color,
+                          }
+                        : {}
+                    }
+                    onClick={() => setBarSelection(index)}
+                    onMouseOver={() => setHovered(index)}
+                    onMouseLeave={() => setHovered(barSelection)}
+                  >
+                    {mainHeader?.content}
+                  </li>
                   {!isModalOpen && (
-                    <h1
-                      onClick={() =>
+                    <AiOutlineDown
+                      className="text-lg justify-end"
+                      onClick={() => {
                         openModal({
                           style: mainHeader?.style,
                           content: mainHeader?.content,
-                        })
-                      }
-                    >
-                      +
-                    </h1>
-                  )}
-                  {isModalOpen && (
-                    <StyledModal
-                      isOpen={isModalOpen}
-                      styleData={selectedStyle}
-                      onClose={() => setIsModalOpen(false)}
-                      twoPictureId={id}
-                      explanationId={explanationId ? explanationId : ""}
-                      contentType="mainHeader"
+                        });
+                        setContentType("mainHeader");
+                        setMainHeaderId(explanationId ?? "");
+                      }}
                     />
                   )}
-                </li>
-              </div>
-            );
-          })}
+                  {isModalOpen &&
+                    contentType === "mainHeader" &&
+                    mainHeaderId === explanationId && (
+                      <StyledModal
+                        key={explanationId}
+                        isOpen={isModalOpen}
+                        styleData={selectedStyle}
+                        onClose={() => setIsModalOpen(false)}
+                        twoPictureId={id}
+                        explanationId={explanationId ? explanationId : ""}
+                        contentType="mainHeader"
+                      />
+                    )}
+                </div>
+              );
+            })}
+          </div>
         </div>
         {/* next to bar  */}
         <div className="flex mx-auto flex-col gap-4 px-4 w-full lg:w-2/3">
@@ -119,22 +143,30 @@ const ExplanationBar = ({
                   className="w-full lg:h-96 sm:h-60 object-fit "
                 />
               )}
-              <h2 className="text-2xl leading-7 font-[500] text-[#212529] capitalize p-2 flex flex-row">
+              <h2
+                className="flex flex-row  w-fit px-4 py-2 gap-8 rounded-2xl text-2xl leading-7 font-[500] text-[#212529] capitalize "
+                style={
+                  explanationArray[barSelection].header?.style
+                    ? explanationArray[barSelection].header?.style
+                    : {}
+                }
+              >
                 {explanationArray[barSelection].header?.content}
                 {!isModalOpen && (
-                  <h1
-                    onClick={() =>
+                  <AiOutlineDown
+                    className="text-lg justify-end"
+                    onClick={() => {
                       openModal({
                         style: explanationArray[barSelection].header?.style,
                         content: explanationArray[barSelection].header?.content,
-                      })
-                    }
-                  >
-                    +
-                  </h1>
+                      });
+                      setContentType("header");
+                    }}
+                  />
                 )}
-                {isModalOpen && (
+                {isModalOpen && contentType === "header" && (
                   <StyledModal
+                    key={explanationArray[barSelection]._id}
                     isOpen={isModalOpen}
                     styleData={selectedStyle}
                     onClose={() => setIsModalOpen(false)}

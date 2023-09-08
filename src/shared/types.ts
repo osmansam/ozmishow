@@ -116,10 +116,13 @@ export interface ContentStyleType {
   content?: string;
   style?: {
     color?: string;
-    "text-size"?: string;
+    fontWeight?: string;
     backgroundColor?: string;
     padding?: string;
-    "font-size"?: string;
+    fontSize?: string;
+    fontFamily?: string;
+    hover: string;
+    effectAll?: boolean;
   };
 }
 
