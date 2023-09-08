@@ -114,22 +114,26 @@ export interface ExplanationBarType {
 }
 export interface ContentStyleType {
   content?: string;
-  style?: {
-    color?: string;
-    fontWeight?: string;
-    backgroundColor?: string;
-    padding?: string;
-    fontSize?: string;
-    fontFamily?: string;
-    hover: string;
-    effectAll?: boolean;
-  };
+  style?: StyleType;
+}
+export interface StyleType {
+  color?: string;
+  fontWeight?: string;
+  backgroundColor?: string;
+  padding?: string;
+  fontSize?: string;
+  fontFamily?: string;
+  hover: string;
+  effectAll?: boolean;
 }
 
 export interface PictureWithStyleType {
   img?: string;
   header?: ContentStyleType;
-  paragraphs?: string[];
+  paragraphs?: {
+    content?: string[];
+    style: StyleType;
+  };
   buttons?: ButtonType[];
   _id?: string;
   twoPictureId?: string;

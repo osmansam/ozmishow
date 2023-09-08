@@ -176,7 +176,7 @@ const ExplanationBar = ({
                   />
                 )}
               </h2>
-              {explanationArray[barSelection].paragraphs?.map(
+              {explanationArray[barSelection].paragraphs?.content?.map(
                 (paragraph, index) => (
                   <p
                     key={index}

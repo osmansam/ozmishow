@@ -295,15 +295,15 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           );
 
         case "TypingEffectContainer":
+          const paragraphs = Array.isArray(twoPictureArray[0]?.paragraphs)
+            ? twoPictureArray[0]?.paragraphs
+            : [];
+
           return (
             <div key={index}>
               <TypingEffectContainer
                 img={twoPictureArray[0].img ? twoPictureArray[0].img : ""}
-                paragraphs={
-                  twoPictureArray[0].paragraphs
-                    ? twoPictureArray[0].paragraphs
-                    : []
-                }
+                paragraphs={paragraphs}
               />
             </div>
           );
