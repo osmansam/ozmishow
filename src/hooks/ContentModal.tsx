@@ -64,7 +64,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-75 z-40 ">
+    <div className="fixed inset-0 flex justify-center  items-center bg-gray-500 bg-opacity-75 z-40 ">
       <div className="bg-white p-4 rounded-lg z-50">
         <h2 className="text-lg font-semibold mb-4">Edit Content</h2>
         <div className="overflow-y-auto max-h-80">

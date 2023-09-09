@@ -307,22 +307,22 @@ function StyledModal({
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className="fixed right-0 top-0 flex  z-40">
+        <div className="fixed right-0 top-0 flex  z-40 ">
           <div
             className="fixed inset-0 bg-black opacity-50"
             onClick={handleOutsideClick}
           ></div>
           <div
-            className="bg-white p-4 rounded-lg z-10"
+            className="bg-white p-4 rounded-lg z-10 min-h-screen"
             style={{ maxHeight: "80vh", overflowY: "auto" }}
           >
             <form onSubmit={handleSubmit}>
-              <h2 className="text-lg font-semibold mb-2 capitalize">
+              <h2 className="text-lg font-semibold mb-3 capitalize">
                 {contentType} Style
               </h2>
               {/* content part */}
               {isContentSend && (
-                <div className="mb-2">
+                <div className="mb-3">
                   <label htmlFor="content" className="block text-gray-600">
                     Content:
                   </label>
@@ -338,7 +338,7 @@ function StyledModal({
                 </div>
               )}
               {/* Add "Effect  All" option */}
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="effectAll" className="block text-gray-600">
                   Effect Style For All:
                 </label>
@@ -352,7 +352,7 @@ function StyledModal({
                 />
                 <span>Apply to all elements</span>
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="color" className="block text-gray-600">
                   Color:
                 </label>
@@ -368,7 +368,7 @@ function StyledModal({
                   {isColorPickerOpen && colorPicker}
                 </div>
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="hover" className="block text-gray-600">
                   Hover Color:
                 </label>
@@ -384,7 +384,7 @@ function StyledModal({
                   {isHoverColorPickerOpen && hoverColorPicker}
                 </div>
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="fontFamily" className="block text-gray-600">
                   Font Family:
                 </label>
@@ -402,7 +402,7 @@ function StyledModal({
                   <option value="Verdana">Verdana</option>
                 </select>
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="fontWeight" className="block text-gray-600">
                   Font Weight:
                 </label>
@@ -417,7 +417,7 @@ function StyledModal({
                   className="border rounded px-2 py-1 w-full"
                 />
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label
                   htmlFor="backgroundColor"
                   className="block text-gray-600"
@@ -436,7 +436,7 @@ function StyledModal({
                   {isBackgroundColorPickerOpen && backgroundColorPicker}
                 </div>
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="padding" className="block text-gray-600">
                   Padding:
                 </label>
@@ -449,7 +449,7 @@ function StyledModal({
                   className="border rounded px-2 py-1 w-full"
                 />
               </div>
-              <div className="mb-2">
+              <div className="mb-3">
                 <label htmlFor="fontSize" className="block text-gray-600">
                   Font Size:
                 </label>

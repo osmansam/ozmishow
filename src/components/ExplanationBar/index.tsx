@@ -113,7 +113,7 @@ const ExplanationBar = ({
                   >
                     {mainHeader?.content}
                   </li>
-                  {!isModalOpen && (
+                  {!isModalOpen && isAdmin && (
                     <AiOutlineDown
                       className="text-lg justify-end"
                       onClick={() => {
@@ -165,7 +165,7 @@ const ExplanationBar = ({
                 }
               >
                 {explanationArray[barSelection].header?.content}
-                {!isModalOpen && (
+                {!isModalOpen && isAdmin && (
                   <AiOutlineDown
                     className="text-lg justify-end"
                     onClick={() => {
@@ -191,12 +191,12 @@ const ExplanationBar = ({
                 )}
               </h2>
               {/* paragraphs */}
-              <div className="flex flex-col gap-3 w-full border-2">
+              <div className="flex flex-col gap-2 w-full  ">
                 {explanationArray[barSelection].paragraphs?.content?.map(
                   (paragraph, index) => (
                     <div key={index}>
                       <p
-                        className=" font-[400] leading-6 text-[#333333]"
+                        className=" font-[400] leading-6 text-[#333333] rounded-lg px-4 py-1"
                         style={
                           explanationArray[barSelection].paragraphs?.style
                             ? explanationArray[barSelection].paragraphs?.style
@@ -220,49 +220,52 @@ const ExplanationBar = ({
                   />
                 )}
                 {/* editing part */}
-                <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-                  {!isModalOpen && (
-                    <button
-                      className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                      onClick={() => {
-                        openModal({
-                          style:
-                            explanationArray[barSelection].paragraphs?.style,
-                          content:
-                            explanationArray[barSelection].paragraphs?.content,
-                        });
-                        setContentType("paragraphs");
-                      }}
-                    >
-                      Style <AiOutlineDown className="my-auto" />
-                    </button>
-                  )}
-                  {explanationArray[barSelection].paragraphs?.content && (
-                    <button
-                      onClick={() =>
-                        openContentModal(
-                          explanationArray[barSelection].paragraphs
-                        )
-                      }
-                      className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                    >
-                      Edit
-                      <AiOutlineDown className="my-auto" />
-                    </button>
-                  )}
-                  {isModalOpen && contentType === "paragraphs" && (
-                    <StyledModal
-                      key={explanationArray[barSelection]._id}
-                      isOpen={isModalOpen}
-                      styleData={selectedStyle}
-                      onClose={() => setIsModalOpen(false)}
-                      twoPictureId={id}
-                      explanationId={explanationArray[barSelection]._id ?? ""}
-                      contentType="paragraphs"
-                      isContentSend={false}
-                    />
-                  )}
-                </div>
+                {isAdmin && (
+                  <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
+                    {!isModalOpen && (
+                      <button
+                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                        onClick={() => {
+                          openModal({
+                            style:
+                              explanationArray[barSelection].paragraphs?.style,
+                            content:
+                              explanationArray[barSelection].paragraphs
+                                ?.content,
+                          });
+                          setContentType("paragraphs");
+                        }}
+                      >
+                        Style <AiOutlineDown className="my-auto" />
+                      </button>
+                    )}
+                    {explanationArray[barSelection].paragraphs?.content && (
+                      <button
+                        onClick={() =>
+                          openContentModal(
+                            explanationArray[barSelection].paragraphs
+                          )
+                        }
+                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                      >
+                        Edit
+                        <AiOutlineDown className="my-auto" />
+                      </button>
+                    )}
+                    {isModalOpen && contentType === "paragraphs" && (
+                      <StyledModal
+                        key={explanationArray[barSelection]._id}
+                        isOpen={isModalOpen}
+                        styleData={selectedStyle}
+                        onClose={() => setIsModalOpen(false)}
+                        twoPictureId={id}
+                        explanationId={explanationArray[barSelection]._id ?? ""}
+                        contentType="paragraphs"
+                        isContentSend={false}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
               {isAdmin && (
                 <button
