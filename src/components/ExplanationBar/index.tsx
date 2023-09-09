@@ -38,7 +38,7 @@ const ExplanationBar = ({
   const [contentType, setContentType] = useState("");
   const [mainHeaderId, setMainHeaderId] = useState("");
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<string[]>();
+  const [contentToEdit, setContentToEdit] = useState<any>();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -56,13 +56,13 @@ const ExplanationBar = ({
     setSelectedStyle(styleData);
     setIsModalOpen(true);
   };
-  const openContentModal = (content: string[]) => {
+  const openContentModal = (content: any) => {
     setContentToEdit(content);
     setIsContentModalOpen(true);
   };
 
   const closeContentModal = () => {
-    setContentToEdit([]);
+    setContentToEdit("");
     setIsContentModalOpen(false);
   };
   const barHeight = explanationArray.length * 25 + 50;
@@ -191,7 +191,7 @@ const ExplanationBar = ({
                 )}
               </h2>
               {/* paragraphs */}
-              <div className="flex flex-col gap-2 w-full border-2">
+              <div className="flex flex-col gap-3 w-full border-2">
                 {explanationArray[barSelection].paragraphs?.content?.map(
                   (paragraph, index) => (
                     <div key={index}>
@@ -208,38 +208,22 @@ const ExplanationBar = ({
                     </div>
                   )
                 )}
-                {explanationArray[barSelection].paragraphs?.content && (
-                  <button
-                    onClick={() =>
-                      openContentModal(
-                        explanationArray[barSelection].paragraphs
-                          ?.content as string[]
-                      )
-                    }
-                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700 mr-2"
-                  >
-                    Edit
-                  </button>
-                )}
+
                 {/* ContentModal for editing paragraphs */}
                 {isContentModalOpen && (
                   <ContentModal
                     isOpen={isContentModalOpen}
-                    content={contentToEdit as string[]}
+                    content={contentToEdit}
                     onClose={closeContentModal}
-                    onSave={(editedContent) => {
-                      // Handle saving the edited content here.
-                      // You can update the state or perform any necessary actions.
-                      console.log("Edited Content:", editedContent);
-                      closeContentModal();
-                    }}
+                    explanationId={explanationArray[barSelection]._id ?? ""}
+                    twoPictureId={id}
                   />
                 )}
                 {/* editing part */}
-                <div className="flex flex-row justify-end gap-2">
+                <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
                   {!isModalOpen && (
-                    <AiOutlineDown
-                      className="text-lg justify-end"
+                    <button
+                      className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
                       onClick={() => {
                         openModal({
                           style:
@@ -249,7 +233,22 @@ const ExplanationBar = ({
                         });
                         setContentType("paragraphs");
                       }}
-                    />
+                    >
+                      Style <AiOutlineDown className="my-auto" />
+                    </button>
+                  )}
+                  {explanationArray[barSelection].paragraphs?.content && (
+                    <button
+                      onClick={() =>
+                        openContentModal(
+                          explanationArray[barSelection].paragraphs
+                        )
+                      }
+                      className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                    >
+                      Edit
+                      <AiOutlineDown className="my-auto" />
+                    </button>
                   )}
                   {isModalOpen && contentType === "paragraphs" && (
                     <StyledModal
@@ -263,7 +262,6 @@ const ExplanationBar = ({
                       isContentSend={false}
                     />
                   )}
-                  <AiOutlineDown />
                 </div>
               </div>
               {isAdmin && (

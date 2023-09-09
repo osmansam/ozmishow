@@ -1,47 +1,85 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../store";
+import { editExplanationBar } from "../features/twoPicture/twoPictureSlice";
 
+interface StyleType {
+  color: string;
+  fontWeight: string;
+  backgroundColor: string;
+  padding: string;
+  fontSize: string;
+  fontFamily: string;
+  hover: string;
+  effectAll: boolean;
+}
+interface ContentData {
+  content: string[];
+  style: StyleType;
+}
 interface ContentModalProps {
   isOpen: boolean;
-  content: string[];
+  content: ContentData;
   onClose: () => void;
-  onSave: (paragraphs: string[]) => void;
+  twoPictureId: string;
+  explanationId: string;
 }
 
 const ContentModal: React.FC<ContentModalProps> = ({
   isOpen,
   content,
   onClose,
-  onSave,
+  twoPictureId,
+  explanationId,
 }) => {
-  const [editedContent, setEditedContent] = useState<string[]>(content);
+  const dispatch = useAppDispatch();
+  const [editedContent, setEditedContent] = useState<ContentData>(content);
 
   // Update the editedContent when the content prop changes
   useEffect(() => {
     setEditedContent(content);
   }, [content]);
 
-  const handleSave = () => {
-    // Call the onSave callback with the edited content
-    onSave(editedContent);
+  const handleSave = async () => {
+    // Update the content
+    const container = [
+      {
+        paragraphs: {
+          content: editedContent.content,
+          style: editedContent.style,
+        },
+      },
+    ];
+    await dispatch(
+      editExplanationBar({
+        twoPictureId,
+        explanationBarId: explanationId,
+        container,
+      })
+    );
 
     // Close the modal
     onClose();
+    window.location.reload();
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-75 z-50">
-      <div className="bg-white p-4 rounded-lg">
+    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-75 z-40 ">
+      <div className="bg-white p-4 rounded-lg z-50">
         <h2 className="text-lg font-semibold mb-4">Edit Content</h2>
         <div className="overflow-y-auto max-h-80">
-          {editedContent.map((paragraph, index) => (
+          {editedContent.content.map((paragraph, index) => (
             <textarea
               key={index}
               rows={5}
               value={paragraph}
               onChange={(e) => {
-                const updatedContent = [...editedContent];
+                const updatedContent = [...editedContent.content];
                 updatedContent[index] = e.target.value;
-                setEditedContent(updatedContent);
+                setEditedContent({
+                  content: updatedContent,
+                  style: editedContent.style,
+                });
               }}
               className="w-full border rounded p-2 mb-2"
               style={{ resize: "vertical" }} // Allow vertical resizing

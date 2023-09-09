@@ -248,7 +248,6 @@ function StyledModal({
   const backgroundColorPicker = (
     <div className="absolute top-10 z-50 left-0">
       <SketchPicker
-        className="absolute top-10 z-50 left-0"
         color={selectedBackgroundColor}
         onChange={handleBackgroundColorChange}
       />
@@ -313,7 +312,10 @@ function StyledModal({
             className="fixed inset-0 bg-black opacity-50"
             onClick={handleOutsideClick}
           ></div>
-          <div className="bg-white p-4 rounded-lg z-10">
+          <div
+            className="bg-white p-4 rounded-lg z-10"
+            style={{ maxHeight: "80vh", overflowY: "auto" }}
+          >
             <form onSubmit={handleSubmit}>
               <h2 className="text-lg font-semibold mb-2 capitalize">
                 {contentType} Style
