@@ -437,6 +437,7 @@ const twoPictureSlice = createSlice({
   reducers: {
     setTwoPictureArray: (state, action) => {
       state.twoPictureArray = [...state.twoPictureArray, action.payload];
+      console.log(state.twoPictureArray, "twoPictureArray");
     },
     resetTwoPictureArray: (state) => {
       state.twoPictureArray = [];
