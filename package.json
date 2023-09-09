@@ -19,8 +19,10 @@
     "classnames": "^2.3.2",
     "framer-motion": "^10.12.4",
     "js-cookie": "^3.0.5",
+    "pdfjs-dist": "^3.9.179",
     "react": "^18.2.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
     "react-icons": "^4.8.0",
@@ -59,6 +61,7 @@
   "devDependencies": {
     "@types/google.maps": "^3.52.3",
     "@types/react-anchor-link-smooth-scroll": "^1.0.2",
+    "@types/react-color": "^3.0.6",
     "@types/react-redux": "^7.1.25",
     "@types/redux": "^3.6.0",
     "@types/redux-actions": "^2.6.2",

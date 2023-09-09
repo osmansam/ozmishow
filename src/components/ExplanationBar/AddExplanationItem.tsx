@@ -67,15 +67,35 @@ const AddExplanationItem = ({
       }
       setButtons(updatedButtons);
     }
-
-    const newTwoPictureArray = {
-      img,
-      header,
-      paragraphs: isPictureContainerParagraph ? newParagraphs : [],
-      mainHeader,
+    const style = {
+      color: "",
+      fontWeight: "",
+      backgroundColor: "",
+      padding: "",
+      fontSize: "",
+      fontFamily: "",
+      hover: "",
+      effectAll: false,
     };
+    const newExplanationBar = {
+      img: img,
+      mainHeader: {
+        content: mainHeader,
+        style: style,
+      },
+      header: { content: header, style: style },
+      paragraphs: {
+        content: newParagraphs,
+        style: style,
+      },
+      buttons: buttons.map((button) => ({
+        content: button.buttonName,
+        style: style,
+      })),
+    };
+    console.log(newExplanationBar);
 
-    dispatch(setTwoPictureArray(newTwoPictureArray));
+    dispatch(setTwoPictureArray(newExplanationBar));
     setImg("");
     setHeader("");
     setMainHeader("");
