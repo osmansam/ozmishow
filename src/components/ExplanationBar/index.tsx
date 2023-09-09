@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AddExplanationItem from "./AddExplanationItem";
 import { ContentStyleType, ExplanationBarType } from "../../shared/types";
+import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
@@ -36,6 +37,8 @@ const ExplanationBar = ({
   const [hovered, setHovered] = useState(Number);
   const [contentType, setContentType] = useState("");
   const [mainHeaderId, setMainHeaderId] = useState("");
+  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const [contentToEdit, setContentToEdit] = useState<string[]>();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -52,6 +55,15 @@ const ExplanationBar = ({
   const openModal = (styleData: any) => {
     setSelectedStyle(styleData);
     setIsModalOpen(true);
+  };
+  const openContentModal = (content: string[]) => {
+    setContentToEdit(content);
+    setIsContentModalOpen(true);
+  };
+
+  const closeContentModal = () => {
+    setContentToEdit([]);
+    setIsContentModalOpen(false);
   };
   const barHeight = explanationArray.length * 25 + 50;
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full  w-full flex flex-col gap-4  justify-between mb-4  h-[${barHeight}px ] bg-[#f9f9f9] rounded-lg py-4 `;
@@ -182,14 +194,46 @@ const ExplanationBar = ({
               <div className="flex flex-col gap-2 w-full border-2">
                 {explanationArray[barSelection].paragraphs?.content?.map(
                   (paragraph, index) => (
-                    <p
-                      key={index}
-                      className=" font-[400] leading-6"
-                      style={{ color: "#333333" }}
-                    >
-                      {paragraph}
-                    </p>
+                    <div key={index}>
+                      <p
+                        className=" font-[400] leading-6 text-[#333333]"
+                        style={
+                          explanationArray[barSelection].paragraphs?.style
+                            ? explanationArray[barSelection].paragraphs?.style
+                            : {}
+                        }
+                      >
+                        {paragraph}
+                      </p>
+                    </div>
                   )
+                )}
+                {explanationArray[barSelection].paragraphs?.content && (
+                  <button
+                    onClick={() =>
+                      openContentModal(
+                        explanationArray[barSelection].paragraphs
+                          ?.content as string[]
+                      )
+                    }
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-700 mr-2"
+                  >
+                    Edit
+                  </button>
+                )}
+                {/* ContentModal for editing paragraphs */}
+                {isContentModalOpen && (
+                  <ContentModal
+                    isOpen={isContentModalOpen}
+                    content={contentToEdit as string[]}
+                    onClose={closeContentModal}
+                    onSave={(editedContent) => {
+                      // Handle saving the edited content here.
+                      // You can update the state or perform any necessary actions.
+                      console.log("Edited Content:", editedContent);
+                      closeContentModal();
+                    }}
+                  />
                 )}
                 {/* editing part */}
                 <div className="flex flex-row justify-end gap-2">
@@ -200,6 +244,8 @@ const ExplanationBar = ({
                         openModal({
                           style:
                             explanationArray[barSelection].paragraphs?.style,
+                          content:
+                            explanationArray[barSelection].paragraphs?.content,
                         });
                         setContentType("paragraphs");
                       }}

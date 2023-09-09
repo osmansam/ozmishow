@@ -173,6 +173,15 @@ function StyledModal({
           },
         },
       ];
+    } else if (contentType === "paragraphs") {
+      container = [
+        {
+          paragraphs: {
+            content: editedStyle.content,
+            style: editedStyle.style,
+          },
+        },
+      ];
     }
     // console.log(editedStyle);
     await dispatch(
