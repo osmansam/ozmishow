@@ -125,6 +125,7 @@ const ExplanationBar = ({
                         twoPictureId={id}
                         explanationId={explanationId ? explanationId : ""}
                         contentType="mainHeader"
+                        isContentSend={true}
                       />
                     )}
                 </div>
@@ -173,20 +174,52 @@ const ExplanationBar = ({
                     twoPictureId={id}
                     explanationId={explanationArray[barSelection]._id ?? ""}
                     contentType="header"
+                    isContentSend={true}
                   />
                 )}
               </h2>
-              {explanationArray[barSelection].paragraphs?.content?.map(
-                (paragraph, index) => (
-                  <p
-                    key={index}
-                    className=" font-[400] leading-6"
-                    style={{ color: "#333333" }}
-                  >
-                    {paragraph}
-                  </p>
-                )
-              )}
+              {/* paragraphs */}
+              <div className="flex flex-col gap-2 w-full border-2">
+                {explanationArray[barSelection].paragraphs?.content?.map(
+                  (paragraph, index) => (
+                    <p
+                      key={index}
+                      className=" font-[400] leading-6"
+                      style={{ color: "#333333" }}
+                    >
+                      {paragraph}
+                    </p>
+                  )
+                )}
+                {/* editing part */}
+                <div className="flex flex-row justify-end gap-2">
+                  {!isModalOpen && (
+                    <AiOutlineDown
+                      className="text-lg justify-end"
+                      onClick={() => {
+                        openModal({
+                          style:
+                            explanationArray[barSelection].paragraphs?.style,
+                        });
+                        setContentType("paragraphs");
+                      }}
+                    />
+                  )}
+                  {isModalOpen && contentType === "paragraphs" && (
+                    <StyledModal
+                      key={explanationArray[barSelection]._id}
+                      isOpen={isModalOpen}
+                      styleData={selectedStyle}
+                      onClose={() => setIsModalOpen(false)}
+                      twoPictureId={id}
+                      explanationId={explanationArray[barSelection]._id ?? ""}
+                      contentType="paragraphs"
+                      isContentSend={false}
+                    />
+                  )}
+                  <AiOutlineDown />
+                </div>
+              </div>
               {isAdmin && (
                 <button
                   className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"

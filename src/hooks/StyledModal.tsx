@@ -28,6 +28,7 @@ interface StyledModalProps {
   twoPictureId: string;
   explanationId: string;
   contentType: string;
+  isContentSend?: boolean;
 }
 
 function StyledModal({
@@ -37,6 +38,7 @@ function StyledModal({
   twoPictureId,
   explanationId,
   contentType,
+  isContentSend,
 }: StyledModalProps) {
   const dispatch = useAppDispatch();
   const [editedStyle, setEditedStyle] = useState<StyleData>(styleData);
@@ -307,20 +309,23 @@ function StyledModal({
               <h2 className="text-lg font-semibold mb-2 capitalize">
                 {contentType} Style
               </h2>
-              <div className="mb-2">
-                <label htmlFor="content" className="block text-gray-600">
-                  Content:
-                </label>
-                <input
-                  type="text"
-                  id="content"
-                  name="content"
-                  value={editedStyle.content}
-                  onChange={handleInputChange}
-                  className="border rounded px-2 py-1 w-full capitalize"
-                  style={editedStyle.style}
-                />
-              </div>
+              {/* content part */}
+              {isContentSend && (
+                <div className="mb-2">
+                  <label htmlFor="content" className="block text-gray-600">
+                    Content:
+                  </label>
+                  <input
+                    type="text"
+                    id="content"
+                    name="content"
+                    value={editedStyle.content}
+                    onChange={handleInputChange}
+                    className="border rounded px-2 py-1 w-full capitalize"
+                    style={editedStyle.style}
+                  />
+                </div>
+              )}
               {/* Add "Effect  All" option */}
               <div className="mb-2">
                 <label htmlFor="effectAll" className="block text-gray-600">
