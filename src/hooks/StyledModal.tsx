@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { SketchPicker } from "react-color";
-import { editExplanationBar } from "../features/twoPicture/twoPictureSlice";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store";
 
 interface StyleType {
   color: string;
@@ -25,6 +22,11 @@ interface StyledModalProps {
   isOpen: boolean;
   styleData: StyleData;
   onClose: () => void;
+  onSave: (
+    container: StyleData,
+    twoPictureId: string,
+    explanationId: string
+  ) => void;
   twoPictureId: string;
   explanationId: string;
   contentType: string;
@@ -35,12 +37,12 @@ function StyledModal({
   isOpen,
   styleData,
   onClose,
+  onSave,
   twoPictureId,
   explanationId,
   contentType,
   isContentSend,
 }: StyledModalProps) {
-  const dispatch = useAppDispatch();
   const [editedStyle, setEditedStyle] = useState<StyleData>(styleData);
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(styleData.style.color);
@@ -184,16 +186,9 @@ function StyledModal({
       ];
     }
     // console.log(editedStyle);
-    await dispatch(
-      editExplanationBar({
-        twoPictureId,
-        explanationBarId: explanationId,
-        container,
-      })
-    );
+    onSave(container, twoPictureId, explanationId);
     setEffectAllElement(true);
     onClose();
-    window.location.reload();
   };
 
   const handleOutsideClick = () => {
