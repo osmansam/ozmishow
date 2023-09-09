@@ -33,6 +33,11 @@ export interface PressType {
   header?: string;
   description: string;
 }
+
+export interface StyleData {
+  content: string;
+  style: StyleType;
+}
 export interface PictureType {
   img?: string;
   header?: string;

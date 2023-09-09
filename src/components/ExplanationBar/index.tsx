@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import AddExplanationItem from "./AddExplanationItem";
-import { ContentStyleType, ExplanationBarType } from "../../shared/types";
+import {
+  ContentStyleType,
+  ExplanationBarType,
+  StyleData,
+} from "../../shared/types";
 import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
@@ -8,7 +12,9 @@ import {
   updateExplanationBar,
   resetTwoPictureArray,
   deleteItemInContainer,
+  editExplanationBar,
 } from "../../features/twoPicture/twoPictureSlice";
+
 import StyledModal from "../../hooks/StyledModal";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 const ExplanationBar = ({
@@ -65,6 +71,21 @@ const ExplanationBar = ({
     setContentToEdit("");
     setIsContentModalOpen(false);
   };
+  const handleEditConfirm = async (
+    container: StyleData,
+    twoPictureId: string,
+    explanationId: string
+  ) => {
+    await dispatch(
+      editExplanationBar({
+        twoPictureId,
+        explanationBarId: explanationId,
+        container,
+      })
+    );
+    window.location.reload();
+  };
+
   const barHeight = explanationArray.length * 25 + 50;
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full  w-full flex flex-col gap-4  justify-between mb-4  h-[${barHeight}px ] bg-[#f9f9f9] rounded-lg py-4 `;
   return (
@@ -134,6 +155,7 @@ const ExplanationBar = ({
                         isOpen={isModalOpen}
                         styleData={selectedStyle}
                         onClose={() => setIsModalOpen(false)}
+                        onSave={handleEditConfirm}
                         twoPictureId={id}
                         explanationId={explanationId ? explanationId : ""}
                         contentType="mainHeader"
@@ -183,6 +205,7 @@ const ExplanationBar = ({
                     isOpen={isModalOpen}
                     styleData={selectedStyle}
                     onClose={() => setIsModalOpen(false)}
+                    onSave={handleEditConfirm}
                     twoPictureId={id}
                     explanationId={explanationArray[barSelection]._id ?? ""}
                     contentType="header"
@@ -258,6 +281,7 @@ const ExplanationBar = ({
                         isOpen={isModalOpen}
                         styleData={selectedStyle}
                         onClose={() => setIsModalOpen(false)}
+                        onSave={handleEditConfirm}
                         twoPictureId={id}
                         explanationId={explanationArray[barSelection]._id ?? ""}
                         contentType="paragraphs"
