@@ -266,10 +266,7 @@ export const editExplanationBar = createAsyncThunk(
   }) => {
     const url = `twoPicture/editExplanationBar/${twoPictureId}/${explanationBarId}`;
     try {
-      const response = await axios.patch(
-        `http://localhost:3002/api/v1/${url}`,
-        { container }
-      );
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
       return response.data;
     } catch (error) {
       return error;
