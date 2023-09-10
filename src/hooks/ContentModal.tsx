@@ -49,14 +49,32 @@ const ContentModal: React.FC<ContentModalProps> = ({
 
   const handleSave = async () => {
     // Update the content
-    const container = [
-      {
-        paragraphs: {
-          content: editedContent.content,
-          style: editedContent.style,
-        },
-      },
-    ];
+    let container;
+
+    switch (contentType) {
+      case "paragraphs":
+        container = [
+          {
+            paragraphs: {
+              content: editedContent.content,
+              style: editedContent.style,
+            },
+          },
+        ];
+        break;
+      case "subHeaders":
+        container = [
+          {
+            subHeaders: {
+              content: editedContent.content,
+              style: editedContent.style,
+            },
+          },
+        ];
+        break;
+      default:
+        break;
+    }
     switch (type) {
       case "explanationBar":
         await dispatch(
@@ -86,9 +104,11 @@ const ContentModal: React.FC<ContentModalProps> = ({
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 flex justify-center  items-center bg-gray-500 bg-opacity-75 z-40 ">
-      <div className="bg-white p-4 rounded-lg z-50">
-        <h2 className="text-lg font-semibold mb-4">Edit Content</h2>
+    <div className=" fixed inset-0 flex justify-center  items-center bg-gray-500 bg-opacity-75 z-40 ">
+      <div className="bg-white p-4 rounded-lg z-50 min-w-full ">
+        <h2 className="text-lg font-semibold mb-4 capitalize">
+          {contentType} Content
+        </h2>
         <div className="overflow-y-auto max-h-80">
           {editedContent.content.map((paragraph, index) => (
             <textarea

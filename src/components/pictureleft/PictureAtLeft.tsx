@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
-import { PictureType } from "../../shared/types";
+import { PictureType, PictureWithStyleType } from "../../shared/types";
+import StyledModal from "../../hooks/StyledModal";
+import ContentModal from "../../hooks/ContentModal";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../../store";
+import { AiOutlineDown } from "react-icons/ai";
 
-const PictureAtLeft = ({ img, header, paragraphs, buttons }: PictureType) => {
+const PictureAtLeft = ({
+  img,
+  header,
+  paragraphs,
+  buttons,
+  _id,
+}: PictureWithStyleType) => {
+  const dispatch = useAppDispatch();
+  const { isAdmin } = useSelector((state: RootState) => state.context);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const [contentToEdit, setContentToEdit] = useState<any>();
+  const [contentType, setContentType] = useState("");
+  const [contentModalContentType, setContentModalContentType] = useState("");
+
+  const [selectedStyle, setSelectedStyle] = useState({
+    content: "",
+    style: {
+      color: "",
+      fontWeight: "",
+      backgroundColor: "",
+      padding: "",
+      fontSize: "",
+      fontFamily: "",
+      hover: "",
+      effectAll: true,
+    },
+  });
+
+  const openModal = (styleData: any) => {
+    setSelectedStyle(styleData);
+    setIsModalOpen(true);
+  };
+  const openContentModal = (content: any, contentType: string) => {
+    setContentToEdit(content);
+    setContentModalContentType(contentType);
+
+    setIsContentModalOpen(true);
+  };
   return (
     <div className="lg:flex w-4/5 lg:justify-between h-full mx-auto  py-10 ">
       {/* left side */}
@@ -17,17 +60,74 @@ const PictureAtLeft = ({ img, header, paragraphs, buttons }: PictureType) => {
       <div className="basis-1/2 ">
         {/* if you want to have more wide paragraphs you need to decrease lg:pl-28 */}
         <div className="flex w-full lg:pl-28 gap-4 flex-col h-full md:pt-20">
-          <h1 className="font-[700] text-4xl">{header}</h1>
+          <h1 className="font-[700] text-4xl">{header?.content}</h1>
           {/* paragraphs */}
-          {paragraphs?.map((paragraph, index) => (
-            <p
-              key={index}
-              className=" font-[400] leading-6 "
-              style={{ color: "#333333" }}
-            >
-              {paragraph}
-            </p>
-          ))}
+
+          <div className="flex flex-col gap-2 w-full  ">
+            {paragraphs?.content?.map((paragraph, index) => (
+              <div key={index}>
+                <p
+                  className=" font-[400] leading-6 text-[#333333] rounded-lg px-4 py-1"
+                  style={paragraphs?.style ? paragraphs?.style : {}}
+                >
+                  {paragraph}
+                </p>
+              </div>
+            ))}
+
+            {/* ContentModal for editing paragraphs */}
+            {isContentModalOpen && (
+              <ContentModal
+                isOpen={isContentModalOpen}
+                content={contentToEdit}
+                onClose={() => setIsContentModalOpen(false)}
+                componentId={""}
+                type="explanationBar"
+                contentType="paragraphs"
+                twoPictureId={_id ?? ""}
+              />
+            )}
+            {/* editing part */}
+            {isAdmin && (
+              <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
+                {!isModalOpen && (
+                  <button
+                    className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                    onClick={() => {
+                      openModal({
+                        style: paragraphs?.style,
+                        content: paragraphs?.content,
+                      });
+                      setContentType("paragraphs");
+                    }}
+                  >
+                    Style <AiOutlineDown className="my-auto" />
+                  </button>
+                )}
+                {paragraphs?.content && (
+                  <button
+                    onClick={() => openContentModal(paragraphs, "paragraphs")}
+                    className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                  >
+                    Edit
+                    <AiOutlineDown className="my-auto" />
+                  </button>
+                )}
+                {isModalOpen && contentType === "paragraphs" && (
+                  <StyledModal
+                    isOpen={isModalOpen}
+                    styleData={selectedStyle}
+                    onClose={() => setIsModalOpen(false)}
+                    type="explanationBar"
+                    twoPictureId={_id ?? ""}
+                    componentId={_id ?? ""}
+                    contentType="paragraphs"
+                    isContentSend={false}
+                  />
+                )}
+              </div>
+            )}
+          </div>
           {/* buttons */}
           <div className="w-full flex gap-8 flex-row">
             {buttons &&

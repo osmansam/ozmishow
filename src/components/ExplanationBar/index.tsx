@@ -80,14 +80,14 @@ const ExplanationBar = ({
       <div className="w-5/6 mx-auto flex lg:flex-row flex-col items-center sm:items-start ">
         {/* Bar part */}
         <div className={barClassName}>
-          <div className="w-max  gap-4 mx-auto justify-center items-center cursor-pointer">
+          <div className="w-max flex flex-col  gap-4 mx-auto justify-center items-center cursor-pointer">
             {explanationArray.map((explanation, index) => {
               const { mainHeader } = explanation;
               const explanationId = explanation._id;
 
               return (
                 <div
-                  className="flex flex-row my-4 justify-center items-center"
+                  className="flex flex-row  justify-center items-center"
                   key={index}
                 >
                   <li
