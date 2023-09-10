@@ -269,7 +269,10 @@ const PageAdmin = ({ page }: Props) => {
           case "PictureAtRight":
             return (
               <div key={index}>
-                <PictureAtRight {...(item.twoPictureArray[0] as PictureType)} />
+                <PictureAtRight
+                  {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}

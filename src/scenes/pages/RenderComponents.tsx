@@ -82,7 +82,10 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "PictureAtRight":
           return (
             <div key={index}>
-              <PictureAtRight {...(item.twoPictureArray[0] as PictureType)} />
+              <PictureAtRight
+                {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                _id={item && item._id ? item._id : ""}
+              />
             </div>
           );
         case "PictureAtLeft":

@@ -6,7 +6,7 @@ import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { AiOutlineDown } from "react-icons/ai";
-
+import { style } from "../../shared/types";
 const PictureAtLeft = ({
   img,
   header,
@@ -24,16 +24,7 @@ const PictureAtLeft = ({
 
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
-    style: {
-      color: "",
-      fontWeight: "",
-      backgroundColor: "",
-      padding: "",
-      fontSize: "",
-      fontFamily: "",
-      hover: "",
-      effectAll: true,
-    },
+    style: style,
   });
 
   const openModal = (styleData: any) => {
