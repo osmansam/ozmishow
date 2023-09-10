@@ -4,6 +4,7 @@ import { RootState, useAppDispatch } from "../store";
 import {
   editExplanationBar,
   editWorkTeamBar,
+  editTwoPictureStyle,
 } from "../features/twoPicture/twoPictureSlice";
 
 interface StyleType {
@@ -90,6 +91,14 @@ const ContentModal: React.FC<ContentModalProps> = ({
           editWorkTeamBar({
             twoPictureId,
             workTeamBarId: componentId,
+            container,
+          })
+        );
+        break;
+      case "twoPicture":
+        await dispatch(
+          editTwoPictureStyle({
+            twoPictureId,
             container,
           })
         );

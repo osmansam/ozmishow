@@ -12,6 +12,7 @@ import StyledModal from "../../hooks/StyledModal";
 import { AiOutlineDown } from "react-icons/ai";
 import ContentModal from "../../hooks/ContentModal";
 import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
+import { style } from "../../shared/types";
 
 const WorkTeamBar = ({
   mainMainHeader,
@@ -31,16 +32,7 @@ const WorkTeamBar = ({
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
-    style: {
-      color: "",
-      fontWeight: "",
-      backgroundColor: "",
-      padding: "",
-      fontSize: "",
-      fontFamily: "",
-      hover: "",
-      effectAll: true,
-    },
+    style: style,
   });
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture

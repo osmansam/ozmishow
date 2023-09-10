@@ -112,6 +112,7 @@ export const updateTwoPicture = createAsyncThunk(
     }
   }
 );
+
 //delete component container
 export const deleteTwoPicture = createAsyncThunk(
   "twoPicture/deleteTwoPicture",
@@ -286,6 +287,25 @@ export const editWorkTeamBar = createAsyncThunk(
     workTeamBarId: string;
   }) => {
     const url = `twoPicture/editWorkTeamBar/${twoPictureId}/${workTeamBarId}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+//editTwoPictureStyle
+export const editTwoPictureStyle = createAsyncThunk(
+  "twoPicture/editTwoPictureStyle",
+  async ({
+    container,
+    twoPictureId,
+  }: {
+    container: any;
+    twoPictureId: string;
+  }) => {
+    const url = `twoPicture/editTwoPictureStyle/${twoPictureId}`;
     try {
       const response = await axios.patch(`${baseURL}/${url}`, { container });
       return response.data;

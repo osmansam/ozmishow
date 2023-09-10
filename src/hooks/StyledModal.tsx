@@ -4,6 +4,7 @@ import { SketchPicker } from "react-color";
 import {
   editExplanationBar,
   editWorkTeamBar,
+  editTwoPictureStyle,
 } from "../features/twoPicture/twoPictureSlice";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store";
@@ -213,6 +214,14 @@ function StyledModal({
           editWorkTeamBar({
             twoPictureId,
             workTeamBarId: componentId,
+            container,
+          })
+        );
+        break;
+      case "twoPicture":
+        await dispatch(
+          editTwoPictureStyle({
+            twoPictureId,
             container,
           })
         );

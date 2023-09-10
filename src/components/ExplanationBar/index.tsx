@@ -4,6 +4,8 @@ import { ExplanationBarType } from "../../shared/types";
 import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import { style } from "../../shared/types";
+
 import {
   updateExplanationBar,
   resetTwoPictureArray,
@@ -21,16 +23,7 @@ const ExplanationBar = ({
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
-    style: {
-      color: "",
-      fontWeight: "",
-      backgroundColor: "",
-      padding: "",
-      fontSize: "",
-      fontFamily: "",
-      hover: "",
-      effectAll: true,
-    },
+    style: style,
   });
 
   const { isAdmin } = useSelector((state: RootState) => state.context);

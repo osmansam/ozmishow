@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType } from "../../shared/types";
-
+import { style } from "../../shared/types";
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;
@@ -69,8 +69,14 @@ const PictureContainer = ({
 
     const newTwoPictureArray = {
       img,
-      header,
-      paragraphs: isPictureContainerParagraph ? newParagraphs : [],
+      header: {
+        content: header,
+        style: style,
+      },
+      paragraphs: {
+        content: isPictureContainerParagraph ? newParagraphs : [],
+        style: style,
+      },
       buttons: isPictureContainerButton ? updatedButtons : [],
     };
 

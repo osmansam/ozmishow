@@ -131,6 +131,16 @@ export interface StyleType {
   hover: string;
   effectAll?: boolean;
 }
+export const style = {
+  color: "",
+  fontWeight: "",
+  backgroundColor: "",
+  padding: "",
+  fontSize: "",
+  fontFamily: "",
+  hover: "",
+  effectAll: false,
+};
 
 export interface PictureWithStyleType {
   img?: string;
