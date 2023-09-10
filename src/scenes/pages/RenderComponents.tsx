@@ -194,7 +194,10 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "PageBanner":
           return (
             <div key={index}>
-              <PageBanner {...(item.twoPictureArray[0] as PictureType)} />
+              <PageBanner
+                {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                _id={item && item._id ? item._id : ""}
+              />
             </div>
           );
         case "FrequentlyAskedQuestions":
