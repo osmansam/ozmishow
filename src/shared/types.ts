@@ -143,7 +143,10 @@ export interface PictureWithStyleType {
   _id?: string;
   twoPictureId?: string;
   mainHeader?: ContentStyleType;
-  subHeaders?: string[];
+  subHeaders?: {
+    content?: string[];
+    style: StyleType;
+  };
   name?: string;
   lastName?: string;
   title?: string;
@@ -171,7 +174,7 @@ export interface SliderType {
 export interface WorkTeamBarType {
   id: string;
   mainMainHeader?: string;
-  workTeamArray: Array<PictureType>;
+  workTeamArray: Array<PictureWithStyleType>;
 }
 interface ComponentType {
   name: string;

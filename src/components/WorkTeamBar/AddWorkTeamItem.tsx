@@ -73,12 +73,30 @@ const AddWorkTeamItem = ({
       }
       setButtons(updatedButtons);
     }
-
+    const style = {
+      color: "",
+      fontWeight: "",
+      backgroundColor: "",
+      padding: "",
+      fontSize: "",
+      fontFamily: "",
+      hover: "",
+      effectAll: false,
+    };
     const newTwoPictureArray = {
       img,
-      subHeaders: isPictureContainerParagraph ? newHeaders : [],
-      paragraphs: isPictureContainerParagraph ? newParagraphs : [],
-      mainHeader,
+      subHeaders: {
+        content: newHeaders,
+        style: style,
+      },
+      paragraphs: {
+        content: isPictureContainerParagraph ? newParagraphs : [],
+        style: style,
+      },
+      mainHeader: {
+        content: mainHeader,
+        style: style,
+      },
     };
 
     dispatch(setTwoPictureArray(newTwoPictureArray));

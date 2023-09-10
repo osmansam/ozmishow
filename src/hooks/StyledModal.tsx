@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { SketchPicker } from "react-color";
+import {
+  editExplanationBar,
+  editWorkTeamBar,
+} from "../features/twoPicture/twoPictureSlice";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../store";
 
 interface StyleType {
   color: string;
@@ -22,27 +28,24 @@ interface StyledModalProps {
   isOpen: boolean;
   styleData: StyleData;
   onClose: () => void;
-  onSave: (
-    container: StyleData,
-    twoPictureId: string,
-    explanationId: string
-  ) => void;
   twoPictureId: string;
-  explanationId: string;
+  componentId: string;
   contentType: string;
   isContentSend?: boolean;
+  type?: string;
 }
 
 function StyledModal({
   isOpen,
   styleData,
   onClose,
-  onSave,
   twoPictureId,
-  explanationId,
+  componentId,
   contentType,
   isContentSend,
+  type,
 }: StyledModalProps) {
+  const dispatch = useAppDispatch();
   const [editedStyle, setEditedStyle] = useState<StyleData>(styleData);
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(styleData.style.color);
@@ -184,11 +187,42 @@ function StyledModal({
           },
         },
       ];
+    } else if (contentType === "subHeaders") {
+      container = [
+        {
+          subHeaders: {
+            content: editedStyle.content,
+            style: editedStyle.style,
+          },
+        },
+      ];
     }
-    // console.log(editedStyle);
-    onSave(container, twoPictureId, explanationId);
+    switch (type) {
+      case "explanationBar":
+        // console.log(editedStyle);
+        await dispatch(
+          editExplanationBar({
+            twoPictureId,
+            explanationBarId: componentId,
+            container,
+          })
+        );
+        break;
+      case "workTeamBar":
+        await dispatch(
+          editWorkTeamBar({
+            twoPictureId,
+            workTeamBarId: componentId,
+            container,
+          })
+        );
+        break;
+      default:
+        break;
+    }
     setEffectAllElement(true);
     onClose();
+    window.location.reload();
   };
 
   const handleOutsideClick = () => {

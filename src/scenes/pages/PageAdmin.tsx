@@ -612,7 +612,7 @@ const PageAdmin = ({ page }: Props) => {
                 <WorkTeamBar
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
-                  workTeamArray={twoPictureArray as PictureType[]}
+                  workTeamArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}

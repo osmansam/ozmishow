@@ -55,7 +55,7 @@ function extractHeaders(response: AxiosResponse) {
   };
 }
 
-const baseURL = "https://ozmishow-back.onrender.com/api/v1";
+const baseURL = "http://localhost:3002/api/v1";
 //get Componont container
 export const getPageTwoPictures = createAsyncThunk(
   "twoPicture/getPageTwoPictures",
@@ -265,6 +265,27 @@ export const editExplanationBar = createAsyncThunk(
     explanationBarId: string;
   }) => {
     const url = `twoPicture/editExplanationBar/${twoPictureId}/${explanationBarId}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+//editWorkTeamBar
+export const editWorkTeamBar = createAsyncThunk(
+  "twoPicture/editWorkTeamBar",
+  async ({
+    container,
+    twoPictureId,
+    workTeamBarId,
+  }: {
+    container: any;
+    twoPictureId: string;
+    workTeamBarId: string;
+  }) => {
+    const url = `twoPicture/editWorkTeamBar/${twoPictureId}/${workTeamBarId}`;
     try {
       const response = await axios.patch(`${baseURL}/${url}`, { container });
       return response.data;

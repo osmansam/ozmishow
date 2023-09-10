@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store";
-import { editExplanationBar } from "../features/twoPicture/twoPictureSlice";
+import {
+  editExplanationBar,
+  editWorkTeamBar,
+} from "../features/twoPicture/twoPictureSlice";
 
 interface StyleType {
   color: string;
@@ -22,7 +25,9 @@ interface ContentModalProps {
   content: ContentData;
   onClose: () => void;
   twoPictureId: string;
-  explanationId: string;
+  componentId: string;
+  contentType: string;
+  type?: string;
 }
 
 const ContentModal: React.FC<ContentModalProps> = ({
@@ -30,7 +35,9 @@ const ContentModal: React.FC<ContentModalProps> = ({
   content,
   onClose,
   twoPictureId,
-  explanationId,
+  componentId,
+  contentType,
+  type,
 }) => {
   const dispatch = useAppDispatch();
   const [editedContent, setEditedContent] = useState<ContentData>(content);
@@ -50,13 +57,28 @@ const ContentModal: React.FC<ContentModalProps> = ({
         },
       },
     ];
-    await dispatch(
-      editExplanationBar({
-        twoPictureId,
-        explanationBarId: explanationId,
-        container,
-      })
-    );
+    switch (type) {
+      case "explanationBar":
+        await dispatch(
+          editExplanationBar({
+            twoPictureId,
+            explanationBarId: componentId,
+            container,
+          })
+        );
+        break;
+      case "workTeamBar":
+        await dispatch(
+          editWorkTeamBar({
+            twoPictureId,
+            workTeamBarId: componentId,
+            container,
+          })
+        );
+        break;
+      default:
+        break;
+    }
 
     // Close the modal
     onClose();
