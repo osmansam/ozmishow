@@ -4,6 +4,10 @@ import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { FreqAskedType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
+import { AiOutlineDown } from "react-icons/ai";
+import { style } from "../../shared/types";
+import StyledModal from "../../hooks/StyledModal";
+import ContentModal from "../../hooks/ContentModal";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import {
   updateContainer,
@@ -15,11 +19,37 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
   const [selection, setSelection] = useState(-1);
   const [isAddNewItem, setIsAddNewItem] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const [contentToEdit, setContentToEdit] = useState<any>();
+  const [modalId, setModalId] = useState<string>("");
+  const [contentType, setContentType] = useState("");
+  const [contentModalContentType, setContentModalContentType] = useState("");
+
+  const [selectedStyle, setSelectedStyle] = useState({
+    content: "",
+    style: style,
+  });
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
   const dispatch = useAppDispatch();
+  const openModal = (styleData: any, idModal: string) => {
+    setSelectedStyle(styleData);
+    setIsModalOpen(true);
+    setModalId(idModal);
+  };
+  const openContentModal = (
+    content: any,
+    contentType: string,
+    idModal: string
+  ) => {
+    setContentToEdit(content);
+    setContentModalContentType(contentType);
 
+    setIsContentModalOpen(true);
+    setModalId(idModal);
+  };
   const handleCreate = async () => {
     dispatch(updateContainer({ container: twoPictureArray, id }));
     setIsAddNewItem(false);
@@ -52,8 +82,47 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
       {freqAskedArray.map((freqAsked, index) => {
         const { header, paragraphs, buttons, _id } = freqAsked;
         return (
-          <div key={index} onClick={() => setSelection(index)}>
-            <h1 className="font-[500] pt-2 px-4">{header}</h1>
+          <div
+            key={index}
+            onClick={() => setSelection(index)}
+            className="h-fit w-full rounded-lg  cursor-pointer"
+          >
+            <h1
+              className="font-[500] pt-2  text-[#333333] flex flex-row gap-8"
+              style={header?.style ? header?.style : {}}
+            >
+              {header?.content}
+              {!isModalOpen && isAdmin && (
+                <AiOutlineDown
+                  className="text-lg justify-end my-auto"
+                  onClick={() => {
+                    openModal(
+                      {
+                        style: header?.style,
+                        content: header?.content,
+                      },
+                      index.toString()
+                    );
+                    setContentType("header");
+                  }}
+                />
+              )}
+              {isModalOpen &&
+                contentType === "header" &&
+                modalId === index.toString() && (
+                  <StyledModal
+                    key={id}
+                    isOpen={isModalOpen}
+                    styleData={selectedStyle}
+                    onClose={() => setIsModalOpen(false)}
+                    type="twoPictureIndex"
+                    twoPictureId={id ?? ""}
+                    componentId={index?.toString() ?? ""}
+                    contentType="header"
+                    isContentSend={true}
+                  />
+                )}
+            </h1>
             {selection === index && (
               <motion.div
                 className="overflow-hidden"
@@ -61,18 +130,71 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
                 animate={{ height: selection === index ? "auto" : 0 }}
                 transition={{ duration: 0.5 }}
               >
-                {paragraphs?.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className="font-[400] leading-6 px-4 pt-2"
-                    style={{ color: "#333333" }}
-                  >
-                    {paragraph}
-                  </p>
-                ))}
+                <div className="flex flex-col gap-2 w-full rounded-lg py-1 px-4 mt-2 ">
+                  {paragraphs?.content?.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className=" font-[400] leading-6 text-[#333333]"
+                      style={paragraphs?.style ? paragraphs?.style : {}}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+
+                {/* ContentModal for editing paragraphs */}
+                {isContentModalOpen && modalId === index.toString() && (
+                  <ContentModal
+                    isOpen={isContentModalOpen}
+                    content={contentToEdit}
+                    onClose={() => setIsContentModalOpen(false)}
+                    componentId={index?.toString() ?? ""}
+                    type="twoPictureIndex"
+                    contentType="paragraphs"
+                    twoPictureId={id ?? ""}
+                  />
+                )}
+                {/* editing part */}
+                {isAdmin && (
+                  <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
+                    {
+                      <button
+                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                        onClick={() => {
+                          openModal(
+                            {
+                              style: paragraphs?.style,
+                              content: paragraphs?.content,
+                            },
+                            index.toString()
+                          );
+                          setContentType("paragraphs");
+                        }}
+                      >
+                        Paragraph Style <AiOutlineDown className="my-auto" />
+                      </button>
+                    }
+                    {paragraphs?.content && (
+                      <button
+                        onClick={() =>
+                          openContentModal(
+                            paragraphs,
+                            "paragraphs",
+                            index.toString()
+                          )
+                        }
+                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+                      >
+                        Paragraph Edit
+                        <AiOutlineDown className="my-auto" />
+                      </button>
+                    )}
+                  </div>
+                )}
                 {buttons &&
+                  buttons.length > 0 &&
                   buttons.map((button, index) => (
-                    <div className="mt-4 px-4 " key={index}>
+                    <div className=" px-4 " key={index}>
                       <ButtonUnderline
                         text={button.buttonName}
                         buttonLink={button.buttonLink}
@@ -84,7 +206,21 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
                   ))}
               </motion.div>
             )}
-            {isAdmin && (
+            {isModalOpen &&
+              contentType === "paragraphs" &&
+              modalId === index.toString() && (
+                <StyledModal
+                  isOpen={isModalOpen}
+                  styleData={selectedStyle}
+                  onClose={() => setIsModalOpen(false)}
+                  type="twoPictureIndex"
+                  twoPictureId={id ?? ""}
+                  componentId={index?.toString() ?? ""}
+                  contentType="paragraphs"
+                  isContentSend={false}
+                />
+              )}
+            {isAdmin && selection === index && (
               <button
                 className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
                 onClick={async () => {

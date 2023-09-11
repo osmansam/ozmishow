@@ -5,6 +5,7 @@ import {
   editExplanationBar,
   editWorkTeamBar,
   editTwoPictureStyle,
+  editTwoPictureIndexStyle,
 } from "../features/twoPicture/twoPictureSlice";
 
 interface StyleType {
@@ -100,6 +101,15 @@ const ContentModal: React.FC<ContentModalProps> = ({
           editTwoPictureStyle({
             twoPictureId,
             container,
+          })
+        );
+        break;
+      case "twoPictureIndex":
+        await dispatch(
+          editTwoPictureIndexStyle({
+            twoPictureId,
+            container,
+            index: componentId,
           })
         );
         break;

@@ -72,13 +72,15 @@ export interface MapType {
   lng: number;
 }
 export interface TwoPictureContainerType {
+  id: string;
   mainHeader?: string;
-  twoPictureArray: Array<PictureType>;
+  twoPictureArray: Array<PictureWithStyleType>;
 }
 
 export interface IconExplainContainerType {
+  id: string;
   mainHeader?: string;
-  iconExplainArray: Array<PictureType>;
+  iconExplainArray: Array<PictureWithStyleType>;
 }
 export interface NewsContainerType {
   id: string;
@@ -105,11 +107,11 @@ export interface YoutubeType {
 }
 export interface FreqAskedType {
   id: string;
-  freqAskedArray: Array<PictureType>;
+  freqAskedArray: Array<PictureWithStyleType>;
 }
 export interface FullPageItemType {
   mainMainHeader?: string;
-  fullPageItemArray: Array<PictureType>;
+  fullPageItemArray: Array<PictureWithStyleType>;
   id: string;
 }
 export interface ExplanationBarType {
@@ -169,6 +171,7 @@ export interface PictureWithStyleType {
   paragraph?: ContentStyleType;
   paragraphStyle?: ContentStyleType;
   icon?: string;
+  index?: number;
 }
 
 export interface CarouselType {

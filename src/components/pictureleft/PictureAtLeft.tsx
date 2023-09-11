@@ -84,13 +84,13 @@ const PictureAtLeft = ({
           </h1>
           {/* paragraphs */}
 
-          <div
-            className="flex flex-col gap-2 w-full rounded-lg py-1  "
-            style={paragraphs?.style ? paragraphs?.style : {}}
-          >
+          <div className="flex flex-col gap-2 w-full rounded-lg py-1  ">
             {paragraphs?.content?.map((paragraph, index) => (
               <div key={index}>
-                <p className=" font-[400] leading-6 text-[#333333] rounded-lg px-4 py-1">
+                <p
+                  className=" font-[400] leading-6 rounded-lg px-4 py-1  text-[#333333] "
+                  style={paragraphs?.style ? paragraphs?.style : {}}
+                >
                   {paragraph}
                 </p>
               </div>

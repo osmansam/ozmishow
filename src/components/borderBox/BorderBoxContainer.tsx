@@ -19,7 +19,11 @@ const BorderBoxContainer = ({
           {twoPictureArray.map((item, index) => {
             const { img, header } = item;
             return (
-              <BorderBox key={index} img={img} header={header}></BorderBox>
+              <BorderBox
+                key={index}
+                img={img}
+                header={header?.content}
+              ></BorderBox>
             );
           })}
         </div>

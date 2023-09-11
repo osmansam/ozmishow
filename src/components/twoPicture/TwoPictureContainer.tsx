@@ -5,6 +5,7 @@ import TwoPicture from "./TwoPicture";
 const TwoPictureContainer = ({
   mainHeader,
   twoPictureArray,
+  id,
 }: TwoPictureContainerType) => {
   return (
     <div className="w-5/6 h-full mx-auto py-10 ">
@@ -19,6 +20,8 @@ const TwoPictureContainer = ({
           const { img, header, paragraphs, buttons } = twoPicture;
           return (
             <TwoPicture
+              _id={id}
+              index={index}
               key={index}
               img={img}
               header={header}

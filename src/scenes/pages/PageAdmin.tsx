@@ -308,7 +308,8 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <TwoPictureContainer
                   mainHeader={item.mainHeader}
-                  twoPictureArray={twoPictureArray as PictureType[]}
+                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                  id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -341,7 +342,8 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <IconExplainContainer
                   mainHeader={mainHeader}
-                  iconExplainArray={twoPictureArray as PictureType[]}
+                  iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                  id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -357,7 +359,10 @@ const PageAdmin = ({ page }: Props) => {
           case "MaximContainer":
             return (
               <div key={index}>
-                <MaximContainer {...(item.twoPictureArray[0] as PictureType)} />
+                <MaximContainer
+                  {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
                 <PageConfigurationButtons
                   index={index}
                   moveItem={moveItem}
@@ -373,8 +378,9 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <BorderBoxContainer
+                  id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
-                  twoPictureArray={twoPictureArray as PictureType[]}
+                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -603,7 +609,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <FreqAsked
                   id={item && item._id ? item._id : ""}
-                  freqAskedArray={twoPictureArray as PictureType[]}
+                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -722,7 +728,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <FullPageItem
                   mainMainHeader={mainHeader}
-                  fullPageItemArray={twoPictureArray as PictureType[]}
+                  fullPageItemArray={twoPictureArray as PictureWithStyleType[]}
                   id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons

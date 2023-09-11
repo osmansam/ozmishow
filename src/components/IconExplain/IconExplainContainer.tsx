@@ -5,6 +5,7 @@ import IconExplain from "./IconExplain";
 const IconExplainContainer = ({
   mainHeader,
   iconExplainArray,
+  id,
 }: IconExplainContainerType) => {
   return (
     <div className="w-5/6 h-full mx-auto py-10 md:py-20">
@@ -19,11 +20,13 @@ const IconExplainContainer = ({
           const { img, header, paragraphs, buttons } = iconExplain;
           return (
             <IconExplain
+              _id={id}
               key={index}
               img={img}
               header={header}
               paragraphs={paragraphs}
               buttons={buttons}
+              index={index}
             ></IconExplain>
           );
         })}

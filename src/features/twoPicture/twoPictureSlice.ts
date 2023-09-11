@@ -314,6 +314,27 @@ export const editTwoPictureStyle = createAsyncThunk(
     }
   }
 );
+// editTwoPictureIndexStyle
+export const editTwoPictureIndexStyle = createAsyncThunk(
+  "twoPicture/editTwoPictureIndexStyle",
+  async ({
+    container,
+    twoPictureId,
+    index,
+  }: {
+    container: any;
+    twoPictureId: string;
+    index: string;
+  }) => {
+    const url = `twoPicture/editTwoPictureIndexStyle/${twoPictureId}/${index}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 // updateSlider
 export const updateSlider = createAsyncThunk(

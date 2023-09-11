@@ -5,6 +5,7 @@ import {
   editExplanationBar,
   editWorkTeamBar,
   editTwoPictureStyle,
+  editTwoPictureIndexStyle,
 } from "../features/twoPicture/twoPictureSlice";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store";
@@ -219,10 +220,30 @@ function StyledModal({
         );
         break;
       case "twoPicture":
+        if (componentId !== "") {
+          await dispatch(
+            editExplanationBar({
+              twoPictureId,
+              explanationBarId: componentId,
+              container,
+            })
+          );
+        } else {
+          await dispatch(
+            editTwoPictureStyle({
+              twoPictureId,
+              container,
+            })
+          );
+        }
+
+        break;
+      case "twoPictureIndex":
         await dispatch(
-          editTwoPictureStyle({
+          editTwoPictureIndexStyle({
             twoPictureId,
             container,
+            index: componentId,
           })
         );
         break;

@@ -101,8 +101,9 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           return (
             <div key={index}>
               <TwoPictureContainer
+                id={item && item._id ? item._id : ""}
                 mainHeader={item.mainHeader}
-                twoPictureArray={twoPictureArray as PictureType[]}
+                twoPictureArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );
@@ -111,22 +112,27 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <IconExplainContainer
                 mainHeader={mainHeader}
-                iconExplainArray={twoPictureArray as PictureType[]}
+                iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                id={item && item._id ? item._id : ""}
               />
             </div>
           );
         case "MaximContainer":
           return (
             <div key={index}>
-              <MaximContainer {...(item.twoPictureArray[0] as PictureType)} />
+              <MaximContainer
+                {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                _id={item && item._id ? item._id : ""}
+              />
             </div>
           );
         case "BorderBoxContainer":
           return (
             <div key={index}>
               <BorderBoxContainer
+                id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
-                twoPictureArray={twoPictureArray as PictureType[]}
+                twoPictureArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );
@@ -205,7 +211,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <FreqAsked
                 id={item && item._id ? item._id : ""}
-                freqAskedArray={twoPictureArray as PictureType[]}
+                freqAskedArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );
@@ -284,7 +290,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <FullPageItem
                 mainMainHeader={mainHeader}
-                fullPageItemArray={twoPictureArray as PictureType[]}
+                fullPageItemArray={twoPictureArray as PictureWithStyleType[]}
                 id={item && item._id ? item._id : ""}
               />
             </div>
