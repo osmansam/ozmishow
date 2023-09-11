@@ -459,6 +459,7 @@ function StyledModal({
                   <option value="Times New Roman">Times New Roman</option>
                   <option value="Georgia">Georgia</option>
                   <option value="Verdana">Verdana</option>
+                  <option value="Comic Sans MS">Comic Sans</option>
                 </select>
               </div>
               <div className="mb-3">

@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { LanguageOptions, NewsContainerType } from "../../../shared/types";
+import {
+  LanguageOptions,
+  NewsContainerType,
+  PictureWithStyleType,
+} from "../../../shared/types";
 import PictureContainer from "../../../scenes/ComponentContainer/PictureContainer";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store";
@@ -27,7 +31,7 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
   const [totalItems, setTotalItems] = useState(0);
   const [limit, setLimit] = useState(6);
   const [isLoading, setIsLoading] = useState(true);
-  const [news, setNews] = useState<PictureType[]>();
+  const [news, setNews] = useState<PictureWithStyleType[]>();
   const [isPagination, setIsPagination] = useState(true);
   //getNews function
   const getNews = async () => {
