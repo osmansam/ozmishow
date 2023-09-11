@@ -44,7 +44,7 @@ const TwoPicture = ({
         <img src={img} alt={header?.content} className="w-full max-h-80" />
       )}
       <h1
-        className="text-lg font-[500] leading-6 pt-2 text-[#333333] flex flex-row gap-8"
+        className="text-lg font-[500] leading-6 mt-2 text-[#333333] flex flex-row gap-8 rounded-2xl px-4 py-0.5"
         style={header?.style ? header?.style : {}}
       >
         {header?.content}
@@ -79,7 +79,7 @@ const TwoPicture = ({
         {paragraphs?.content?.map((paragraph, index) => (
           <p
             key={index}
-            className=" font-[400] leading-6 text-[#333333]"
+            className=" font-[400] leading-6 text-[#333333] rounded-2xl px-2"
             style={paragraphs?.style ? paragraphs?.style : {}}
           >
             {paragraph}
