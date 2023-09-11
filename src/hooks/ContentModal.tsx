@@ -142,7 +142,7 @@ const ContentModal: React.FC<ContentModalProps> = ({
                   style: editedContent.style,
                 });
               }}
-              className="w-full border rounded p-2 mb-2"
+              className="w-full border rounded p-2 mb-2 text-black"
               style={{ resize: "vertical" }} // Allow vertical resizing
             ></textarea>
           ))}

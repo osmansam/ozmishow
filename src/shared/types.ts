@@ -177,7 +177,7 @@ export interface PictureWithStyleType {
 export interface CarouselType {
   id: string;
   mainMainHeader?: string;
-  carouselArray: Array<PictureType>;
+  carouselArray: Array<PictureWithStyleType>;
 }
 export interface SliderType {
   id: string;

@@ -16,14 +16,11 @@ const IconExplain = ({
   paragraphs,
   buttons,
 }: PictureWithStyleType) => {
-  const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const [contentToEdit, setContentToEdit] = useState<any>();
   const [contentType, setContentType] = useState("");
-  const [contentModalContentType, setContentModalContentType] = useState("");
-
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
     style: style,
@@ -35,8 +32,6 @@ const IconExplain = ({
   };
   const openContentModal = (content: any, contentType: string) => {
     setContentToEdit(content);
-    setContentModalContentType(contentType);
-
     setIsContentModalOpen(true);
   };
   return (

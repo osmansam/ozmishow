@@ -8,6 +8,7 @@ import {
   resetTwoPictureArray,
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
+import { style } from "../../shared/types";
 import SinglePicture from "./SinglePicture";
 
 const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
@@ -37,11 +38,11 @@ const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
           {carouselArray.map((carouselItem, index) => (
             <SinglePicture
               key={index}
-              img={carouselItem.img ? carouselItem.img : ""}
-              header={carouselItem.header ? carouselItem.header : ""}
-              paragraphs={
-                carouselItem.paragraphs ? carouselItem.paragraphs : [""]
-              }
+              _id={id}
+              img={carouselItem?.img}
+              header={carouselItem?.header}
+              paragraphs={carouselItem?.paragraphs}
+              index={index}
             />
           ))}
         </ul>

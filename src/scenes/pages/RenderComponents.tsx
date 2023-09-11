@@ -180,7 +180,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <Carousel
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
-                carouselArray={twoPictureArray as PictureType[]}
+                carouselArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );

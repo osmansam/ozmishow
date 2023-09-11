@@ -532,7 +532,7 @@ const PageAdmin = ({ page }: Props) => {
                 <Carousel
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
-                  carouselArray={twoPictureArray as PictureType[]}
+                  carouselArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}
