@@ -159,9 +159,9 @@ export interface PictureWithStyleType {
     content?: string[];
     style: StyleType;
   };
-  name?: string;
-  lastName?: string;
-  title?: string;
+  name?: ContentStyleType;
+  lastName?: ContentStyleType;
+  title?: ContentStyleType;
   page?: string;
   date?: string; // Change this from 'String' to 'string'
   percentage?: number;

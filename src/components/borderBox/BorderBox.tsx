@@ -7,18 +7,14 @@ import { AiOutlineDown } from "react-icons/ai";
 import { style } from "../../shared/types";
 import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
-import { PictureType, PictureWithStyleType } from "../../shared/types";
+import { PictureWithStyleType } from "../../shared/types";
 
 const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
-  const dispatch = useAppDispatch();
   const [isHovered, setIsHovered] = React.useState(false);
 
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
   const [contentType, setContentType] = useState("");
-  const [contentModalContentType, setContentModalContentType] = useState("");
   const [modalId, setModalId] = useState("");
 
   const [selectedStyle, setSelectedStyle] = useState({
@@ -32,16 +28,6 @@ const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
     setModalId(idModal);
   };
 
-  const openContentModal = (
-    content: any,
-    contentType: string,
-    idModal: string
-  ) => {
-    setContentToEdit(content);
-    setContentModalContentType(contentType);
-    setModalId(idModal);
-    setIsContentModalOpen(true);
-  };
   return (
     <motion.div
       className="w-5/6  h-52 flex  gap-12 mx-auto items-center p-8 border-2 bg-white"
