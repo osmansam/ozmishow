@@ -1,6 +1,6 @@
 import React from "react";
 import useMediaQuery from "../../../hooks/UseMediaQuery";
-import { PictureType } from "../../../shared/types";
+import { PictureType, PictureWithStyleType } from "../../../shared/types";
 import { RootState, useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ const NewsBox = ({
   img,
   header,
   date,
-}: PictureType) => {
+}: PictureWithStyleType) => {
   const navigate = useNavigate();
   const type = "Type1";
   return (
@@ -25,7 +25,7 @@ const NewsBox = ({
           navigate(`/news/${twoPictureId}/${_id}/${type}`);
         }}
       >
-        <img src={img} alt={header} className="h-1/2 w-full" />
+        <img src={img} alt={header?.content} className="h-1/2 w-full" />
         <div className="flex flex-col gap-2 w-3/4 mx-auto">
           <p
             className="font-[400] text-[12px] leading-[19px]"
@@ -33,7 +33,7 @@ const NewsBox = ({
           >
             {date ? date : "2021-09-09"}
           </p>
-          <h1 className="font-[500] text-2xl leading-7">{header}</h1>
+          <h1 className="font-[500] text-2xl leading-7">{header?.content}</h1>
         </div>
       </div>
     </div>

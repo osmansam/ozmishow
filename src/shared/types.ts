@@ -146,6 +146,7 @@ export const style = {
 
 export interface PictureWithStyleType {
   img?: string;
+  mainMainHeader?: string;
   header?: ContentStyleType;
   paragraphs?: {
     content?: string[];

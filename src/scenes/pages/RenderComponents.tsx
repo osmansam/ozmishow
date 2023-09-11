@@ -299,12 +299,9 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           return (
             <div key={index}>
               <BackgroundHeader
-                mainHeader={mainHeader ? mainHeader : ""}
-                header={
-                  twoPictureArray[0].header
-                    ? (twoPictureArray[0].header as string)
-                    : ""
-                }
+                _id={item && item._id ? item._id : ""}
+                mainMainHeader={mainHeader}
+                header={twoPictureArray[0]?.header as ContentStyleType}
               />
             </div>
           );
