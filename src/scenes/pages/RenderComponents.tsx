@@ -170,7 +170,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <Slider
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
-                sliderArray={twoPictureArray as PictureType[]}
+                sliderArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );

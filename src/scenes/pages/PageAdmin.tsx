@@ -513,7 +513,7 @@ const PageAdmin = ({ page }: Props) => {
                 <Slider
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
-                  sliderArray={twoPictureArray as PictureType[]}
+                  sliderArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}

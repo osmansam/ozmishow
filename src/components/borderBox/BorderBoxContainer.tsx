@@ -5,6 +5,7 @@ import BorderBox from "./BorderBox";
 const BorderBoxContainer = ({
   mainHeader,
   twoPictureArray,
+  id,
 }: TwoPictureContainerType) => {
   return (
     <div className="w-full h-full py-20  " style={{ background: "#f6f6f6" }}>
@@ -18,12 +19,15 @@ const BorderBoxContainer = ({
         <div className="flex flex-col lg:flex-row lg:w-5/6 w-full justify-center items-center mx-auto gap-20">
           {twoPictureArray.map((item, index) => {
             const { img, header } = item;
+
             return (
               <BorderBox
                 key={index}
                 img={img}
-                header={header?.content}
-              ></BorderBox>
+                header={header}
+                _id={id}
+                index={index}
+              />
             );
           })}
         </div>

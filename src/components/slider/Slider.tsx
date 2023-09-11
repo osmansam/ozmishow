@@ -64,7 +64,7 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
           <div className="radius-ball absolute top-1/2  ml-3 transform translate-y-[-50%] w-40 h-40 rounded-full bg-blue-400 z-0"></div>
           <img
             src={img}
-            alt={header}
+            alt={header?.content}
             className="w-40 h-40 rounded-full z-10 object-cover"
           />
           {/* <FaQuoteRight className="z-40" /> */}
@@ -76,7 +76,7 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
         <p className="text-center text-[#617d98]  font-[400] leading-6">
           {title}
         </p>
-        {paragraphs?.map((paragraph, index) => (
+        {paragraphs?.content?.map((paragraph, index) => (
           <p
             key={index}
             className=" font-[400] leading-6 text-sm text-center px-6 py-2"

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType } from "../../shared/types";
-
+import { style } from "../../shared/types";
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;
@@ -72,12 +72,30 @@ const AddSliderItem = ({
 
     const newTwoPictureArray = {
       img,
-      header,
-      paragraphs: isPictureContainerParagraph ? newParagraphs : [],
-      mainHeader,
-      name,
-      lastName,
-      title,
+      header: {
+        content: header,
+        style: style,
+      },
+      paragraphs: {
+        content: isPictureContainerParagraph ? newParagraphs : [],
+        style: style,
+      },
+      mainHeader: {
+        content: mainHeader,
+        style: style,
+      },
+      name: {
+        content: name,
+        style: style,
+      },
+      lastName: {
+        content: lastName,
+        style: style,
+      },
+      title: {
+        content: title,
+        style: style,
+      },
     };
 
     dispatch(setTwoPictureArray(newTwoPictureArray));

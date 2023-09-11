@@ -182,7 +182,7 @@ export interface CarouselType {
 export interface SliderType {
   id: string;
   mainMainHeader?: string;
-  sliderArray: Array<PictureType>;
+  sliderArray: Array<PictureWithStyleType>;
 }
 export interface WorkTeamBarType {
   id: string;
