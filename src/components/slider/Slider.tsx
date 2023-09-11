@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { FaQuoteRight } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import StyledModal from "../../hooks/StyledModal";
+import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import { AiOutlineDown } from "react-icons/ai";
+import { style } from "../../shared/types";
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import { FaQuoteRight } from "react-icons/fa";
 import { SliderType } from "../../shared/types";
 import AddSliderItem from "./AddSliderItem";
 import {
@@ -19,6 +23,27 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const [contentToEdit, setContentToEdit] = useState<any>();
+  const [contentType, setContentType] = useState("");
+  const [contentModalContentType, setContentModalContentType] = useState("");
+
+  const [selectedStyle, setSelectedStyle] = useState({
+    content: "",
+    style: style,
+  });
+
+  const openModal = (styleData: any) => {
+    setSelectedStyle(styleData);
+    setIsModalOpen(true);
+  };
+  const openContentModal = (content: any, contentType: string) => {
+    setContentToEdit(content);
+    setContentModalContentType(contentType);
+
+    setIsContentModalOpen(true);
+  };
 
   useEffect(() => {
     const lastIndex = sliderArray.length - 1;
@@ -52,7 +77,6 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
   };
 
   const currentSlide = sliderArray[index];
-  const { img, header, name, lastName, paragraphs, title } = currentSlide;
 
   return (
     <div className="py-10 flex flex-col  w-full">
@@ -63,20 +87,20 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
         <div className="relative flex justify-center items-center">
           <div className="radius-ball absolute top-1/2  ml-3 transform translate-y-[-50%] w-40 h-40 rounded-full bg-blue-400 z-0"></div>
           <img
-            src={img}
-            alt={header?.content}
+            src={currentSlide?.img}
+            alt={currentSlide?.header?.content}
             className="w-40 h-40 rounded-full z-10 object-cover"
           />
           {/* <FaQuoteRight className="z-40" /> */}
         </div>
 
         <h2 className="text-lg leading-7 font-[700] text-center text-[#102a42] capitalize p-1">
-          {name + "  " + lastName}
+          {currentSlide?.name?.content + "  " + currentSlide?.lastName?.content}
         </h2>
         <p className="text-center text-[#617d98]  font-[400] leading-6">
-          {title}
+          {currentSlide?.title?.content}
         </p>
-        {paragraphs?.content?.map((paragraph, index) => (
+        {currentSlide?.paragraphs?.content?.map((paragraph, index) => (
           <p
             key={index}
             className=" font-[400] leading-6 text-sm text-center px-6 py-2"
