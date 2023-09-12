@@ -18,7 +18,7 @@ const PictureAtRight = ({
         <div className="flex w-full lg:pl-28 gap-4 flex-col h-full md:pt-20">
           <h1
             className="w-fit px-4 py-1 gap-8 rounded-2xl font-[700] text-4xl flex flex-row"
-            style={header?.style ? header?.style : {}}
+            style={header?.style}
           >
             {header?.content}
             <StyleModalContainer
@@ -36,7 +36,7 @@ const PictureAtRight = ({
               <div key={index}>
                 <p
                   className="font-[400] leading-6 text-[#333333] rounded-lg px-4 py-1"
-                  style={paragraphs?.style ? paragraphs?.style : {}}
+                  style={paragraphs?.style}
                 >
                   {paragraph}
                 </p>
