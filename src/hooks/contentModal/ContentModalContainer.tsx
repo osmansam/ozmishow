@@ -67,7 +67,10 @@ const ContentModalContainer = ({
                 setContentType(contentContainerType);
               }}
             >
-              Paragraph Style <AiOutlineDown className="my-auto" />
+              {contentContainerType === "paragraphs"
+                ? "Paragraph Style"
+                : "Input Style"}
+              <AiOutlineDown className="my-auto" />
             </button>
           )}
           {content?.content && (
@@ -75,7 +78,9 @@ const ContentModalContainer = ({
               onClick={() => openContentModal(content, contentContainerType)}
               className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
             >
-              Paragraph Edit
+              {contentContainerType === "paragraphs"
+                ? "Paragraph Edit"
+                : "Input Edit"}
               <AiOutlineDown className="my-auto" />
             </button>
           )}
