@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/contentModal/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { AiOutlineDown } from "react-icons/ai";
-import { style } from "../../shared/types";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { FaQuoteRight } from "react-icons/fa";
 import { SliderType } from "../../shared/types";
 import AddSliderItem from "./AddSliderItem";
 import {
   updateSlider,
   resetTwoPictureArray,
-  deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 
 const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
@@ -23,27 +17,6 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
-  const [contentType, setContentType] = useState("");
-  const [contentModalContentType, setContentModalContentType] = useState("");
-
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
-
-  const openModal = (styleData: any) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-  };
-  const openContentModal = (content: any, contentType: string) => {
-    setContentToEdit(content);
-    setContentModalContentType(contentType);
-
-    setIsContentModalOpen(true);
-  };
 
   useEffect(() => {
     const lastIndex = sliderArray.length - 1;

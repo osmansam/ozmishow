@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { PictureType, PictureWithStyleType } from "../../shared/types";
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/contentModal/ContentModal";
+import { useState } from "react";
+import { PictureWithStyleType } from "../../shared/types";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { AiOutlineDown } from "react-icons/ai";
-import { style } from "../../shared/types";
+import { RootState } from "../../store";
 
+import { style } from "../../shared/types";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 const SinglePicture = ({
   header,
   paragraphs,
@@ -14,31 +13,6 @@ const SinglePicture = ({
   _id,
   index,
 }: PictureWithStyleType) => {
-  const { isAdmin } = useSelector((state: RootState) => state.context);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
-  const [contentType, setContentType] = useState("");
-  const [modalId, setModalId] = useState("");
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
-
-  const openModal = (styleData: any, idModal: string) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-    setModalId(idModal);
-  };
-  const openContentModal = (
-    content: any,
-    contentType: string,
-    idModal: string
-  ) => {
-    setContentToEdit(content);
-    setModalId(idModal);
-    setIsContentModalOpen(true);
-  };
   return (
     <li className="relative mx-5 inline-block h-[380px] w-[450px] ">
       <div
@@ -52,36 +26,14 @@ const SinglePicture = ({
           style={header?.style ? header?.style : {}}
         >
           {header?.content}
-          {!isModalOpen && isAdmin && (
-            <AiOutlineDown
-              className="text-lg justify-end my-auto"
-              onClick={() => {
-                openModal(
-                  {
-                    style: header?.style,
-                    content: header?.content,
-                  },
-                  index?.toString() ?? ""
-                );
-                setContentType("header");
-              }}
-            />
-          )}
-          {isModalOpen &&
-            contentType === "header" &&
-            modalId === index?.toString() && (
-              <StyledModal
-                key={_id}
-                isOpen={isModalOpen}
-                styleData={selectedStyle}
-                onClose={() => setIsModalOpen(false)}
-                type="twoPictureIndex"
-                twoPictureId={_id ?? ""}
-                componentId={index?.toString() ?? ""}
-                contentType="header"
-                isContentSend={true}
-              />
-            )}
+          <StyleModalContainer
+            styleData={header}
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            contentContainerType="header"
+            isContentSend={true}
+            type="twoPictureIndex"
+          />
         </p>
         <div className="flex flex-col gap-2 w-full  py-1  l  ">
           {paragraphs?.content?.map((paragraph, index) => (
@@ -94,67 +46,13 @@ const SinglePicture = ({
             </p>
           ))}
         </div>
-        {/* ContentModal for editing paragraphs */}
-        {isContentModalOpen && (
-          <ContentModal
-            isOpen={isContentModalOpen}
-            content={contentToEdit}
-            onClose={() => setIsContentModalOpen(false)}
-            componentId={index?.toString() ?? ""}
-            type="twoPictureIndex"
-            contentType="paragraphs"
-            twoPictureId={_id ?? ""}
-          />
-        )}
-        {/* editing part */}
-        {isAdmin && (
-          <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-            {!isModalOpen && (
-              <button
-                className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                onClick={() => {
-                  openModal(
-                    {
-                      style: paragraphs?.style,
-                      content: paragraphs?.content,
-                    },
-                    index?.toString() ?? ""
-                  );
-                  setContentType("paragraphs");
-                }}
-              >
-                Paragraph Style <AiOutlineDown className="my-auto" />
-              </button>
-            )}
-            {paragraphs?.content && (
-              <button
-                onClick={() =>
-                  openContentModal(
-                    paragraphs,
-                    "paragraphs",
-                    index?.toString() ?? ""
-                  )
-                }
-                className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-              >
-                Paragraph Edit
-                <AiOutlineDown className="my-auto" />
-              </button>
-            )}
-            {isModalOpen && contentType === "paragraphs" && (
-              <StyledModal
-                isOpen={isModalOpen}
-                styleData={selectedStyle}
-                onClose={() => setIsModalOpen(false)}
-                type="twoPictureIndex"
-                twoPictureId={_id ?? ""}
-                componentId={index?.toString() ?? ""}
-                contentType="paragraphs"
-                isContentSend={false}
-              />
-            )}
-          </div>
-        )}
+        <ContentModalContainer
+          content={paragraphs}
+          twoPictureId={_id ?? ""}
+          componentId={index?.toString() ?? ""}
+          contentContainerType="paragraphs"
+          type="twoPictureIndex"
+        />
       </div>
       <img
         alt="carousel img"

@@ -6,9 +6,8 @@ import { CarouselType } from "../../shared/types";
 import {
   updateExplanationBar,
   resetTwoPictureArray,
-  deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
-import { style } from "../../shared/types";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import SinglePicture from "./SinglePicture";
 
 const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
@@ -30,9 +29,22 @@ const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
   return (
     <div className="py-10 flex flex-col items-center">
       {/* mainHeader */}
-      <h1 className="text-3xl font-bold p-4 ml-4 ">
-        {mainMainHeader?.content}
-      </h1>
+      <div className="w-5/6 mx-auto mb-4">
+        <h1
+          className="text-3xl font-bold  ml-4 w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
+          style={mainMainHeader?.style}
+        >
+          {mainMainHeader?.content}
+          <StyleModalContainer
+            styleData={mainMainHeader}
+            twoPictureId={id ?? ""}
+            componentId={""}
+            contentContainerType="mainHeader"
+            isContentSend={true}
+            type="mainMainHeader"
+          />
+        </h1>
+      </div>
 
       {/* carousel */}
       <div className="mt-10 h-[353px] w-full overflow-x-auto overflow-y-hidden">
