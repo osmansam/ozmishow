@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { PictureWithStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContenModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 
 const PictureAtLeft = ({
   img,
@@ -52,7 +52,7 @@ const PictureAtLeft = ({
                 </p>
               </div>
             ))}
-            <ContenModalContainer
+            <ContentModalContainer
               content={paragraphs}
               twoPictureId={_id ?? ""}
               componentId={""}
