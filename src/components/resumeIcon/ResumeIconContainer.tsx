@@ -1,8 +1,5 @@
 import React, { lazy } from "react";
-import {
-  ProgressBarContainerType,
-  ResumeIconContainerType,
-} from "../../shared/types";
+import { ResumeIconContainerType } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
