@@ -8,52 +8,25 @@ import {
   resetTwoPictureArray,
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import { AiOutlineDown } from "react-icons/ai";
-import ContentModal from "../../hooks/contentModal/ContentModal";
 import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
-import { style } from "../../shared/types";
-
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 const WorkTeamBar = ({
   mainMainHeader,
   workTeamArray,
   id,
 }: WorkTeamBarType) => {
+  const dispatch = useAppDispatch();
   const [isWorkTeamItem, setIsWorkTeamItem] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
-  const [contentModalContentType, setContentModalContentType] = useState("");
   const [barSelection, setBarSelection] = useState(0);
   const [hovered, setHovered] = useState(Number);
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
-  const [contentType, setContentType] = useState("");
-  const [mainHeaderId, setMainHeaderId] = useState("");
-  const [paragraphId, setParagraphId] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
   const [quantity, setQuantity] = useState(1);
-
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuantity(parseInt(e.target.value));
-  };
-
-  const dispatch = useAppDispatch();
-
-  const openModal = (styleData: any) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-  };
-  const openContentModal = (content: any, contentType: string) => {
-    setContentToEdit(content);
-    setContentModalContentType(contentType);
-
-    setIsContentModalOpen(true);
   };
 
   //handle create new explanation item
@@ -90,9 +63,22 @@ const WorkTeamBar = ({
 
   return (
     <div className="py-10">
-      <h1 className="text-3xl font-bold p-4 ml-4 ">
-        {mainMainHeader?.content}
-      </h1>
+      <div className="w-5/6 mx-auto mb-4">
+        <h1
+          className="text-3xl font-bold  ml-4 w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
+          style={mainMainHeader?.style}
+        >
+          {mainMainHeader?.content}
+          <StyleModalContainer
+            styleData={mainMainHeader}
+            twoPictureId={id ?? ""}
+            componentId={""}
+            contentContainerType="mainHeader"
+            isContentSend={true}
+            type="mainMainHeader"
+          />
+        </h1>
+      </div>
       <div className="w-5/6 mx-auto flex lg:flex-row flex-col items-center sm:items-start">
         {/* Bar part */}
         <div className={barClassName}>
@@ -130,34 +116,14 @@ const WorkTeamBar = ({
                   >
                     {mainHeader?.content}
                   </li>
-                  {!isModalOpen && isAdmin && (
-                    <AiOutlineDown
-                      className="text-lg justify-end"
-                      onClick={() => {
-                        openModal({
-                          style: mainHeader?.style,
-                          content: mainHeader?.content,
-                        });
-                        setContentType("mainHeader");
-                        setMainHeaderId(workTeamId ?? "");
-                      }}
-                    />
-                  )}
-                  {isModalOpen &&
-                    contentType === "mainHeader" &&
-                    mainHeaderId === workTeamId && (
-                      <StyledModal
-                        key={workTeamId}
-                        isOpen={isModalOpen}
-                        styleData={selectedStyle}
-                        onClose={() => setIsModalOpen(false)}
-                        type="workTeamBar"
-                        twoPictureId={id}
-                        componentId={workTeamId ? workTeamId : ""}
-                        contentType="mainHeader"
-                        isContentSend={true}
-                      />
-                    )}
+                  <StyleModalContainer
+                    styleData={mainHeader}
+                    twoPictureId={id}
+                    componentId={workTeamId ? workTeamId : ""}
+                    contentContainerType="mainHeader"
+                    isContentSend={true}
+                    type="workTeamBar"
+                  />
                 </div>
               );
             })}
@@ -222,138 +188,23 @@ const WorkTeamBar = ({
                       </div>
                     </div>
 
-                    {/* editing part */}
-
                     {/* editing buttons and modals */}
                     <div className="flex flex-row gap-4">
-                      {/* subheader */}
-                      {isAdmin && (
-                        <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-                          {!isModalOpen && (
-                            <button
-                              className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                              onClick={() => {
-                                openModal({
-                                  style: workTeam.subHeaders?.style,
-                                  content: workTeam?.subHeaders?.content,
-                                });
-                                setParagraphId(workTeam._id ?? "");
-                                setContentType("subHeaders");
-                              }}
-                            >
-                              Input Style <AiOutlineDown className="my-auto" />
-                            </button>
-                          )}
-                          {isModalOpen &&
-                            contentType === "subHeaders" &&
-                            paragraphId === workTeam._id && (
-                              <StyledModal
-                                key={workTeam._id}
-                                isOpen={isModalOpen}
-                                styleData={selectedStyle}
-                                onClose={() => setIsModalOpen(false)}
-                                type="workTeamBar"
-                                twoPictureId={id}
-                                componentId={workTeam._id ?? ""}
-                                contentType="subHeaders"
-                                isContentSend={false}
-                              />
-                            )}
-                          {/* ContentModal for editing subHeaders */}
-                          {isContentModalOpen &&
-                            paragraphId === workTeam._id &&
-                            contentModalContentType === "subHeaders" && (
-                              <ContentModal
-                                isOpen={isContentModalOpen}
-                                content={contentToEdit}
-                                onClose={() => setIsContentModalOpen(false)}
-                                componentId={workTeam._id ?? ""}
-                                type="workTeamBar"
-                                contentType="subHeaders"
-                                twoPictureId={id}
-                              />
-                            )}
-                          {workTeam.subHeaders && (
-                            <button
-                              onClick={() => {
-                                openContentModal(
-                                  workTeam.subHeaders,
-                                  "subHeaders"
-                                );
-                                setParagraphId(workTeam._id ?? "");
-                              }}
-                              className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                            >
-                              Input Edit
-                              <AiOutlineDown className="my-auto" />
-                            </button>
-                          )}
-                        </div>
-                      )}
+                      <ContentModalContainer
+                        content={workTeam.subHeaders}
+                        twoPictureId={id}
+                        componentId={workTeam._id ?? ""}
+                        contentContainerType="subHeaders"
+                        type="workTeamBar"
+                      />
                       {/* paragraphs */}
-                      {isAdmin && (
-                        <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-                          {!isModalOpen && (
-                            <button
-                              className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                              onClick={() => {
-                                openModal({
-                                  style: workTeam.paragraphs?.style,
-                                  content: workTeam?.paragraphs?.content,
-                                });
-                                setParagraphId(workTeam._id ?? "");
-                                setContentType("paragraphs");
-                              }}
-                            >
-                              Answer Style <AiOutlineDown className="my-auto" />
-                            </button>
-                          )}
-                          {isModalOpen &&
-                            contentType === "paragraphs" &&
-                            paragraphId === workTeam._id && (
-                              <StyledModal
-                                key={workTeam._id}
-                                isOpen={isModalOpen}
-                                styleData={selectedStyle}
-                                onClose={() => setIsModalOpen(false)}
-                                type="workTeamBar"
-                                twoPictureId={id}
-                                componentId={workTeam._id ?? ""}
-                                contentType="paragraphs"
-                                isContentSend={false}
-                              />
-                            )}
-                          {/* ContentModal for editing paragraphs */}
-                          {isContentModalOpen &&
-                            paragraphId === workTeam._id &&
-                            contentModalContentType === "paragraphs" && (
-                              <ContentModal
-                                isOpen={isContentModalOpen}
-                                content={contentToEdit}
-                                onClose={() => setIsContentModalOpen(false)}
-                                componentId={workTeam._id ?? ""}
-                                type="workTeamBar"
-                                contentType="paragraphs"
-                                twoPictureId={id}
-                              />
-                            )}
-                          {workTeam.paragraphs && (
-                            <button
-                              onClick={() => {
-                                openContentModal(
-                                  workTeam.paragraphs,
-                                  "paragraphs"
-                                );
-                                setParagraphId(workTeam._id ?? "");
-                              }}
-                              className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                            >
-                              Answer Edit
-                              <AiOutlineDown className="my-auto" />
-                            </button>
-                          )}
-                        </div>
-                      )}
+                      <ContentModalContainer
+                        content={workTeam.paragraphs}
+                        twoPictureId={id}
+                        componentId={workTeam._id ?? ""}
+                        contentContainerType="paragraphs"
+                        type="workTeamBar"
+                      />
                     </div>
                     {isAdmin && (
                       <button
