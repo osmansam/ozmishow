@@ -1,32 +1,11 @@
-import React, { useEffect, useState } from "react";
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/contentModal/ContentModal";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { AiOutlineDown } from "react-icons/ai";
-import { style } from "../../shared/types";
+import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { PictureWithStyleType } from "../../shared/types";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 
 const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
   const [isHovered, setIsHovered] = React.useState(false);
-
-  const { isAdmin } = useSelector((state: RootState) => state.context);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [contentType, setContentType] = useState("");
-  const [modalId, setModalId] = useState("");
-
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
-
-  const openModal = (styleData: any, idModal: string) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-    setModalId(idModal);
-  };
 
   return (
     <motion.div
@@ -37,38 +16,18 @@ const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
       <img src={img} alt={header?.content} className="w-40 h-40 " />
       <div className="w-full flex justify-between ">
         <h1
-          className="font-[700] text-2xl leading-8 flex flex-row gap-4"
+          className="font-[700] text-2xl leading-8 flex flex-row gap-4 justify-center items-center"
           style={header?.style ? header?.style : {}}
         >
           {header?.content}
-          {!isModalOpen && isAdmin && (
-            <AiOutlineDown
-              className="text-lg justify-end my-auto"
-              onClick={() => {
-                openModal(
-                  {
-                    style: header?.style,
-                    content: header?.content,
-                  },
-                  index?.toString() ?? ""
-                );
-                setContentType("header");
-              }}
-            />
-          )}
-          {isModalOpen && contentType === "header" && (
-            <StyledModal
-              key={_id}
-              isOpen={isModalOpen}
-              styleData={selectedStyle}
-              onClose={() => setIsModalOpen(false)}
-              type="twoPictureIndex"
-              twoPictureId={_id ?? ""}
-              componentId={modalId ?? ""}
-              contentType="header"
-              isContentSend={true}
-            />
-          )}
+          <StyleModalContainer
+            styleData={header}
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            contentContainerType="header"
+            isContentSend={true}
+            type="twoPictureIndex"
+          />
         </h1>
         <div>
           <BsArrowRight
