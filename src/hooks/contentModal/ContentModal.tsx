@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
@@ -9,17 +9,7 @@ import {
   editResumeBox,
   editMainMainHeader,
 } from "../../features/twoPicture/twoPictureSlice";
-
-interface StyleType {
-  color: string;
-  fontWeight: string;
-  backgroundColor: string;
-  padding: string;
-  fontSize: string;
-  fontFamily: string;
-  hover: string;
-  effectAll: boolean;
-}
+import { StyleType } from "../../shared/types";
 interface ContentData {
   content: string[];
   style: StyleType;
