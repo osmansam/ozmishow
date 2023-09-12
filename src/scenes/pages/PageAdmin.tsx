@@ -474,7 +474,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <ProgressBarContainer
                   id={item && item._id ? item._id : ""}
-                  mainHeader={mainHeader ? mainHeader : ""}
+                  mainHeader={mainHeader}
                   progressBarArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
@@ -493,7 +493,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <ResumeBox
                   id={item && item._id ? item._id : ""}
-                  mainHeader={mainHeader ? mainHeader : ""}
+                  mainHeader={mainHeader}
                   resumeBoxArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
@@ -550,7 +550,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <ResumeIcon
                   id={item && item._id ? item._id : ""}
-                  mainHeader={mainHeader ? mainHeader : ""}
+                  mainHeader={mainHeader}
                   resumeIconArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
@@ -568,7 +568,7 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <YoutubeVideo
-                  embedId={mainHeader ? mainHeader : ""}
+                  embedId={mainHeader?.content ?? ""}
                   header={
                     twoPictureArray[0].header
                       ? (twoPictureArray[0].header as string)

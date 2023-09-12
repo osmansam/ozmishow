@@ -2,7 +2,7 @@ import React, { useEffect, useState, ReactElement } from "react";
 import { PictureWithStyleType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { style } from "../../shared/types";
 import { AiOutlineDown } from "react-icons/ai";

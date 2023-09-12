@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PictureType, PictureWithStyleType } from "../../shared/types";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
@@ -38,7 +38,7 @@ const BackgroundHeader = ({
         <div className="z-10 flex ">
           <div>
             <h1 className="font-semibold text-2xl  md:text-4xl sfont-[Poppins,sans-serif] text-gray-800 capitalize leading-[54px] ">
-              {mainMainHeader}
+              {mainMainHeader?.content}
             </h1>
             <div className="w-24 h-[3px] bg-[#fd7e13]  mx-auto"></div>
           </div>

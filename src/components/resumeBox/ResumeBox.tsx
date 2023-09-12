@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { PictureWithStyleType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { style } from "../../shared/types";
 import { AiOutlineDown } from "react-icons/ai";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 const ResumeBox = ({
   year1,
   year2,
@@ -44,31 +45,14 @@ const ResumeBox = ({
               style={year1?.style ?? {}}
             >
               {year1?.content}{" "}
-              {!isModalOpen && isAdmin && (
-                <AiOutlineDown
-                  className="text-lg justify-end my-auto"
-                  onClick={() => {
-                    openModal({
-                      style: year1?.style,
-                      content: year1?.content,
-                    });
-                    setContentType("year1");
-                  }}
-                />
-              )}
-              {isModalOpen && contentType === "year1" && (
-                <StyledModal
-                  key={_id}
-                  isOpen={isModalOpen}
-                  styleData={selectedStyle}
-                  onClose={() => setIsModalOpen(false)}
-                  type="resumeBox"
-                  twoPictureId={_id ?? ""}
-                  componentId={index?.toString() ?? ""}
-                  contentType="year1"
-                  isContentSend={true}
-                />
-              )}
+              <StyleModalContainer
+                styleData={year1}
+                twoPictureId={_id ?? ""}
+                componentId={index?.toString() ?? ""}
+                contentContainerType="year1"
+                isContentSend={true}
+                type="resumeBox"
+              />
             </h1>
             <h1 className="text-white">-</h1>
             <h1
@@ -76,31 +60,14 @@ const ResumeBox = ({
               style={year2?.style ?? {}}
             >
               {year2?.content}{" "}
-              {!isModalOpen && isAdmin && (
-                <AiOutlineDown
-                  className="text-lg justify-end my-auto"
-                  onClick={() => {
-                    openModal({
-                      style: year2?.style,
-                      content: year2?.content,
-                    });
-                    setContentType("year2");
-                  }}
-                />
-              )}
-              {isModalOpen && contentType === "year2" && (
-                <StyledModal
-                  key={_id}
-                  isOpen={isModalOpen}
-                  styleData={selectedStyle}
-                  onClose={() => setIsModalOpen(false)}
-                  type="resumeBox"
-                  twoPictureId={_id ?? ""}
-                  componentId={index?.toString() ?? ""}
-                  contentType="year2"
-                  isContentSend={true}
-                />
-              )}
+              <StyleModalContainer
+                styleData={year2}
+                twoPictureId={_id ?? ""}
+                componentId={index?.toString() ?? ""}
+                contentContainerType="year2"
+                isContentSend={true}
+                type="resumeBox"
+              />
             </h1>
           </div>
         </div>
@@ -110,31 +77,14 @@ const ResumeBox = ({
           style={header?.style ? header?.style : {}}
         >
           {header?.content}
-          {!isModalOpen && isAdmin && (
-            <AiOutlineDown
-              className="text-lg justify-end my-auto"
-              onClick={() => {
-                openModal({
-                  style: header?.style,
-                  content: header?.content,
-                });
-                setContentType("header");
-              }}
-            />
-          )}
-          {isModalOpen && contentType === "header" && (
-            <StyledModal
-              key={_id}
-              isOpen={isModalOpen}
-              styleData={selectedStyle}
-              onClose={() => setIsModalOpen(false)}
-              type="resumeBox"
-              twoPictureId={_id ?? ""}
-              componentId={index?.toString() ?? ""}
-              contentType="header"
-              isContentSend={true}
-            />
-          )}
+          <StyleModalContainer
+            styleData={header}
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            contentContainerType="header"
+            isContentSend={true}
+            type="resumeBox"
+          />
         </h1>
         {/* university */}
         <p
@@ -142,31 +92,14 @@ const ResumeBox = ({
           style={university?.style ?? {}}
         >
           {university?.content}
-          {!isModalOpen && isAdmin && (
-            <AiOutlineDown
-              className="text-lg justify-end my-auto"
-              onClick={() => {
-                openModal({
-                  style: university?.style,
-                  content: university?.content,
-                });
-                setContentType("university");
-              }}
-            />
-          )}
-          {isModalOpen && contentType === "university" && (
-            <StyledModal
-              key={_id}
-              isOpen={isModalOpen}
-              styleData={selectedStyle}
-              onClose={() => setIsModalOpen(false)}
-              type="resumeBox"
-              twoPictureId={_id ?? ""}
-              componentId={index?.toString() ?? ""}
-              contentType="university"
-              isContentSend={true}
-            />
-          )}
+          <StyleModalContainer
+            styleData={university}
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            contentContainerType="university"
+            isContentSend={true}
+            type="resumeBox"
+          />
         </p>
         {/* paragraph */}
         <p

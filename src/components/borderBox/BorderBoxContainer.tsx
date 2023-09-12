@@ -14,7 +14,7 @@ const BorderBoxContainer = ({
           className="font-[700] text-4xl leading-[44px] pb-3 pl-5 lg:pl-20"
           style={{ color: "#333333" }}
         >
-          {mainHeader}
+          {mainHeader?.content}
         </h1>
         <div className="flex flex-col lg:flex-row lg:w-5/6 w-full justify-center items-center mx-auto gap-20">
           {twoPictureArray.map((item, index) => {

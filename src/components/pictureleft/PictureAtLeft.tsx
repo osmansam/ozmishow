@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { PictureType, PictureWithStyleType } from "../../shared/types";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";

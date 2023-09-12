@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { PictureType, PictureWithStyleType } from "../../shared/types";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import { RootState } from "../../store";
 import { AiOutlineDown } from "react-icons/ai";
 import { style } from "../../shared/types";
 const TwoPicture = ({
@@ -15,14 +15,11 @@ const TwoPicture = ({
   _id,
   index,
 }: PictureWithStyleType) => {
-  const dispatch = useAppDispatch();
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const [contentToEdit, setContentToEdit] = useState<any>();
   const [contentType, setContentType] = useState("");
-  const [contentModalContentType, setContentModalContentType] = useState("");
-
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
     style: style,
@@ -34,8 +31,6 @@ const TwoPicture = ({
   };
   const openContentModal = (content: any, contentType: string) => {
     setContentToEdit(content);
-    setContentModalContentType(contentType);
-
     setIsContentModalOpen(true);
   };
   return (

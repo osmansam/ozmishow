@@ -12,7 +12,7 @@ import {
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import { AiOutlineDown } from "react-icons/ai";
 const ExplanationBar = ({
   mainMainHeader,

@@ -188,7 +188,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           return (
             <div key={index}>
               <YoutubeVideo
-                embedId={mainHeader ? mainHeader : ""}
+                embedId={mainHeader?.content ?? ""}
                 header={
                   twoPictureArray[0].header
                     ? (twoPictureArray[0].header as string)
@@ -236,7 +236,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <ProgressBarContainer
                 id={item && item._id ? item._id : ""}
-                mainHeader={mainHeader ? mainHeader : ""}
+                mainHeader={mainHeader}
                 progressBarArray={twoPictureArray as PictureType[]}
               />
             </div>
@@ -246,7 +246,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <ResumeBox
                 id={item && item._id ? item._id : ""}
-                mainHeader={mainHeader ? mainHeader : ""}
+                mainHeader={mainHeader}
                 resumeBoxArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
@@ -256,7 +256,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <ResumeIcon
                 id={item && item._id ? item._id : ""}
-                mainHeader={mainHeader ? mainHeader : ""}
+                mainHeader={mainHeader}
                 resumeIconArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>

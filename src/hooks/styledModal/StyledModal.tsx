@@ -7,20 +7,11 @@ import {
   editTwoPictureStyle,
   editTwoPictureIndexStyle,
   editResumeBox,
-} from "../features/twoPicture/twoPictureSlice";
+  editMainMainHeader,
+} from "../../features/twoPicture/twoPictureSlice";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store";
-
-interface StyleType {
-  color: string;
-  fontWeight: string;
-  backgroundColor: string;
-  padding: string;
-  fontSize: string;
-  fontFamily: string;
-  hover: string;
-  effectAll: boolean;
-}
+import { RootState, useAppDispatch } from "../../store";
+import { StyleType } from "../../shared/types";
 
 interface StyleData {
   content: string;
@@ -141,8 +132,8 @@ function StyledModal({
   };
   const handleConfirm = () => {
     // Save the selected colors to the editedStyle and close the color pickers
-    handleStyleChange("color", selectedColor);
-    handleStyleChange("backgroundColor", selectedBackgroundColor);
+    handleStyleChange("color", selectedColor ?? "");
+    handleStyleChange("backgroundColor", selectedBackgroundColor ?? "");
     setIsColorPickerOpen(false);
     setIsBackgroundColorPickerOpen(false);
   };
@@ -225,6 +216,17 @@ function StyledModal({
             twoPictureId,
             container,
             index: componentId,
+          })
+        );
+        break;
+      case "mainMainHeader":
+        await dispatch(
+          editMainMainHeader({
+            twoPictureId,
+            mainHeader: {
+              content: editedStyle.content,
+              style: editedStyle.style,
+            },
           })
         );
         break;

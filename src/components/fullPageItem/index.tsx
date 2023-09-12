@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FullPageItemType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import { AiOutlineDown } from "react-icons/ai";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { style } from "../../shared/types";
 import { useSelector } from "react-redux";
@@ -65,7 +65,7 @@ const FullPageItem = ({
         className="font-[700] text-4xl leading-[44px] pb-4"
         style={{ color: "#333333" }}
       >
-        {mainMainHeader}
+        {mainMainHeader?.content}
       </h1>
       {fullPageItemArray.map((fullPageItem, index) => {
         const { header, paragraphs, buttons, img, _id } = fullPageItem;

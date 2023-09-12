@@ -13,7 +13,7 @@ const IconExplainContainer = ({
         className="font-[700] text-4xl leading-[44px] pb-3"
         style={{ color: "#333333" }}
       >
-        {mainHeader}
+        {mainHeader?.content}
       </h1>
       <div className="w-full h-full md:flex md:justify-between mx-auto">
         {iconExplainArray.map((iconExplain, index) => {

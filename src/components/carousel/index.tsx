@@ -30,7 +30,9 @@ const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
   return (
     <div className="py-10 flex flex-col items-center">
       {/* mainHeader */}
-      <h1 className="text-3xl font-bold p-4 ml-4 ">{mainMainHeader}</h1>
+      <h1 className="text-3xl font-bold p-4 ml-4 ">
+        {mainMainHeader?.content}
+      </h1>
 
       {/* carousel */}
       <div className="mt-10 h-[353px] w-full overflow-x-auto overflow-y-hidden">

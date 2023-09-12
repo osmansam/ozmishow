@@ -13,6 +13,7 @@ import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import Deneme from "./adminPageOptions";
 import { useNavigate } from "react-router-dom";
+import { style } from "../../shared/types";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -109,7 +110,10 @@ const ComponentContainer = () => {
           createTwoPicture({
             page,
             componentName,
-            mainHeader,
+            mainHeader: {
+              content: mainHeader,
+              style: style,
+            },
             twoPictureArray,
             position,
             language,
@@ -124,7 +128,10 @@ const ComponentContainer = () => {
           createTwoPicture({
             page,
             componentName,
-            mainHeader,
+            mainHeader: {
+              content: mainHeader,
+              style: style,
+            },
             twoPictureArray,
             position,
             language,
@@ -138,7 +145,10 @@ const ComponentContainer = () => {
           createTwoPicture({
             page,
             componentName,
-            mainHeader,
+            mainHeader: {
+              content: mainHeader,
+              style: style,
+            },
             twoPictureArray,
             position,
             language,
@@ -155,7 +165,10 @@ const ComponentContainer = () => {
             page,
             selectedSection,
             componentName,
-            mainHeader,
+            mainHeader: {
+              content: mainHeader,
+              style: style,
+            },
             twoPictureArray,
             position,
             language,
@@ -172,7 +185,10 @@ const ComponentContainer = () => {
             page,
             selectedSection,
             componentName,
-            mainHeader,
+            mainHeader: {
+              content: mainHeader,
+              style: style,
+            },
             twoPictureArray,
             position,
             language,
@@ -192,7 +208,10 @@ const ComponentContainer = () => {
             page,
             selectedSection,
             componentName,
-            mainHeader,
+            mainHeader: {
+              content: mainHeader,
+              style: style,
+            },
             twoPictureArray,
             position,
             language,

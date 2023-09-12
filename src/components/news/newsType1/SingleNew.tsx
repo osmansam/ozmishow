@@ -9,7 +9,7 @@ import Navbar from "../../navbar/Navbar";
 import NewsContainer from "./NewsContainer";
 import NewsContainer2 from "../newsType2/NewsContainer2";
 import Footer from "../../footer";
-import StyledModal from "../../../hooks/StyledModal";
+import StyledModal from "../../../hooks/styledModal/StyledModal";
 import ContentModal from "../../../hooks/ContentModal";
 import { style } from "../../../shared/types";
 import { AiOutlineDown } from "react-icons/ai";

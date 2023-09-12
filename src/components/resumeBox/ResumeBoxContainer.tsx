@@ -6,6 +6,7 @@ import {
   updateResumeBox,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 
 const ResumeBox = lazy(() => import("./ResumeBox"));
 const AddResumeBox = lazy(() => import("./AddResumeBox"));
@@ -29,16 +30,24 @@ const ResumeBoxContainer = ({
     window.location.reload();
   };
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3  w-5/6 mx-auto">
       {/* mainHeader */}
       <h1
-        className="w-5/6 mx-auto flex justify-start font-[700] text-4xl leading-[44px] pb-3"
-        style={{ color: "#333333" }}
+        className="w-fit    justify-start font-[700] text-4xl leading-[44px] mb-3 text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5 "
+        style={mainHeader?.style}
       >
-        {mainHeader}
+        {mainHeader?.content}
+        <StyleModalContainer
+          styleData={mainHeader}
+          twoPictureId={id ?? ""}
+          componentId={""}
+          contentContainerType="mainHeader"
+          isContentSend={true}
+          type="mainMainHeader"
+        />
       </h1>
       {/* resume Box container */}
-      <div className="flex flex-wrap w-5/6 mx-auto pb-6">
+      <div className="flex flex-wrap mx-auto pb-6">
         {resumeBoxArray.map((resumeBox, index) => {
           const { header, year1, year2, paragraph, university } = resumeBox;
           return (

@@ -55,8 +55,8 @@ function extractHeaders(response: AxiosResponse) {
   };
 }
 
-// const baseURL = "http://localhost:3002/api/v1";
-const baseURL = "https://ozmishow-back.onrender.com/api/v1";
+const baseURL = "http://localhost:3002/api/v1";
+// const baseURL = "https://ozmishow-back.onrender.com/api/v1";
 
 //get Componont container
 export const getPageTwoPictures = createAsyncThunk(
@@ -297,6 +297,26 @@ export const editWorkTeamBar = createAsyncThunk(
     }
   }
 );
+//editMainMainHeader
+export const editMainMainHeader = createAsyncThunk(
+  "twoPicture/editMainMainHeader",
+  async ({
+    mainHeader,
+    twoPictureId,
+  }: {
+    mainHeader: ContentStyleType;
+    twoPictureId: string;
+  }) => {
+    const url = `twoPicture/editMainMainHeader/${twoPictureId}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { mainHeader });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 //editTwoPictureStyle
 export const editTwoPictureStyle = createAsyncThunk(
   "twoPicture/editTwoPictureStyle",

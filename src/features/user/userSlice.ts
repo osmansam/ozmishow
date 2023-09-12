@@ -27,7 +27,9 @@ const initialState: UserState = {
   users: [],
   isUserLoggedIn: false,
 };
-const baseURL = "https://ozmishow-back.onrender.com/api/v1";
+const baseURL = "http://localhost:3002/api/v1";
+
+// const baseURL = "https://ozmishow-back.onrender.com/api/v1";
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",

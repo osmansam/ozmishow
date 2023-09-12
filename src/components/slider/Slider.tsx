@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import ContentModal from "../../hooks/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
@@ -81,7 +81,7 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
   return (
     <div className="py-10 flex flex-col  w-full">
       <h1 className="font-[700] text-[#102a42] text-3xl flex justify-start py-2 items-start px-4 mx-auto">
-        {mainMainHeader}
+        {mainMainHeader?.content}
       </h1>
       <div className="flex flex-col  py-6 shadow-2xl bg-white w-5/6 lg:w-2/5 min-h-[400px] mx-auto relative">
         <div className="relative flex justify-center items-center">

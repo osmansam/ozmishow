@@ -73,32 +73,32 @@ export interface MapType {
 }
 export interface TwoPictureContainerType {
   id: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
   twoPictureArray: Array<PictureWithStyleType>;
 }
 
 export interface IconExplainContainerType {
   id: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
   iconExplainArray: Array<PictureWithStyleType>;
 }
 export interface NewsContainerType {
   id: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
 }
 export interface ProgressBarContainerType {
   id: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
   progressBarArray: Array<PictureType>;
 }
 export interface ResumeIconContainerType {
   id: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
   resumeIconArray: Array<PictureWithStyleType>;
 }
 export interface ResumeBoxContainerType {
   id: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
   resumeBoxArray: Array<PictureWithStyleType>;
 }
 export interface YoutubeType {
@@ -110,7 +110,7 @@ export interface FreqAskedType {
   freqAskedArray: Array<PictureWithStyleType>;
 }
 export interface FullPageItemType {
-  mainMainHeader?: string;
+  mainMainHeader?: ContentStyleType;
   fullPageItemArray: Array<PictureWithStyleType>;
   id: string;
 }
@@ -146,7 +146,7 @@ export const style = {
 
 export interface PictureWithStyleType {
   img?: string;
-  mainMainHeader?: string;
+  mainMainHeader?: ContentStyleType;
   header?: ContentStyleType;
   paragraphs?: {
     content?: string[];
@@ -177,17 +177,17 @@ export interface PictureWithStyleType {
 
 export interface CarouselType {
   id: string;
-  mainMainHeader?: string;
+  mainMainHeader?: ContentStyleType;
   carouselArray: Array<PictureWithStyleType>;
 }
 export interface SliderType {
   id: string;
-  mainMainHeader?: string;
+  mainMainHeader?: ContentStyleType;
   sliderArray: Array<PictureWithStyleType>;
 }
 export interface WorkTeamBarType {
   id: string;
-  mainMainHeader?: string;
+  mainMainHeader?: ContentStyleType;
   workTeamArray: Array<PictureWithStyleType>;
 }
 interface ComponentType {
@@ -405,7 +405,7 @@ export const Components: { [key: string]: ComponentType } = {
 export interface ContainerType {
   _id?: string;
   page: string;
-  mainHeader?: string;
+  mainHeader?: ContentStyleType;
   selectedSection?: string;
   componentName: string;
   twoPictureArray: Array<PictureType> | Array<PictureWithStyleType>;

@@ -7,6 +7,7 @@ import {
   editTwoPictureStyle,
   editTwoPictureIndexStyle,
   editResumeBox,
+  editMainMainHeader,
 } from "../features/twoPicture/twoPictureSlice";
 
 interface StyleType {

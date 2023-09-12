@@ -38,7 +38,7 @@ const ResumeIconContainer = ({
         className="w-5/6 mx-auto flex justify-start font-[700] text-4xl leading-[44px] pb-3"
         style={{ color: "#333333" }}
       >
-        {mainHeader}
+        {mainHeader?.content}
       </h1>
       <div className="flex flex-wrap w-5/6 mx-auto pb-6">
         {resumeIconArray.map((resumeIcon, index) => {

@@ -8,7 +8,7 @@ import {
   resetTwoPictureArray,
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
-import StyledModal from "../../hooks/StyledModal";
+import StyledModal from "../../hooks/styledModal/StyledModal";
 import { AiOutlineDown } from "react-icons/ai";
 import ContentModal from "../../hooks/ContentModal";
 import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
@@ -90,7 +90,9 @@ const WorkTeamBar = ({
 
   return (
     <div className="py-10">
-      <h1 className="text-3xl font-bold p-4 ml-4 ">{mainMainHeader}</h1>
+      <h1 className="text-3xl font-bold p-4 ml-4 ">
+        {mainMainHeader?.content}
+      </h1>
       <div className="w-5/6 mx-auto flex lg:flex-row flex-col items-center sm:items-start">
         {/* Bar part */}
         <div className={barClassName}>
