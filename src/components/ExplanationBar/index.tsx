@@ -1,38 +1,26 @@
 import React, { useState } from "react";
 import AddExplanationItem from "./AddExplanationItem";
 import { ExplanationBarType } from "../../shared/types";
-import ContentModal from "../../hooks/contentModal/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
-import { style } from "../../shared/types";
-
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import {
   updateExplanationBar,
   resetTwoPictureArray,
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import { AiOutlineDown } from "react-icons/ai";
 const ExplanationBar = ({
   mainMainHeader,
   explanationArray,
   id,
 }: ExplanationBarType) => {
   const [isAddExplanationItem, setIsAddExplanationItem] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
-
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [barSelection, setBarSelection] = useState(0);
   const [hovered, setHovered] = useState(Number);
-  const [contentType, setContentType] = useState("");
-  const [mainHeaderId, setMainHeaderId] = useState("");
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
+
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -45,31 +33,28 @@ const ExplanationBar = ({
     dispatch(resetTwoPictureArray());
     window.location.reload();
   };
-  // Function to open the modal and set the selected style data
-  const openModal = (styleData: any) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-  };
-  const openContentModal = (content: any) => {
-    setContentToEdit(content);
-    setIsContentModalOpen(true);
-  };
-
-  const closeContentModal = () => {
-    setContentToEdit("");
-    setIsContentModalOpen(false);
-  };
 
   const barHeight = explanationArray.length * 25 + 50;
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full  w-full flex flex-col gap-4  justify-between mb-4  h-[${barHeight}px ] bg-[#f9f9f9] rounded-lg py-4 `;
   return (
     <div className="py-10 flex flex-col items-center">
-      <h1
-        className="text-3xl font-bold p-4 ml-4"
-        style={mainMainHeader?.style ? mainMainHeader.style : {}}
-      >
-        {mainMainHeader?.content}
-      </h1>
+      <div className="w-5/6 mx-auto mb-4">
+        <h1
+          className="text-3xl font-bold  ml-4 w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
+          style={mainMainHeader?.style}
+        >
+          {mainMainHeader?.content}
+          <StyleModalContainer
+            styleData={mainMainHeader}
+            twoPictureId={id ?? ""}
+            componentId={""}
+            contentContainerType="mainHeader"
+            isContentSend={true}
+            type="mainMainHeader"
+          />
+        </h1>
+      </div>
+
       <div className="w-5/6 mx-auto flex lg:flex-row flex-col items-center sm:items-start ">
         {/* Bar part */}
         <div className={barClassName}>
@@ -108,34 +93,14 @@ const ExplanationBar = ({
                   >
                     {mainHeader?.content}
                   </li>
-                  {!isModalOpen && isAdmin && (
-                    <AiOutlineDown
-                      className="text-lg justify-end"
-                      onClick={() => {
-                        openModal({
-                          style: mainHeader?.style,
-                          content: mainHeader?.content,
-                        });
-                        setContentType("mainHeader");
-                        setMainHeaderId(explanationId ?? "");
-                      }}
-                    />
-                  )}
-                  {isModalOpen &&
-                    contentType === "mainHeader" &&
-                    mainHeaderId === explanationId && (
-                      <StyledModal
-                        key={explanationId}
-                        isOpen={isModalOpen}
-                        styleData={selectedStyle}
-                        onClose={() => setIsModalOpen(false)}
-                        type="explanationBar"
-                        twoPictureId={id}
-                        componentId={explanationId ? explanationId : ""}
-                        contentType="mainHeader"
-                        isContentSend={true}
-                      />
-                    )}
+                  <StyleModalContainer
+                    styleData={mainHeader}
+                    twoPictureId={id}
+                    componentId={explanationId ? explanationId : ""}
+                    contentContainerType="mainHeader"
+                    isContentSend={true}
+                    type="explanationBar"
+                  />
                 </div>
               );
             })}
@@ -154,38 +119,17 @@ const ExplanationBar = ({
               )}
               <h2
                 className="flex flex-row  w-fit px-4 py-2 gap-8 rounded-2xl text-2xl leading-7 font-[500] text-[#212529] capitalize "
-                style={
-                  explanationArray[barSelection].header?.style
-                    ? explanationArray[barSelection].header?.style
-                    : {}
-                }
+                style={explanationArray[barSelection].header?.style}
               >
                 {explanationArray[barSelection].header?.content}
-                {!isModalOpen && isAdmin && (
-                  <AiOutlineDown
-                    className="text-lg justify-end"
-                    onClick={() => {
-                      openModal({
-                        style: explanationArray[barSelection].header?.style,
-                        content: explanationArray[barSelection].header?.content,
-                      });
-                      setContentType("header");
-                    }}
-                  />
-                )}
-                {isModalOpen && contentType === "header" && (
-                  <StyledModal
-                    key={explanationArray[barSelection]._id}
-                    isOpen={isModalOpen}
-                    styleData={selectedStyle}
-                    onClose={() => setIsModalOpen(false)}
-                    type="explanationBar"
-                    twoPictureId={id}
-                    componentId={explanationArray[barSelection]._id ?? ""}
-                    contentType="header"
-                    isContentSend={true}
-                  />
-                )}
+                <StyleModalContainer
+                  styleData={explanationArray[barSelection].header}
+                  twoPictureId={id}
+                  componentId={explanationArray[barSelection]._id ?? ""}
+                  contentContainerType="header"
+                  isContentSend={true}
+                  type="explanationBar"
+                />
               </h2>
               {/* paragraphs */}
               <div className="flex flex-col gap-2 w-full  ">
@@ -194,78 +138,20 @@ const ExplanationBar = ({
                     <div key={index}>
                       <p
                         className=" font-[400] leading-6 text-[#333333] rounded-lg px-4 py-1"
-                        style={
-                          explanationArray[barSelection].paragraphs?.style
-                            ? explanationArray[barSelection].paragraphs?.style
-                            : {}
-                        }
+                        style={explanationArray[barSelection].paragraphs?.style}
                       >
                         {paragraph}
                       </p>
                     </div>
                   )
                 )}
-
-                {/* ContentModal for editing paragraphs */}
-                {isContentModalOpen && (
-                  <ContentModal
-                    isOpen={isContentModalOpen}
-                    content={contentToEdit}
-                    onClose={closeContentModal}
-                    componentId={explanationArray[barSelection]._id ?? ""}
-                    type="explanationBar"
-                    contentType="paragraphs"
-                    twoPictureId={id}
-                  />
-                )}
-                {/* editing part */}
-                {isAdmin && (
-                  <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-                    {!isModalOpen && (
-                      <button
-                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                        onClick={() => {
-                          openModal({
-                            style:
-                              explanationArray[barSelection].paragraphs?.style,
-                            content:
-                              explanationArray[barSelection].paragraphs
-                                ?.content,
-                          });
-                          setContentType("paragraphs");
-                        }}
-                      >
-                        Style <AiOutlineDown className="my-auto" />
-                      </button>
-                    )}
-                    {explanationArray[barSelection].paragraphs?.content && (
-                      <button
-                        onClick={() =>
-                          openContentModal(
-                            explanationArray[barSelection].paragraphs
-                          )
-                        }
-                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                      >
-                        Edit
-                        <AiOutlineDown className="my-auto" />
-                      </button>
-                    )}
-                    {isModalOpen && contentType === "paragraphs" && (
-                      <StyledModal
-                        key={explanationArray[barSelection]._id}
-                        isOpen={isModalOpen}
-                        styleData={selectedStyle}
-                        onClose={() => setIsModalOpen(false)}
-                        type="explanationBar"
-                        twoPictureId={id}
-                        componentId={explanationArray[barSelection]._id ?? ""}
-                        contentType="paragraphs"
-                        isContentSend={false}
-                      />
-                    )}
-                  </div>
-                )}
+                <ContentModalContainer
+                  content={explanationArray[barSelection].paragraphs}
+                  twoPictureId={id}
+                  componentId={explanationArray[barSelection]._id ?? ""}
+                  contentContainerType="paragraphs"
+                  type="explanationBar"
+                />
               </div>
               {isAdmin && (
                 <button
