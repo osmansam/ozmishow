@@ -4,11 +4,9 @@ import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { FreqAskedType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import { useSelector } from "react-redux";
-import { AiOutlineDown } from "react-icons/ai";
-import { style } from "../../shared/types";
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/contentModal/ContentModal";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
@@ -19,37 +17,10 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
   const [selection, setSelection] = useState(-1);
   const [isAddNewItem, setIsAddNewItem] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
-  const [modalId, setModalId] = useState<string>("");
-  const [contentType, setContentType] = useState("");
-  const [contentModalContentType, setContentModalContentType] = useState("");
-
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
   const dispatch = useAppDispatch();
-  const openModal = (styleData: any, idModal: string) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-    setModalId(idModal);
-  };
-  const openContentModal = (
-    content: any,
-    contentType: string,
-    idModal: string
-  ) => {
-    setContentToEdit(content);
-    setContentModalContentType(contentType);
-
-    setIsContentModalOpen(true);
-    setModalId(idModal);
-  };
   const handleCreate = async () => {
     dispatch(updateContainer({ container: twoPictureArray, id }));
     setIsAddNewItem(false);
@@ -89,39 +60,17 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
           >
             <h1
               className="font-[500] pt-2  text-[#333333] flex flex-row gap-8"
-              style={header?.style ? header?.style : {}}
+              style={header?.style}
             >
               {header?.content}
-              {!isModalOpen && isAdmin && (
-                <AiOutlineDown
-                  className="text-lg justify-end my-auto"
-                  onClick={() => {
-                    openModal(
-                      {
-                        style: header?.style,
-                        content: header?.content,
-                      },
-                      index.toString()
-                    );
-                    setContentType("header");
-                  }}
-                />
-              )}
-              {isModalOpen &&
-                contentType === "header" &&
-                modalId === index.toString() && (
-                  <StyledModal
-                    key={id}
-                    isOpen={isModalOpen}
-                    styleData={selectedStyle}
-                    onClose={() => setIsModalOpen(false)}
-                    type="twoPictureIndex"
-                    twoPictureId={id ?? ""}
-                    componentId={index?.toString() ?? ""}
-                    contentType="header"
-                    isContentSend={true}
-                  />
-                )}
+              <StyleModalContainer
+                styleData={header}
+                twoPictureId={id ?? ""}
+                componentId={index?.toString() ?? ""}
+                contentContainerType="header"
+                isContentSend={true}
+                type="twoPictureIndex"
+              />
             </h1>
             {selection === index && (
               <motion.div
@@ -141,56 +90,6 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
                     </p>
                   ))}
                 </div>
-
-                {/* ContentModal for editing paragraphs */}
-                {isContentModalOpen && modalId === index.toString() && (
-                  <ContentModal
-                    isOpen={isContentModalOpen}
-                    content={contentToEdit}
-                    onClose={() => setIsContentModalOpen(false)}
-                    componentId={index?.toString() ?? ""}
-                    type="twoPictureIndex"
-                    contentType="paragraphs"
-                    twoPictureId={id ?? ""}
-                  />
-                )}
-                {/* editing part */}
-                {isAdmin && (
-                  <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-                    {
-                      <button
-                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                        onClick={() => {
-                          openModal(
-                            {
-                              style: paragraphs?.style,
-                              content: paragraphs?.content,
-                            },
-                            index.toString()
-                          );
-                          setContentType("paragraphs");
-                        }}
-                      >
-                        Paragraph Style <AiOutlineDown className="my-auto" />
-                      </button>
-                    }
-                    {paragraphs?.content && (
-                      <button
-                        onClick={() =>
-                          openContentModal(
-                            paragraphs,
-                            "paragraphs",
-                            index.toString()
-                          )
-                        }
-                        className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                      >
-                        Paragraph Edit
-                        <AiOutlineDown className="my-auto" />
-                      </button>
-                    )}
-                  </div>
-                )}
                 {buttons &&
                   buttons.length > 0 &&
                   buttons.map((button, index) => (
@@ -206,20 +105,14 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
                   ))}
               </motion.div>
             )}
-            {isModalOpen &&
-              contentType === "paragraphs" &&
-              modalId === index.toString() && (
-                <StyledModal
-                  isOpen={isModalOpen}
-                  styleData={selectedStyle}
-                  onClose={() => setIsModalOpen(false)}
-                  type="twoPictureIndex"
-                  twoPictureId={id ?? ""}
-                  componentId={index?.toString() ?? ""}
-                  contentType="paragraphs"
-                  isContentSend={false}
-                />
-              )}
+            <ContentModalContainer
+              content={paragraphs}
+              twoPictureId={id ?? ""}
+              componentId={index?.toString() ?? ""}
+              contentContainerType="paragraphs"
+              type="twoPictureIndex"
+            />
+
             {isAdmin && selection === index && (
               <button
                 className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
