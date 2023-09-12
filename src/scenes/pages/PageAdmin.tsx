@@ -551,7 +551,7 @@ const PageAdmin = ({ page }: Props) => {
                 <ResumeIcon
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader ? mainHeader : ""}
-                  resumeIconArray={twoPictureArray as PictureType[]}
+                  resumeIconArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
                   index={index}

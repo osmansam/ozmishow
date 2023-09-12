@@ -45,10 +45,12 @@ const ResumeIconContainer = ({
           const { header, icon, paragraph } = resumeIcon;
           return (
             <ResumeIcon
+              index={index}
               key={index}
-              header={header ? header : ""}
-              icon={icon ? icon : ""}
-              paragraph={paragraph ? paragraph : ""}
+              header={header}
+              icon={icon ?? ""}
+              paragraph={paragraph}
+              _id={id}
             ></ResumeIcon>
           );
         })}

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType } from "../../shared/types";
+import { style } from "../../shared/types";
 
 type Props = {};
 
@@ -20,8 +21,14 @@ const AddResumeIcon = () => {
     e.preventDefault();
     const newTwoPictureArray = {
       icon: icon,
-      paragraph: paragraph,
-      header: header,
+      paragraph: {
+        content: paragraph,
+        style: style,
+      },
+      header: {
+        content: header,
+        style: style,
+      },
     };
     dispatch(setTwoPictureArray(newTwoPictureArray));
     setHeader("");

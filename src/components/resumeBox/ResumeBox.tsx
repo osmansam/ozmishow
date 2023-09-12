@@ -20,23 +20,17 @@ const ResumeBox = ({
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const [contentToEdit, setContentToEdit] = useState<any>();
   const [contentType, setContentType] = useState("");
-  const [modalId, setModalId] = useState<string>("");
+
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
     style: style,
   });
-  const openModal = (styleData: any, idModal: string) => {
+  const openModal = (styleData: any) => {
     setSelectedStyle(styleData);
-    setModalId(idModal);
     setIsModalOpen(true);
   };
-  const openContentModal = (
-    content: any,
-    contentType: string,
-    idModal: string
-  ) => {
+  const openContentModal = (content: any, contentType: string) => {
     setContentToEdit(content);
-    setModalId(idModal);
     setIsContentModalOpen(true);
   };
   return (
@@ -54,13 +48,10 @@ const ResumeBox = ({
                 <AiOutlineDown
                   className="text-lg justify-end my-auto"
                   onClick={() => {
-                    openModal(
-                      {
-                        style: year1?.style,
-                        content: year1?.content,
-                      },
-                      index?.toString() ?? ""
-                    );
+                    openModal({
+                      style: year1?.style,
+                      content: year1?.content,
+                    });
                     setContentType("year1");
                   }}
                 />
@@ -89,13 +80,10 @@ const ResumeBox = ({
                 <AiOutlineDown
                   className="text-lg justify-end my-auto"
                   onClick={() => {
-                    openModal(
-                      {
-                        style: year2?.style,
-                        content: year2?.content,
-                      },
-                      index?.toString() ?? ""
-                    );
+                    openModal({
+                      style: year2?.style,
+                      content: year2?.content,
+                    });
                     setContentType("year2");
                   }}
                 />
@@ -126,13 +114,10 @@ const ResumeBox = ({
             <AiOutlineDown
               className="text-lg justify-end my-auto"
               onClick={() => {
-                openModal(
-                  {
-                    style: header?.style,
-                    content: header?.content,
-                  },
-                  index?.toString() ?? ""
-                );
+                openModal({
+                  style: header?.style,
+                  content: header?.content,
+                });
                 setContentType("header");
               }}
             />
@@ -161,13 +146,10 @@ const ResumeBox = ({
             <AiOutlineDown
               className="text-lg justify-end my-auto"
               onClick={() => {
-                openModal(
-                  {
-                    style: university?.style,
-                    content: university?.content,
-                  },
-                  index?.toString() ?? ""
-                );
+                openModal({
+                  style: university?.style,
+                  content: university?.content,
+                });
                 setContentType("university");
               }}
             />
@@ -188,7 +170,7 @@ const ResumeBox = ({
         </p>
         {/* paragraph */}
         <p
-          className="font-[400]  font-[Poppins,sans-serif] text-[#4c4d4d]  leading-[29px] "
+          className="font-[400]  font-[Poppins,sans-serif] text-[#4c4d4d]  leading-[29px] rounded-lg px-2 "
           style={paragraph?.style ?? {}}
         >
           {paragraph?.content}
@@ -213,13 +195,10 @@ const ResumeBox = ({
               <button
                 className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
                 onClick={() => {
-                  openModal(
-                    {
-                      style: paragraph?.style,
-                      content: [paragraph?.content],
-                    },
-                    index?.toString() ?? ""
-                  );
+                  openModal({
+                    style: paragraph?.style,
+                    content: [paragraph?.content],
+                  });
                   setContentType("paragraph");
                 }}
               >
@@ -228,13 +207,7 @@ const ResumeBox = ({
             )}
             {paragraph?.content && (
               <button
-                onClick={() =>
-                  openContentModal(
-                    paragraph,
-                    "paragraph",
-                    index?.toString() ?? ""
-                  )
-                }
+                onClick={() => openContentModal(paragraph, "paragraph")}
                 className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
               >
                 Paragraph Edit

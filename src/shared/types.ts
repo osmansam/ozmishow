@@ -94,7 +94,7 @@ export interface ProgressBarContainerType {
 export interface ResumeIconContainerType {
   id: string;
   mainHeader?: string;
-  resumeIconArray: Array<PictureType>;
+  resumeIconArray: Array<PictureWithStyleType>;
 }
 export interface ResumeBoxContainerType {
   id: string;
