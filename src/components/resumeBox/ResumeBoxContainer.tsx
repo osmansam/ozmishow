@@ -33,7 +33,7 @@ const ResumeBoxContainer = ({
     <div className="flex flex-col gap-3  w-5/6 mx-auto">
       {/* mainHeader */}
       <h1
-        className="w-fit    justify-start font-[700] text-4xl leading-[44px] mb-3 text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5 "
+        className="w-fit  font-[700] text-4xl leading-[44px] mb-3 text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5 justify-center items-center"
         style={mainHeader?.style}
       >
         {mainHeader?.content}

@@ -10,7 +10,7 @@ import {
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
 import AddResumeIcon from "./AddResumeIcon";
-
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 const ResumeIcon = lazy(() => import("./ResumeIcon"));
 
 const ResumeIconContainer = ({
@@ -34,12 +34,23 @@ const ResumeIconContainer = ({
   return (
     <div className="flex flex-col gap-3 py-10">
       {/* mainHeader */}
-      <h1
-        className="w-5/6 mx-auto flex justify-start font-[700] text-4xl leading-[44px] pb-3"
-        style={{ color: "#333333" }}
-      >
-        {mainHeader?.content}
-      </h1>
+      <div className="w-5/6 mx-auto">
+        <h1
+          className="font-[700] text-4xl leading-[44px] mb-2 text-[#333333] w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
+          style={mainHeader?.style}
+        >
+          {mainHeader?.content}
+          <StyleModalContainer
+            styleData={mainHeader}
+            twoPictureId={id ?? ""}
+            componentId={""}
+            contentContainerType="mainHeader"
+            isContentSend={true}
+            type="mainMainHeader"
+          />
+        </h1>
+      </div>
+
       <div className="flex flex-wrap w-5/6 mx-auto pb-6">
         {resumeIconArray.map((resumeIcon, index) => {
           const { header, icon, paragraph } = resumeIcon;

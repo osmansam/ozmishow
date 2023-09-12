@@ -32,7 +32,7 @@ const SingleNew = () => {
       <div className=" w-5/6 lg:w-3/4  mx-auto flex flex-col py-10 ">
         {/* header */}
         <h1
-          className="w-fit  font-[700] text-4xl flex flex-row gap-8 rounded-2xl px-4 py-0.5"
+          className="w-fit  font-[700] text-4xl flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
           style={header?.style}
         >
           {header?.content}

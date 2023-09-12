@@ -22,7 +22,7 @@ const SinglePicture = ({
   opacity-0 transition duration-500 hover:opacity-90"
       >
         <p
-          className="text-2xl flex flex-row gap-4 rounded-2xl px-4"
+          className="text-2xl flex flex-row gap-4 rounded-2xl px-4 justify-center items-center"
           style={header?.style ? header?.style : {}}
         >
           {header?.content}
