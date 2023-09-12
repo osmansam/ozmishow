@@ -80,11 +80,11 @@ const ExplanationBar = ({
 
               return (
                 <div
-                  className="flex flex-row  justify-center items-center"
+                  className="w-full flex flex-row  justify-center items-center"
                   key={index}
                 >
                   <li
-                    className="  !w-full px-8 rounded-lg  list-none capitalize pointer  z-10  justify-center  items-center mx-auto  py-1  "
+                    className="  !w-full px-8 rounded-lg  list-none capitalize pointer  z-10  flex justify-center  items-center mx-auto  py-1  "
                     style={
                       mainHeader?.style
                         ? {
