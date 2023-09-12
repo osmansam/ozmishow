@@ -6,6 +6,7 @@ import {
   editWorkTeamBar,
   editTwoPictureStyle,
   editTwoPictureIndexStyle,
+  editResumeBox,
 } from "../features/twoPicture/twoPictureSlice";
 
 interface StyleType {
@@ -50,33 +51,15 @@ const ContentModal: React.FC<ContentModalProps> = ({
   }, [content]);
 
   const handleSave = async () => {
-    // Update the content
-    let container;
+    const container = [
+      {
+        [contentType]: {
+          content: editedContent.content,
+          style: editedContent.style,
+        },
+      },
+    ];
 
-    switch (contentType) {
-      case "paragraphs":
-        container = [
-          {
-            paragraphs: {
-              content: editedContent.content,
-              style: editedContent.style,
-            },
-          },
-        ];
-        break;
-      case "subHeaders":
-        container = [
-          {
-            subHeaders: {
-              content: editedContent.content,
-              style: editedContent.style,
-            },
-          },
-        ];
-        break;
-      default:
-        break;
-    }
     switch (type) {
       case "explanationBar":
         await dispatch(
@@ -107,6 +90,15 @@ const ContentModal: React.FC<ContentModalProps> = ({
       case "twoPictureIndex":
         await dispatch(
           editTwoPictureIndexStyle({
+            twoPictureId,
+            container,
+            index: componentId,
+          })
+        );
+        break;
+      case "resumeBox":
+        await dispatch(
+          editResumeBox({
             twoPictureId,
             container,
             index: componentId,

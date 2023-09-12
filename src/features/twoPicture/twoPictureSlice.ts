@@ -337,6 +337,27 @@ export const editTwoPictureIndexStyle = createAsyncThunk(
     }
   }
 );
+// editResumeBox
+export const editResumeBox = createAsyncThunk(
+  "twoPicture/editResumeBox",
+  async ({
+    container,
+    twoPictureId,
+    index,
+  }: {
+    container: any;
+    twoPictureId: string;
+    index: string;
+  }) => {
+    const url = `twoPicture/editResumeBox/${twoPictureId}/${index}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { container });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
 
 // updateSlider
 export const updateSlider = createAsyncThunk(
@@ -498,7 +519,6 @@ const twoPictureSlice = createSlice({
   reducers: {
     setTwoPictureArray: (state, action) => {
       state.twoPictureArray = [...state.twoPictureArray, action.payload];
-      console.log(state.twoPictureArray, "twoPictureArray");
     },
     resetTwoPictureArray: (state) => {
       state.twoPictureArray = [];

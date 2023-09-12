@@ -247,7 +247,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <ResumeBox
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader ? mainHeader : ""}
-                resumeBoxArray={twoPictureArray as PictureType[]}
+                resumeBoxArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
           );

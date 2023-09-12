@@ -6,6 +6,7 @@ import {
   editWorkTeamBar,
   editTwoPictureStyle,
   editTwoPictureIndexStyle,
+  editResumeBox,
 } from "../features/twoPicture/twoPictureSlice";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store";
@@ -161,44 +162,15 @@ function StyledModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    let container: any = [];
-    if (contentType === "mainHeader") {
-      container = [
-        {
-          mainHeader: {
-            content: editedStyle.content,
-            style: editedStyle.style,
-          },
+    const container = [
+      {
+        [contentType]: {
+          content: editedStyle.content,
+          style: editedStyle.style,
         },
-      ];
-    } else if (contentType === "header") {
-      container = [
-        {
-          header: {
-            content: editedStyle.content,
-            style: editedStyle.style,
-          },
-        },
-      ];
-    } else if (contentType === "paragraphs") {
-      container = [
-        {
-          paragraphs: {
-            content: editedStyle.content,
-            style: editedStyle.style,
-          },
-        },
-      ];
-    } else if (contentType === "subHeaders") {
-      container = [
-        {
-          subHeaders: {
-            content: editedStyle.content,
-            style: editedStyle.style,
-          },
-        },
-      ];
-    }
+      },
+    ];
+
     switch (type) {
       case "explanationBar":
         // console.log(editedStyle);
@@ -241,6 +213,15 @@ function StyledModal({
       case "twoPictureIndex":
         await dispatch(
           editTwoPictureIndexStyle({
+            twoPictureId,
+            container,
+            index: componentId,
+          })
+        );
+        break;
+      case "resumeBox":
+        await dispatch(
+          editResumeBox({
             twoPictureId,
             container,
             index: componentId,

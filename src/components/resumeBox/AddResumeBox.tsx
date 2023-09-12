@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType } from "../../shared/types";
-
+import { style } from "../../shared/types";
 const AddResumeBox = () => {
   const { twoPictureArray, pageOptions } = useSelector(
     (state: RootState) => state.twoPicture
@@ -22,11 +22,26 @@ const AddResumeBox = () => {
     e.preventDefault();
 
     const newTwoPictureArray = {
-      year1: year1,
-      year2: year2,
-      header: header,
-      university: university,
-      paragraph: paragraph,
+      year1: {
+        content: year1,
+        style: style,
+      },
+      year2: {
+        content: year2,
+        style: style,
+      },
+      header: {
+        content: header,
+        style: style,
+      },
+      university: {
+        content: university,
+        style: style,
+      },
+      paragraph: {
+        content: paragraph,
+        style: style,
+      },
     };
     dispatch(setTwoPictureArray(newTwoPictureArray));
     setYear1("");
@@ -36,7 +51,10 @@ const AddResumeBox = () => {
     setParagraph("");
     setAllDone(true);
   };
-
+  if (allDone)
+    return (
+      <div className="w-5/6 flex justify-between mx-auto px-4 pt-4 ">Done!</div>
+    );
   return (
     <div className="w-full mt-4">
       <form

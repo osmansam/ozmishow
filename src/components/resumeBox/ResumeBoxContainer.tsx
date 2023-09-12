@@ -44,11 +44,13 @@ const ResumeBoxContainer = ({
           return (
             <ResumeBox
               key={index}
-              header={header ? header : ""}
-              year1={year1 ? year1 : ""}
-              year2={year2 ? year2 : ""}
-              paragraph={paragraph ? paragraph : ""}
-              university={university ? university : ""}
+              index={index}
+              header={header}
+              year1={year1}
+              year2={year2}
+              paragraph={paragraph}
+              university={university}
+              _id={id}
             ></ResumeBox>
           );
         })}

@@ -99,7 +99,7 @@ export interface ResumeIconContainerType {
 export interface ResumeBoxContainerType {
   id: string;
   mainHeader?: string;
-  resumeBoxArray: Array<PictureType>;
+  resumeBoxArray: Array<PictureWithStyleType>;
 }
 export interface YoutubeType {
   embedId: string;
@@ -166,9 +166,9 @@ export interface PictureWithStyleType {
   page?: string;
   date?: string; // Change this from 'String' to 'string'
   percentage?: number;
-  year1?: string;
-  year2?: string;
-  university?: string;
+  year1?: ContentStyleType;
+  year2?: ContentStyleType;
+  university?: ContentStyleType;
   paragraph?: ContentStyleType;
   paragraphStyle?: ContentStyleType;
   icon?: string;
