@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FullPageItemType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
-import { AiOutlineDown } from "react-icons/ai";
-import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/contentModal/ContentModal";
 import { style } from "../../shared/types";
 import { useSelector } from "react-redux";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
@@ -21,36 +20,9 @@ const FullPageItem = ({
   const dispatch = useAppDispatch();
   const [isAddNewItem, setIsAddNewItem] = React.useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
-  const [contentType, setContentType] = useState("");
-  const [contentModalContentType, setContentModalContentType] = useState("");
-  const [modalId, setModalId] = useState("");
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
-
-  const openModal = (styleData: any, idModal: string) => {
-    setSelectedStyle(styleData);
-    setModalId(idModal);
-    setIsModalOpen(true);
-  };
-  const openContentModal = (
-    content: any,
-    contentType: string,
-    idModal: string
-  ) => {
-    setContentToEdit(content);
-    setContentModalContentType(contentType);
-    setModalId(idModal);
-
-    setIsContentModalOpen(true);
-  };
 
   const handleCreate = async () => {
     console.log("twoPictureArray", twoPictureArray);
@@ -62,10 +34,18 @@ const FullPageItem = ({
   return (
     <div className="w-5/6 lg:w-4/5  mx-auto my-auto h-full py-10">
       <h1
-        className="font-[700] text-4xl leading-[44px] pb-4"
-        style={{ color: "#333333" }}
+        className="font-[700] text-4xl leading-[44px] mb-2 text-[#333333] w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
+        style={mainMainHeader?.style}
       >
         {mainMainHeader?.content}
+        <StyleModalContainer
+          styleData={mainMainHeader}
+          twoPictureId={id ?? ""}
+          componentId={""}
+          contentContainerType="mainHeader"
+          isContentSend={true}
+          type="mainMainHeader"
+        />
       </h1>
       {fullPageItemArray.map((fullPageItem, index) => {
         const { header, paragraphs, buttons, img, _id } = fullPageItem;
@@ -83,36 +63,14 @@ const FullPageItem = ({
               style={header?.style ? header?.style : {}}
             >
               {header?.content}
-              {!isModalOpen && isAdmin && (
-                <AiOutlineDown
-                  className="text-lg justify-end my-auto"
-                  onClick={() => {
-                    openModal(
-                      {
-                        style: header?.style,
-                        content: header?.content,
-                      },
-                      index.toString()
-                    );
-                    setContentType("header");
-                  }}
-                />
-              )}
-              {isModalOpen &&
-                contentType === "header" &&
-                modalId === index.toString() && (
-                  <StyledModal
-                    key={id}
-                    isOpen={isModalOpen}
-                    styleData={selectedStyle}
-                    onClose={() => setIsModalOpen(false)}
-                    type="twoPictureIndex"
-                    twoPictureId={id ?? ""}
-                    componentId={index.toString()}
-                    contentType="header"
-                    isContentSend={true}
-                  />
-                )}
+              <StyleModalContainer
+                styleData={header}
+                twoPictureId={id ?? ""}
+                componentId={index.toString()}
+                contentContainerType="header"
+                isContentSend={true}
+                type="twoPictureIndex"
+              />
             </h1>
             <div
               className="flex flex-col gap-2 w-full rounded-lg py-2"
@@ -128,68 +86,13 @@ const FullPageItem = ({
                 </p>
               ))}
             </div>
-
-            {isContentModalOpen && modalId === index.toString() && (
-              <ContentModal
-                isOpen={isContentModalOpen}
-                content={contentToEdit}
-                onClose={() => setIsContentModalOpen(false)}
-                componentId={index.toString()}
-                type="twoPictureIndex"
-                contentType="paragraphs"
-                twoPictureId={id ?? ""}
-              />
-            )}
-            {/* editing part */}
-            {isAdmin && (
-              <div className="flex flex-row justify-start gap-2 rounded-2xl py-2">
-                {!isModalOpen && (
-                  <button
-                    className="flex flex-row gap-1 bg-blue-500 text-white px-2 rounded-2xl hover:bg-blue-700 mr-2"
-                    onClick={() => {
-                      openModal(
-                        {
-                          style: paragraphs?.style,
-                          content: paragraphs?.content,
-                        },
-                        index.toString()
-                      );
-                      setContentType("paragraphs");
-                    }}
-                  >
-                    Style <AiOutlineDown className="my-auto" />
-                  </button>
-                )}
-                {paragraphs?.content && (
-                  <button
-                    onClick={() =>
-                      openContentModal(
-                        paragraphs,
-                        "paragraphs",
-                        index.toString()
-                      )
-                    }
-                    className="flex flex-row gap-1 bg-blue-500 text-white px-2 rounded-2xl hover:bg-blue-700 mr-2"
-                  >
-                    Edit <AiOutlineDown className="my-auto" />
-                  </button>
-                )}
-                {isModalOpen &&
-                  contentType === "paragraphs" &&
-                  modalId === index.toString() && (
-                    <StyledModal
-                      isOpen={isModalOpen}
-                      styleData={selectedStyle}
-                      onClose={() => setIsModalOpen(false)}
-                      type="twoPictureIndex"
-                      twoPictureId={id ?? ""}
-                      componentId={index.toString()}
-                      contentType="paragraphs"
-                      isContentSend={false}
-                    />
-                  )}
-              </div>
-            )}
+            <ContentModalContainer
+              content={paragraphs}
+              twoPictureId={id ?? ""}
+              componentId={index?.toString() ?? ""}
+              contentContainerType="paragraphs"
+              type="twoPictureIndex"
+            />
           </div>
         );
       })}
