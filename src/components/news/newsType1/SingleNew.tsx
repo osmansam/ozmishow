@@ -18,7 +18,7 @@ const SingleNew = () => {
   const { id, twoPictureId, type } = useParams();
   const dispatch = useAppDispatch();
   const [news, setNews] = useState({} as PictureWithStyleType);
-  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
+
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
