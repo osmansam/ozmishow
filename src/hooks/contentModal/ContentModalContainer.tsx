@@ -14,7 +14,7 @@ interface ContentModalProps {
   contentContainerType: string;
   type?: string;
 }
-const ContenModalContainer = ({
+const ContentModalContainer = ({
   content,
   twoPictureId,
   componentId,
@@ -97,4 +97,4 @@ const ContenModalContainer = ({
   );
 };
 
-export default ContenModalContainer;
+export default ContentModalContainer;
