@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { PictureWithStyleType } from "../../shared/types";
 import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/ContentModal";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ContentModal from "../../hooks/contentModal/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { AiOutlineDown } from "react-icons/ai";
@@ -42,31 +43,14 @@ const IconExplain = ({
         style={header?.style ? header?.style : {}}
       >
         {header?.content}
-        {!isModalOpen && isAdmin && (
-          <AiOutlineDown
-            className="text-lg justify-end my-auto"
-            onClick={() => {
-              openModal({
-                style: header?.style,
-                content: header?.content,
-              });
-              setContentType("header");
-            }}
-          />
-        )}
-        {isModalOpen && contentType === "header" && (
-          <StyledModal
-            key={_id}
-            isOpen={isModalOpen}
-            styleData={selectedStyle}
-            onClose={() => setIsModalOpen(false)}
-            type="twoPictureIndex"
-            twoPictureId={_id ?? ""}
-            componentId={index?.toString() ?? ""}
-            contentType="header"
-            isContentSend={true}
-          />
-        )}
+        <StyleModalContainer
+          styleData={header}
+          twoPictureId={_id ?? ""}
+          componentId={index?.toString() ?? ""}
+          contentContainerType="header"
+          isContentSend={true}
+          type="twoPictureIndex"
+        />
       </h1>
       <div className="flex flex-col gap-2 w-full rounded-lg py-1  ">
         {paragraphs?.content?.map((paragraph, index) => (

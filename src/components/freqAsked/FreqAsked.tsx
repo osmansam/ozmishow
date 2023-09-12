@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { AiOutlineDown } from "react-icons/ai";
 import { style } from "../../shared/types";
 import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/ContentModal";
+import ContentModal from "../../hooks/contentModal/ContentModal";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import {
   updateContainer,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StyledModal from "../../hooks/styledModal/StyledModal";
-import ContentModal from "../../hooks/ContentModal";
+import ContentModal from "../../hooks/contentModal/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { AiOutlineDown } from "react-icons/ai";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddExplanationItem from "./AddExplanationItem";
 import { ExplanationBarType } from "../../shared/types";
-import ContentModal from "../../hooks/ContentModal";
+import ContentModal from "../../hooks/contentModal/ContentModal";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { style } from "../../shared/types";

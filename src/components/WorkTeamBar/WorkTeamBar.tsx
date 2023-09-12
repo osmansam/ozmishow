@@ -10,7 +10,7 @@ import {
 } from "../../features/twoPicture/twoPictureSlice";
 import StyledModal from "../../hooks/styledModal/StyledModal";
 import { AiOutlineDown } from "react-icons/ai";
-import ContentModal from "../../hooks/ContentModal";
+import ContentModal from "../../hooks/contentModal/ContentModal";
 import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
 import { style } from "../../shared/types";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store";
+import { RootState, useAppDispatch } from "../../store";
 import {
   editExplanationBar,
   editWorkTeamBar,
@@ -8,7 +8,7 @@ import {
   editTwoPictureIndexStyle,
   editResumeBox,
   editMainMainHeader,
-} from "../features/twoPicture/twoPictureSlice";
+} from "../../features/twoPicture/twoPictureSlice";
 
 interface StyleType {
   color: string;

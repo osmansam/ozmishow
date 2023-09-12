@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { StyleType } from "../../shared/types";
+import { RootState } from "../../store";
 import StyledModal from "./StyledModal";
 import { AiOutlineDown } from "react-icons/ai";
 import { style } from "../../shared/types";
-interface StyleData {
-  content: string;
-  style: StyleType;
-}
 
 interface StyledModalProps {
   styleData: any;
@@ -18,7 +13,6 @@ interface StyledModalProps {
   isContentSend?: boolean;
   type?: string;
 }
-type Props = {};
 
 const StyleModalContainer = ({
   styleData,

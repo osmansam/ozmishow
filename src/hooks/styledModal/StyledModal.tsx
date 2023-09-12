@@ -9,8 +9,7 @@ import {
   editResumeBox,
   editMainMainHeader,
 } from "../../features/twoPicture/twoPictureSlice";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import { useAppDispatch } from "../../store";
 import { StyleType } from "../../shared/types";
 
 interface StyleData {

@@ -1,7 +1,7 @@
 import React from "react";
 import { IconExplainContainerType } from "../../shared/types";
 import IconExplain from "./IconExplain";
-
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 const IconExplainContainer = ({
   mainHeader,
   iconExplainArray,
@@ -10,10 +10,18 @@ const IconExplainContainer = ({
   return (
     <div className="w-5/6 h-full mx-auto py-10 md:py-20">
       <h1
-        className="font-[700] text-4xl leading-[44px] pb-3"
-        style={{ color: "#333333" }}
+        className="w-fit font-[700] text-4xl leading-[44px] mb-3  text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5"
+        style={mainHeader?.style}
       >
         {mainHeader?.content}
+        <StyleModalContainer
+          styleData={mainHeader}
+          twoPictureId={id ?? ""}
+          componentId={""}
+          contentContainerType="mainHeader"
+          isContentSend={true}
+          type="mainMainHeader"
+        />
       </h1>
       <div className="w-full h-full md:flex md:justify-between mx-auto">
         {iconExplainArray.map((iconExplain, index) => {
