@@ -209,9 +209,6 @@ const ComponentContainer = () => {
 
         resetInputs();
         break;
-      case Components.ContactFormEn.name:
-      case Components.ContactFormTr.name:
-      case Components.Map.name:
       case Components.PageBanner.name:
       case Components.MaximContainer.name:
       case Components.ContactContainer.name:
