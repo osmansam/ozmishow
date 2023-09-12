@@ -6,13 +6,9 @@ import { RootState, useAppDispatch } from "../../../store";
 import { useSelector } from "react-redux";
 import { deleteItemInContainer } from "../../../features/twoPicture/twoPictureSlice";
 import Navbar from "../../navbar/Navbar";
-import NewsContainer from "./NewsContainer";
-import NewsContainer2 from "../newsType2/NewsContainer2";
 import Footer from "../../footer";
-import StyledModal from "../../../hooks/styledModal/StyledModal";
-import ContentModal from "../../../hooks/contentModal/ContentModal";
-import { style } from "../../../shared/types";
-import { AiOutlineDown } from "react-icons/ai";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 
 const SingleNew = () => {
   const { id, twoPictureId, type } = useParams();
@@ -20,22 +16,6 @@ const SingleNew = () => {
   const [news, setNews] = useState({} as PictureWithStyleType);
 
   const { isAdmin } = useSelector((state: RootState) => state.context);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const [contentToEdit, setContentToEdit] = useState<any>();
-  const [contentType, setContentType] = useState("");
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
-  const openModal = (styleData: any) => {
-    setSelectedStyle(styleData);
-    setIsModalOpen(true);
-  };
-  const openContentModal = (content: any, contentType: string) => {
-    setContentToEdit(content);
-    setIsContentModalOpen(true);
-  };
   const getSingleNew = async () => {
     const response = await axios.get(
       `https://ozmishow-back.onrender.com/api/v1/twoPicture/getSingleNew/${twoPictureId}/${id}`
@@ -53,34 +33,17 @@ const SingleNew = () => {
         {/* header */}
         <h1
           className="w-fit  font-[700] text-4xl flex flex-row gap-8 rounded-2xl px-4 py-0.5"
-          style={header?.style ? header?.style : {}}
+          style={header?.style}
         >
           {header?.content}
-          {!isModalOpen && isAdmin && (
-            <AiOutlineDown
-              className="text-lg justify-end my-auto"
-              onClick={() => {
-                openModal({
-                  style: header?.style,
-                  content: header?.content,
-                });
-                setContentType("header");
-              }}
-            />
-          )}
-          {isModalOpen && contentType === "header" && (
-            <StyledModal
-              key={twoPictureId}
-              isOpen={isModalOpen}
-              styleData={selectedStyle}
-              onClose={() => setIsModalOpen(false)}
-              type="explanationBar"
-              twoPictureId={twoPictureId ?? ""}
-              componentId={id ?? ""}
-              contentType="header"
-              isContentSend={true}
-            />
-          )}
+          <StyleModalContainer
+            styleData={header}
+            twoPictureId={twoPictureId ?? ""}
+            componentId={id ?? ""}
+            contentContainerType="header"
+            isContentSend={true}
+            type="explanationBar"
+          />
         </h1>
         {/* img */}
         {news.img && (
@@ -103,58 +66,13 @@ const SingleNew = () => {
           ))}
         </div>
         {/* ContentModal for editing paragraphs */}
-        {isContentModalOpen && (
-          <ContentModal
-            isOpen={isContentModalOpen}
-            content={contentToEdit}
-            onClose={() => setIsContentModalOpen(false)}
-            componentId={id ?? ""}
-            type="explanationBar"
-            contentType="paragraphs"
-            twoPictureId={twoPictureId ?? ""}
-          />
-        )}
-        {/* editing part */}
-        {isAdmin && (
-          <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
-            {!isModalOpen && (
-              <button
-                className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-                onClick={() => {
-                  openModal({
-                    style: paragraphs?.style,
-                    content: paragraphs?.content,
-                  });
-                  setContentType("paragraphs");
-                }}
-              >
-                Paragraph Style <AiOutlineDown className="my-auto" />
-              </button>
-            )}
-            {paragraphs?.content && (
-              <button
-                onClick={() => openContentModal(paragraphs, "paragraphs")}
-                className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-              >
-                Paragraph Edit
-                <AiOutlineDown className="my-auto" />
-              </button>
-            )}
-            {isModalOpen && contentType === "paragraphs" && (
-              <StyledModal
-                key={twoPictureId}
-                isOpen={isModalOpen}
-                styleData={selectedStyle}
-                onClose={() => setIsModalOpen(false)}
-                type="explanationBar"
-                twoPictureId={twoPictureId ?? ""}
-                componentId={id ?? ""}
-                contentType="paragraphs"
-                isContentSend={false}
-              />
-            )}
-          </div>
-        )}
+        <ContentModalContainer
+          content={paragraphs}
+          twoPictureId={twoPictureId ?? ""}
+          componentId={id ?? ""}
+          contentContainerType="paragraphs"
+          type="explanationBar"
+        />
         {isAdmin && (
           <button
             className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
