@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { ProgressBarContainerType } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
   updateProgressBar,
   resetTwoPictureArray,
@@ -14,6 +15,7 @@ const ProgressBarContainer = ({
   id,
   mainHeader,
   progressBarArray,
+  componentStyle,
 }: ProgressBarContainerType) => {
   const [isAddProgressBar, setIsAddProgressBar] = React.useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -29,7 +31,13 @@ const ProgressBarContainer = ({
     window.location.reload();
   };
   return (
-    <div className="flex flex-col gap-3 py-10">
+    <div className="flex flex-col gap-3 py-10" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       {/* mainHeader */}
       <h1
         className="w-5/6 mx-auto flex justify-start font-[700] text-4xl leading-[44px] pb-3"

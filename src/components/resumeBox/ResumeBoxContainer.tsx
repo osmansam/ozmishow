@@ -6,6 +6,7 @@ import {
   updateResumeBox,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 
 const ResumeBox = lazy(() => import("./ResumeBox"));
@@ -14,6 +15,7 @@ const AddResumeBox = lazy(() => import("./AddResumeBox"));
 const ResumeBoxContainer = ({
   id,
   mainHeader,
+  componentStyle,
   resumeBoxArray,
 }: ResumeBoxContainerType) => {
   const [isAddResumeBox, setIsAddResumeBox] = React.useState(false);
@@ -30,7 +32,13 @@ const ResumeBoxContainer = ({
     window.location.reload();
   };
   return (
-    <div className="flex flex-col gap-3  w-5/6 mx-auto">
+    <div className="flex flex-col gap-3  w-5/6 mx-auto" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       {/* mainHeader */}
       <h1
         className="w-fit  font-[700] text-4xl leading-[44px] mb-3 text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5 justify-center items-center"

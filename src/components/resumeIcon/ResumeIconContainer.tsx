@@ -6,6 +6,7 @@ import {
   updateProgressBar,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import AddResumeIcon from "./AddResumeIcon";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 const ResumeIcon = lazy(() => import("./ResumeIcon"));
@@ -14,6 +15,7 @@ const ResumeIconContainer = ({
   id,
   mainHeader,
   resumeIconArray,
+  componentStyle,
 }: ResumeIconContainerType) => {
   const [isAddResumeIcon, setIsAddResumeIcon] = React.useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -29,7 +31,13 @@ const ResumeIconContainer = ({
     window.location.reload();
   };
   return (
-    <div className="flex flex-col gap-3 py-10">
+    <div className="flex flex-col gap-3 py-10" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       {/* mainHeader */}
       <div className="w-5/6 mx-auto">
         <h1

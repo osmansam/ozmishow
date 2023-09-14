@@ -93,16 +93,19 @@ export interface ProgressBarContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   progressBarArray: Array<PictureType>;
+  componentStyle?: ComponentStyleType;
 }
 export interface ResumeIconContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   resumeIconArray: Array<PictureWithStyleType>;
+  componentStyle?: ComponentStyleType;
 }
 export interface ResumeBoxContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   resumeBoxArray: Array<PictureWithStyleType>;
+  componentStyle?: ComponentStyleType;
 }
 export interface YoutubeType {
   embedId: string;
@@ -199,6 +202,7 @@ export interface SliderType {
   id: string;
   mainMainHeader?: ContentStyleType;
   sliderArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
 }
 export interface WorkTeamBarType {
   id: string;
@@ -428,6 +432,7 @@ export interface ContainerType {
   position: number;
   language: string;
   style: any;
+  componentType: string;
 }
 
 export interface ButtonType {

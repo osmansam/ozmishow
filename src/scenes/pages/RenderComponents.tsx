@@ -78,23 +78,22 @@ export const renderComponents = (newContainer: ContainerType[]) => {
   return newContainer?.map((item, index) => {
     if (item && item.componentName) {
       const { mainHeader, twoPictureArray, style } = item;
+      const pictureItem = {
+        ...item.twoPictureArray[0],
+        componentStyle: style,
+      };
       switch (item.componentName) {
         case "PictureAtRight":
           return (
             <div key={index}>
-              <PictureAtRight
-                {...(item.twoPictureArray[0] as PictureWithStyleType)}
-                _id={item && item._id ? item._id : ""}
-              />
+              <PictureAtRight {...(pictureItem as PictureWithStyleType)} />
             </div>
           );
+
         case "PictureAtLeft":
           return (
             <div key={index}>
-              <PictureAtLeft
-                {...(item.twoPictureArray[0] as PictureWithStyleType)}
-                _id={item && item._id ? item._id : ""}
-              />
+              <PictureAtLeft {...(pictureItem as PictureWithStyleType)} />
             </div>
           );
         case "TwoPictureContainer":
@@ -123,7 +122,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           return (
             <div key={index}>
               <MaximContainer
-                {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                {...(pictureItem as PictureWithStyleType)}
                 _id={item && item._id ? item._id : ""}
               />
             </div>
@@ -177,6 +176,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
                 sliderArray={twoPictureArray as PictureWithStyleType[]}
+                componentStyle={style}
               />
             </div>
           );
@@ -208,7 +208,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           return (
             <div key={index}>
               <PageBanner
-                {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                {...(pictureItem as PictureWithStyleType)}
                 _id={item && item._id ? item._id : ""}
               />
             </div>
@@ -246,6 +246,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <ProgressBarContainer
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
+                componentStyle={style}
                 progressBarArray={twoPictureArray as PictureType[]}
               />
             </div>
@@ -256,6 +257,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <ResumeBox
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
+                componentStyle={style}
                 resumeBoxArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
@@ -267,6 +269,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
                 resumeIconArray={twoPictureArray as PictureWithStyleType[]}
+                componentStyle={style}
               />
             </div>
           );

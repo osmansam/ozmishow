@@ -8,8 +8,14 @@ import {
   updateSlider,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 
-const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
+const Slider = ({
+  mainMainHeader,
+  sliderArray,
+  id,
+  componentStyle,
+}: SliderType) => {
   const dispatch = useAppDispatch();
   const [index, setIndex] = useState(0);
   const [isAddSlider, setIsAddSlider] = useState(false);
@@ -52,7 +58,13 @@ const Slider = ({ mainMainHeader, sliderArray, id }: SliderType) => {
   const currentSlide = sliderArray[index];
 
   return (
-    <div className="py-10 flex flex-col  w-full">
+    <div className="py-10 flex flex-col  w-full" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       <h1 className="font-[700] text-[#102a42] text-3xl flex justify-start py-2 items-start px-4 mx-auto">
         {mainMainHeader?.content}
       </h1>

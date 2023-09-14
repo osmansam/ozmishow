@@ -28,14 +28,14 @@ const ComponentStyleModalContainer = ({
   return (
     <div>
       {!isModalOpen && isAdmin && (
-        <div className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700">
+        <div
+          className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700"
+          onClick={() => {
+            openModal(styleData);
+          }}
+        >
           <h2>Component Style</h2>
-          <AiOutlineDown
-            className="text-lg justify-end my-auto"
-            onClick={() => {
-              openModal(styleData);
-            }}
-          />
+          <AiOutlineDown className="text-lg justify-end my-auto" />
         </div>
       )}
 

@@ -101,6 +101,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -120,6 +121,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -139,6 +141,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -157,6 +160,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -178,6 +182,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -199,6 +204,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -223,6 +229,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();
@@ -248,6 +255,7 @@ const ComponentContainer = () => {
             position,
             language,
             style: { componentStyle },
+            componentType: "type1",
           })
         );
         resetInputs();

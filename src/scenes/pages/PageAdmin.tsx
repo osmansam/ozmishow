@@ -264,13 +264,16 @@ const PageAdmin = ({ page }: Props) => {
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
         const { mainHeader, twoPictureArray, _id, style } = item;
-
+        const pictureItem = {
+          ...item.twoPictureArray[0],
+          componentStyle: style,
+        };
         switch (item.componentName) {
           case "PictureAtRight":
             return (
               <div key={index}>
                 <PictureAtRight
-                  {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                  {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons
@@ -288,7 +291,7 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <PictureAtLeft
-                  {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                  {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
                 />
 
@@ -362,7 +365,7 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <MaximContainer
-                  {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                  {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons
@@ -481,6 +484,7 @@ const PageAdmin = ({ page }: Props) => {
                 <ProgressBarContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
+                  componentStyle={style}
                   progressBarArray={twoPictureArray as PictureType[]}
                 />
                 <PageConfigurationButtons
@@ -501,6 +505,7 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   resumeBoxArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -520,6 +525,7 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
                   sliderArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -559,6 +565,7 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   resumeIconArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -597,7 +604,7 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <PageBanner
-                  {...(item.twoPictureArray[0] as PictureWithStyleType)}
+                  {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons
