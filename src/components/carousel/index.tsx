@@ -9,8 +9,14 @@ import {
 } from "../../features/twoPicture/twoPictureSlice";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import SinglePicture from "./SinglePicture";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 
-const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
+const Carousel = ({
+  mainMainHeader,
+  carouselArray,
+  componentStyle,
+  id,
+}: CarouselType) => {
   const dispatch = useAppDispatch();
   const [isAddCarousel, setIsAddCarousel] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -27,7 +33,13 @@ const Carousel = ({ mainMainHeader, carouselArray, id }: CarouselType) => {
   };
   const carouselWidth = carouselArray.length * 466;
   return (
-    <div className="py-10 flex flex-col items-center">
+    <div className="py-10 flex flex-col items-center" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       {/* mainHeader */}
       <div className="w-5/6 mx-auto mb-4">
         <h1

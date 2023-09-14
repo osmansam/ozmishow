@@ -182,6 +182,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <Carousel
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
+                componentStyle={style}
                 carouselArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>

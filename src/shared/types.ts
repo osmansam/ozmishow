@@ -188,6 +188,7 @@ export interface CarouselType {
   id: string;
   mainMainHeader?: ContentStyleType;
   carouselArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
 }
 export interface SliderType {
   id: string;
