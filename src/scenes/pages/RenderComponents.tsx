@@ -113,6 +113,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <IconExplainContainer
                 mainHeader={mainHeader}
+                componentStyle={style}
                 iconExplainArray={twoPictureArray as PictureWithStyleType[]}
                 id={item && item._id ? item._id : ""}
               />

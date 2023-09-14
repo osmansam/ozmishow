@@ -82,6 +82,7 @@ export interface IconExplainContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   iconExplainArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
 }
 export interface NewsContainerType {
   id: string;

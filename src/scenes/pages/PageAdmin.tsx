@@ -344,6 +344,7 @@ const PageAdmin = ({ page }: Props) => {
                 <IconExplainContainer
                   mainHeader={mainHeader}
                   iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
                   id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons

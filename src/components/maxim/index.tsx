@@ -2,13 +2,25 @@ import React from "react";
 import { PictureWithStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 
-const Maxim = ({ header, paragraphs, _id }: PictureWithStyleType) => {
+const Maxim = ({
+  header,
+  paragraphs,
+  componentStyle,
+  _id,
+}: PictureWithStyleType) => {
   return (
     <div
-      className="w-full h-52  flex flex-col gap-10 justify-center items-center py-20"
-      style={{ backgroundColor: "#f6f6f6" }}
+      className="w-full h-52  flex flex-col gap-10 justify-center items-center py-20 bg-[#f6f6f6]"
+      style={componentStyle}
     >
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={_id ?? ""}
+        />
+      </div>
       {paragraphs?.content?.map((paragraph, index) => (
         <h1
           key={index}
