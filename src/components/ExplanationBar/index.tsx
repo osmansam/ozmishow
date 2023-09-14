@@ -44,6 +44,9 @@ const ExplanationBar = ({
         <ComponentStyleModalContainer
           styleData={componentStyle}
           twoPictureId={id ?? ""}
+          // buraya componentTYpe gelecek
+          currentType="type1"
+          isComponentType={false}
         />
       </div>
       <div className="w-5/6 mx-auto mb-4">

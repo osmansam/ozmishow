@@ -15,6 +15,9 @@ const TwoPictureContainer = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          isComponentType={false}
+          // buraya componentTYpe gelecek
+          currentType="type1"
           twoPictureId={id ?? ""}
         />
       </div>

@@ -4,20 +4,26 @@ import { PictureWithStyleType } from "../../../shared/types";
 import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+
 const PictureAtLeft = ({
   img,
   header,
   paragraphs,
   buttons,
   componentStyle,
+  componentType,
   _id,
 }: PictureWithStyleType) => {
   return (
     <div className="w-full h-full flex flex-col mx-auto" style={componentStyle}>
-      <div className=" w-full flex justify-end mr-20 ">
+      <div className=" w-full flex justify-end pr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          currentType={componentType ?? ""}
           twoPictureId={_id ?? ""}
+          componentTypes={pictureAndTextTypes}
+          isComponentType={true}
         />
       </div>
       <div
@@ -38,7 +44,7 @@ const PictureAtLeft = ({
           <div className="flex w-full lg:pl-28 gap-4 flex-col h-full md:pt-20">
             <h1
               className="w-fit px-4 py-1 gap-8 rounded-2xl font-[700] text-4xl flex flex-row "
-              style={header?.style ? header?.style : {}}
+              style={header?.style}
             >
               {header?.content}
               <StyleModalContainer

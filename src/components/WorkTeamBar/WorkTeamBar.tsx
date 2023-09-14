@@ -68,8 +68,11 @@ const WorkTeamBar = ({
     <div className="py-10" style={componentStyle}>
       <div className="flex justify-end mr-20">
         <ComponentStyleModalContainer
+          // buraya componentTYpe gelecek
+          currentType="type1"
           styleData={componentStyle}
           twoPictureId={id ?? ""}
+          isComponentType={false}
         />
       </div>
       <div className="w-5/6 mx-auto mb-4">

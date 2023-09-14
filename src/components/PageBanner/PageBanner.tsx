@@ -12,7 +12,10 @@ const PageBanner = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          // buraya componentTYpe gelecek
+          currentType="type1"
           twoPictureId={_id ?? ""}
+          isComponentType={false}
         />
       </div>
       {/* image */}

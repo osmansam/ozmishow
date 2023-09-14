@@ -36,7 +36,10 @@ const ResumeBoxContainer = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          // buraya componentTYpe gelecek
+          currentType="type1"
           twoPictureId={id ?? ""}
+          isComponentType={false}
         />
       </div>
       {/* mainHeader */}

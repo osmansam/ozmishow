@@ -21,6 +21,9 @@ import Loading from "../../components/loading";
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );
+const PictureAtLeftType3 = lazy(
+  () => import("../../components/pictureAndText/picLeft/PictureAtLeftType3")
+);
 const PictureAtRight = lazy(
   () => import("../../components/pictureAndText/picRight/PictureAtRight")
 );
@@ -267,26 +270,9 @@ const PageAdmin = ({ page }: Props) => {
         const pictureItem = {
           ...item.twoPictureArray[0],
           componentStyle: style,
+          componentType: componentType,
         };
         switch (item.componentName) {
-          case "PictureAtRight":
-            return (
-              <div key={index}>
-                <PictureAtRight
-                  {...(pictureItem as PictureWithStyleType)}
-                  _id={item && item._id ? item._id : ""}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
           case "PictureAndText":
             if (componentType === "type1") {
               return (
@@ -311,6 +297,24 @@ const PageAdmin = ({ page }: Props) => {
               return (
                 <div key={index}>
                   <PictureAtRight
+                    {...(pictureItem as PictureWithStyleType)}
+                    _id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type3") {
+              return (
+                <div key={index}>
+                  <PictureAtLeftType3
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
                   />
@@ -421,43 +425,49 @@ const PageAdmin = ({ page }: Props) => {
               </div>
             );
           case "NewsContainer":
-            return (
-              <div key={index}>
-                <NewsContainer
-                  id={item && item._id ? item._id : ""}
-                  mainHeader={mainHeader}
-                  componentStyle={style}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
-          case "NewsContainer2":
-            return (
-              <div key={index}>
-                <NewsContainer2
-                  id={item && item._id ? item._id : ""}
-                  componentStyle={style}
-                  mainHeader={mainHeader}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
+            if (componentType === "type1") {
+              return (
+                <div key={index}>
+                  <NewsContainer
+                    id={item && item._id ? item._id : ""}
+                    mainHeader={mainHeader}
+                    componentType={componentType}
+                    componentStyle={style}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type2") {
+              return (
+                <div key={index}>
+                  <NewsContainer2
+                    id={item && item._id ? item._id : ""}
+                    componentStyle={style}
+                    componentType={componentType}
+                    mainHeader={mainHeader}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            }
+            break;
+
           case "TypingEffectContainer":
             const paragraphs = Array.isArray(twoPictureArray[0]?.paragraphs)
               ? twoPictureArray[0]?.paragraphs

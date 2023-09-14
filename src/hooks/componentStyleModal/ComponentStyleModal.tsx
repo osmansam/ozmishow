@@ -9,13 +9,19 @@ interface ComponentStyleModalProps {
   isOpen: boolean;
   styleData: any;
   onClose: () => void;
+  componentTypes?: string[];
   twoPictureId: string;
+  currentType: string;
+  isComponentType: boolean;
 }
 
 function ComponentStyleModal({
   isOpen,
   styleData,
+  currentType,
   onClose,
+  componentTypes,
+  isComponentType,
   twoPictureId,
 }: ComponentStyleModalProps) {
   const dispatch = useAppDispatch();
@@ -23,7 +29,7 @@ function ComponentStyleModal({
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(styleData.backgroundColor);
   const [originalColor, setOriginalColor] = useState(styleData.backgroundColor);
-
+  const [selectedType, setSelectedType] = useState(currentType);
   const toggleColorPicker = () => {
     setIsColorPickerOpen(!isColorPickerOpen);
   };
@@ -64,7 +70,13 @@ function ComponentStyleModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(editComponentStyle({ twoPictureId, style: editedStyle }));
+    dispatch(
+      editComponentStyle({
+        twoPictureId,
+        style: editedStyle,
+        type: selectedType,
+      })
+    );
     onClose();
     window.location.reload();
   };
@@ -142,6 +154,26 @@ function ComponentStyleModal({
                   className="border rounded px-2 py-1 w-full"
                 />
               </div>
+              {isComponentType && (
+                <div className="mb-3">
+                  <label htmlFor="fontFamily" className="block text-gray-600">
+                    Component Type:
+                  </label>
+                  <select
+                    id="type"
+                    name="selectedType"
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                    className="border rounded px-2 py-1 w-full"
+                  >
+                    {componentTypes?.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <div className="flex justify-end">
                 <button
                   type="submit"

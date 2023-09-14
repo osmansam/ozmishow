@@ -332,10 +332,21 @@ export const editTwoPictureStyle = createAsyncThunk(
 //editComponentStyle
 export const editComponentStyle = createAsyncThunk(
   "twoPicture/editComponentStyle",
-  async ({ style, twoPictureId }: { style: any; twoPictureId: string }) => {
+  async ({
+    style,
+    type,
+    twoPictureId,
+  }: {
+    style: any;
+    twoPictureId: string;
+    type?: string;
+  }) => {
     const url = `twoPicture/editComponentStyle/${twoPictureId}`;
     try {
-      const response = await axios.patch(`${baseURL}/${url}`, { style });
+      const response = await axios.patch(`${baseURL}/${url}`, {
+        componentStyle: style,
+        componentType: type ?? "type1",
+      });
       return response.data;
     } catch (error) {
       return error;

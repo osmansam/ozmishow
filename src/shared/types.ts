@@ -88,6 +88,7 @@ export interface NewsContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   componentStyle?: ComponentStyleType;
+  componentType: string;
 }
 export interface ProgressBarContainerType {
   id: string;
@@ -190,6 +191,7 @@ export interface PictureWithStyleType {
   componentStyle?: ComponentStyleType;
   icon?: string;
   index?: number;
+  componentType?: string;
 }
 
 export interface CarouselType {
@@ -270,14 +272,6 @@ export const Components: { [key: string]: ComponentType } = {
   },
   NewsContainer: {
     name: "NewsContainer",
-    pictureContainerNumber: 1,
-    isMainHeader: true,
-    isPictureContainerImage: true,
-    isPictureContainerButton: false,
-    isPictureContainerParagraph: true,
-  },
-  NewsContainer2: {
-    name: "NewsContainer2",
     pictureContainerNumber: 1,
     isMainHeader: true,
     isPictureContainerImage: true,

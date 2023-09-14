@@ -18,6 +18,9 @@ const Maxim = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          isComponentType={false}
+          // buraya componentTYpe gelecek
+          currentType="type1"
           twoPictureId={_id ?? ""}
         />
       </div>

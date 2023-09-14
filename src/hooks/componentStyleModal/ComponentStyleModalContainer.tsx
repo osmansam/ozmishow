@@ -7,11 +7,18 @@ import { RootState } from "../../store";
 interface ComponentStyleModalProps {
   styleData: any;
   twoPictureId: string;
+  componentTypes?: string[];
+  currentType: string;
+
+  isComponentType: boolean;
 }
 
 const ComponentStyleModalContainer = ({
   styleData,
+  currentType,
   twoPictureId,
+  componentTypes,
+  isComponentType,
 }: ComponentStyleModalProps) => {
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
@@ -45,7 +52,10 @@ const ComponentStyleModalContainer = ({
           twoPictureId={twoPictureId}
           isOpen={isModalOpen}
           styleData={selectedStyle}
+          componentTypes={componentTypes}
+          currentType={currentType}
           onClose={() => setIsModalOpen(false)}
+          isComponentType={isComponentType}
         />
       )}
     </div>

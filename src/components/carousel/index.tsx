@@ -38,6 +38,9 @@ const Carousel = ({
         <ComponentStyleModalContainer
           styleData={componentStyle}
           twoPictureId={id ?? ""}
+          // buraya componentTYpe gelecek
+          currentType="type1"
+          isComponentType={false}
         />
       </div>
       {/* mainHeader */}

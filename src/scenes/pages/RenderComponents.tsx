@@ -81,6 +81,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
       const pictureItem = {
         ...item.twoPictureArray[0],
         componentStyle: style,
+        componentType: componentType,
       };
       switch (item.componentName) {
         case "PictureAndText":
@@ -147,25 +148,30 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             </div>
           );
         case "NewsContainer":
-          return (
-            <div key={index}>
-              <NewsContainer
-                id={item && item._id ? item._id : ""}
-                mainHeader={mainHeader}
-                componentStyle={style}
-              />
-            </div>
-          );
-        case "NewsContainer2":
-          return (
-            <div key={index}>
-              <NewsContainer2
-                id={item && item._id ? item._id : ""}
-                componentStyle={style}
-                mainHeader={mainHeader}
-              />
-            </div>
-          );
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <NewsContainer
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <NewsContainer2
+                  id={item && item._id ? item._id : ""}
+                  componentStyle={style}
+                  componentType={componentType}
+                  mainHeader={mainHeader}
+                />
+              </div>
+            );
+          }
+          break;
         case "ExplanationBar":
           return (
             <div key={index}>

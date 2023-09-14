@@ -4,6 +4,7 @@ import { PictureWithStyleType } from "../../../shared/types";
 import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import { pictureAndTextTypes } from "../../../shared/compenentTypes";
 
 const PictureAtRight = ({
   img,
@@ -11,20 +12,27 @@ const PictureAtRight = ({
   paragraphs,
   buttons,
   _id,
+  componentType,
   componentStyle,
 }: PictureWithStyleType) => {
   return (
-    <div className="w-full h-full flex flex-col mx-auto" style={componentStyle}>
-      <div className=" w-full flex  ">
+    <div
+      className="w-full h-full flex flex-col  lg:justify-center items-center mx-auto"
+      style={componentStyle}
+    >
+      <div className=" w-full justify-end pr-20 flex  ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          currentType={componentType ?? ""}
           twoPictureId={_id ?? ""}
+          componentTypes={pictureAndTextTypes}
+          isComponentType={true}
         />
       </div>
-      <div className="lg:flex w-4/5 lg:justify-between h-full mx-auto py-10">
+      <div className="lg:flex  lg:justify-between h-full mx-auto py-10  px-8">
         {/* left side */}
-        <div className="basis-1/2">
-          <div className="flex w-full lg:pl-28 gap-4 flex-col h-full md:pt-20">
+        <div className="basis-1/2 px-4">
+          <div className="flex w-full lg:pr-28 gap-4 flex-col h-full ">
             <h1
               className="w-fit px-4 py-1 gap-8 rounded-2xl font-[700] text-4xl flex flex-row"
               style={header?.style}
@@ -81,7 +89,7 @@ const PictureAtRight = ({
         <img
           src={img}
           alt="img"
-          className="w-full lg:basis-1/2 lg:h-[400px] sm:h-[250px] sm:py-5 md:py-0"
+          className="w-full lg:basis-1/2 lg:h-[400px] sm:h-[250px] sm:py-5 md:py-0 px-4"
         />
       </div>
     </div>

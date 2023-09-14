@@ -18,10 +18,12 @@ import {
 } from "../../../features/twoPicture/twoPictureSlice";
 import Loading from "../../loading";
 import translations from "../../../translations.json";
+import { newsContainerTypes } from "../../../shared/compenentTypes";
 const NewsContainer2 = ({
   id,
   mainHeader,
   componentStyle,
+  componentType,
 }: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
@@ -96,6 +98,9 @@ const NewsContainer2 = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          isComponentType={true}
+          componentTypes={newsContainerTypes}
+          currentType={componentType}
           twoPictureId={id ?? ""}
         />
       </div>

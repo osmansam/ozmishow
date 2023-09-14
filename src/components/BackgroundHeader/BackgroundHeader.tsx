@@ -13,7 +13,10 @@ const BackgroundHeader = ({
       <div className="flex justify-end ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
+          // buraya componentTYpe gelecek
+          currentType="type1"
           twoPictureId={_id ?? ""}
+          isComponentType={false}
         />
       </div>
 

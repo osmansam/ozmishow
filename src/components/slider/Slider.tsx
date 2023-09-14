@@ -63,6 +63,9 @@ const Slider = ({
         <ComponentStyleModalContainer
           styleData={componentStyle}
           twoPictureId={id ?? ""}
+          // buraya componentTYpe gelecek
+          currentType="type1"
+          isComponentType={false}
         />
       </div>
       <h1 className="font-[700] text-[#102a42] text-3xl flex justify-start py-2 items-start px-4 mx-auto">

@@ -15,6 +15,9 @@ const BorderBoxContainer = ({
         <ComponentStyleModalContainer
           styleData={componentStyle}
           twoPictureId={id ?? ""}
+          // buraya componentTYpe gelecek
+          currentType="type1"
+          isComponentType={false}
         />
       </div>
       <div className="w-full flex justify-between gap-8 flex-col ">
