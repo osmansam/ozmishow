@@ -263,7 +263,7 @@ const PageAdmin = ({ page }: Props) => {
   const renderComponents = () => {
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
-        const { mainHeader, twoPictureArray, _id } = item;
+        const { mainHeader, twoPictureArray, _id, style } = item;
 
         switch (item.componentName) {
           case "PictureAtRight":
@@ -308,6 +308,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <TwoPictureContainer
                   mainHeader={item.mainHeader}
+                  componentStyle={style}
                   twoPictureArray={twoPictureArray as PictureWithStyleType[]}
                   id={item && item._id ? item._id : ""}
                 />
@@ -380,6 +381,7 @@ const PageAdmin = ({ page }: Props) => {
                 <BorderBoxContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
+                  componentStyle={style}
                   twoPictureArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
@@ -629,6 +631,7 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
                   workTeamArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -707,6 +710,7 @@ const PageAdmin = ({ page }: Props) => {
                 <BackgroundHeader
                   _id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
+                  componentStyle={style}
                   header={twoPictureArray[0]?.header as ContentStyleType}
                 />
                 <PageConfigurationButtons

@@ -2,13 +2,21 @@ import React from "react";
 import { TwoPictureContainerType } from "../../shared/types";
 import BorderBox from "./BorderBox";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 const BorderBoxContainer = ({
   mainHeader,
   twoPictureArray,
+  componentStyle,
   id,
 }: TwoPictureContainerType) => {
   return (
-    <div className="w-full h-full py-20  " style={{ background: "#f6f6f6" }}>
+    <div className="w-full h-full py-20  " style={componentStyle}>
+      <div className="flex justify-end mr-20">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       <div className="w-full flex justify-between gap-8 flex-col ">
         <div className="w-5/6 mx-auto">
           <h1

@@ -75,6 +75,7 @@ export interface TwoPictureContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   twoPictureArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
 }
 
 export interface IconExplainContainerType {
@@ -133,6 +134,10 @@ export interface StyleType {
   hover: string;
   effectAll?: boolean;
 }
+export interface ComponentStyleType {
+  backgroundColor?: string;
+  width?: string;
+}
 export const style = {
   color: "",
   fontWeight: "",
@@ -143,7 +148,10 @@ export const style = {
   hover: "",
   effectAll: false,
 };
-
+export const componentStyle = {
+  backgroundColor: "",
+  width: "",
+};
 export interface PictureWithStyleType {
   img?: string;
   mainMainHeader?: ContentStyleType;
@@ -171,6 +179,7 @@ export interface PictureWithStyleType {
   university?: ContentStyleType;
   paragraph?: ContentStyleType;
   paragraphStyle?: ContentStyleType;
+  componentStyle?: ComponentStyleType;
   icon?: string;
   index?: number;
 }
@@ -189,6 +198,7 @@ export interface WorkTeamBarType {
   id: string;
   mainMainHeader?: ContentStyleType;
   workTeamArray: Array<PictureWithStyleType>;
+  componentStyle: any;
 }
 interface ComponentType {
   name: string;
@@ -411,6 +421,7 @@ export interface ContainerType {
   twoPictureArray: Array<PictureType> | Array<PictureWithStyleType>;
   position: number;
   language: string;
+  style: any;
 }
 
 export interface ButtonType {

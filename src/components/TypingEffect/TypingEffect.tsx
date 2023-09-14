@@ -94,12 +94,13 @@ const TypingEffect = ({
         className="relative text-3xl font-mono"
       >
         {typingText}
-        <span
+        {/* cursor not working properly */}
+        {/* <span
           className={`absolute h-8 w-1 bg-white ${
             isCursorVisible ? "opacity-100" : "opacity-0"
           }`}
           style={{ animation: "blink 1s step-end infinite" }}
-        ></span>
+        ></span> */}
       </span>
       <style>
         {`

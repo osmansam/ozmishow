@@ -11,8 +11,11 @@ import {
 import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+
 const WorkTeamBar = ({
   mainMainHeader,
+  componentStyle,
   workTeamArray,
   id,
 }: WorkTeamBarType) => {
@@ -62,7 +65,13 @@ const WorkTeamBar = ({
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full w-full  flex flex-col gap-4 justify-between mb-4 h-[${barHeight}px] bg-[#f9f9f9] rounded-lg py-4`;
 
   return (
-    <div className="py-10">
+    <div className="py-10" style={componentStyle}>
+      <div className="flex justify-end mr-20">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       <div className="w-5/6 mx-auto mb-4">
         <h1
           className="text-3xl font-bold  ml-4 w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
@@ -236,7 +245,7 @@ const WorkTeamBar = ({
       </div>
       {/* Button to add new item */}
       {!isWorkTeamItem && isAdmin && (
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-center items-center">
           <input
             className="border-2 w-16"
             type="number"

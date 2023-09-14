@@ -3,6 +3,7 @@ import PictureContainer from "./PictureContainer";
 import { Components, LanguageOptions } from "../../shared/types";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import { componentStyle } from "../../shared/types";
 import {
   createTwoPicture,
   resetTwoPictureArray,
@@ -99,6 +100,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -117,6 +119,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -135,6 +138,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -152,6 +156,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -172,6 +177,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -192,6 +198,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -215,6 +222,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();
@@ -239,6 +247,7 @@ const ComponentContainer = () => {
             twoPictureArray,
             position,
             language,
+            style: { componentStyle },
           })
         );
         resetInputs();

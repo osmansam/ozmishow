@@ -34,7 +34,7 @@ const FullPageItem = ({
   return (
     <div className="w-5/6 lg:w-4/5  mx-auto my-auto h-full py-10">
       <h1
-        className="font-[700] text-4xl leading-[44px] mb-2 text-[#333333] w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
+        className="font-[700] text-4xl leading-[44px] mb-4 text-[#333333] w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
         style={mainMainHeader?.style}
       >
         {mainMainHeader?.content}

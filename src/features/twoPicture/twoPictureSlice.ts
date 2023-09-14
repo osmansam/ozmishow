@@ -1,10 +1,5 @@
 import { REHYDRATE } from "redux-persist";
-import TwoPictureContainer from "../../components/twoPicture/TwoPictureContainer";
-import {
-  ThunkAPIType,
-  TwoPictureContainerType,
-  ExplanationBarType,
-} from "./../../shared/types";
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   PictureType,
@@ -13,11 +8,8 @@ import {
   PageOptionsType,
   MapType,
 } from "../../shared/types";
-import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import axios from "axios";
-import { logDOM } from "@testing-library/react";
-import { AnyAction } from "redux";
 
 interface ComponentState {
   isLoading: boolean;
@@ -128,6 +120,7 @@ export const deleteTwoPicture = createAsyncThunk(
     }
   }
 );
+
 //get page options
 export const getPageOptions = createAsyncThunk(
   "twoPicture/getPageOptions",
@@ -336,6 +329,20 @@ export const editTwoPictureStyle = createAsyncThunk(
     }
   }
 );
+//editComponentStyle
+export const editComponentStyle = createAsyncThunk(
+  "twoPicture/editComponentStyle",
+  async ({ style, twoPictureId }: { style: any; twoPictureId: string }) => {
+    const url = `twoPicture/editComponentStyle/${twoPictureId}`;
+    try {
+      const response = await axios.patch(`${baseURL}/${url}`, { style });
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 // editTwoPictureIndexStyle
 export const editTwoPictureIndexStyle = createAsyncThunk(
   "twoPicture/editTwoPictureIndexStyle",

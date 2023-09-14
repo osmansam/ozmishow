@@ -77,7 +77,7 @@ type Props = {};
 export const renderComponents = (newContainer: ContainerType[]) => {
   return newContainer?.map((item, index) => {
     if (item && item.componentName) {
-      const { mainHeader, twoPictureArray } = item;
+      const { mainHeader, twoPictureArray, style } = item;
       switch (item.componentName) {
         case "PictureAtRight":
           return (
@@ -103,6 +103,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <TwoPictureContainer
                 id={item && item._id ? item._id : ""}
                 mainHeader={item.mainHeader}
+                componentStyle={style}
                 twoPictureArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
@@ -132,6 +133,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <BorderBoxContainer
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
+                componentStyle={style}
                 twoPictureArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
@@ -222,6 +224,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
                 id={item && item._id ? item._id : ""}
                 mainMainHeader={mainHeader}
                 workTeamArray={twoPictureArray as PictureWithStyleType[]}
+                componentStyle={style}
               />
             </div>
           );
@@ -300,6 +303,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <BackgroundHeader
                 _id={item && item._id ? item._id : ""}
+                componentStyle={style}
                 mainMainHeader={mainHeader}
                 header={twoPictureArray[0]?.header as ContentStyleType}
               />

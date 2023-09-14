@@ -13,7 +13,7 @@ const TwoPicture = ({
   index,
 }: PictureWithStyleType) => {
   return (
-    <div className="flex flex-col gap-4 md:pr-6 w-full md:w-1/2a h-full mt-8 ">
+    <div className="flex flex-col gap-4 md:px-4 w-full md:w-1/2a h-full mt-8 ">
       {img && (
         <img src={img} alt={header?.content} className="w-full max-h-80" />
       )}

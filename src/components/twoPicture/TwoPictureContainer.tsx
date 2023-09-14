@@ -23,7 +23,7 @@ const TwoPictureContainer = ({
           type="mainMainHeader"
         />
       </h1>
-      <div className="w-full h-full md:flex md:justify-between mx-auto">
+      <div className=" w-full h-full md:flex md:justify-center items-center mx-auto">
         {twoPictureArray.map((twoPicture, index) => {
           const { img, header, paragraphs, buttons } = twoPicture;
           return (
