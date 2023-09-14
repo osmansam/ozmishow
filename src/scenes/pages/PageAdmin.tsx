@@ -402,6 +402,7 @@ const PageAdmin = ({ page }: Props) => {
                 <NewsContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
+                  componentStyle={style}
                 />
                 <PageConfigurationButtons
                   index={index}
@@ -419,6 +420,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <NewsContainer2
                   id={item && item._id ? item._id : ""}
+                  componentStyle={style}
                   mainHeader={mainHeader}
                 />
                 <PageConfigurationButtons

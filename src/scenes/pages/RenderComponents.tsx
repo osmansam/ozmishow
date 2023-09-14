@@ -145,6 +145,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <NewsContainer
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
+                componentStyle={style}
               />
             </div>
           );
@@ -153,6 +154,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <NewsContainer2
                 id={item && item._id ? item._id : ""}
+                componentStyle={style}
                 mainHeader={mainHeader}
               />
             </div>

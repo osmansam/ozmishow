@@ -9,16 +9,20 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store";
 import axios from "axios";
 import { FiSearch } from "react-icons/fi";
-import { PictureType, Components } from "../../../shared/types";
 import { Pagination } from "../../pagination/Pagination";
 import NewsBox2 from "./NewsBox2";
+import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
 } from "../../../features/twoPicture/twoPictureSlice";
 import Loading from "../../loading";
 import translations from "../../../translations.json";
-const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
+const NewsContainer2 = ({
+  id,
+  mainHeader,
+  componentStyle,
+}: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -88,7 +92,13 @@ const NewsContainer2 = ({ id, mainHeader }: NewsContainerType) => {
     return <Loading />;
   }
   return (
-    <div className="w-full flex flex-col gap-4 mx-auto">
+    <div className="w-full flex flex-col gap-4 mx-auto" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       <div className="w-5/6 mx-auto flex justify-end  px-4 pt-2 ">
         <input
           type="text"

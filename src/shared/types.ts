@@ -87,6 +87,7 @@ export interface IconExplainContainerType {
 export interface NewsContainerType {
   id: string;
   mainHeader?: ContentStyleType;
+  componentStyle?: ComponentStyleType;
 }
 export interface ProgressBarContainerType {
   id: string;
