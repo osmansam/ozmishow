@@ -613,6 +613,7 @@ const PageAdmin = ({ page }: Props) => {
               <div key={index}>
                 <FreqAsked
                   id={item && item._id ? item._id : ""}
+                  componentStyle={style}
                   freqAskedArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons
@@ -732,6 +733,7 @@ const PageAdmin = ({ page }: Props) => {
                 <FullPageItem
                   mainMainHeader={mainHeader}
                   fullPageItemArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
                   id={item && item._id ? item._id : ""}
                 />
                 <PageConfigurationButtons

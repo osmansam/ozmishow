@@ -5,6 +5,7 @@ import { style } from "../../shared/types";
 import { useSelector } from "react-redux";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
@@ -15,6 +16,7 @@ type Props = {};
 const FullPageItem = ({
   mainMainHeader,
   fullPageItemArray,
+  componentStyle,
   id,
 }: FullPageItemType) => {
   const dispatch = useAppDispatch();
@@ -32,7 +34,16 @@ const FullPageItem = ({
     window.location.reload();
   };
   return (
-    <div className="w-5/6 lg:w-4/5  mx-auto my-auto h-full py-10">
+    <div
+      className="w-5/6 lg:w-4/5  mx-auto my-auto h-full py-10"
+      style={componentStyle}
+    >
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       <h1
         className="font-[700] text-4xl leading-[44px] mb-4 text-[#333333] w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
         style={mainMainHeader?.style}

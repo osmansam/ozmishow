@@ -215,6 +215,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <FreqAsked
                 id={item && item._id ? item._id : ""}
+                componentStyle={style}
                 freqAskedArray={twoPictureArray as PictureWithStyleType[]}
               />
             </div>
@@ -295,6 +296,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             <div key={index}>
               <FullPageItem
                 mainMainHeader={mainHeader}
+                componentStyle={style}
                 fullPageItemArray={twoPictureArray as PictureWithStyleType[]}
                 id={item && item._id ? item._id : ""}
               />

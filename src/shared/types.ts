@@ -109,10 +109,12 @@ export interface YoutubeType {
 export interface FreqAskedType {
   id: string;
   freqAskedArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
 }
 export interface FullPageItemType {
   mainMainHeader?: ContentStyleType;
   fullPageItemArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
   id: string;
 }
 export interface ExplanationBarType {

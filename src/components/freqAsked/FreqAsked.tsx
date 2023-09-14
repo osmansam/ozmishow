@@ -7,13 +7,14 @@ import { useSelector } from "react-redux";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 
-const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
+const FreqAsked = ({ freqAskedArray, componentStyle, id }: FreqAskedType) => {
   const [selection, setSelection] = useState(-1);
   const [isAddNewItem, setIsAddNewItem] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -49,7 +50,14 @@ const FreqAsked = ({ freqAskedArray, id }: FreqAskedType) => {
     <div
       className="w-4/5 mx-auto  my-auto h-full py-10  px-4 cursor-pointer"
       id="freqAskedContainer"
+      style={componentStyle}
     >
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       {freqAskedArray.map((freqAsked, index) => {
         const { header, paragraphs, buttons, _id } = freqAsked;
         return (
