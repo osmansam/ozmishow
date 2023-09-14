@@ -19,10 +19,10 @@ import {
 import ConfirmationModal from "../../components/confirmation";
 import Loading from "../../components/loading";
 const PictureAtLeft = lazy(
-  () => import("../../components/pictureleft/PictureAtLeft")
+  () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );
 const PictureAtRight = lazy(
-  () => import("../../components/pictureRight/PictureAtRight")
+  () => import("../../components/pictureAndText/picRight/PictureAtRight")
 );
 const IconExplainContainer = lazy(
   () => import("../../components/IconExplain/IconExplainContainer")
@@ -263,7 +263,7 @@ const PageAdmin = ({ page }: Props) => {
   const renderComponents = () => {
     return newContainer?.map((item, index) => {
       if (item && item.componentName) {
-        const { mainHeader, twoPictureArray, _id, style } = item;
+        const { mainHeader, twoPictureArray, _id, style, componentType } = item;
         const pictureItem = {
           ...item.twoPictureArray[0],
           componentStyle: style,
@@ -287,25 +287,46 @@ const PageAdmin = ({ page }: Props) => {
                 />
               </div>
             );
-          case "PictureAtLeft":
-            return (
-              <div key={index}>
-                <PictureAtLeft
-                  {...(pictureItem as PictureWithStyleType)}
-                  _id={item && item._id ? item._id : ""}
-                />
+          case "PictureAndText":
+            if (componentType === "type1") {
+              return (
+                <div key={index}>
+                  <PictureAtLeft
+                    {...(pictureItem as PictureWithStyleType)}
+                    _id={item && item._id ? item._id : ""}
+                  />
 
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type2") {
+              return (
+                <div key={index}>
+                  <PictureAtRight
+                    {...(pictureItem as PictureWithStyleType)}
+                    _id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            }
+            break;
           case "TwoPictureContainer":
             return (
               <div key={index}>
