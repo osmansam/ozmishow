@@ -8,10 +8,10 @@ import {
   PictureWithStyleType,
 } from "../../shared/types";
 const PictureAtLeft = lazy(
-  () => import("../../components/pictureleft/PictureAtLeft")
+  () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );
 const PictureAtRight = lazy(
-  () => import("../../components/pictureRight/PictureAtRight")
+  () => import("../../components/pictureAndText/picRight/PictureAtRight")
 );
 const IconExplainContainer = lazy(
   () => import("../../components/IconExplain/IconExplainContainer")
@@ -77,25 +77,33 @@ type Props = {};
 export const renderComponents = (newContainer: ContainerType[]) => {
   return newContainer?.map((item, index) => {
     if (item && item.componentName) {
-      const { mainHeader, twoPictureArray, style } = item;
+      const { mainHeader, twoPictureArray, style, componentType } = item;
       const pictureItem = {
         ...item.twoPictureArray[0],
         componentStyle: style,
       };
       switch (item.componentName) {
-        case "PictureAtRight":
-          return (
-            <div key={index}>
-              <PictureAtRight {...(pictureItem as PictureWithStyleType)} />
-            </div>
-          );
-
-        case "PictureAtLeft":
-          return (
-            <div key={index}>
-              <PictureAtLeft {...(pictureItem as PictureWithStyleType)} />
-            </div>
-          );
+        case "PictureAndText":
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <PictureAtLeft
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <PictureAtRight
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          }
+          break;
         case "TwoPictureContainer":
           return (
             <div key={index}>

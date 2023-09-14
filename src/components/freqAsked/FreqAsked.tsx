@@ -48,7 +48,7 @@ const FreqAsked = ({ freqAskedArray, componentStyle, id }: FreqAskedType) => {
 
   return (
     <div
-      className="w-4/5 mx-auto  my-auto h-full py-10  px-4 cursor-pointer"
+      className="w-4/5 mx-auto my-10 h-full py-10  px-4 cursor-pointer"
       id="freqAskedContainer"
       style={componentStyle}
     >

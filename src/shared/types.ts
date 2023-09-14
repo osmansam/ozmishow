@@ -228,16 +228,8 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
-  PictureAtRight: {
-    name: "PictureAtRight",
-    pictureContainerNumber: 1,
-    isMainHeader: false,
-    isPictureContainerImage: true,
-    isPictureContainerButton: true,
-    isPictureContainerParagraph: true,
-  },
   PictureAtLeft: {
-    name: "PictureAtLeft",
+    name: "PictureAndText",
     pictureContainerNumber: 1,
     isMainHeader: false,
     isPictureContainerImage: true,

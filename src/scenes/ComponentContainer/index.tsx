@@ -90,8 +90,7 @@ const ComponentContainer = () => {
   const handleCreate = async () => {
     switch (componentName) {
       // case PictureAtRight and PictureAtLeft
-      case Components.PictureAtRight.name:
-      case Components.PictureAtLeft.name:
+      case Components.PictureAndText.name:
         if (twoPictureArray.length !== 1) return;
         await dispatch(
           createTwoPicture({
