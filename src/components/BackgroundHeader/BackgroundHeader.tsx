@@ -1,13 +1,24 @@
 import { PictureWithStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 
 const BackgroundHeader = ({
   header,
   mainMainHeader,
+  componentStyle,
   _id,
 }: PictureWithStyleType) => {
   return (
-    <div className=" flex items-center justify-center w-full pt-12  ">
+    <div
+      className=" flex items-center  justify-center w-full pt-12  "
+      style={componentStyle}
+    >
+      <div className="flex justify-end mr-20">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={_id ?? ""}
+        />
+      </div>
       <div className="w-full flex items-center justify-center relative ">
         <div className="z-10 flex ">
           <div>
