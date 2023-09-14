@@ -119,6 +119,7 @@ export interface ExplanationBarType {
   id: string;
   mainMainHeader?: ContentStyleType;
   explanationArray: Array<PictureWithStyleType>;
+  componentStyle: ComponentStyleType;
 }
 export interface ContentStyleType {
   content?: string;

@@ -458,6 +458,7 @@ const PageAdmin = ({ page }: Props) => {
                 <ExplanationBar
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader as ContentStyleType}
+                  componentStyle={style}
                   explanationArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons

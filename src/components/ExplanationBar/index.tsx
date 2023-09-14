@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
   updateExplanationBar,
   resetTwoPictureArray,
@@ -14,6 +15,7 @@ import {
 const ExplanationBar = ({
   mainMainHeader,
   explanationArray,
+  componentStyle,
   id,
 }: ExplanationBarType) => {
   const [isAddExplanationItem, setIsAddExplanationItem] = useState(false);
@@ -37,7 +39,13 @@ const ExplanationBar = ({
   const barHeight = explanationArray.length * 25 + 50;
   const barClassName = `lg:w-[270px] md:w-[270px] sm:w-full  w-full flex flex-col gap-4  justify-between mb-4  h-[${barHeight}px ] bg-[#f9f9f9] rounded-lg py-4 `;
   return (
-    <div className="py-10 flex flex-col items-center">
+    <div className="py-10 flex flex-col items-center" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={id ?? ""}
+        />
+      </div>
       <div className="w-5/6 mx-auto mb-4">
         <h1
           className="text-3xl font-bold  ml-4 w-fit flex flex-row gap-8 rounded-2xl px-4 py-0.5 justify-center items-center"
