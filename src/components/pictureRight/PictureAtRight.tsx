@@ -3,16 +3,27 @@ import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 import { PictureWithStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 
 const PictureAtRight = ({
   img,
   header,
   paragraphs,
   buttons,
+  componentStyle,
   _id,
 }: PictureWithStyleType) => {
   return (
-    <div className="lg:flex w-4/5 lg:justify-between h-full mx-auto py-10">
+    <div
+      className="lg:flex w-4/5 lg:justify-between h-full mx-auto py-10"
+      style={componentStyle}
+    >
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={_id ?? ""}
+        />
+      </div>
       {/* left side */}
       <div className="basis-1/2">
         <div className="flex w-full lg:pl-28 gap-4 flex-col h-full md:pt-20">

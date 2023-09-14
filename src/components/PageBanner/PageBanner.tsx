@@ -1,9 +1,20 @@
 import { PictureWithStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-
-const PageBanner = ({ img, header, _id }: PictureWithStyleType) => {
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+const PageBanner = ({
+  img,
+  header,
+  _id,
+  componentStyle,
+}: PictureWithStyleType) => {
   return (
-    <div className="relative w-full pt-10 mb-10">
+    <div className="relative w-full pt-10 mb-10" style={componentStyle}>
+      <div className=" w-full flex justify-end mr-20 ">
+        <ComponentStyleModalContainer
+          styleData={componentStyle}
+          twoPictureId={_id ?? ""}
+        />
+      </div>
       {/* image */}
       <img src={img} alt="pageImage" className="w-full h-72 object-cover" />
       {/* Description */}
