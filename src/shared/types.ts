@@ -147,6 +147,9 @@ export interface ComponentStyleType {
   backgroundColor?: string;
   width?: string;
 }
+export interface PageStyleType {
+  backgroundColor?: string;
+}
 export const style = {
   color: "",
   fontWeight: "",
