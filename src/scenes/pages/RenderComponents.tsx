@@ -13,6 +13,9 @@ const PictureAtLeft = lazy(
 const PictureAtRight = lazy(
   () => import("../../components/pictureAndText/picRight/PictureAtRight")
 );
+const PictureAtLeftType3 = lazy(
+  () => import("../../components/pictureAndText/picLeft/PictureAtLeftType3")
+);
 const IconExplainContainer = lazy(
   () => import("../../components/IconExplain/IconExplainContainer")
 );
@@ -98,6 +101,15 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             return (
               <div key={index}>
                 <PictureAtRight
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type3") {
+            return (
+              <div key={index}>
+                <PictureAtLeftType3
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
                 />
