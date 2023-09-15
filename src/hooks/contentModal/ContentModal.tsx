@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import { useAppDispatch } from "../../store";
 import {
   editExplanationBar,
   editWorkTeamBar,
   editTwoPictureStyle,
   editTwoPictureIndexStyle,
   editResumeBox,
-  editMainMainHeader,
 } from "../../features/twoPicture/twoPictureSlice";
 import { StyleType } from "../../shared/types";
 interface ContentData {

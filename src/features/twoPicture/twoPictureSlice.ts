@@ -134,6 +134,19 @@ export const getPageOptions = createAsyncThunk(
     }
   }
 );
+//update page options
+export const updatePageOptions = createAsyncThunk(
+  "twoPicture/updatePageOptions",
+  async ({ id, style }: { id: string; style: any }) => {
+    const url = "pageOptions/";
+    try {
+      const response = await axios.patch(`${baseURL}/${url}${id}`, style);
+      return extractHeaders(response);
+    } catch (error) {
+      return error;
+    }
+  }
+);
 //create page options
 export const createPageOptions = createAsyncThunk(
   "twoPicture/createPageOptions",
