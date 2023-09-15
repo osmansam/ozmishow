@@ -9,12 +9,14 @@ import {
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import { SliderTypes } from "../../shared/compenentTypes";
 
 const Slider = ({
   mainMainHeader,
   sliderArray,
   id,
   componentStyle,
+  componentType,
 }: SliderType) => {
   const dispatch = useAppDispatch();
   const [index, setIndex] = useState(0);
@@ -63,9 +65,9 @@ const Slider = ({
         <ComponentStyleModalContainer
           styleData={componentStyle}
           twoPictureId={id ?? ""}
-          // buraya componentTYpe gelecek
-          currentType="type1"
-          isComponentType={false}
+          currentType={componentType}
+          isComponentType={true}
+          componentTypes={SliderTypes}
         />
       </div>
       <h1 className="font-[700] text-[#102a42] text-3xl flex justify-start py-2 items-start px-4 mx-auto">

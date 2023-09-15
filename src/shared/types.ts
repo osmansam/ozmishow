@@ -211,6 +211,7 @@ export interface SliderType {
   mainMainHeader?: ContentStyleType;
   sliderArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
+  componentType: string;
 }
 export interface WorkTeamBarType {
   id: string;

@@ -20,6 +20,7 @@ import {
 } from "../../shared/types";
 import ConfirmationModal from "../../components/confirmation";
 import Loading from "../../components/loading";
+import SliderType2 from "../../components/slider/SliderType2";
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );
@@ -552,25 +553,50 @@ const PageAdmin = ({ page }: Props) => {
               </div>
             );
           case "Slider":
-            return (
-              <div key={index}>
-                <Slider
-                  id={item && item._id ? item._id : ""}
-                  mainMainHeader={mainHeader}
-                  sliderArray={twoPictureArray as PictureWithStyleType[]}
-                  componentStyle={style}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
+            if (componentType === "type1") {
+              return (
+                <div key={index}>
+                  <Slider
+                    id={item && item._id ? item._id : ""}
+                    mainMainHeader={mainHeader}
+                    sliderArray={twoPictureArray as PictureWithStyleType[]}
+                    componentType={componentType}
+                    componentStyle={style}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type2") {
+              return (
+                <div key={index}>
+                  <SliderType2
+                    id={item && item._id ? item._id : ""}
+                    mainMainHeader={mainHeader}
+                    sliderArray={twoPictureArray as PictureWithStyleType[]}
+                    componentType={componentType}
+                    componentStyle={style}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            }
+            break;
           case "Carousel":
             return (
               <div key={index}>

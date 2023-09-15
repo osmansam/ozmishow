@@ -7,6 +7,7 @@ import {
   PictureType,
   PictureWithStyleType,
 } from "../../shared/types";
+import SliderType2 from "../../components/slider/SliderType2";
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );
@@ -196,16 +197,33 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             </div>
           );
         case "Slider":
-          return (
-            <div key={index}>
-              <Slider
-                id={item && item._id ? item._id : ""}
-                mainMainHeader={mainHeader}
-                sliderArray={twoPictureArray as PictureWithStyleType[]}
-                componentStyle={style}
-              />
-            </div>
-          );
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <Slider
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  sliderArray={twoPictureArray as PictureWithStyleType[]}
+                  componentType={componentType}
+                  componentStyle={style}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <SliderType2
+                  id={item && item._id ? item._id : ""}
+                  mainMainHeader={mainHeader}
+                  sliderArray={twoPictureArray as PictureWithStyleType[]}
+                  componentType={componentType}
+                  componentStyle={style}
+                />
+              </div>
+            );
+          }
+          break;
+
         case "Carousel":
           return (
             <div key={index}>
