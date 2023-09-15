@@ -70,7 +70,7 @@ function ComponentStyleModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(
+    await dispatch(
       editComponentStyle({
         twoPictureId,
         style: editedStyle,
