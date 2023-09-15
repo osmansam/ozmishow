@@ -140,7 +140,9 @@ export const updatePageOptions = createAsyncThunk(
   async ({ id, style }: { id: string; style: any }) => {
     const url = "pageOptions/";
     try {
-      const response = await axios.patch(`${baseURL}/${url}${id}`, style);
+      const response = await axios.patch(`${baseURL}/${url}${id}`, {
+        style: style,
+      });
       return extractHeaders(response);
     } catch (error) {
       return error;

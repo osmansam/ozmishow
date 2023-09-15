@@ -1,6 +1,7 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
+import { pageStyle } from "../../shared/types";
 import {
   getPageTwoPictures,
   getAllTwoPicture,
@@ -8,6 +9,7 @@ import {
 import { ContainerType } from "../../shared/types";
 import Loading from "../../components/loading";
 import { renderComponents } from "./RenderComponents";
+
 const Navbar = lazy(() => import("../../components/navbar/Navbar"));
 const Sidebar = lazy(() => import("../../components/sidebar"));
 const Footer = lazy(() => import("../../components/footer"));
@@ -65,8 +67,9 @@ const Page = ({ page }: Props) => {
             <Navbar currentPage={currentPage} />
           </div>
         )}
-
-        {renderComponents(newContainer)}
+        <div style={currentPage?.pageStyle}>
+          {renderComponents(newContainer)}
+        </div>
         {(currentPage?.isNavbar || currentPage?.isSubpage) && (
           <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
         )}

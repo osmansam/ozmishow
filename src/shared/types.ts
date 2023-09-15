@@ -164,6 +164,9 @@ export const componentStyle = {
   backgroundColor: "",
   width: "",
 };
+export const pageStyle = {
+  backgroundColor: "",
+};
 export interface PictureWithStyleType {
   img?: string;
   mainMainHeader?: ContentStyleType;
@@ -448,4 +451,5 @@ export interface PageOptionsType {
   motherPageTR: string;
   motherPageEN: string;
   sectionPageType: string;
+  pageStyle: PageStyleType;
 }

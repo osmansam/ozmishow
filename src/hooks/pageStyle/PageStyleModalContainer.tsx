@@ -6,16 +6,12 @@ import { PageStyleType } from "../../shared/types";
 import { AiOutlineDown } from "react-icons/ai";
 
 interface PageStyleModalProps {
-  isOpen: boolean;
   styleData: PageStyleType;
-  onClose: () => void;
   pageOptionsId: string;
 }
 
 const PageStyleModalContainer = ({
-  isOpen,
   styleData,
-  onClose,
   pageOptionsId,
 }: PageStyleModalProps) => {
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -26,7 +22,13 @@ const PageStyleModalContainer = ({
   return (
     <div>
       {!isModalOpen && isAdmin && (
-        <AiOutlineDown className="text-lg justify-end" onClick={openModal} />
+        <div
+          className="flex flex-row gap-1 my-10 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700"
+          onClick={openModal}
+        >
+          <h2>Page Style</h2>
+          <AiOutlineDown className="text-lg justify-end" />
+        </div>
       )}
       {isModalOpen && (
         <PageStyleModal

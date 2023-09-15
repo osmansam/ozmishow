@@ -8,6 +8,8 @@ import {
   updatePageAndLanguage,
   getPageOptions,
 } from "../../features/twoPicture/twoPictureSlice";
+import { pageStyle } from "../../shared/types";
+import PageStyleModalContainer from "../../hooks/pageStyle/PageStyleModalContainer";
 import {
   LanguageOptions,
   PageOptionsType,
@@ -810,7 +812,13 @@ const PageAdmin = ({ page }: Props) => {
             <Navbar currentPage={currentPage} />
           </div>
         )}
-        {renderComponents()}
+        <div style={currentPage?.pageStyle}>
+          <PageStyleModalContainer
+            pageOptionsId={currentPage?._id ?? ""}
+            styleData={currentPage?.pageStyle ?? pageStyle}
+          />
+          {renderComponents()}
+        </div>
         {(currentPage?.isNavbar || currentPage?.isSubpage) && (
           <Footer currentPage={currentPage ? currentPage.pageNameEN : ""} />
         )}
