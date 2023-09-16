@@ -8,3 +8,4 @@ export const pictureAndTextTypes = [
 export const newsContainerTypes = ["type1", "type2"];
 export const SliderTypes = ["type1", "type2"];
 export const TwoPictureContainerTypes = ["type1", "type2"];
+export const IconExplainContainerTypes = ["type1", "type2"];

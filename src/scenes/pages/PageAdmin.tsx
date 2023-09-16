@@ -37,7 +37,10 @@ const PicLeftType5 = lazy(
   () => import("../../components/pictureAndText/picLeft/PicLeftType5")
 );
 const IconExplainContainer = lazy(
-  () => import("../../components/IconExplain/IconExplainContainer")
+  () => import("../../components/IconExplain/type1/IconExplainContainer")
+);
+const IconExplainContainer2 = lazy(
+  () => import("../../components/IconExplain/type2/IconExplainContainer2")
 );
 const TwoPictureContainer = lazy(
   () => import("../../components/twoPicture/type1/TwoPictureContainer")
@@ -443,25 +446,50 @@ const PageAdmin = ({ page }: Props) => {
               </div>
             );
           case "IconExplainContainer":
-            return (
-              <div key={index}>
-                <IconExplainContainer
-                  mainHeader={mainHeader}
-                  iconExplainArray={twoPictureArray as PictureWithStyleType[]}
-                  componentStyle={style}
-                  id={item && item._id ? item._id : ""}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
+            if (componentType === "type1") {
+              return (
+                <div key={index}>
+                  <IconExplainContainer
+                    mainHeader={mainHeader}
+                    componentType={componentType}
+                    iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                    componentStyle={style}
+                    id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type2") {
+              return (
+                <div key={index}>
+                  <IconExplainContainer2
+                    mainHeader={mainHeader}
+                    componentType={componentType}
+                    iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                    componentStyle={style}
+                    id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            }
+            break;
           case "MaximContainer":
             return (
               <div key={index}>

@@ -1,13 +1,14 @@
 import React from "react";
-import { IconExplainContainerType } from "../../shared/types";
-import IconExplain from "./IconExplain";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
-
+import { IconExplainContainerType } from "../../../shared/types";
+import IconExplain2 from "./IconExplain2";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import { IconExplainContainerTypes } from "../../../shared/compenentTypes";
 const IconExplainContainer = ({
   mainHeader,
   iconExplainArray,
   componentStyle,
+  componentType,
   id,
 }: IconExplainContainerType) => {
   return (
@@ -15,9 +16,9 @@ const IconExplainContainer = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
-          isComponentType={false}
-          // buraya componentTYpe gelecek
-          currentType="type1"
+          isComponentType={true}
+          currentType={componentType}
+          componentTypes={IconExplainContainerTypes}
           twoPictureId={id ?? ""}
         />
       </div>
@@ -39,7 +40,7 @@ const IconExplainContainer = ({
         {iconExplainArray.map((iconExplain, index) => {
           const { img, header, paragraphs, buttons } = iconExplain;
           return (
-            <IconExplain
+            <IconExplain2
               _id={id}
               key={index}
               img={img}
@@ -47,7 +48,7 @@ const IconExplainContainer = ({
               paragraphs={paragraphs}
               buttons={buttons}
               index={index}
-            ></IconExplain>
+            ></IconExplain2>
           );
         })}
       </div>

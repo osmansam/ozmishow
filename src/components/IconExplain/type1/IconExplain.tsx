@@ -1,8 +1,8 @@
 import React from "react";
-import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
-import { PictureWithStyleType } from "../../shared/types";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
+import { PictureWithStyleType } from "../../../shared/types";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 
 const IconExplain = ({
   _id,

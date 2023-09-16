@@ -24,7 +24,10 @@ const PictureAtLeftType3 = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeftType3")
 );
 const IconExplainContainer = lazy(
-  () => import("../../components/IconExplain/IconExplainContainer")
+  () => import("../../components/IconExplain/type1/IconExplainContainer")
+);
+const IconExplainContainer2 = lazy(
+  () => import("../../components/IconExplain/type2/IconExplainContainer2")
 );
 const TwoPictureContainer = lazy(
   () => import("../../components/twoPicture/type1/TwoPictureContainer")
@@ -174,16 +177,33 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           break;
 
         case "IconExplainContainer":
-          return (
-            <div key={index}>
-              <IconExplainContainer
-                mainHeader={mainHeader}
-                componentStyle={style}
-                iconExplainArray={twoPictureArray as PictureWithStyleType[]}
-                id={item && item._id ? item._id : ""}
-              />
-            </div>
-          );
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <IconExplainContainer
+                  mainHeader={mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                  iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                  id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <IconExplainContainer2
+                  mainHeader={mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                  iconExplainArray={twoPictureArray as PictureWithStyleType[]}
+                  id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          }
+          break;
+
         case "MaximContainer":
           return (
             <div key={index}>
