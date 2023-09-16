@@ -14,6 +14,12 @@ const PictureAtLeft = lazy(
 const PictureAtRight = lazy(
   () => import("../../components/pictureAndText/picRight/PictureAtRight")
 );
+const PicType4 = lazy(
+  () => import("../../components/pictureAndText/picRight/PicType4")
+);
+const PicLeftType5 = lazy(
+  () => import("../../components/pictureAndText/picLeft/PicLeftType5")
+);
 const PictureAtLeftType3 = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeftType3")
 );
@@ -21,7 +27,10 @@ const IconExplainContainer = lazy(
   () => import("../../components/IconExplain/IconExplainContainer")
 );
 const TwoPictureContainer = lazy(
-  () => import("../../components/twoPicture/TwoPictureContainer")
+  () => import("../../components/twoPicture/type1/TwoPictureContainer")
+);
+const TwoPictureContainer2 = lazy(
+  () => import("../../components/twoPicture/type2/TwoPictureContainer2")
 );
 const MaximContainer = lazy(() => import("../../components/maxim"));
 const FreqAsked = lazy(() => import("../../components/freqAsked/FreqAsked"));
@@ -116,19 +125,54 @@ export const renderComponents = (newContainer: ContainerType[]) => {
                 />
               </div>
             );
+          } else if (componentType === "type4") {
+            return (
+              <div key={index}>
+                <PicType4
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type5") {
+            return (
+              <div key={index}>
+                <PicLeftType5
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
           }
           break;
         case "TwoPictureContainer":
-          return (
-            <div key={index}>
-              <TwoPictureContainer
-                id={item && item._id ? item._id : ""}
-                mainHeader={item.mainHeader}
-                componentStyle={style}
-                twoPictureArray={twoPictureArray as PictureWithStyleType[]}
-              />
-            </div>
-          );
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <TwoPictureContainer
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={item.mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <TwoPictureContainer2
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={item.mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                />
+              </div>
+            );
+          }
+          break;
+
         case "IconExplainContainer":
           return (
             <div key={index}>
@@ -155,6 +199,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
               <BorderBoxContainer
                 id={item && item._id ? item._id : ""}
                 mainHeader={mainHeader}
+                componentType={componentType}
                 componentStyle={style}
                 twoPictureArray={twoPictureArray as PictureWithStyleType[]}
               />

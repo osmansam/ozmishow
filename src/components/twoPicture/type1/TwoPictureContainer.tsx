@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { TwoPictureContainerType } from "../../shared/types";
+import { TwoPictureContainerType } from "../../../shared/types";
 import TwoPicture from "./TwoPicture";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
-
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import { TwoPictureContainerTypes } from "../../../shared/compenentTypes";
 const TwoPictureContainer = ({
   mainHeader,
   twoPictureArray,
   componentStyle,
+  componentType,
   id,
 }: TwoPictureContainerType) => {
   return (
@@ -15,9 +16,9 @@ const TwoPictureContainer = ({
       <div className=" w-full flex justify-end mr-20 ">
         <ComponentStyleModalContainer
           styleData={componentStyle}
-          isComponentType={false}
-          // buraya componentTYpe gelecek
-          currentType="type1"
+          isComponentType={true}
+          currentType={componentType}
+          componentTypes={TwoPictureContainerTypes}
           twoPictureId={id ?? ""}
         />
       </div>
@@ -35,7 +36,7 @@ const TwoPictureContainer = ({
           type="mainMainHeader"
         />
       </h1>
-      <div className=" w-full h-full md:flex md:justify-center items-center mx-auto">
+      <div className="  md:flex md:justify-center  mx-auto">
         {twoPictureArray.map((twoPicture, index) => {
           const { img, header, paragraphs, buttons } = twoPicture;
           return (

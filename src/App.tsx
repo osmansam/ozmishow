@@ -10,6 +10,7 @@ import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
 import { PageOptionsType } from "./shared/types";
 const Login = lazy(() => import("./scenes/login"));
 const SingleNew = lazy(() => import("./components/news/newsType1/SingleNew"));
+const ReadMore = lazy(() => import("./components/readMore/ReadMore"));
 const Loading = lazy(() => import("./components/loading"));
 const Page = lazy(() => import("./scenes/pages/Page"));
 const PageAdmin = lazy(() => import("./scenes/pages/PageAdmin"));
@@ -59,6 +60,11 @@ function App() {
                         path={`/news/:twoPictureId/:id/:type`}
                         element={<SingleNew />}
                       />
+                      <Route
+                        key={`readMore-${page.pageNameEN.toLowerCase()}`}
+                        path={`/readMore/:twoPictureId/:index/`}
+                        element={<ReadMore />}
+                      />
                     </React.Fragment>
                   ))}
                 </>
@@ -97,6 +103,10 @@ function App() {
                       <Route
                         path={`/news/:twoPictureId/:id/:type`}
                         element={<SingleNew />}
+                      />
+                      <Route
+                        path={`/readMore/:twoPictureId/:index`}
+                        element={<ReadMore />}
                       />
                     </React.Fragment>
                   ))}

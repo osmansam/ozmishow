@@ -30,11 +30,20 @@ const PictureAtLeftType3 = lazy(
 const PictureAtRight = lazy(
   () => import("../../components/pictureAndText/picRight/PictureAtRight")
 );
+const PicType4 = lazy(
+  () => import("../../components/pictureAndText/picRight/PicType4")
+);
+const PicLeftType5 = lazy(
+  () => import("../../components/pictureAndText/picLeft/PicLeftType5")
+);
 const IconExplainContainer = lazy(
   () => import("../../components/IconExplain/IconExplainContainer")
 );
 const TwoPictureContainer = lazy(
-  () => import("../../components/twoPicture/TwoPictureContainer")
+  () => import("../../components/twoPicture/type1/TwoPictureContainer")
+);
+const TwoPictureContainer2 = lazy(
+  () => import("../../components/twoPicture/type2/TwoPictureContainer2")
 );
 const MaximContainer = lazy(() => import("../../components/maxim"));
 const FreqAsked = lazy(() => import("../../components/freqAsked/FreqAsked"));
@@ -332,28 +341,92 @@ const PageAdmin = ({ page }: Props) => {
                   />
                 </div>
               );
+            } else if (componentType === "type4") {
+              return (
+                <div key={index}>
+                  <PicType4
+                    {...(pictureItem as PictureWithStyleType)}
+                    _id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type5") {
+              return (
+                <div key={index}>
+                  <PicLeftType5
+                    {...(pictureItem as PictureWithStyleType)}
+                    _id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
             }
+
             break;
           case "TwoPictureContainer":
-            return (
-              <div key={index}>
-                <TwoPictureContainer
-                  mainHeader={item.mainHeader}
-                  componentStyle={style}
-                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
-                  id={item && item._id ? item._id : ""}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
+            if (componentType === "type1") {
+              return (
+                <div key={index}>
+                  <TwoPictureContainer
+                    mainHeader={item.mainHeader}
+                    componentStyle={style}
+                    componentType={componentType}
+                    twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                    id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type2") {
+              return (
+                <div key={index}>
+                  <TwoPictureContainer2
+                    mainHeader={item.mainHeader}
+                    componentStyle={style}
+                    componentType={componentType}
+                    twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                    id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            }
+
+            break;
+
           case "SpeedReader":
             return (
               <div key={index}>
@@ -414,6 +487,7 @@ const PageAdmin = ({ page }: Props) => {
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
                   componentStyle={style}
+                  componentType={componentType}
                   twoPictureArray={twoPictureArray as PictureWithStyleType[]}
                 />
                 <PageConfigurationButtons

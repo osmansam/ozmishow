@@ -63,7 +63,7 @@ const PictureAtLeft = ({
                 <div key={index}>
                   <p
                     className=" font-[400] leading-6 rounded-lg px-4 py-1  text-[#333333] "
-                    style={paragraphs?.style ? paragraphs?.style : {}}
+                    style={paragraphs?.style}
                   >
                     {paragraph}
                   </p>

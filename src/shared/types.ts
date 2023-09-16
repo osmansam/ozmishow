@@ -75,6 +75,7 @@ export interface TwoPictureContainerType {
   id: string;
   mainHeader?: ContentStyleType;
   twoPictureArray: Array<PictureWithStyleType>;
+  componentType: string;
   componentStyle: ComponentStyleType;
 }
 
