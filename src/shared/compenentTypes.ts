@@ -4,6 +4,7 @@ export const pictureAndTextTypes = [
   "type3",
   "type4",
   "type5",
+  "type6",
 ];
 export const newsContainerTypes = ["type1", "type2"];
 export const SliderTypes = ["type1", "type2"];

@@ -20,6 +20,9 @@ const PicType4 = lazy(
 const PicLeftType5 = lazy(
   () => import("../../components/pictureAndText/picLeft/PicLeftType5")
 );
+const PicLeftType6 = lazy(
+  () => import("../../components/pictureAndText/picLeft/PicLeftType6")
+);
 const PictureAtLeftType3 = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeftType3")
 );
@@ -141,6 +144,15 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             return (
               <div key={index}>
                 <PicLeftType5
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type6") {
+            return (
+              <div key={index}>
+                <PicLeftType6
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
                 />

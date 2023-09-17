@@ -151,6 +151,7 @@ export interface ComponentStyleType {
 }
 export interface PageStyleType {
   backgroundColor?: string;
+  effectAll?: boolean;
 }
 export const style = {
   color: "",

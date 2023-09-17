@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom"; // Import ReactDOM for createPortal
 import { SketchPicker } from "react-color";
 import { updatePageOptions } from "../../features/twoPicture/twoPictureSlice";
@@ -25,6 +25,7 @@ const PageStyleModal = ({
     ...styleData,
   });
 
+  const [effectAllElement, setEffectAllElement] = useState(styleData.effectAll); //
   const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
     styleData.backgroundColor
   );
@@ -33,7 +34,16 @@ const PageStyleModal = ({
   const [originalBackgroundColor, setOriginalBackgroundColor] = useState(
     styleData.backgroundColor
   );
-
+  const toggleEffectAll = () => {
+    setEffectAllElement(!effectAllElement);
+  };
+  useEffect(() => {
+    // Update the effectAll value when the checkbox changes
+    setEditedStyle((prevStyle) => ({
+      ...prevStyle,
+      effectAll: effectAllElement,
+    }));
+  }, [effectAllElement]);
   // Function to toggle the background color picker
   const toggleBackgroundColorPicker = () => {
     setIsBackgroundColorPickerOpen(!isBackgroundColorPickerOpen);
@@ -147,6 +157,20 @@ const PageStyleModal = ({
                     </div>
                   )}
                 </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="effectAll" className="block text-gray-600">
+                  Effect Style For All:
+                </label>
+                <input
+                  type="checkbox"
+                  id="effectAll"
+                  name="effectAll"
+                  checked={effectAllElement}
+                  onChange={toggleEffectAll}
+                  className="mr-2"
+                />
+                <span>Apply to all elements</span>
               </div>
               <div className="flex justify-end">
                 <button

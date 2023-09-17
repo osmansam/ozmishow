@@ -36,6 +36,9 @@ const PicType4 = lazy(
 const PicLeftType5 = lazy(
   () => import("../../components/pictureAndText/picLeft/PicLeftType5")
 );
+const PicLeftType6 = lazy(
+  () => import("../../components/pictureAndText/picLeft/PicLeftType6")
+);
 const IconExplainContainer = lazy(
   () => import("../../components/IconExplain/type1/IconExplainContainer")
 );
@@ -366,6 +369,24 @@ const PageAdmin = ({ page }: Props) => {
               return (
                 <div key={index}>
                   <PicLeftType5
+                    {...(pictureItem as PictureWithStyleType)}
+                    _id={item && item._id ? item._id : ""}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type6") {
+              return (
+                <div key={index}>
+                  <PicLeftType6
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
                   />
