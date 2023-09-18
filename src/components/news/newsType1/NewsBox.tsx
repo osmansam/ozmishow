@@ -25,7 +25,11 @@ const NewsBox = ({
           navigate(`/news/${twoPictureId}/${_id}/${type}`);
         }}
       >
-        <img src={img} alt={header?.content} className="h-1/2 w-full" />
+        <img
+          src={img?.content}
+          alt={header?.content}
+          className="h-1/2 w-full"
+        />
         <div className="flex flex-col gap-2 w-3/4 mx-auto">
           <p
             className="font-[400] text-[12px] leading-[19px]"

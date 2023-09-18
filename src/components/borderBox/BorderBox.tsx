@@ -3,7 +3,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { PictureWithStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-
+import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
 const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -13,7 +13,18 @@ const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <img src={img} alt={header?.content} className="w-40 h-40 " />
+      <img
+        src={img?.content}
+        alt={header?.content}
+        className="w-40 h-40 "
+        style={img?.style}
+      />
+      <ImageStyleModalContainer
+        twoPictureId={_id ?? ""}
+        componentId={index?.toString() ?? ""}
+        type="twoPictureIndex"
+        styleData={img}
+      />
       <div className="w-full flex justify-between ">
         <h1
           className="font-[700] text-2xl leading-8 flex flex-row gap-4 justify-center items-center"

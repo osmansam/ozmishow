@@ -5,7 +5,7 @@ import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer"
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import { pictureAndTextTypes } from "../../../shared/compenentTypes";
-
+import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
 const PictureAtLeft = ({
   img,
   header,
@@ -31,10 +31,18 @@ const PictureAtLeft = ({
         style={componentStyle}
       >
         {/* left side */}
+
         <img
-          src={img}
-          alt="img"
-          className="w-full lg:basis-1/2 lg:h-[400px] sm:h-[250px] sm:py-5 md:py-0"
+          src={img?.content}
+          alt={header?.content}
+          className="w-full lg:basis-1/2 lg:h-[25rem] max-w-[25rem] sm:h-[15rem] sm:py-5 md:py-0"
+          style={img?.style}
+        />
+        <ImageStyleModalContainer
+          twoPictureId={_id ?? ""}
+          componentId={""}
+          type="twoPicture"
+          styleData={img}
         />
 
         {/* right side  */}

@@ -11,6 +11,7 @@ import {
   resetTwoPictureArray,
   deleteItemInContainer,
 } from "../../features/twoPicture/twoPictureSlice";
+import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
 
 const ExplanationBar = ({
   mainMainHeader,
@@ -122,14 +123,26 @@ const ExplanationBar = ({
           {explanationArray[barSelection] && (
             <>
               {explanationArray[barSelection].img && (
-                <img
-                  src={explanationArray[barSelection].img}
-                  alt="explanationImage"
-                  className="w-full lg:h-96 sm:h-60 object-fit "
-                />
+                <div className="flex flex-col justify-center items-center gap-4">
+                  {explanationArray[barSelection].img?.content && (
+                    <img
+                      src={explanationArray[barSelection].img?.content}
+                      alt="explanationImage"
+                      className="w-full lg:h-96 sm:h-60 object-fit "
+                      style={explanationArray[barSelection].img?.style}
+                    />
+                  )}
+
+                  <ImageStyleModalContainer
+                    twoPictureId={id ?? ""}
+                    componentId={explanationArray[barSelection]._id ?? ""}
+                    type="explanationBar"
+                    styleData={explanationArray[barSelection].img}
+                  />
+                </div>
               )}
               <h2
-                className="flex flex-row  w-fit px-4 py-2 gap-8 rounded-2xl text-2xl leading-7 font-[500] text-[#212529] capitalize "
+                className="flex flex-row  w-fit px-4 pb-2 gap-8 rounded-2xl text-2xl leading-7 font-[500] text-[#212529] capitalize "
                 style={explanationArray[barSelection].header?.style}
               >
                 {explanationArray[barSelection].header?.content}

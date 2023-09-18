@@ -3,6 +3,7 @@ import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
 import { PictureWithStyleType } from "../../../shared/types";
 import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
+import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
 
 const IconExplain = ({
   _id,
@@ -14,7 +15,22 @@ const IconExplain = ({
 }: PictureWithStyleType) => {
   return (
     <div className="flex flex-col gap-4 md:pr-6 w-full md:w-1/3 h-full mt-8">
-      {img && <img src={img} alt={header?.content} className="w-full h-60" />}
+      {img && (
+        <>
+          <img
+            src={img?.content}
+            alt={header?.content}
+            className="w-full h-60"
+            style={img?.style}
+          />
+          <ImageStyleModalContainer
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            type="twoPictureIndex"
+            styleData={img}
+          />
+        </>
+      )}
       <h1
         className="text-lg font-[500] leading-6 mt-2 text-[#333333] flex flex-row gap-8 rounded-2xl px-4 py-0.5"
         style={header?.style ? header?.style : {}}

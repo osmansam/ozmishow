@@ -8,7 +8,11 @@ import {
   updatePageAndLanguage,
   getPageOptions,
 } from "../../features/twoPicture/twoPictureSlice";
-import { pageStyle } from "../../shared/types";
+import {
+  pageStyle,
+  imageStyle,
+  ImageContentStyleType,
+} from "../../shared/types";
 import PageStyleModalContainer from "../../hooks/pageStyle/PageStyleModalContainer";
 import {
   LanguageOptions,
@@ -18,7 +22,7 @@ import {
   PictureWithStyleType,
   ContentStyleType,
 } from "../../shared/types";
-import ConfirmationModal from "../../components/confirmation";
+import ConfirmationModal from "../../hooks/confirmation";
 import Loading from "../../components/loading";
 import SliderType2 from "../../components/slider/SliderType2";
 const PictureAtLeft = lazy(
@@ -601,7 +605,7 @@ const PageAdmin = ({ page }: Props) => {
             return (
               <div key={index}>
                 <TypingEffectContainer
-                  img={twoPictureArray[0].img ? twoPictureArray[0].img : ""}
+                  img={twoPictureArray[0].img as ImageContentStyleType}
                   paragraphs={paragraphs}
                 />
                 <PageConfigurationButtons

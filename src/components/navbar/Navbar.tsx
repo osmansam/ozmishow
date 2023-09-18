@@ -16,7 +16,7 @@ import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
-import ConfirmationModal from "../confirmation";
+import ConfirmationModal from "../../hooks/confirmation";
 
 // import { AiOutlineDown } from "react-icons/ai";
 

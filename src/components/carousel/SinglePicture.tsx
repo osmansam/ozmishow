@@ -6,6 +6,8 @@ import { RootState } from "../../store";
 import { style } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
+
 const SinglePicture = ({
   header,
   paragraphs,
@@ -46,18 +48,27 @@ const SinglePicture = ({
             </p>
           ))}
         </div>
-        <ContentModalContainer
-          content={paragraphs}
-          twoPictureId={_id ?? ""}
-          componentId={index?.toString() ?? ""}
-          contentContainerType="paragraphs"
-          type="twoPictureIndex"
-        />
+        <div className="flex flex-row mt-[-2rem] justify-center items-center">
+          <ContentModalContainer
+            content={paragraphs}
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            contentContainerType="paragraphs"
+            type="twoPictureIndex"
+          />
+          <ImageStyleModalContainer
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            type="twoPictureIndex"
+            styleData={img}
+          />
+        </div>
       </div>
       <img
         alt="carousel img"
-        src={img}
+        src={img?.content}
         className="object-cover h-full w-full "
+        style={img?.style}
       />
     </li>
   );

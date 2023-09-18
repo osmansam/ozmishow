@@ -3,6 +3,7 @@ import { PictureWithStyleType } from "../../../shared/types";
 import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import { useNavigate } from "react-router-dom";
+import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
 
 const IconExplain = ({
   _id,
@@ -15,9 +16,24 @@ const IconExplain = ({
   const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-4 md:pr-6 w-full md:w-1/3 h-full mt-8">
-      {img && <img src={img} alt={header?.content} className="w-full h-60" />}
+      {img && (
+        <>
+          <img
+            src={img?.content}
+            alt={header?.content}
+            className="w-full h-60 mx-auto my-auto"
+            style={img?.style}
+          />
+          <ImageStyleModalContainer
+            twoPictureId={_id ?? ""}
+            componentId={index?.toString() ?? ""}
+            type="twoPictureIndex"
+            styleData={img}
+          />
+        </>
+      )}
       <h1
-        className="w-fit mx-auto capitalize text-lg font-[500] leading-6 mt-2 text-[#333333] flex flex-row gap-8 rounded-2xl px-4 py-0.5"
+        className="w-fit mx-auto capitalize text-lg font-[500] leading-6 mt-2 text-[#333333] flex flex-row gap-8 rounded-2xl px-4 py-0.5 items-center"
         style={header?.style ? header?.style : {}}
       >
         {header?.content}
@@ -31,19 +47,20 @@ const IconExplain = ({
         />
       </h1>
       <div className="flex flex-col justify-center items-center  gap-2 w-full rounded-lg py-1  ">
-        {paragraphs?.content?.map((paragraph, index) => (
+        {paragraphs?.content && (
           <p
             key={index}
             className=" font-[400] leading-6 text-[#333333] rounded-2xl px-2"
             style={paragraphs?.style ? paragraphs?.style : {}}
           >
-            {paragraph.length && paragraph.length > 250 ? (
-              <>{paragraph?.substring(0, 250)}...</>
+            {paragraphs?.content[0]?.length &&
+            paragraphs?.content[0]?.length > 250 ? (
+              <>{paragraphs?.content[0]?.substring(0, 250)}...</>
             ) : (
-              <>{paragraph}</>
+              <>{paragraphs?.content[0]}</>
             )}
           </p>
-        ))}
+        )}
       </div>
       <ContentModalContainer
         content={paragraphs}

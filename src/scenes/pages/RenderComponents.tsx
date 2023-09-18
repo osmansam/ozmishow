@@ -6,6 +6,7 @@ import {
   ContentStyleType,
   PictureType,
   PictureWithStyleType,
+  ImageContentStyleType,
 } from "../../shared/types";
 import SliderType2 from "../../components/slider/SliderType2";
 const PictureAtLeft = lazy(
@@ -449,7 +450,7 @@ export const renderComponents = (newContainer: ContainerType[]) => {
           return (
             <div key={index}>
               <TypingEffectContainer
-                img={twoPictureArray[0].img ? twoPictureArray[0].img : ""}
+                img={twoPictureArray[0].img as ImageContentStyleType}
                 paragraphs={paragraphs}
               />
             </div>

@@ -12,6 +12,7 @@ import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
 
 const WorkTeamBar = ({
   mainMainHeader,
@@ -151,11 +152,20 @@ const WorkTeamBar = ({
                   className="flex flex-col md:flex-row  py-5  gap-5 justify-center items-center md:justify-normal md:items-start "
                 >
                   {workTeam.img && (
-                    <img
-                      src={workTeam.img}
-                      alt="explanationImage"
-                      className="w-40 h-44 object-fit rounded-md"
-                    />
+                    <div className="flex flex-col justify-center items-center">
+                      <img
+                        src={workTeam.img?.content}
+                        alt="explanationImage"
+                        className="w-40 h-44 object-fit rounded-md"
+                        style={workTeam?.img?.style}
+                      />
+                      <ImageStyleModalContainer
+                        twoPictureId={id}
+                        componentId={workTeam._id ?? ""}
+                        type="workTeamBar"
+                        styleData={workTeam?.img}
+                      />
+                    </div>
                   )}
 
                   <div>

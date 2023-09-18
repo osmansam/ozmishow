@@ -373,8 +373,7 @@ function StyledModal({
                     name="content"
                     value={editedStyle.content}
                     onChange={handleInputChange}
-                    className="border rounded px-2 py-1 w-full capitalize"
-                    style={editedStyle.style}
+                    className="border rounded px-2 py-1 w-full "
                   />
                 </div>
               )}

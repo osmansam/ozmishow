@@ -23,7 +23,7 @@ const IconExplainContainer = ({
         />
       </div>
       <h1
-        className="w-fit font-[700] text-4xl leading-[44px] mb-3  text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5"
+        className="w-fit font-[700] text-4xl leading-[44px] mb-3  text-[#333333] flex flex-row gap-2 rounded-2xl px-4 py-0.5 items-center"
         style={mainHeader?.style}
       >
         {mainHeader?.content}

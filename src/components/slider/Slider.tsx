@@ -77,7 +77,7 @@ const Slider = ({
         <div className="relative flex justify-center items-center">
           <div className="radius-ball absolute top-1/2  ml-3 transform translate-y-[-50%] w-40 h-40 rounded-full bg-blue-400 z-0"></div>
           <img
-            src={currentSlide?.img}
+            src={currentSlide?.img?.content}
             alt={currentSlide?.header?.content}
             className="w-40 h-40 rounded-full z-10 object-cover"
           />

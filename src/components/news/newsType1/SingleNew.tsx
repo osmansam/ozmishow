@@ -9,6 +9,7 @@ import Navbar from "../../navbar/Navbar";
 import Footer from "../../footer";
 import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
+import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
 
 const SingleNew = () => {
   const { id, twoPictureId, type } = useParams();
@@ -47,11 +48,20 @@ const SingleNew = () => {
         </h1>
         {/* img */}
         {news.img && (
-          <img
-            src={news.img}
-            alt="img"
-            className="  mx-auto lg:h-[450px] sm:h-60 py-10"
-          />
+          <>
+            <img
+              src={news.img?.content}
+              alt="img"
+              className="  mx-auto lg:h-[450px] sm:h-60 py-10"
+              style={img?.style}
+            />
+            <ImageStyleModalContainer
+              twoPictureId={twoPictureId ?? ""}
+              componentId={id ?? ""}
+              type="explanationBar"
+              styleData={img}
+            />
+          </>
         )}
         {/* paragraphs */}
         <div className="flex flex-col gap-2 w-full rounded-lg py-1  ">

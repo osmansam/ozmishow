@@ -145,6 +145,11 @@ export interface StyleType {
   hover: string;
   effectAll?: boolean;
 }
+export interface ImageType {
+  width?: string;
+  height?: string;
+  effectAll?: boolean;
+}
 export interface ComponentStyleType {
   backgroundColor?: string;
   width?: string;
@@ -170,8 +175,16 @@ export const componentStyle = {
 export const pageStyle = {
   backgroundColor: "",
 };
+export const imageStyle = {
+  width: "",
+  height: "",
+  effectAll: false,
+};
 export interface PictureWithStyleType {
-  img?: string;
+  img?: {
+    content: string;
+    style: ImageType;
+  };
   mainMainHeader?: ContentStyleType;
   header?: ContentStyleType;
   paragraphs?: {
@@ -240,7 +253,7 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
-  PictureAtLeft: {
+  PictureAndText: {
     name: "PictureAndText",
     pictureContainerNumber: 1,
     isMainHeader: false,
@@ -429,6 +442,10 @@ export interface ContainerType {
   language: string;
   style: any;
   componentType: string;
+}
+export interface ImageContentStyleType {
+  content: string;
+  style: ImageType;
 }
 
 export interface ButtonType {

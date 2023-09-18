@@ -1,33 +1,29 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import StyledModal from "./StyledModal";
+import ImageStyleModal from "./ImageStyleModal";
 import { AiOutlineDown } from "react-icons/ai";
-import { style } from "../../shared/types";
+import { imageStyle } from "../../shared/types";
 
 interface StyledModalProps {
   styleData: any;
   twoPictureId: string;
   componentId: string;
-  contentContainerType: string;
+  type: string;
   isContentSend?: boolean;
-  type?: string;
 }
 
-const StyleModalContainer = ({
+const ImageStyleModalContainer = ({
   styleData,
   twoPictureId,
-  componentId,
-  contentContainerType,
-  isContentSend,
   type,
+  componentId,
 }: StyledModalProps) => {
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [contentType, setContentType] = useState("");
   const [selectedStyle, setSelectedStyle] = useState({
     content: "",
-    style: style,
+    style: imageStyle,
   });
 
   const openModal = (styleData: any) => {
@@ -37,32 +33,32 @@ const StyleModalContainer = ({
   return (
     <div>
       {!isModalOpen && isAdmin && (
-        <AiOutlineDown
-          className="text-lg justify-end cursor-pointer items-center"
+        <div
+          className="flex flex-row gap-1  bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 items-center cursor-pointer"
           onClick={() => {
             openModal({
               style: styleData?.style,
               content: styleData?.content,
             });
-            setContentType(contentContainerType);
           }}
-        />
+        >
+          <h2>Image Style</h2>
+          <AiOutlineDown className="text-lg justify-end" />
+        </div>
       )}
-      {isModalOpen && contentType === contentContainerType && (
-        <StyledModal
+      {isModalOpen && (
+        <ImageStyleModal
           key={twoPictureId}
           isOpen={isModalOpen}
           styleData={selectedStyle}
           onClose={() => setIsModalOpen(false)}
-          type={type}
           twoPictureId={twoPictureId}
           componentId={componentId ?? ""}
-          contentType={contentContainerType}
-          isContentSend={isContentSend}
+          type={type ?? ""}
         />
       )}
     </div>
   );
 };
 
-export default StyleModalContainer;
+export default ImageStyleModalContainer;

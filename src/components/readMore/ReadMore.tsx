@@ -46,7 +46,7 @@ const ReadMore = () => {
         {/* img */}
 
         <img
-          src={data?.img}
+          src={data?.img?.content}
           alt="img"
           className="  mx-auto lg:h-[450px] sm:h-60 py-10"
         />

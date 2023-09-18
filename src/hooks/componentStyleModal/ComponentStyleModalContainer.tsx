@@ -36,7 +36,7 @@ const ComponentStyleModalContainer = ({
     <div>
       {!isModalOpen && isAdmin && (
         <div
-          className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700"
+          className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 cursor-pointer items-center"
           onClick={() => {
             openModal(styleData);
           }}

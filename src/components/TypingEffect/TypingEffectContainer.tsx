@@ -1,9 +1,9 @@
 import React from "react";
 import TypingEffect from "./TypingEffect";
-
+import { ImageType } from "../../shared/types";
 type Props = {
   paragraphs: string[];
-  img: string;
+  img: { content: string; style: ImageType };
 };
 
 const TypingEffectContainer = ({ paragraphs, img }: Props) => {
@@ -12,7 +12,7 @@ const TypingEffectContainer = ({ paragraphs, img }: Props) => {
       <div
         className="w-full h-screen bg-cover bg-center relative min-h-screen"
         style={{
-          backgroundImage: `url(${img})`,
+          backgroundImage: `url(${img?.content})`,
         }}
       ></div>
       <div className="absolute inset-0 bg-black opacity-40"></div>

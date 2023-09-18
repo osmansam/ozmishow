@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType } from "../../shared/types";
-import { style } from "../../shared/types";
+import { style, imageStyle } from "../../shared/types";
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;
@@ -15,15 +15,11 @@ const AddWorkTeamItem = ({
   isPictureContainerButton,
   isPictureContainerParagraph,
 }: Props) => {
-  const { twoPictureArray, pageOptions } = useSelector(
-    (state: RootState) => state.twoPicture
-  );
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const dispatch = useAppDispatch();
   const [ready, setReady] = useState(false);
   const [allDone, setAllDone] = useState(false);
   const [img, setImg] = useState("");
-  const [headers, setHeaders] = useState<string[]>([]);
-  const [paragraphs, setParagraphs] = useState<string[]>([]);
   const [paragraphNumber, setParagraphNumber] = useState(1);
   const [buttonNumber, setButtonNumber] = useState(1);
   const [buttons, setButtons] = useState<ButtonType[]>([]);
@@ -75,7 +71,10 @@ const AddWorkTeamItem = ({
     }
 
     const newTwoPictureArray = {
-      img,
+      img: {
+        content: img,
+        style: imageStyle,
+      },
       subHeaders: {
         content: newHeaders,
         style: style,
@@ -93,9 +92,8 @@ const AddWorkTeamItem = ({
     dispatch(setTwoPictureArray(newTwoPictureArray));
     setImg("");
     setMainHeader("");
-    setParagraphs([]);
+
     setButtons([]);
-    setHeaders([]);
 
     setAllDone(true);
   };

@@ -6,6 +6,8 @@ import ContentModalContainer from "../../../hooks/contentModal/ContentModalConta
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import { pictureAndTextTypes } from "../../../shared/compenentTypes";
 import { useNavigate } from "react-router-dom";
+import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
+
 const PicType4 = ({
   img,
   header,
@@ -84,11 +86,21 @@ const PicType4 = ({
       </div>
 
       {/* img */}
+
       <img
-        src={img}
+        src={img?.content}
         alt={header?.content}
-        className="w-full lg:basis-1/2 lg:h-[400px] sm:h-[250px] sm:py-5 md:py-0"
+        className="w-full lg:basis-1/2 lg:h-[25rem] sm:h-[15rem] sm:py-5 md:py-0"
+        style={img?.style}
       />
+      <div className="w-fit px-4 ">
+        <ImageStyleModalContainer
+          twoPictureId={_id ?? ""}
+          componentId={""}
+          type="twoPicture"
+          styleData={img}
+        />
+      </div>
     </div>
   );
 };

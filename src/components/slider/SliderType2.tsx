@@ -59,7 +59,7 @@ const SliderType2 = ({
             <div className="flex flex-col gap-2 ">
               {/* img */}
               <img
-                src={img}
+                src={img?.content}
                 alt={header?.content}
                 className="h-40 w-40 rounded-full mx-auto grayscale"
               />

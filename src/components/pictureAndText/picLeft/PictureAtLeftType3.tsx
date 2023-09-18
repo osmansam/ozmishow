@@ -5,7 +5,7 @@ import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer"
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import { pictureAndTextTypes } from "../../../shared/compenentTypes";
-
+import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
 type Props = {};
 
 const PictureAtLeftType3 = ({
@@ -18,7 +18,7 @@ const PictureAtLeftType3 = ({
   _id,
 }: PictureWithStyleType) => {
   return (
-    <div className="flex flex-col gap-4 " style={componentStyle}>
+    <div className="flex flex-col gap-4 w-full  " style={componentStyle}>
       {/* component Style button */}
       <div className=" w-full flex justify-end pr-20 ">
         <ComponentStyleModalContainer
@@ -68,12 +68,21 @@ const PictureAtLeftType3 = ({
         />
       </div>
       {/* img */}
-      <div className="w-5/6 md:w-3/4 mx-auto">
+      <div className="w-5/6 md:w-3/4 mx-auto flex flex-col ">
         <img
-          src={img}
+          src={img?.content}
           alt="img"
           className="w-full h-[12rem] md:w-1/2 md:h-[20rem]  md:mt-[-5rem]  sm:py-5 md:py-0"
+          style={img?.style}
         />
+        <div className="w-fit px-4 ">
+          <ImageStyleModalContainer
+            twoPictureId={_id ?? ""}
+            componentId={""}
+            type="twoPicture"
+            styleData={img}
+          />
+        </div>
       </div>
     </div>
   );

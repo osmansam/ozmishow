@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { FullPageItemType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
-import { style } from "../../shared/types";
 import { useSelector } from "react-redux";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
 import {
   updateContainer,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
-type Props = {};
 
 const FullPageItem = ({
   mainMainHeader,
@@ -66,14 +65,25 @@ const FullPageItem = ({
         return (
           <div key={index} className="w-full">
             {img && (
-              <img
-                src={img}
-                alt={header?.content}
-                className="w-full md:w-5/6 mx-auto lg:h-80 sm:h-60"
-              />
+              <>
+                <img
+                  src={img?.content}
+                  alt={header?.content}
+                  className="w-full md:w-5/6 mx-auto lg:h-80 sm:h-60"
+                  style={img?.style}
+                />
+                <div className="w-fit px-4 mx-auto">
+                  <ImageStyleModalContainer
+                    twoPictureId={id ?? ""}
+                    componentId={index.toString()}
+                    type="twoPictureIndex"
+                    styleData={img}
+                  />
+                </div>
+              </>
             )}
             <h1
-              className="w-fit px-4 py-1 gap-8 rounded-2xl font-[700] text-lg  text-[#333333] flex flex-row mt-2"
+              className="w-fit  py-0.5 gap-8 rounded-2xl font-[700] text-lg  text-[#333333] flex flex-row mt-2 items-center px-2"
               style={header?.style ? header?.style : {}}
             >
               {header?.content}
@@ -87,7 +97,7 @@ const FullPageItem = ({
               />
             </h1>
             <div
-              className="flex flex-col gap-2 w-full rounded-lg py-2"
+              className="flex flex-col gap-6 w-full rounded-lg py-2 px-2"
               style={paragraphs?.style ? paragraphs?.style : {}}
             >
               {paragraphs?.content?.map((paragraph, index) => (
