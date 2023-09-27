@@ -23,6 +23,7 @@ const PageStyleModal = ({
   // Initialize the edited style with the original style data
   const [editedStyle, setEditedStyle] = useState<PageStyleType>({
     ...styleData,
+    backgroundSize: "cover",
   });
 
   const [effectAllElement, setEffectAllElement] = useState(styleData.effectAll); //
@@ -31,12 +32,11 @@ const PageStyleModal = ({
   );
   const [isBackgroundColorPickerOpen, setIsBackgroundColorPickerOpen] =
     useState(false);
-  const [originalBackgroundColor, setOriginalBackgroundColor] = useState(
-    styleData.backgroundColor
-  );
+
   const toggleEffectAll = () => {
     setEffectAllElement(!effectAllElement);
   };
+
   useEffect(() => {
     // Update the effectAll value when the checkbox changes
     setEditedStyle((prevStyle) => ({
@@ -56,6 +56,12 @@ const PageStyleModal = ({
     setEditedStyle((prevEditedStyle) => ({
       ...prevEditedStyle,
       backgroundColor: color.hex,
+    }));
+  };
+  const handleStyleChange = (property: string, value: string) => {
+    setEditedStyle((prevStyle) => ({
+      ...prevStyle,
+      [property]: value,
     }));
   };
 
@@ -157,6 +163,32 @@ const PageStyleModal = ({
                     </div>
                   )}
                 </div>
+              </div>
+              <div className="mb-3">
+                <label
+                  htmlFor="backgroundImage"
+                  className="block text-gray-600"
+                >
+                  Background Image:
+                </label>
+                <input
+                  type="text"
+                  id="backgroundImage"
+                  name="backgroundImage"
+                  // value={editedStyle.backgroundImage?.replace(
+                  //   /url\((['"])?(.*?)\1\)/gi,
+                  //   "$2"
+                  // )}
+                  value={editedStyle.backgroundImage}
+                  onChange={(e) =>
+                    handleStyleChange(
+                      "backgroundImage",
+                      // `url("${e.target.value}")`
+                      e.target.value
+                    )
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
               </div>
               <div className="mb-3">
                 <label htmlFor="effectAll" className="block text-gray-600">

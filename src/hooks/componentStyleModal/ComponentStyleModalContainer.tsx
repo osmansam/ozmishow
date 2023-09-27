@@ -9,7 +9,6 @@ interface ComponentStyleModalProps {
   twoPictureId: string;
   componentTypes?: string[];
   currentType: string;
-
   isComponentType: boolean;
 }
 

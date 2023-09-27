@@ -154,6 +154,24 @@ function ComponentStyleModal({
                   className="border rounded px-2 py-1 w-full"
                 />
               </div>
+              <div className="mb-3">
+                <label
+                  htmlFor="backgroundImage"
+                  className="block text-gray-600"
+                >
+                  Background Image:
+                </label>
+                <input
+                  type="text"
+                  id="backgroundImage"
+                  name="backgroundImage"
+                  value={editedStyle.backgroundImage}
+                  onChange={(e) =>
+                    handleStyleChange("backgroundImage", e.target.value)
+                  }
+                  className="border rounded px-2 py-1 w-full"
+                />
+              </div>
               {isComponentType && (
                 <div className="mb-3">
                   <label htmlFor="fontFamily" className="block text-gray-600">

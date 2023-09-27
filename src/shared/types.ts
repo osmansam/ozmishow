@@ -153,10 +153,13 @@ export interface ImageType {
 export interface ComponentStyleType {
   backgroundColor?: string;
   width?: string;
+  backgroundImage?: string;
 }
 export interface PageStyleType {
   backgroundColor?: string;
   effectAll?: boolean;
+  backgroundImage?: string;
+  backgroundSize?: string;
 }
 export const style = {
   color: "",
@@ -171,9 +174,12 @@ export const style = {
 export const componentStyle = {
   backgroundColor: "",
   width: "",
+  backgroundImage: "",
 };
 export const pageStyle = {
   backgroundColor: "",
+  backgroundImage: "",
+  backgroundSize: "",
 };
 export const imageStyle = {
   width: "",
