@@ -121,7 +121,7 @@ const Footer = ({ currentPage }: Props) => {
             <div className="flex flex-row gap-2">
               <GoLocation className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">
-                {translations[language as keyof typeof translations].address}
+                {translations[language as keyof typeof translations]?.address}
               </h2>
             </div>
 
@@ -136,7 +136,7 @@ const Footer = ({ currentPage }: Props) => {
             <div className="flex flex-row gap-4">
               <BsTelephone className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">
-                {translations[language as keyof typeof translations].phone}
+                {translations[language as keyof typeof translations]?.phone}
               </h2>
               <p className="text-sm text-[#888888]">{footer?.phone}</p>
             </div>
@@ -150,7 +150,7 @@ const Footer = ({ currentPage }: Props) => {
             <div className="flex flex-row gap-4">
               <AiOutlineMail className="w-8 h-6" style={{ color: "#888888" }} />
               <h2 className="text-[#888888]">
-                {translations[language as keyof typeof translations].email}
+                {translations[language as keyof typeof translations]?.email}
               </h2>
               <p className="text-sm text-[#888888]">{footer?.email}</p>
             </div>
