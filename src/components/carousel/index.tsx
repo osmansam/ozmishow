@@ -6,6 +6,7 @@ import { CarouselType } from "../../shared/types";
 import {
   updateExplanationBar,
   resetTwoPictureArray,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import SinglePicture from "./SinglePicture";
@@ -16,6 +17,7 @@ const Carousel = ({
   carouselArray,
   componentStyle,
   id,
+  page,
 }: CarouselType) => {
   const dispatch = useAppDispatch();
   const [isAddCarousel, setIsAddCarousel] = useState(false);
@@ -29,7 +31,7 @@ const Carousel = ({
     await dispatch(updateExplanationBar({ container: twoPictureArray, id }));
     setIsAddCarousel(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
   const carouselWidth = carouselArray.length * 466;
   return (

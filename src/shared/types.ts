@@ -232,6 +232,7 @@ export interface CarouselType {
   mainMainHeader?: ContentStyleType;
   carouselArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
+  page?: string;
 }
 export interface SliderType {
   id: string;

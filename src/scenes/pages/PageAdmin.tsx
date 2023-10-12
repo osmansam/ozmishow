@@ -738,6 +738,7 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   componentStyle={style}
                   carouselArray={twoPictureArray as PictureWithStyleType[]}
+                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}
