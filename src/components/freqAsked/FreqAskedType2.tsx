@@ -11,22 +11,21 @@ import ComponentStyleModalContainer from "../../hooks/componentStyleModal/Compon
 import {
   updateContainer,
   resetTwoPictureArray,
-  getPageTwoPictures,
   deleteItemInContainer,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 import { FreqAskedTypes } from "../../shared/compenentTypes";
 
-const FreqAsked = ({
+const FreqAskedType2 = ({
   freqAskedArray,
   componentStyle,
   id,
-  componentType,
   page,
+  componentType,
 }: FreqAskedType) => {
   const [selection, setSelection] = useState(-1);
   const [isAddNewItem, setIsAddNewItem] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
-
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
   );
@@ -54,14 +53,13 @@ const FreqAsked = ({
       window.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
   return (
     <div
-      className="w-4/5 mx-auto my-10 h-full py-10  px-4 cursor-pointer"
+      className="w-4/5 mx-auto my-10 h-full py-10 px-4 cursor-pointer shadow-lg bg-white rounded-lg"
       id="freqAskedContainer"
       style={componentStyle}
     >
-      <div className=" w-full flex justify-end mr-20 ">
+      <div className="w-full flex justify-end mr-20">
         <ComponentStyleModalContainer
           styleData={componentStyle}
           isComponentType={true}
@@ -70,16 +68,17 @@ const FreqAsked = ({
           twoPictureId={id ?? ""}
         />
       </div>
+
       {freqAskedArray.map((freqAsked, index) => {
         const { header, paragraphs, buttons, _id } = freqAsked;
         return (
           <div
             key={index}
             onClick={() => setSelection(index)}
-            className="h-fit w-full rounded-lg  cursor-pointer"
+            className="border-b border-gray-200 py-4 hover:bg-gray-100 transition-colors duration-300 rounded-lg"
           >
             <h1
-              className="font-[500] pt-2  text-[#333333] flex flex-row gap-8"
+              className="font-semibold text-lg text-blue-700 flex flex-row gap-8 hover:text-blue-900 transition-colors duration-300"
               style={header?.style}
             >
               {header?.content}
@@ -92,28 +91,28 @@ const FreqAsked = ({
                 type="twoPictureIndex"
               />
             </h1>
+
             {selection === index && (
               <motion.div
-                className="overflow-hidden"
+                className="overflow-hidden bg-gray-100 rounded-lg "
                 initial={{ height: 0 }}
                 animate={{ height: selection === index ? "auto" : 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="flex flex-col gap-2 w-full rounded-lg py-1 px-4 mt-2 ">
-                  {paragraphs?.content?.map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className=" font-[400] leading-6 text-[#333333]"
-                      style={paragraphs?.style ? paragraphs?.style : {}}
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
+                {paragraphs?.content?.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="text-gray-600 leading-6"
+                    style={paragraphs?.style ? paragraphs?.style : {}}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+
                 {buttons &&
                   buttons.length > 0 &&
                   buttons.map((button, index) => (
-                    <div className=" px-4 " key={index}>
+                    <div key={index} className="px-4 py-2">
                       <ButtonUnderline
                         text={button.buttonName}
                         buttonLink={button.buttonLink}
@@ -125,6 +124,7 @@ const FreqAsked = ({
                   ))}
               </motion.div>
             )}
+
             <ContentModalContainer
               content={paragraphs}
               twoPictureId={id ?? ""}
@@ -135,7 +135,7 @@ const FreqAsked = ({
 
             {isAdmin && selection === index && (
               <button
-                className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+                className="capitalize border border-red-400 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-red-500 hover:text-white transition-colors duration-300"
                 onClick={async () => {
                   try {
                     await dispatch(
@@ -144,7 +144,6 @@ const FreqAsked = ({
                         itemId: _id ?? "",
                       })
                     );
-                    // window.location.reload();
                   } catch (error) {
                     console.log(error);
                   }
@@ -153,15 +152,13 @@ const FreqAsked = ({
                 Delete
               </button>
             )}
-            {/* Underline color #e2e2e2 */}
-            <div className="mx-auto h-px mt-4 font-[700] bg-freqUnderline"></div>
           </div>
         );
       })}
 
       {!isAddNewItem && isAdmin && (
         <button
-          className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+          className="capitalize border-2 border-blue-500 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
           onClick={() => setIsAddNewItem(true)}
         >
           Add New item
@@ -175,7 +172,7 @@ const FreqAsked = ({
             isPictureContainerParagraph={true}
           />
           <button
-            className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+            className="capitalize border-2 border-green-500 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-green-500 hover:text-white transition-colors duration-300"
             onClick={handleCreate}
           >
             Create
@@ -186,4 +183,4 @@ const FreqAsked = ({
   );
 };
 
-export default FreqAsked;
+export default FreqAskedType2;

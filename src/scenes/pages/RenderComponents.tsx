@@ -91,6 +91,9 @@ const ResumeIcon = lazy(
 const SpeedReader = lazy(
   () => import("../../components/speedReader/SpeedReader")
 );
+const FreqAskedType2 = lazy(
+  () => import("../../components/freqAsked/FreqAskedType2")
+);
 ////
 type Props = {};
 
@@ -336,15 +339,30 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             </div>
           );
         case "FrequentlyAskedQuestions":
-          return (
-            <div key={index}>
-              <FreqAsked
-                id={item && item._id ? item._id : ""}
-                componentStyle={style}
-                freqAskedArray={twoPictureArray as PictureWithStyleType[]}
-              />
-            </div>
-          );
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <FreqAsked
+                  id={item && item._id ? item._id : ""}
+                  componentStyle={style}
+                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                  componentType={componentType}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <FreqAskedType2
+                  id={item && item._id ? item._id : ""}
+                  componentStyle={style}
+                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                  componentType={componentType}
+                />
+              </div>
+            );
+          }
+          break;
         case "WorkTeamBar":
           return (
             <div key={index}>

@@ -106,6 +106,9 @@ const ResumeIcon = lazy(
 const SpeedReader = lazy(
   () => import("../../components/speedReader/SpeedReader")
 );
+const FreqAskedType2 = lazy(
+  () => import("../../components/freqAsked/FreqAskedType2")
+);
 interface Props {
   page: string;
 }
@@ -805,24 +808,50 @@ const PageAdmin = ({ page }: Props) => {
               </div>
             );
           case "FrequentlyAskedQuestions":
-            return (
-              <div key={index}>
-                <FreqAsked
-                  id={item && item._id ? item._id : ""}
-                  componentStyle={style}
-                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
-                />
-                <PageConfigurationButtons
-                  index={index}
-                  moveItem={moveItem}
-                  disableMoveUp={index === 0}
-                  disableMoveDown={index === newContainer.length - 1}
-                  id={_id ? _id : ""}
-                  pageOptions={pageOptions}
-                  language={language}
-                />
-              </div>
-            );
+            if (componentType === "type1") {
+              return (
+                <div key={index}>
+                  <FreqAsked
+                    id={item && item._id ? item._id : ""}
+                    componentStyle={style}
+                    freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                    componentType={componentType}
+                    page={page}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            } else if (componentType === "type2") {
+              return (
+                <div key={index}>
+                  <FreqAskedType2
+                    id={item && item._id ? item._id : ""}
+                    componentStyle={style}
+                    freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                    componentType={componentType}
+                    page={page}
+                  />
+                  <PageConfigurationButtons
+                    index={index}
+                    moveItem={moveItem}
+                    disableMoveUp={index === 0}
+                    disableMoveDown={index === newContainer.length - 1}
+                    id={_id ? _id : ""}
+                    pageOptions={pageOptions}
+                    language={language}
+                  />
+                </div>
+              );
+            }
+            break;
           case "WorkTeamBar":
             return (
               <div key={index}>

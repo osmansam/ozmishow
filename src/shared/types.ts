@@ -118,6 +118,8 @@ export interface FreqAskedType {
   id: string;
   freqAskedArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
+  componentType: string;
+  page?: string;
 }
 export interface FullPageItemType {
   mainMainHeader?: ContentStyleType;
