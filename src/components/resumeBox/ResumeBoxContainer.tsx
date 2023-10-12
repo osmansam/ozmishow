@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../store";
 import {
   updateResumeBox,
+  getPageTwoPictures,
   resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
@@ -17,6 +18,7 @@ const ResumeBoxContainer = ({
   mainHeader,
   componentStyle,
   resumeBoxArray,
+  page,
 }: ResumeBoxContainerType) => {
   const [isAddResumeBox, setIsAddResumeBox] = React.useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -29,7 +31,7 @@ const ResumeBoxContainer = ({
     await dispatch(updateResumeBox({ container: twoPictureArray, id }));
     setIsAddResumeBox(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
   return (
     <div className="flex flex-col gap-3  w-5/6 mx-auto" style={componentStyle}>

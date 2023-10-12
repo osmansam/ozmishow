@@ -110,6 +110,7 @@ export interface ResumeBoxContainerType {
   mainHeader?: ContentStyleType;
   resumeBoxArray: Array<PictureWithStyleType>;
   componentStyle?: ComponentStyleType;
+  page?: string;
 }
 export interface YoutubeType {
   embedId: string;

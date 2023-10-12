@@ -673,6 +673,7 @@ const PageAdmin = ({ page }: Props) => {
                   mainHeader={mainHeader}
                   resumeBoxArray={twoPictureArray as PictureWithStyleType[]}
                   componentStyle={style}
+                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}
