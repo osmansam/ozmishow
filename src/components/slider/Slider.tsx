@@ -7,6 +7,7 @@ import AddSliderItem from "./AddSliderItem";
 import {
   updateSlider,
   resetTwoPictureArray,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import { SliderTypes } from "../../shared/compenentTypes";
@@ -17,6 +18,7 @@ const Slider = ({
   id,
   componentStyle,
   componentType,
+  page,
 }: SliderType) => {
   const dispatch = useAppDispatch();
   const [index, setIndex] = useState(0);
@@ -54,7 +56,7 @@ const Slider = ({
     await dispatch(updateSlider({ container: twoPictureArray, id }));
     setIsAddSlider(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
 
   const currentSlide = sliderArray[index];

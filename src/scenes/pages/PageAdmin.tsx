@@ -695,6 +695,7 @@ const PageAdmin = ({ page }: Props) => {
                     sliderArray={twoPictureArray as PictureWithStyleType[]}
                     componentType={componentType}
                     componentStyle={style}
+                    page={page}
                   />
                   <PageConfigurationButtons
                     index={index}

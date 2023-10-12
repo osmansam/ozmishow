@@ -240,6 +240,7 @@ export interface SliderType {
   sliderArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
   componentType: string;
+  page?: string;
 }
 export interface WorkTeamBarType {
   id: string;
