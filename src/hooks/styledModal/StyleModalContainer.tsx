@@ -12,6 +12,7 @@ interface StyledModalProps {
   contentContainerType: string;
   isContentSend?: boolean;
   type?: string;
+  buttonIndex?: number;
 }
 
 const StyleModalContainer = ({
@@ -20,20 +21,17 @@ const StyleModalContainer = ({
   componentId,
   contentContainerType,
   isContentSend,
+  buttonIndex,
   type,
 }: StyledModalProps) => {
   const { isAdmin } = useSelector((state: RootState) => state.context);
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const [contentType, setContentType] = useState("");
-  const [selectedStyle, setSelectedStyle] = useState({
-    content: "",
-    style: style,
-  });
 
   const openModal = (styleData: any) => {
-    setSelectedStyle(styleData);
     setIsModalOpen(true);
   };
+
   return (
     <div>
       {!isModalOpen && isAdmin && (
@@ -52,13 +50,14 @@ const StyleModalContainer = ({
         <StyledModal
           key={twoPictureId}
           isOpen={isModalOpen}
-          styleData={selectedStyle}
+          styleData={styleData}
           onClose={() => setIsModalOpen(false)}
           type={type}
           twoPictureId={twoPictureId}
           componentId={componentId ?? ""}
           contentType={contentContainerType}
           isContentSend={isContentSend}
+          buttonIndex={buttonIndex ?? 0}
         />
       )}
     </div>

@@ -113,13 +113,26 @@ const FreqAsked = ({
                 {buttons &&
                   buttons.length > 0 &&
                   buttons.map((button, index) => (
-                    <div className=" px-4 " key={index}>
+                    <div
+                      className=" px-4 flex flex-row w-fit items-center justify-center gap-2 "
+                      key={index}
+                      style={button.style}
+                    >
                       <ButtonUnderline
                         text={button.content}
                         buttonLink={button.link}
                         textColor="black"
                         underlineColorBefore="#e5e5e5"
                         underlineColorAfter="#414141"
+                      />
+                      <StyleModalContainer
+                        styleData={button}
+                        twoPictureId={id ?? ""}
+                        componentId={index?.toString() ?? ""}
+                        contentContainerType="buttons"
+                        isContentSend={true}
+                        type="twoPictureIndex"
+                        buttonIndex={index}
                       />
                     </div>
                   ))}
@@ -144,7 +157,7 @@ const FreqAsked = ({
                         itemId: _id ?? "",
                       })
                     );
-                    // window.location.reload();
+                    dispatch(getPageTwoPictures(page ?? ""));
                   } catch (error) {
                     console.log(error);
                   }

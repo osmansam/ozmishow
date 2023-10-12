@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 import { SketchPicker } from "react-color";
 import {
   editExplanationBar,
@@ -15,6 +17,7 @@ import { StyleType } from "../../shared/types";
 interface StyleData {
   content: string;
   style: StyleType;
+  link?: string;
 }
 
 interface StyledModalProps {
@@ -26,6 +29,7 @@ interface StyledModalProps {
   contentType: string;
   isContentSend?: boolean;
   type?: string;
+  buttonIndex?: number;
 }
 
 function StyledModal({
@@ -37,6 +41,7 @@ function StyledModal({
   contentType,
   isContentSend,
   type,
+  buttonIndex,
 }: StyledModalProps) {
   const dispatch = useAppDispatch();
   const [editedStyle, setEditedStyle] = useState<StyleData>(styleData);
@@ -44,6 +49,7 @@ function StyledModal({
   const [selectedColor, setSelectedColor] = useState(styleData.style.color);
   const [originalColor, setOriginalColor] = useState(styleData.style.color); // Track original color
   const [isHoverColorPickerOpen, setIsHoverColorPickerOpen] = useState(false);
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const [selectedHoverColor, setSelectedHoverColor] = useState(
     styleData.style.hover
   );
@@ -152,18 +158,31 @@ function StyledModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const container = [
-      {
-        [contentType]: {
-          content: editedStyle.content,
-          style: editedStyle.style,
+    let container;
+    if (contentType === "buttons") {
+      container = [
+        {
+          [contentType]: {
+            content: editedStyle.content,
+            style: editedStyle.style,
+            link: editedStyle.link,
+          },
+          buttonIndex: buttonIndex,
         },
-      },
-    ];
+      ];
+    } else {
+      container = [
+        {
+          [contentType]: {
+            content: editedStyle.content,
+            style: editedStyle.style,
+          },
+        },
+      ];
+    }
 
     switch (type) {
       case "explanationBar":
-        // console.log(editedStyle);
         await dispatch(
           editExplanationBar({
             twoPictureId,
@@ -375,6 +394,31 @@ function StyledModal({
                     onChange={handleInputChange}
                     className="border rounded px-2 py-1 w-full "
                   />
+                </div>
+              )}
+              {contentType === "buttons" && (
+                <div className="mb-3">
+                  <select
+                    className="border-2 w-2/5 rounded-md"
+                    name="link"
+                    value={editedStyle.link}
+                    onChange={(e) => {
+                      setEditedStyle({
+                        ...editedStyle,
+                        link: e.target.value,
+                      });
+                    }}
+                  >
+                    <option value="">Select a page</option>
+                    {pageOptions.map((option, index) => (
+                      <option
+                        key={index}
+                        value={option.pageNameEN.toLowerCase()}
+                      >
+                        {option.pageNameEN}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               )}
               {/* Add "Effect  All" option */}

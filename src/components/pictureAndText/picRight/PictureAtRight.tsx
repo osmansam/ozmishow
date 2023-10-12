@@ -72,15 +72,28 @@ const PictureAtRight = ({
             {/* buttons */}
             <div className="w-full flex gap-8 flex-row">
               {buttons &&
+                buttons.length > 0 &&
                 buttons.map((button, index) => (
-                  <div className="mt-4" key={index}>
+                  <div
+                    className=" px-4 flex flex-row w-fit items-center justify-center gap-2 "
+                    key={index}
+                    style={button.style}
+                  >
                     <ButtonUnderline
                       text={button.content}
                       buttonLink={button.link}
                       textColor="black"
                       underlineColorBefore="#e5e5e5"
                       underlineColorAfter="#414141"
-                    ></ButtonUnderline>
+                    />
+                    <StyleModalContainer
+                      styleData={button}
+                      twoPictureId={_id ?? ""}
+                      componentId={""}
+                      contentContainerType="buttons"
+                      isContentSend={true}
+                      type="twoPicture"
+                    />
                   </div>
                 ))}
             </div>
