@@ -630,6 +630,7 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader as ContentStyleType}
                   componentStyle={style}
                   explanationArray={twoPictureArray as PictureWithStyleType[]}
+                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}

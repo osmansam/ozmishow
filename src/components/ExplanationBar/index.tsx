@@ -10,6 +10,7 @@ import {
   updateExplanationBar,
   resetTwoPictureArray,
   deleteItemInContainer,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
 
@@ -18,6 +19,7 @@ const ExplanationBar = ({
   explanationArray,
   componentStyle,
   id,
+  page,
 }: ExplanationBarType) => {
   const [isAddExplanationItem, setIsAddExplanationItem] = useState(false);
   const { isAdmin } = useSelector((state: RootState) => state.context);
@@ -34,7 +36,7 @@ const ExplanationBar = ({
     await dispatch(updateExplanationBar({ container: twoPictureArray, id }));
     setIsAddExplanationItem(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
 
   const barHeight = explanationArray.length * 25 + 50;
@@ -189,7 +191,7 @@ const ExplanationBar = ({
                         })
                       );
                       setBarSelection(0);
-                      window.location.reload();
+                      dispatch(getPageTwoPictures(page ?? ""));
                     } catch (error) {
                       console.log(error);
                     }

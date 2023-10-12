@@ -132,6 +132,7 @@ export interface ExplanationBarType {
   mainMainHeader?: ContentStyleType;
   explanationArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
+  page?: string;
 }
 export interface ContentStyleType {
   content?: string;
