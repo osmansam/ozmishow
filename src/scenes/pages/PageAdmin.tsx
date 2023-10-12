@@ -219,7 +219,7 @@ export const PageConfigurationButtons: React.FC<
                 language: updateLanguage,
               })
             );
-            window.location.reload();
+            dispatch(getPageTwoPictures(updatePage));
           }}
         >
           Submit

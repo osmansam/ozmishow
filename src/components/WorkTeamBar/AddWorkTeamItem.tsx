@@ -63,8 +63,9 @@ const AddWorkTeamItem = ({
           `buttonLink${i}`
         ] as HTMLInputElement;
         updatedButtons.push({
-          buttonName: buttonNameInput.value,
-          buttonLink: buttonLinkInput.value,
+          content: buttonNameInput.value,
+          style: style,
+          link: buttonLinkInput.value,
         });
       }
       setButtons(updatedButtons);
@@ -200,14 +201,14 @@ const AddWorkTeamItem = ({
         <select
           className="border-2 w-2/5 rounded-md"
           name={`buttonLink${i}`}
-          value={buttons[i]?.buttonLink}
+          value={buttons[i]?.link}
           onChange={(e) => {
             const value = e.target.value.toLowerCase();
             setButtons((prevButtons) => {
               const updatedButtons = [...prevButtons];
               updatedButtons[i] = {
                 ...updatedButtons[i],
-                buttonLink: value,
+                link: value,
               };
               return updatedButtons;
             });

@@ -464,8 +464,9 @@ export interface ImageContentStyleType {
 }
 
 export interface ButtonType {
-  buttonName: string;
-  buttonLink: string;
+  content: string;
+  style: StyleType;
+  link: string;
 }
 export const LanguageOptions = {
   EN: "EN",

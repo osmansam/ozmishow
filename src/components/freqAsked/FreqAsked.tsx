@@ -115,8 +115,8 @@ const FreqAsked = ({
                   buttons.map((button, index) => (
                     <div className=" px-4 " key={index}>
                       <ButtonUnderline
-                        text={button.buttonName}
-                        buttonLink={button.buttonLink}
+                        text={button.content}
+                        buttonLink={button.link}
                         textColor="black"
                         underlineColorBefore="#e5e5e5"
                         underlineColorAfter="#414141"
