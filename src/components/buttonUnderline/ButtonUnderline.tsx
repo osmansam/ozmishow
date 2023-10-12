@@ -5,21 +5,14 @@ import { useNavigate } from "react-router-dom";
 type Props = {
   buttonLink: string;
   text: string;
-  textColor: string;
-  underlineColorBefore: string;
-  underlineColorAfter: string;
 };
 
-const ButtonUnderline = ({
-  buttonLink,
-  text,
-  textColor,
-  underlineColorBefore,
-  underlineColorAfter,
-}: Props) => {
+const ButtonUnderline = ({ buttonLink, text }: Props) => {
   const navigate = useNavigate();
   const [isHover, setIsHover] = useState(false);
-
+  const textColor = "black";
+  const underlineColorBefore = "#e5e5e5";
+  const underlineColorAfter = "#414141";
   const handleMouseOver = () => {
     setIsHover(true);
   };

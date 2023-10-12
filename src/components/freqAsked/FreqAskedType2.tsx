@@ -120,9 +120,6 @@ const FreqAskedType2 = ({
                       <ButtonUnderline
                         text={button.content}
                         buttonLink={button.link}
-                        textColor="black"
-                        underlineColorBefore="#e5e5e5"
-                        underlineColorAfter="#414141"
                       />
                       <StyleModalContainer
                         styleData={button}

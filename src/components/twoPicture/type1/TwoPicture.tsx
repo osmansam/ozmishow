@@ -68,19 +68,13 @@ const TwoPicture = ({
       <div className="w-full flex gap-8 flex-row">
         {buttons &&
           buttons.length > 0 &&
-          buttons.map((button, index) => (
+          buttons.map((button, ind) => (
             <div
               className=" px-4 flex flex-row w-fit items-center justify-center gap-2 "
-              key={index}
+              key={ind}
               style={button.style}
             >
-              <ButtonUnderline
-                text={button.content}
-                buttonLink={button.link}
-                textColor="black"
-                underlineColorBefore="#e5e5e5"
-                underlineColorAfter="#414141"
-              />
+              <ButtonUnderline text={button.content} buttonLink={button.link} />
               <StyleModalContainer
                 styleData={button}
                 twoPictureId={_id ?? ""}
@@ -88,7 +82,7 @@ const TwoPicture = ({
                 contentContainerType="buttons"
                 isContentSend={true}
                 type="twoPictureIndex"
-                buttonIndex={index}
+                buttonIndex={ind}
               />
             </div>
           ))}

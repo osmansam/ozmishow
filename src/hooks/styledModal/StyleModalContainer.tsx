@@ -57,7 +57,7 @@ const StyleModalContainer = ({
           componentId={componentId ?? ""}
           contentType={contentContainerType}
           isContentSend={isContentSend}
-          buttonIndex={buttonIndex ?? 0}
+          buttonIndex={buttonIndex}
         />
       )}
     </div>
