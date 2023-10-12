@@ -22,7 +22,7 @@ const TwoPicture2 = ({
           <img
             src={img?.content}
             alt={header?.content}
-            className="w-full max-h-80"
+            className="w-full max-h-80 h-40 md:h-72"
             style={img?.style}
           />
           <ImageStyleModalContainer
