@@ -9,12 +9,13 @@ import { PictureType, Components } from "../../../shared/types";
 import { Pagination } from "../../pagination/Pagination";
 import NewsBox3 from "./NewsBox3";
 import {
+  getPageTwoPictures,
   updateContainer,
   resetTwoPictureArray,
 } from "../../../features/twoPicture/twoPictureSlice";
 import translations from "../../../translations.json";
 
-const NewsContainer3 = ({ id, mainHeader }: NewsContainerType) => {
+const NewsContainer3 = ({ id, mainHeader, page }: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
     (state: RootState) => state.twoPicture
@@ -70,7 +71,7 @@ const NewsContainer3 = ({ id, mainHeader }: NewsContainerType) => {
     await dispatch(updateContainer({ container: twoPictureArray, id }));
     setIsAddNewItem(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {

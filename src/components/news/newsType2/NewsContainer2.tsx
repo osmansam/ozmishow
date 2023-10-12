@@ -15,6 +15,7 @@ import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/Com
 import {
   updateContainer,
   resetTwoPictureArray,
+  getPageTwoPictures,
 } from "../../../features/twoPicture/twoPictureSlice";
 import Loading from "../../loading";
 import translations from "../../../translations.json";
@@ -24,6 +25,7 @@ const NewsContainer2 = ({
   mainHeader,
   componentStyle,
   componentType,
+  page,
 }: NewsContainerType) => {
   const dispatch = useAppDispatch();
   const { twoPictureArray } = useSelector(
@@ -82,7 +84,7 @@ const NewsContainer2 = ({
     await dispatch(updateContainer({ container: twoPictureArray, id }));
     setIsAddNewItem(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {

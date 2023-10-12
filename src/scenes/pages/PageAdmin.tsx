@@ -566,6 +566,7 @@ const PageAdmin = ({ page }: Props) => {
                     mainHeader={mainHeader}
                     componentType={componentType}
                     componentStyle={style}
+                    page={page}
                   />
                   <PageConfigurationButtons
                     index={index}
@@ -586,6 +587,7 @@ const PageAdmin = ({ page }: Props) => {
                     componentStyle={style}
                     componentType={componentType}
                     mainHeader={mainHeader}
+                    page={page}
                   />
                   <PageConfigurationButtons
                     index={index}

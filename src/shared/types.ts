@@ -91,6 +91,7 @@ export interface NewsContainerType {
   mainHeader?: ContentStyleType;
   componentStyle?: ComponentStyleType;
   componentType: string;
+  page?: string;
 }
 export interface ProgressBarContainerType {
   id: string;
