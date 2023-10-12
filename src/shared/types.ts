@@ -127,6 +127,7 @@ export interface FullPageItemType {
   fullPageItemArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
   id: string;
+  page?: string;
 }
 export interface ExplanationBarType {
   id: string;

@@ -964,6 +964,7 @@ const PageAdmin = ({ page }: Props) => {
                   fullPageItemArray={twoPictureArray as PictureWithStyleType[]}
                   componentStyle={style}
                   id={item && item._id ? item._id : ""}
+                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}

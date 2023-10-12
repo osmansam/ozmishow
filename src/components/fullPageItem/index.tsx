@@ -9,6 +9,7 @@ import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalCont
 import {
   updateContainer,
   resetTwoPictureArray,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 
@@ -17,6 +18,7 @@ const FullPageItem = ({
   fullPageItemArray,
   componentStyle,
   id,
+  page,
 }: FullPageItemType) => {
   const dispatch = useAppDispatch();
   const [isAddNewItem, setIsAddNewItem] = React.useState(false);
@@ -26,11 +28,10 @@ const FullPageItem = ({
   );
 
   const handleCreate = async () => {
-    console.log("twoPictureArray", twoPictureArray);
-    dispatch(updateContainer({ container: twoPictureArray, id }));
+    await dispatch(updateContainer({ container: twoPictureArray, id }));
     setIsAddNewItem(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
   return (
     <div
