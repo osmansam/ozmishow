@@ -7,6 +7,7 @@ import {
   updateWorkTeamBar,
   resetTwoPictureArray,
   deleteItemInContainer,
+  getPageTwoPictures,
 } from "../../features/twoPicture/twoPictureSlice";
 import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
@@ -19,6 +20,7 @@ const WorkTeamBar = ({
   componentStyle,
   workTeamArray,
   id,
+  page,
 }: WorkTeamBarType) => {
   const dispatch = useAppDispatch();
   const [isWorkTeamItem, setIsWorkTeamItem] = useState(false);
@@ -35,10 +37,10 @@ const WorkTeamBar = ({
 
   //handle create new explanation item
   const handleCreate = async () => {
-    dispatch(updateWorkTeamBar({ container: twoPictureArray, id }));
+    await dispatch(updateWorkTeamBar({ container: twoPictureArray, id }));
     setIsWorkTeamItem(false);
     dispatch(resetTwoPictureArray());
-    window.location.reload();
+    dispatch(getPageTwoPictures(page ?? ""));
   };
 
   const groupedWorkTeams: {
@@ -240,7 +242,7 @@ const WorkTeamBar = ({
                               })
                             );
                             setBarSelection(0);
-                            window.location.reload();
+                            dispatch(getPageTwoPictures(page ?? ""));
                           } catch (error) {
                             console.log(error);
                           }

@@ -243,6 +243,7 @@ export interface WorkTeamBarType {
   mainMainHeader?: ContentStyleType;
   workTeamArray: Array<PictureWithStyleType>;
   componentStyle: any;
+  page?: string;
 }
 interface ComponentType {
   name: string;

@@ -861,6 +861,7 @@ const PageAdmin = ({ page }: Props) => {
                   mainMainHeader={mainHeader}
                   workTeamArray={twoPictureArray as PictureWithStyleType[]}
                   componentStyle={style}
+                  page={page}
                 />
                 <PageConfigurationButtons
                   index={index}
