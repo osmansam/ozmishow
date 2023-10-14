@@ -119,7 +119,7 @@ const PictureContainer = ({
                 Paragraph Number <span>:</span>
               </label>
               <input
-                className="border-2 w-16"
+                className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-1/4"
                 type="number"
                 name="paragraphNumber"
                 value={paragraphNumber}
@@ -137,7 +137,7 @@ const PictureContainer = ({
                 Button Number<span>:</span>
               </label>
               <input
-                className="border-2 w-16"
+                className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-1/4"
                 type="number"
                 name="buttonNumber"
                 value={buttonNumber}
@@ -173,7 +173,7 @@ const PictureContainer = ({
           Paragraph {i + 1} <span>:</span>
         </label>
         <textarea
-          className="border-2 rounded-md w-4/5"
+          className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
           name={`paragraph${i}`}
         />
       </div>
@@ -190,12 +190,12 @@ const PictureContainer = ({
           Button {i + 1} Name <span>:</span>
         </label>
         <input
-          className="border-2 w-2/5 rounded-md"
+          className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
           type="text"
           name={`buttonName${i}`}
         />
         <select
-          className="border-2 w-2/5 rounded-md"
+          className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
           name={`buttonLink${i}`}
           value={buttons[i]?.link}
           onChange={(e) => {
@@ -237,7 +237,7 @@ const PictureContainer = ({
               Image <span>:</span>
             </label>
             <input
-              className="border-2 rounded-md w-4/5"
+              className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
               type="text"
               name="img"
               value={img}
@@ -254,7 +254,7 @@ const PictureContainer = ({
             Header <span>:</span>
           </label>
           <input
-            className="border-2 w-4/5 rounded-md"
+            className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
             type="text"
             name="header"
             value={header}
