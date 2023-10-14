@@ -25,6 +25,8 @@ import {
 import ConfirmationModal from "../../hooks/confirmation";
 import Loading from "../../components/loading";
 import SliderType2 from "../../components/slider/SliderType2";
+import { setLanguage } from "../../features/context/contextSlice";
+
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );
@@ -135,6 +137,7 @@ export const PageConfigurationButtons: React.FC<
 }) => {
   const dispatch = useAppDispatch();
 
+  const [changePage, setChangePage] = useState(false);
   const [updatePage, setUpdatePage] = useState(pageOptions[0].pageNameEN);
   const [updateLanguage, setUpdateLanguage] = useState(language);
   const handleConfirmDelete = async () => {
@@ -145,86 +148,112 @@ export const PageConfigurationButtons: React.FC<
   const handleCancelDelete = () => {
     setShowConfirmationModal(false);
   };
-
+  useEffect(() => {
+    if (language === undefined || language === "") {
+      dispatch(setLanguage("EN"));
+    }
+  }, [dispatch]);
   return (
-    <div className="pt-4 flex flex-col items-center">
-      {showConfirmationModal && (
-        <ConfirmationModal
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
-        />
-      )}
-      {/* move the container up and down */}
-      <div className="flex flex-row gap-6">
-        <button
-          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
-          disabled={disableMoveUp}
-          onClick={() => moveItem(index, "up")}
-        >
-          Move Up
-        </button>
-        <button
-          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
-          disabled={disableMoveDown}
-          onClick={() => moveItem(index, "down")}
-        >
-          Move Down
-        </button>
-        {/* Delete Container */}
-        <button
-          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
-          onClick={async () => {
-            setShowConfirmationModal(true);
-          }}
-        >
-          Delete
-        </button>
-      </div>
-      {/* change page and language  */}
-      <div className="flex flex-row gap-6  w-1/3 ">
-        <select
-          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer"
-          onChange={(e) => {
-            setUpdatePage(e.target.value);
-          }}
-        >
-          {pageOptions.map((page, index) => (
-            <option key={index} value={page.pageNameEN}>
-              {page.pageNameEN}
-            </option>
-          ))}
-        </select>
-        <select
-          className="border-2 m-2 px-4 rounded-lg   hover:bg-slate-400 cursor-pointer w-1/3"
-          onChange={(e) => {
-            setUpdateLanguage(e.target.value);
-          }}
-        >
-          {Object.entries(LanguageOptions).map(([value, label]) => (
-            <option
-              key={value}
-              value={LanguageOptions[label as keyof typeof LanguageOptions]}
+    <div className="my-4 flex flex-col gap-4 items-center justify-center">
+      <div className="pt-4 flex flex-col items-center space-y-4">
+        {showConfirmationModal && (
+          <ConfirmationModal
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+          />
+        )}
+        {/* Move Container buttons */}
+        <div className="flex flex-row gap-4">
+          <button
+            className="bg-black hover:bg-slate-400 text-white py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            disabled={disableMoveUp}
+            onClick={() => {
+              moveItem(index, "up");
+            }}
+          >
+            Move Up
+          </button>
+          <button
+            className="bg-black hover:bg-slate-400 text-white py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            disabled={disableMoveDown}
+            onClick={() => {
+              moveItem(index, "down");
+            }}
+          >
+            Move Down
+          </button>
+          {!changePage && (
+            <button
+              className="bg-black hover:bg-slate-400 text-white py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+              onClick={() => setChangePage(true)}
             >
-              {label}
-            </option>
-          ))}
-        </select>
-        <button
-          className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
-          onClick={async () => {
-            await dispatch(
-              updatePageAndLanguage({
-                id,
-                page: updatePage,
-                language: updateLanguage,
-              })
-            );
-            dispatch(getPageTwoPictures(updatePage));
-          }}
-        >
-          Submit
-        </button>
+              Change Page
+            </button>
+          )}
+          <button
+            className="bg-black hover:bg-slate-400 text-white py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            onClick={async () => {
+              setShowConfirmationModal(true);
+            }}
+          >
+            Delete
+          </button>
+        </div>
       </div>
+
+      {changePage && (
+        <div className="flex flex-row gap-4 w-2/3 items-center">
+          <select
+            className="appearance-none bg-white border border-gray-300 hover:border-gray-500 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+            onChange={(e) => {
+              setUpdatePage(e.target.value);
+            }}
+          >
+            {pageOptions.map((page, index) => (
+              <option key={index} value={page.pageNameEN}>
+                {page.pageNameEN}
+              </option>
+            ))}
+          </select>
+          <select
+            className="appearance-none bg-white border border-gray-300 hover:border-gray-500 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+            onChange={(e) => {
+              setUpdateLanguage(e.target.value);
+            }}
+          >
+            {Object.entries(LanguageOptions).map(([value, label]) => (
+              <option
+                key={value}
+                value={LanguageOptions[label as keyof typeof LanguageOptions]}
+              >
+                {label}
+              </option>
+            ))}
+          </select>
+          <button
+            className="bg-black hover:bg-slate-400 text-white py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            onClick={async () => {
+              await dispatch(
+                updatePageAndLanguage({
+                  id,
+                  page: updatePage,
+                  language: updateLanguage,
+                })
+              );
+              dispatch(getPageTwoPictures(updatePage));
+              setChangePage(false);
+            }}
+          >
+            Submit
+          </button>
+          <button
+            className="bg-black hover:bg-slate-400 text-white py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            onClick={() => setChangePage(false)}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </div>
   );
 };

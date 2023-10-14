@@ -179,9 +179,9 @@ const ExplanationBar = ({
                   type="explanationBar"
                 />
               </div>
-              {isAdmin && (
+              {!isAddExplanationItem && isAdmin && (
                 <button
-                  className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+                  className="w-fit capitalize border-2 border-red-500 text-red-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600 hover:text-red-600 hover:bg-red-100"
                   onClick={async () => {
                     try {
                       await dispatch(
@@ -207,10 +207,10 @@ const ExplanationBar = ({
       {/* Button to add new item */}
       {!isAddExplanationItem && isAdmin && (
         <button
-          className="capitalize border-2  cursor-pointer w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
+          className="w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
           onClick={() => setIsAddExplanationItem(true)}
         >
-          Add New item
+          Add New Item
         </button>
       )}
       {isAddExplanationItem && isAdmin && (
@@ -220,12 +220,20 @@ const ExplanationBar = ({
             isPictureContainerButton={false}
             isPictureContainerParagraph={true}
           />
-          <button
-            className="capitalize border-2 w-fit p-2 rounded-lg mx-auto mt-4 pointer hover:bg-slate-300"
-            onClick={handleCreate}
-          >
-            Create
-          </button>
+          <div className="w-5/6 mx-auto my-2 flex flex-row gap-4">
+            <button
+              className="w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
+              onClick={handleCreate}
+            >
+              Create
+            </button>
+            <button
+              className="w-fit capitalize border-2 border-red-500 text-red-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 hover:border-red-600 hover:text-red-600 hover:bg-red-100"
+              onClick={() => setIsAddExplanationItem(false)}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>

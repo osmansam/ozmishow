@@ -183,6 +183,8 @@ function StyledModal({
 
     switch (type) {
       case "explanationBar":
+        console.log("explanationBar");
+        console.log(container);
         await dispatch(
           editExplanationBar({
             twoPictureId,

@@ -115,20 +115,24 @@ const AddExplanationItem = ({
     return (
       <div className="w-full ">
         <form
-          className="border-2 w-5/6 flex flex-col justify-between gap-2 mx-auto p-4"
+          className="bg-white shadow-md rounded-lg w-5/6 mx-auto p-6 mt-6 border border-gray-200 flex flex-col justify-between gap-4 hover:shadow-lg transition duration-300 ease-in-out"
           onSubmit={handleNumberSubmit}
         >
           {isPictureContainerParagraph && (
-            <div className="flex gap-5 w-full ">
-              <label className="w-40" htmlFor="paragraphNumber">
+            <div className="flex gap-5 items-center w-full bg-white  rounded-lg p-4  transition duration-300 ease-in-out">
+              <label
+                className="w-40 text-gray-600 font-medium"
+                htmlFor="paragraphNumber"
+              >
                 Paragraph Number:
               </label>
               <input
-                className="border-2 w-16"
+                className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out"
                 type="number"
                 name="paragraphNumber"
                 value={paragraphNumber}
                 onChange={handleChangeNumber}
+                min={1}
               />
             </div>
           )}
@@ -148,7 +152,7 @@ const AddExplanationItem = ({
           )}
           <button
             type="submit"
-            className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
+            className="mx-auto mt-4 w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
           >
             Submit
           </button>
@@ -166,8 +170,11 @@ const AddExplanationItem = ({
   for (let i = 0; i < paragraphNumber; i++) {
     paragraphInputs.push(
       <div key={i} className="flex gap-5 h-20 w-full ">
-        <label className="w-28" htmlFor={`paragraph${i}`}>
-          Paragraph {i + 1} :
+        <label
+          className="text-lg w-32 font-semibold flex justify-between"
+          htmlFor={`paragraph${i}`}
+        >
+          Paragraph {i + 1} <span>:</span>
         </label>
         <textarea
           className="border-2 rounded-md w-4/5"
@@ -180,8 +187,11 @@ const AddExplanationItem = ({
   for (let i = 0; i < buttonNumber; i++) {
     buttonInputs.push(
       <div key={i} className="flex gap-5  w-full ">
-        <label className="w-28" htmlFor={`buttonName${i}`}>
-          Button {i + 1} Name:
+        <label
+          className="text-lg w-32 font-semibold flex justify-between"
+          htmlFor={`buttonName${i}`}
+        >
+          Button {i + 1} Name<span>:</span>
         </label>
         <input
           className="border-2 w-2/5 rounded-md"
@@ -219,16 +229,19 @@ const AddExplanationItem = ({
     <div className="w-full mt-4">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center h-full w-5/6  mx-auto gap-2 rounded-md py-4 px-8 border-4"
+        className="bg-white shadow-md rounded-lg w-5/6 mx-auto p-6 mt-6 border border-gray-200 flex flex-col justify-between gap-4 hover:shadow-lg transition duration-300 ease-in-out"
       >
         {/* image */}
         {isPictureContainerImage && (
-          <div className="flex gap-5 w-full ">
-            <label className="w-28" htmlFor="img">
-              Image :
+          <div className="flex items-center gap-5 w-full my-2">
+            <label
+              className="text-lg w-32 font-semibold flex justify-between"
+              htmlFor="img"
+            >
+              Image<span>:</span>
             </label>
             <input
-              className="border-2 rounded-md w-4/5"
+              className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
               type="text"
               name="img"
               value={img}
@@ -236,13 +249,17 @@ const AddExplanationItem = ({
             />
           </div>
         )}
+
         {/* MainHeader */}
         <div className="flex gap-5 w-full ">
-          <label className="w-28" htmlFor="mainHeader">
-            Main Header :
+          <label
+            className="text-lg w-32 font-semibold flex justify-between"
+            htmlFor="mainHeader"
+          >
+            Main Header <span>:</span>
           </label>
           <input
-            className="border-2 w-4/5 rounded-md"
+            className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
             type="text"
             name="mainHeader"
             value={mainHeader}
@@ -251,11 +268,14 @@ const AddExplanationItem = ({
         </div>
         {/* header */}
         <div className="flex gap-5 w-full ">
-          <label className="w-28" htmlFor="header">
-            Header :
+          <label
+            className="text-lg w-32 font-semibold flex justify-between "
+            htmlFor="header"
+          >
+            Header <span>:</span>
           </label>
           <input
-            className="border-2 w-4/5 rounded-md"
+            className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
             type="text"
             name="header"
             value={header}
@@ -266,7 +286,7 @@ const AddExplanationItem = ({
         {isPictureContainerButton ? buttonInputs : null}
         <button
           type="submit"
-          className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
+          className="mx-auto w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
         >
           Submit
         </button>

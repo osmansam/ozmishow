@@ -9,6 +9,7 @@ import {
 import { ContainerType } from "../../shared/types";
 import Loading from "../../components/loading";
 import { renderComponents } from "./RenderComponents";
+import { setLanguage } from "../../features/context/contextSlice";
 
 const Navbar = lazy(() => import("../../components/navbar/Navbar"));
 const Sidebar = lazy(() => import("../../components/sidebar"));
@@ -30,6 +31,11 @@ const Page = ({ page }: Props) => {
   const { container } = useSelector((state: RootState) => state.twoPicture);
   const currentPage = pageOptions.find((item) => item.pageNameEN === page);
 
+  useEffect(() => {
+    if (language === undefined || language === "") {
+      dispatch(setLanguage("EN"));
+    }
+  }, [dispatch]);
   // first get all the two pictures from the database
   useEffect(() => {
     const fetchData = async () => {
