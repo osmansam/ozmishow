@@ -138,7 +138,10 @@ const AddExplanationItem = ({
           )}
           {isPictureContainerButton && (
             <div className="flex gap-5 w-full ">
-              <label className="w-40" htmlFor="buttonNumber">
+              <label
+                className="w-40 text-gray-600 font-medium"
+                htmlFor="buttonNumber"
+              >
                 Button Number:
               </label>
               <input
