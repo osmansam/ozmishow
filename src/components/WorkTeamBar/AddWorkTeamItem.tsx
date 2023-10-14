@@ -114,40 +114,48 @@ const AddWorkTeamItem = ({
     return (
       <div className="w-full">
         <form
-          className="border-2 w-5/6 flex flex-col justify-between gap-2 mx-auto p-4"
+          className="bg-white shadow-md rounded-lg w-5/6 mx-auto p-6 mt-6 border border-gray-200 flex flex-col justify-between gap-4 hover:shadow-lg transition duration-300 ease-in-out"
           onSubmit={handleNumberSubmit}
         >
           {isPictureContainerParagraph && (
             <div className="flex gap-5 w-full">
-              <label className="w-40" htmlFor="paragraphNumber">
-                Paragraph Number:
+              <label
+                className="text-lg w-48 font-semibold flex justify-between "
+                htmlFor="paragraphNumber"
+              >
+                Paragraph Number <span>:</span>
               </label>
               <input
-                className="border-2 w-16"
+                className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
                 type="number"
                 name="paragraphNumber"
                 value={paragraphNumber}
                 onChange={handleChangeNumber}
+                min={1}
               />
             </div>
           )}
           {isPictureContainerButton && (
             <div className="flex gap-5 w-full">
-              <label className="w-40" htmlFor="buttonNumber">
-                Button Number:
+              <label
+                className="text-lg w-48 font-semibold flex justify-between "
+                htmlFor="buttonNumber"
+              >
+                Button Number<span>:</span>
               </label>
               <input
-                className="border-2 w-16"
+                className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-1/4"
                 type="number"
                 name="buttonNumber"
                 value={buttonNumber}
                 onChange={handleChangeNumber}
+                min={1}
               />
             </div>
           )}
           <button
             type="submit"
-            className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
+            className="mx-auto mt-4 w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
           >
             Submit
           </button>
@@ -167,19 +175,27 @@ const AddWorkTeamItem = ({
   for (let i = 0; i < paragraphNumber; i++) {
     paragraphInputs.push(
       <div key={i} className="flex gap-5 h-20 w-full">
-        <label className="w-28" htmlFor={`header${i}`}>
-          Header {i + 1}:
+        <label
+          className="text-lg w-fit font-semibold flex justify-between "
+          htmlFor={`header${i}`}
+        >
+          Header {i + 1}
+          <span>:</span>
         </label>
         <input
-          className="border-2 rounded-md w-4/5"
+          className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
           type="text"
           name={`header${i}`}
         />
-        <label className="w-28" htmlFor={`paragraph${i}`}>
-          Paragraph {i + 1}:
+        <label
+          className="text-lg w-fit font-semibold flex justify-between "
+          htmlFor={`paragraph${i}`}
+        >
+          Paragraph {i + 1}
+          <span>:</span>
         </label>
         <textarea
-          className="border-2 rounded-md w-4/5"
+          className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
           name={`paragraph${i}`}
         />
       </div>
@@ -190,11 +206,14 @@ const AddWorkTeamItem = ({
   for (let i = 0; i < buttonNumber; i++) {
     buttonInputs.push(
       <div key={i} className="flex gap-5 w-full">
-        <label className="w-28" htmlFor={`buttonName${i}`}>
-          Button {i + 1} Name:
+        <label
+          className="text-lg w-32 font-semibold flex justify-between "
+          htmlFor={`buttonName${i}`}
+        >
+          Button {i + 1} Name<span>:</span>
         </label>
         <input
-          className="border-2 w-2/5 rounded-md"
+          className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
           type="text"
           name={`buttonName${i}`}
         />
@@ -229,16 +248,19 @@ const AddWorkTeamItem = ({
     <div className="w-full mt-4">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center h-full w-5/6 mx-auto gap-2 rounded-md py-4 px-8 border-4"
+        className="bg-white shadow-md rounded-lg w-5/6 mx-auto p-6 mt-6 border border-gray-200 flex flex-col justify-between gap-4 hover:shadow-lg transition duration-300 ease-in-out"
       >
         {/* image */}
         {isPictureContainerImage && (
           <div className="flex gap-5 w-full">
-            <label className="w-28" htmlFor="img">
-              Image:
+            <label
+              className="text-lg w-32 font-semibold flex justify-between "
+              htmlFor="img"
+            >
+              Image<span>:</span>
             </label>
             <input
-              className="border-2 rounded-md w-4/5"
+              className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
               type="text"
               name="img"
               value={img}
@@ -248,11 +270,14 @@ const AddWorkTeamItem = ({
         )}
         {/* MainHeader */}
         <div className="flex gap-5 w-full">
-          <label className="w-28" htmlFor="mainHeader">
-            Main Header:
+          <label
+            className="text-lg w-32 font-semibold flex justify-between "
+            htmlFor="mainHeader"
+          >
+            Main Header<span>:</span>
           </label>
           <input
-            className="border-2 w-4/5 rounded-md"
+            className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
             type="text"
             name="mainHeader"
             value={mainHeader}
@@ -263,7 +288,7 @@ const AddWorkTeamItem = ({
         {buttonInputs}
         <button
           type="submit"
-          className="border-2 w-fit p-2 rounded-lg mx-auto mt-4"
+          className="mx-auto mt-4 w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
         >
           Submit
         </button>
