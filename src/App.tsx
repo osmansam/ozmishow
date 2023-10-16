@@ -51,17 +51,17 @@ function App() {
                   {pageOptions?.map((page, index) => (
                     <React.Fragment key={index}>
                       <Route
-                        key={`page-${page.pageNameEN.toLowerCase()}`}
-                        path={`/${page.pageNameEN.toLowerCase()}`}
+                        key={`page-${page?.pageNameEN?.toLowerCase()}`}
+                        path={`/${page?.pageNameEN?.toLowerCase()}`}
                         element={<PageAdmin page={page.pageNameEN} />}
                       />
                       <Route
-                        key={`news-${page.pageNameEN.toLowerCase()}`}
+                        key={`news-${page?.pageNameEN?.toLowerCase()}`}
                         path={`/news/:twoPictureId/:id/:type`}
                         element={<SingleNew />}
                       />
                       <Route
-                        key={`readMore-${page.pageNameEN.toLowerCase()}`}
+                        key={`readMore-${page?.pageNameEN?.toLowerCase()}`}
                         path={`/readMore/:twoPictureId/:index/`}
                         element={<ReadMore />}
                       />
@@ -77,27 +77,27 @@ function App() {
                         page.sectionPageType === "Type1" && (
                           <Route
                             key={index}
-                            path={`/${page.pageNameEN.toLowerCase()}`}
+                            path={`/${page?.pageNameEN?.toLowerCase()}`}
                             element={
-                              <SectionPageType1 page={page.pageNameEN} />
+                              <SectionPageType1 page={page?.pageNameEN} />
                             }
                           />
                         )}
-                      {page.isSectionPage &&
-                        page.sectionPageType === "Type2" && (
+                      {page?.isSectionPage &&
+                        page?.sectionPageType === "Type2" && (
                           <Route
                             key={index}
-                            path={`/${page.pageNameEN.toLowerCase()}`}
+                            path={`/${page?.pageNameEN?.toLowerCase()}`}
                             element={
-                              <SectionPageType2 page={page.pageNameEN} />
+                              <SectionPageType2 page={page?.pageNameEN} />
                             }
                           />
                         )}
                       {!page.isSectionPage && (
                         <Route
                           key={index}
-                          path={`/${page.pageNameEN.toLowerCase()}`}
-                          element={<Page page={page.pageNameEN} />}
+                          path={`/${page?.pageNameEN?.toLowerCase()}`}
+                          element={<Page page={page?.pageNameEN} />}
                         />
                       )}
                       <Route
