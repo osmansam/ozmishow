@@ -209,6 +209,7 @@ export const PageConfigurationButtons: React.FC<
               setUpdatePage(e.target.value);
             }}
           >
+            <option value="">Select a language</option>
             {pageOptions.map((page, index) => (
               <option key={index} value={page.pageNameEN}>
                 {page.pageNameEN}
