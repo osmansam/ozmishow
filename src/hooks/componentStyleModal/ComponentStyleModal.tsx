@@ -4,7 +4,7 @@ import { SketchPicker } from "react-color";
 import { useAppDispatch } from "../../store";
 import { ComponentStyleType } from "../../shared/types";
 import { editComponentStyle } from "../../features/twoPicture/twoPictureSlice";
-import { getAllTwoPicture } from "../../features/twoPicture/twoPictureSlice";
+
 interface ComponentStyleModalProps {
   isOpen: boolean;
   styleData: any;
@@ -78,7 +78,7 @@ function ComponentStyleModal({
       })
     );
     onClose();
-    await dispatch(getAllTwoPicture());
+    window.location.reload();
   };
 
   const colorPicker = (

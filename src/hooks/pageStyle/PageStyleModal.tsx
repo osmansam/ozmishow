@@ -4,7 +4,7 @@ import { SketchPicker } from "react-color";
 import { updatePageOptions } from "../../features/twoPicture/twoPictureSlice";
 import { useAppDispatch } from "../../store";
 import { PageStyleType } from "../../shared/types";
-import { getAllTwoPicture } from "../../features/twoPicture/twoPictureSlice";
+
 interface PageStyleModalProps {
   isOpen: boolean;
   styleData: PageStyleType;
@@ -95,7 +95,7 @@ const PageStyleModal = ({
     );
 
     onClose();
-    await dispatch(getAllTwoPicture());
+    window.location.reload();
   };
 
   // Function to handle clicks outside the modal
