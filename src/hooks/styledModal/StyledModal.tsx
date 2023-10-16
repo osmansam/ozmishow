@@ -10,6 +10,7 @@ import {
   editTwoPictureIndexStyle,
   editResumeBox,
   editMainMainHeader,
+  getAllTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
 import { useAppDispatch } from "../../store";
 import { StyleType } from "../../shared/types";
@@ -255,7 +256,7 @@ function StyledModal({
     }
     setEffectAllElement(true);
     onClose();
-    window.location.reload();
+    await dispatch(getAllTwoPicture());
   };
 
   const handleOutsideClick = () => {
