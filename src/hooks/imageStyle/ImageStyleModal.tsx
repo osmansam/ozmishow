@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { SketchPicker } from "react-color";
 import {
   editExplanationBar,
-  editWorkTeamBar,
-  editTwoPictureStyle,
-  editTwoPictureIndexStyle,
   editResumeBox,
+  editTwoPictureIndexStyle,
+  editTwoPictureStyle,
+  editWorkTeamBar,
 } from "../../features/twoPicture/twoPictureSlice";
-import { useAppDispatch } from "../../store";
 import { ImageType } from "../../shared/types";
+import { useAppDispatch } from "../../store";
 
 interface StyleData {
   content: string;

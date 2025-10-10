@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { SliderType } from "../../shared/types";
-import AddSliderItem from "./AddSliderItem";
 import {
-  updateSlider,
-  resetTwoPictureArray,
   getPageTwoPictures,
+  resetTwoPictureArray,
+  updateSlider,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import { SliderTypes } from "../../shared/compenentTypes";
+import { SliderType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import AddSliderItem from "./AddSliderItem";
 
 const Slider = ({
   mainMainHeader,

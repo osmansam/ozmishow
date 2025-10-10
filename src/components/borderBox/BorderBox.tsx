@@ -1,9 +1,9 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
-import { motion } from "framer-motion";
-import { PictureWithStyleType } from "../../shared/types";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import { PictureWithStyleType } from "../../shared/types";
 const BorderBox = ({ img, header, _id, index }: PictureWithStyleType) => {
   const [isHovered, setIsHovered] = React.useState(false);
 

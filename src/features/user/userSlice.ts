@@ -1,8 +1,6 @@
-import { UserType } from "./../../shared/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
-import Cookies from "js-cookie";
 import axios from "axios";
+import { UserType } from "./../../shared/types";
 
 interface UserState {
   user: UserType;

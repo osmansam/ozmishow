@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import AddWorkTeamItem from "./AddWorkTeamItem";
-import { WorkTeamBarType } from "../../shared/types";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
 import {
-  updateWorkTeamBar,
-  resetTwoPictureArray,
   deleteItemInContainer,
   getPageTwoPictures,
+  resetTwoPictureArray,
+  updateWorkTeamBar,
 } from "../../features/twoPicture/twoPictureSlice";
-import { PictureWithStyleType, ContentStyleType } from "../../shared/types";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import {
+  ContentStyleType,
+  PictureWithStyleType,
+  WorkTeamBarType,
+} from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import AddWorkTeamItem from "./AddWorkTeamItem";
 
 const WorkTeamBar = ({
   mainMainHeader,

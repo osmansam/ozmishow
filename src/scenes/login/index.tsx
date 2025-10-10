@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { loginUser } from "../../features/user/userSlice";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../components/loading";
 import { setIsAdmin } from "../../features/context/contextSlice";
+import { loginUser } from "../../features/user/userSlice";
+import { RootState, useAppDispatch } from "../../store";
 
 type Props = {};
 

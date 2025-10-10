@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
-import { ButtonType } from "../../shared/types";
-import { style, imageStyle } from "../../shared/types";
+import { ButtonType, imageStyle, style } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;

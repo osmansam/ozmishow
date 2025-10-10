@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom"; // Import ReactDOM for createPortal
+import React, { useEffect, useState } from "react";
 import { SketchPicker } from "react-color";
+import ReactDOM from "react-dom"; // Import ReactDOM for createPortal
 import { updatePageOptions } from "../../features/twoPicture/twoPictureSlice";
-import { useAppDispatch } from "../../store";
 import { PageStyleType } from "../../shared/types";
+import { useAppDispatch } from "../../store";
 
 interface PageStyleModalProps {
   isOpen: boolean;

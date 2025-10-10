@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import pdfjs from "pdfjs-dist";
 import "pdfjs-dist/build/pdf.worker.entry";
+import React, { useEffect, useRef, useState } from "react";
 const SpeedReader = () => {
   const [text, setText] = useState("Hello world!");
   const [isPlaying, setIsPlaying] = useState(false);

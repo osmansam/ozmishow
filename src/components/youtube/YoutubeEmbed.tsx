@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = { embedId: string };
 
 const YoutubeEmbed = ({ embedId }: Props) => (

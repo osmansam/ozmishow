@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { getNavbar } from "../../features/twoPicture/twoPictureSlice";
-import {
-  createFooter,
-  getFooter,
-} from "../../features/twoPicture/twoPictureSlice";
-import { useNavigate } from "react-router-dom";
-import { GoLocation } from "react-icons/go";
-import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
+import { BsTelephone } from "react-icons/bs";
 import { FaFax } from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  getFooter,
+  getNavbar,
+} from "../../features/twoPicture/twoPictureSlice";
 import { LanguageOptions, PageOptionsType } from "../../shared/types";
-import AddFooter from "./AddFooter";
+import { RootState, useAppDispatch } from "../../store";
 import translations from "../../translations.json";
+import AddFooter from "./AddFooter";
 
 type Props = {
   currentPage?: string;

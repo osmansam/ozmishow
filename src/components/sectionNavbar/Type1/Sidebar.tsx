@@ -1,5 +1,4 @@
 // Sidebar.tsx
-import React from "react";
 import Link from "./Link";
 
 type Props = {

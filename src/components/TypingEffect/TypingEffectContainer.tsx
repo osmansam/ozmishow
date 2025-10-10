@@ -1,6 +1,5 @@
-import React from "react";
-import TypingEffect from "./TypingEffect";
 import { ImageType } from "../../shared/types";
+import TypingEffect from "./TypingEffect";
 type Props = {
   paragraphs: string[];
   img: { content: string; style: ImageType };

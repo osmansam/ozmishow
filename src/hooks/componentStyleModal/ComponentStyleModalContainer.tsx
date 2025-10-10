@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import ComponentStyleModal from "./ComponentStyleModal";
+import { useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-import { ComponentStyleType } from "../../shared/types";
 import { useSelector } from "react-redux";
+import { ComponentStyleType } from "../../shared/types";
 import { RootState } from "../../store";
+import ComponentStyleModal from "./ComponentStyleModal";
 interface ComponentStyleModalProps {
   styleData: any;
   twoPictureId: string;

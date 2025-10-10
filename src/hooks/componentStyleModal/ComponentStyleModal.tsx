@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
 import { SketchPicker } from "react-color";
-import { useAppDispatch } from "../../store";
-import { ComponentStyleType } from "../../shared/types";
+import ReactDOM from "react-dom";
 import { editComponentStyle } from "../../features/twoPicture/twoPictureSlice";
+import { ComponentStyleType } from "../../shared/types";
+import { useAppDispatch } from "../../store";
 
 interface ComponentStyleModalProps {
   isOpen: boolean;

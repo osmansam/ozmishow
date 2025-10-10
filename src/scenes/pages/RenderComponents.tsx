@@ -1,14 +1,12 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import { lazy } from "react";
+import SliderType2 from "../../components/slider/SliderType2";
 import {
   ContainerType,
   ContentStyleType,
+  ImageContentStyleType,
   PictureType,
   PictureWithStyleType,
-  ImageContentStyleType,
 } from "../../shared/types";
-import SliderType2 from "../../components/slider/SliderType2";
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
 );

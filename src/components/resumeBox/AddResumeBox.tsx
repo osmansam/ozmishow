@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import React, { useState } from "react";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
-import { ButtonType } from "../../shared/types";
 import { style } from "../../shared/types";
+import { useAppDispatch } from "../../store";
 const AddResumeBox = () => {
-  const { twoPictureArray, pageOptions } = useSelector(
-    (state: RootState) => state.twoPicture
-  );
   const dispatch = useAppDispatch();
-  const [ready, setReady] = useState(false);
   const [allDone, setAllDone] = useState(false);
-  const [img, setImg] = useState("");
   const [year1, setYear1] = useState("");
   const [year2, setYear2] = useState("");
   const [header, setHeader] = useState("");

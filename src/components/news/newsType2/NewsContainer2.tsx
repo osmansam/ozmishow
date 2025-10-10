@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
-import {
-  LanguageOptions,
-  NewsContainerType,
-  PictureWithStyleType,
-} from "../../../shared/types";
-import PictureContainer from "../../../scenes/ComponentContainer/PictureContainer";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../../store";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import {
+  getPageTwoPictures,
+  resetTwoPictureArray,
+  updateContainer,
+} from "../../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import PictureContainer from "../../../scenes/ComponentContainer/PictureContainer";
+import { newsContainerTypes } from "../../../shared/compenentTypes";
+import { NewsContainerType, PictureWithStyleType } from "../../../shared/types";
+import { RootState, useAppDispatch } from "../../../store";
+import translations from "../../../translations.json";
+import Loading from "../../loading";
 import { Pagination } from "../../pagination/Pagination";
 import NewsBox2 from "./NewsBox2";
-import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import {
-  updateContainer,
-  resetTwoPictureArray,
-  getPageTwoPictures,
-} from "../../../features/twoPicture/twoPictureSlice";
-import Loading from "../../loading";
-import translations from "../../../translations.json";
-import { newsContainerTypes } from "../../../shared/compenentTypes";
 const NewsContainer2 = ({
   id,
   mainHeader,

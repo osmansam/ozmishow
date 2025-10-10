@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
-import { FreqAskedType } from "../../shared/types";
-import { RootState, useAppDispatch } from "../../store";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
-import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
-  updateContainer,
-  resetTwoPictureArray,
   deleteItemInContainer,
   getPageTwoPictures,
+  resetTwoPictureArray,
+  updateContainer,
 } from "../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import { FreqAskedTypes } from "../../shared/compenentTypes";
+import { FreqAskedType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import ButtonUnderline from "../buttonUnderline/ButtonUnderline";
 
 const FreqAskedType2 = ({
   freqAskedArray,

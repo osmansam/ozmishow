@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
+import React, { useState } from "react";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
-import { ButtonType } from "../../shared/types";
 import { style } from "../../shared/types";
-
-type Props = {};
+import { useAppDispatch } from "../../store";
 
 const AddResumeIcon = () => {
-  const { twoPictureArray, pageOptions } = useSelector(
-    (state: RootState) => state.twoPicture
-  );
   const dispatch = useAppDispatch();
   const [done, setDone] = useState(false);
   const [header, setHeader] = useState("");

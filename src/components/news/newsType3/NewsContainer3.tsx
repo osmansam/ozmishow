@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { LanguageOptions, NewsContainerType } from "../../../shared/types";
-import PictureContainer from "../../../scenes/ComponentContainer/PictureContainer";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../../store";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { PictureType, Components } from "../../../shared/types";
-import { Pagination } from "../../pagination/Pagination";
-import NewsBox3 from "./NewsBox3";
+import { useSelector } from "react-redux";
 import {
   getPageTwoPictures,
-  updateContainer,
   resetTwoPictureArray,
+  updateContainer,
 } from "../../../features/twoPicture/twoPictureSlice";
+import PictureContainer from "../../../scenes/ComponentContainer/PictureContainer";
+import { NewsContainerType, PictureType } from "../../../shared/types";
+import { RootState, useAppDispatch } from "../../../store";
 import translations from "../../../translations.json";
+import { Pagination } from "../../pagination/Pagination";
+import NewsBox3 from "./NewsBox3";
 
 const NewsContainer3 = ({ id, mainHeader, page }: NewsContainerType) => {
   const dispatch = useAppDispatch();

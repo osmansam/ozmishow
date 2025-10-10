@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import {
+  getPageTwoPictures,
+  resetTwoPictureArray,
+  updateContainer,
+} from "../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 import { FullPageItemType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
-import { useSelector } from "react-redux";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
-import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
-import {
-  updateContainer,
-  resetTwoPictureArray,
-  getPageTwoPictures,
-} from "../../features/twoPicture/twoPictureSlice";
-import PictureContainer from "../../scenes/ComponentContainer/PictureContainer";
 
 const FullPageItem = ({
   mainMainHeader,

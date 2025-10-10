@@ -1,5 +1,3 @@
-import React from "react";
-
 interface Mappable {
   location: {
     lat: number;

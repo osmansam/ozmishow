@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
 import { createFooter } from "../../features/twoPicture/twoPictureSlice";
+import { useAppDispatch } from "../../store";
 type Props = {
   setIsAddFooter: (value: boolean) => void;
 };

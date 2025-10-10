@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { TwoPictureContainerTypes } from "../../../shared/compenentTypes";
 import { TwoPictureContainerType } from "../../../shared/types";
 import TwoPicture from "./TwoPicture";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
-import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import { TwoPictureContainerTypes } from "../../../shared/compenentTypes";
 const TwoPictureContainer = ({
   mainHeader,
   twoPictureArray,

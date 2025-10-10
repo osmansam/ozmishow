@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { SketchPicker } from "react-color";
 import ReactDOM from "react-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { SketchPicker } from "react-color";
 import {
   editExplanationBar,
-  editWorkTeamBar,
-  editTwoPictureStyle,
-  editTwoPictureIndexStyle,
-  editResumeBox,
   editMainMainHeader,
+  editResumeBox,
+  editTwoPictureIndexStyle,
+  editTwoPictureStyle,
+  editWorkTeamBar,
 } from "../../features/twoPicture/twoPictureSlice";
-import { useAppDispatch } from "../../store";
 import { StyleType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 
 interface StyleData {
   content: string;
