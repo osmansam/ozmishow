@@ -1,10 +1,6 @@
-import React, { useState } from "react";
-import { set, useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
 
-type Props = {};
-
-const ContactFormEn = (props: Props) => {
+const ContactFormEn = () => {
   const {
     register,
     trigger,

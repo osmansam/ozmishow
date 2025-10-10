@@ -1,9 +1,8 @@
-import React from "react";
+import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { IconExplainContainerTypes } from "../../../shared/compenentTypes";
 import { IconExplainContainerType } from "../../../shared/types";
 import IconExplain from "./IconExplain";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
-import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import { IconExplainContainerTypes } from "../../../shared/compenentTypes";
 
 const IconExplainContainer = ({
   mainHeader,

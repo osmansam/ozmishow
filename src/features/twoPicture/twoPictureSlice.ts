@@ -1,15 +1,12 @@
-import { REHYDRATE } from "redux-persist";
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios, { AxiosResponse } from "axios";
 import {
-  PictureType,
   ContainerType,
   ContentStyleType,
-  PageOptionsType,
   MapType,
+  PageOptionsType,
+  PictureType,
 } from "../../shared/types";
-import { AxiosResponse } from "axios";
-import axios from "axios";
 
 interface ComponentState {
   isLoading: boolean;

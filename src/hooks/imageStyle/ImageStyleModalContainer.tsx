@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { AiOutlineDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { imageStyle } from "../../shared/types";
 import { RootState } from "../../store";
 import ImageStyleModal from "./ImageStyleModal";
-import { AiOutlineDown } from "react-icons/ai";
-import { imageStyle } from "../../shared/types";
 
 interface StyledModalProps {
   styleData: any;

@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import Link from "./Link";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../../store";
+import { RootState } from "../../../store";
+import Link from "./Link";
 
 import classNames from "classnames";
 
@@ -10,7 +10,6 @@ interface Props {
   links: string[];
 }
 const Navbar = ({ links }: Props) => {
-  const dispatch = useAppDispatch();
   const { isTopOfPage } = useSelector((state: RootState) => state.context);
   const flexBetween = "flex justify-between items-center";
   const navbarBackground = classNames({

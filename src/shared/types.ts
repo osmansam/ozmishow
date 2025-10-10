@@ -1,6 +1,6 @@
 import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { RootState } from "../store";
 import { Action, AnyAction } from "redux";
+import { RootState } from "../store";
 
 export type ThunkAPIType = {
   dispatch: ThunkDispatch<RootState, void, AnyAction>;

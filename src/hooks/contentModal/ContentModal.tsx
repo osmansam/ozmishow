@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useAppDispatch } from "../../store";
 import {
   editExplanationBar,
-  editWorkTeamBar,
-  editTwoPictureStyle,
-  editTwoPictureIndexStyle,
   editResumeBox,
+  editTwoPictureIndexStyle,
+  editTwoPictureStyle,
+  editWorkTeamBar,
 } from "../../features/twoPicture/twoPictureSlice";
 import { StyleType } from "../../shared/types";
+import { useAppDispatch } from "../../store";
 interface ContentData {
   content: string[];
   style: StyleType;

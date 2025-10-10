@@ -1,8 +1,7 @@
-import React from "react";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import { TwoPictureContainerType } from "../../shared/types";
 import BorderBox from "./BorderBox";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 const BorderBoxContainer = ({
   mainHeader,
   twoPictureArray,

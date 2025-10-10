@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import Link from "./Link";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../../store";
 import classNames from "classnames";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { setSelectedSection } from "../../../features/context/contextSlice";
+import { RootState, useAppDispatch } from "../../../store";
+import Link from "./Link";
 
 interface Props {
   links: string[];

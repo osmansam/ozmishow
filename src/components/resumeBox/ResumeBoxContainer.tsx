@@ -1,14 +1,14 @@
 import React, { lazy } from "react";
-import { ResumeBoxContainerType } from "../../shared/types";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
 import {
-  updateResumeBox,
   getPageTwoPictures,
   resetTwoPictureArray,
+  updateResumeBox,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import { ResumeBoxContainerType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 
 const ResumeBox = lazy(() => import("./ResumeBox"));
 const AddResumeBox = lazy(() => import("./AddResumeBox"));

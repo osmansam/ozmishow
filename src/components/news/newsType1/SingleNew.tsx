@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { PictureWithStyleType } from "../../../shared/types";
-import { RootState, useAppDispatch } from "../../../store";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { deleteItemInContainer } from "../../../features/twoPicture/twoPictureSlice";
-import Navbar from "../../navbar/Navbar";
-import Footer from "../../footer";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { PictureWithStyleType } from "../../../shared/types";
+import { RootState, useAppDispatch } from "../../../store";
+import Footer from "../../footer";
+import Navbar from "../../navbar/Navbar";
 
 const SingleNew = () => {
   const { id, twoPictureId, type } = useParams();

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { LanguageOptions } from "../../shared/types";
+import { RootState } from "../../store";
 import translations from "../../translations.json";
 type ConfirmationModalProps = {
   onConfirm: () => void;

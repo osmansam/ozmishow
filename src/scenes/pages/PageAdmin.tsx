@@ -1,31 +1,28 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import {
-  getPageTwoPictures,
-  updateTwoPicture,
-  deleteTwoPicture,
-  updatePageAndLanguage,
-  getPageOptions,
-} from "../../features/twoPicture/twoPictureSlice";
-import {
-  pageStyle,
-  imageStyle,
-  ImageContentStyleType,
-} from "../../shared/types";
-import PageStyleModalContainer from "../../hooks/pageStyle/PageStyleModalContainer";
-import {
-  LanguageOptions,
-  PageOptionsType,
-  ContainerType,
-  PictureType,
-  PictureWithStyleType,
-  ContentStyleType,
-} from "../../shared/types";
-import ConfirmationModal from "../../hooks/confirmation";
 import Loading from "../../components/loading";
 import SliderType2 from "../../components/slider/SliderType2";
 import { setLanguage } from "../../features/context/contextSlice";
+import {
+  deleteTwoPicture,
+  getPageOptions,
+  getPageTwoPictures,
+  updatePageAndLanguage,
+  updateTwoPicture,
+} from "../../features/twoPicture/twoPictureSlice";
+import ConfirmationModal from "../../hooks/confirmation";
+import PageStyleModalContainer from "../../hooks/pageStyle/PageStyleModalContainer";
+import {
+  ContainerType,
+  ContentStyleType,
+  ImageContentStyleType,
+  LanguageOptions,
+  PageOptionsType,
+  pageStyle,
+  PictureType,
+  PictureWithStyleType,
+} from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")

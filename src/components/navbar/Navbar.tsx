@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { LanguageOptions, PageOptionsType } from "../../shared/types";
-import {
-  setLanguage,
-  setIsSidebarOpen,
-  setIsAdmin,
-} from "../../features/context/contextSlice";
-import { logout } from "../../features/user/userSlice";
-import {
-  getNavbar,
-  deletePage,
-} from "../../features/twoPicture/twoPictureSlice";
-import { FaBars } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
+import { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
+import { FaBars } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  setIsAdmin,
+  setIsSidebarOpen,
+  setLanguage,
+} from "../../features/context/contextSlice";
+import {
+  deletePage,
+  getNavbar,
+} from "../../features/twoPicture/twoPictureSlice";
+import { logout } from "../../features/user/userSlice";
 import ConfirmationModal from "../../hooks/confirmation";
+import { LanguageOptions, PageOptionsType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 
 // import { AiOutlineDown } from "react-icons/ai";
 

@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { getFooter } from "../../features/twoPicture/twoPictureSlice";
-import { GoLocation } from "react-icons/go";
-import { BsTelephone } from "react-icons/bs";
+import { useEffect } from "react";
 import { AiOutlineMail } from "react-icons/ai";
+import { BsTelephone } from "react-icons/bs";
 import { FaFax } from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
+import { useSelector } from "react-redux";
+import { getFooter } from "../../features/twoPicture/twoPictureSlice";
 import { LanguageOptions } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import translations from "../../translations.json";
 import ContactFormEn from "../contactForm/ContactFormEn";
 import ContactFormTr from "../contactForm/ContactFormTr";
-import translations from "../../translations.json";
 import Map from "../map";
-type Props = {};
 
-const ContactContainer = (props: Props) => {
+const ContactContainer = () => {
   const dispatch = useAppDispatch();
   const { language } = useSelector((state: RootState) => state.context);
   const { footer } = useSelector((state: RootState) => state.twoPicture);

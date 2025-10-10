@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
-import PictureContainer from "./PictureContainer";
-import { Components, LanguageOptions } from "../../shared/types";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { componentStyle } from "../../shared/types";
-import {
-  createTwoPicture,
-  resetTwoPictureArray,
-  getPageTwoPictures,
-  createNavbar,
-} from "../../features/twoPicture/twoPictureSlice";
+import { useNavigate } from "react-router-dom";
 import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
+import {
+  createNavbar,
+  createTwoPicture,
+  getPageTwoPictures,
+  resetTwoPictureArray,
+} from "../../features/twoPicture/twoPictureSlice";
+import {
+  Components,
+  componentStyle,
+  LanguageOptions,
+  style,
+} from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 import Deneme from "./adminPageOptions";
-import { useNavigate } from "react-router-dom";
-import { style } from "../../shared/types";
+import PictureContainer from "./PictureContainer";
 const ComponentContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

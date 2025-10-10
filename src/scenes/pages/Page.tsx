@@ -1,15 +1,11 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { pageStyle } from "../../shared/types";
-import {
-  getPageTwoPictures,
-  getAllTwoPicture,
-} from "../../features/twoPicture/twoPictureSlice";
-import { ContainerType } from "../../shared/types";
 import Loading from "../../components/loading";
-import { renderComponents } from "./RenderComponents";
 import { setLanguage } from "../../features/context/contextSlice";
+import { getAllTwoPicture } from "../../features/twoPicture/twoPictureSlice";
+import { ContainerType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import { renderComponents } from "./RenderComponents";
 
 const Navbar = lazy(() => import("../../components/navbar/Navbar"));
 const Sidebar = lazy(() => import("../../components/sidebar"));

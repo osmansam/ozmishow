@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
-import { PictureWithStyleType } from "../../../shared/types";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { PictureWithStyleType } from "../../../shared/types";
+import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
 
 const TwoPicture = ({
   img,

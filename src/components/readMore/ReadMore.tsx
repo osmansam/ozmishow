@@ -1,26 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  ContentStyleType,
-  PictureWithStyleType,
-  StyleType,
-} from "../../shared/types";
-import { RootState, useAppDispatch } from "../../store";
-import { useSelector } from "react-redux";
-import { deleteItemInContainer } from "../../features/twoPicture/twoPictureSlice";
-import Navbar from "../navbar/Navbar";
+import { PictureWithStyleType } from "../../shared/types";
 import Footer from "../footer";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
-import { style } from "../../shared/types";
+import Navbar from "../navbar/Navbar";
 
 const ReadMore = () => {
   const { twoPictureId, index } = useParams<{
     twoPictureId: string;
     index: string;
   }>();
-  const { isAdmin } = useSelector((state: RootState) => state.context);
   const [data, setData] = useState<PictureWithStyleType>();
   const getReadMe = async () => {
     const res = await axios.get(

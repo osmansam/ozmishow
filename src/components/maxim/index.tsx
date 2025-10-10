@@ -1,8 +1,7 @@
-import React from "react";
-import { PictureWithStyleType } from "../../shared/types";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import { PictureWithStyleType } from "../../shared/types";
 
 const Maxim = ({
   header,

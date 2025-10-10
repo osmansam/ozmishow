@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import AddCarousel from "./AddCarousel";
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import { CarouselType } from "../../shared/types";
 import {
-  updateExplanationBar,
-  resetTwoPictureArray,
   getPageTwoPictures,
+  resetTwoPictureArray,
+  updateExplanationBar,
 } from "../../features/twoPicture/twoPictureSlice";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
-import SinglePicture from "./SinglePicture";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import { CarouselType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
+import AddCarousel from "./AddCarousel";
+import SinglePicture from "./SinglePicture";
 
 const Carousel = ({
   mainMainHeader,

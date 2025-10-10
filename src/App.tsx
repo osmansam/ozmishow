@@ -1,13 +1,10 @@
-import React, { lazy, useEffect, useState, Suspense } from "react";
-import { Provider } from "react-redux";
+import React, { lazy, Suspense, useEffect } from "react";
+import { Provider, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./store";
-import { RootState, useAppDispatch } from "./store";
-import { useSelector } from "react-redux";
-import TwoPicture from "./scenes/ComponentContainer";
 import { getPageOptions } from "./features/twoPicture/twoPictureSlice";
-import { PageOptionsType } from "./shared/types";
+import TwoPicture from "./scenes/ComponentContainer";
+import { persistor, RootState, store, useAppDispatch } from "./store";
 const Login = lazy(() => import("./scenes/login"));
 const SingleNew = lazy(() => import("./components/news/newsType1/SingleNew"));
 const ReadMore = lazy(() => import("./components/readMore/ReadMore"));

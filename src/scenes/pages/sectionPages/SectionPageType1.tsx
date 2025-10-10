@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../../store";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Navbar from "../../../components/sectionNavbar/Type1/Navbar";
 import {
   setIsTopOfPage,
   setSelectedSection,
 } from "../../../features/context/contextSlice";
 import { ContainerType } from "../../../shared/types";
-import { motion } from "framer-motion";
+import { RootState } from "../../../store";
 import { renderComponents } from "../RenderComponents";
-import Navbar from "../../../components/sectionNavbar/Type1/Navbar";
 
 interface Props {
   page: string;

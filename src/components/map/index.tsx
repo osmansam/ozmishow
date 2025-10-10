@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { createCustomMap } from "./CustomMap";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
 import { createMap, getMap } from "../../features/twoPicture/twoPictureSlice";
+import { RootState, useAppDispatch } from "../../store";
+import { createCustomMap } from "./CustomMap";
 
 const Map = () => {
   const { map } = useSelector((state: RootState) => state.twoPicture);

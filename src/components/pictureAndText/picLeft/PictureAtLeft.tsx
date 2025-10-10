@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
-import { PictureWithStyleType } from "../../../shared/types";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+import { PictureWithStyleType } from "../../../shared/types";
+import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
 const PictureAtLeft = ({
   img,
   header,

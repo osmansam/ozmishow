@@ -1,12 +1,12 @@
 import React, { lazy } from "react";
-import { ProgressBarContainerType } from "../../shared/types";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../../store";
-import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import {
-  updateProgressBar,
   resetTwoPictureArray,
+  updateProgressBar,
 } from "../../features/twoPicture/twoPictureSlice";
+import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
+import { ProgressBarContainerType } from "../../shared/types";
+import { RootState, useAppDispatch } from "../../store";
 
 const ProgressBar = lazy(() => import("./ProgressBar"));
 const AddProgressBar = lazy(() => import("./AddProgressBar"));

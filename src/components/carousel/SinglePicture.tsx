@@ -1,12 +1,7 @@
-import { useState } from "react";
-import { PictureWithStyleType } from "../../shared/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-
-import { style } from "../../shared/types";
-import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
+import { PictureWithStyleType } from "../../shared/types";
 
 const SinglePicture = ({
   header,
