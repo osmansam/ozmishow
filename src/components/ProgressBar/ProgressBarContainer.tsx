@@ -23,7 +23,6 @@ const ProgressBarContainer = ({
     (state: RootState) => state.twoPicture
   );
   const dispatch = useAppDispatch();
-  //handle create new progressBar item
   const handleCreate = async () => {
     await dispatch(updateProgressBar({ container: twoPictureArray, id }));
     setIsAddProgressBar(false);
