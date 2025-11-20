@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { SketchPicker } from "react-color";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { GenericButton } from "../../common/GenericButton";
+import SelectInput from "../../common/SelectInput";
+import TextInput from "../../common/TextInput";
+import { InputTypes } from "../../common/types";
 import { editComponentStyle } from "../../features/twoPicture/twoPictureSlice";
 import { ComponentStyleType } from "../../shared/types";
 import { useAppDispatch } from "../../store";
@@ -26,47 +29,18 @@ function ComponentStyleModal({
 }: ComponentStyleModalProps) {
   const dispatch = useAppDispatch();
   const [editedStyle, setEditedStyle] = useState<ComponentStyleType>(styleData);
-  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(styleData.backgroundColor);
-  const [originalColor, setOriginalColor] = useState(styleData.backgroundColor);
   const [selectedType, setSelectedType] = useState(currentType);
-  const toggleColorPicker = () => {
-    setIsColorPickerOpen(!isColorPickerOpen);
-  };
 
   const handleStyleChange = (property: string, value: string) => {
     setEditedStyle((prevStyle) => ({
       ...prevStyle,
       [property]: value,
     }));
+    if (property === "backgroundColor") {
+      setSelectedColor(value);
+    }
   };
-
-  const handleClearColor = () => {
-    setSelectedColor(""); // Clear the color
-    handleStyleChange("backgroundColor", "");
-    setIsColorPickerOpen(false); // Close the color picker
-  };
-
-  const handleColorChange = (color: any) => {
-    setSelectedColor(color.hex);
-  };
-
-  const handleConfirm = () => {
-    // Save the selected colors to the editedStyle and close the color pickers
-    handleStyleChange("backgroundColor", selectedColor ?? "");
-    setIsColorPickerOpen(false);
-  };
-
-  const handleCancel = () => {
-    // Close the color picker without saving changes and reset the color values
-    setSelectedColor(originalColor);
-    setIsColorPickerOpen(false);
-  };
-
-  useEffect(() => {
-    // Update the original color values when styleData changes
-    setOriginalColor(styleData.backgroundColor);
-  }, [styleData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,31 +55,7 @@ function ComponentStyleModal({
     window.location.reload();
   };
 
-  const colorPicker = (
-    <div className="absolute top-10 z-50 left-0">
-      <SketchPicker color={selectedColor} onChange={handleColorChange} />
-      <div className="flex justify-end mt-2">
-        <button
-          onClick={handleClearColor} // Clear the color and close the palette
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
-        >
-          Clear Color
-        </button>
-        <button
-          onClick={handleConfirm}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-        >
-          Confirm
-        </button>
-        <button
-          onClick={handleCancel}
-          className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
+
 
   return isOpen
     ? ReactDOM.createPortal(
@@ -122,90 +72,52 @@ function ComponentStyleModal({
               <h2 className="text-lg font-semibold mb-3 capitalize">
                 Component Style
               </h2>
-              <div className="mb-3">
-                <label
-                  htmlFor="backgroundColor"
-                  className="block text-gray-600"
-                >
-                  Background Color:
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="backgroundColor"
-                    name="backgroundColor"
-                    value={selectedColor}
-                    onClick={toggleColorPicker}
-                    className="border rounded px-2 py-1 w-full"
-                  />
-                  {isColorPickerOpen && colorPicker}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="width" className="block text-gray-600">
-                  Width:
-                </label>
-                <input
-                  type="text"
-                  id="width"
-                  name="width"
-                  value={editedStyle.width}
-                  onChange={(e) => handleStyleChange("width", e.target.value)}
-                  className="border rounded px-2 py-1 w-full"
-                />
-              </div>
-              <div className="mb-3">
-                <label
-                  htmlFor="backgroundImage"
-                  className="block text-gray-600"
-                >
-                  Background Image:
-                </label>
-                <input
-                  type="text"
-                  id="backgroundImage"
-                  name="backgroundImage"
-                  value={editedStyle.backgroundImage}
-                  onChange={(e) =>
-                    handleStyleChange("backgroundImage", e.target.value)
-                  }
-                  className="border rounded px-2 py-1 w-full"
-                />
-              </div>
+              <TextInput
+                label="Background Color"
+                type={InputTypes.COLOR}
+                value={selectedColor}
+                onChange={(color) => handleStyleChange("backgroundColor", color)}
+              />
+              <TextInput
+                label="Width"
+                type={InputTypes.TEXT}
+                value={editedStyle.width}
+                onChange={(value) => handleStyleChange("width", value)}
+              />
+              <TextInput
+                label="Background Image"
+                type={InputTypes.TEXT}
+                value={editedStyle.backgroundImage}
+                onChange={(value) => handleStyleChange("backgroundImage", value)}
+              />
               {isComponentType && (
-                <div className="mb-3">
-                  <label htmlFor="fontFamily" className="block text-gray-600">
-                    Component Type:
-                  </label>
-                  <select
-                    id="type"
-                    name="selectedType"
-                    value={selectedType}
-                    onChange={(e) => setSelectedType(e.target.value)}
-                    className="border rounded px-2 py-1 w-full"
-                  >
-                    {componentTypes?.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectInput
+                  label="Component Type"
+                  options={componentTypes?.map((type) => ({ value: type, label: type })) || []}
+                  value={{ value: selectedType, label: selectedType }}
+                  onChange={(option) => {
+                    if (option && 'value' in option) {
+                      setSelectedType(String(option.value));
+                    }
+                  }}
+                />
               )}
-              <div className="flex justify-end">
-                <button
+              <div className="flex justify-end gap-2 mt-6">
+                <GenericButton
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+                  variant="primary"
+                  size="md"
                 >
                   Save
-                </button>
-                <button
+                </GenericButton>
+                <GenericButton
                   type="button"
                   onClick={onClose}
-                  className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
+                  variant="secondary"
+                  size="md"
                 >
                   Cancel
-                </button>
+                </GenericButton>
               </div>
             </form>
           </div>

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { SketchPicker } from "react-color";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useSelector } from "react-redux";
+import { GenericButton } from "../../common/GenericButton";
+import SelectInput from "../../common/SelectInput";
+import TextInput from "../../common/TextInput";
+import { InputTypes } from "../../common/types";
 import {
-  editExplanationBar,
-  editMainMainHeader,
-  editResumeBox,
-  editTwoPictureIndexStyle,
-  editTwoPictureStyle,
-  editWorkTeamBar,
+    editExplanationBar,
+    editMainMainHeader,
+    editResumeBox,
+    editTwoPictureIndexStyle,
+    editTwoPictureStyle,
+    editWorkTeamBar,
 } from "../../features/twoPicture/twoPictureSlice";
 import { StyleType } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
@@ -44,116 +47,14 @@ function StyledModal({
 }: StyledModalProps) {
   const dispatch = useAppDispatch();
   const [editedStyle, setEditedStyle] = useState<StyleData>(styleData);
-  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(styleData.style.color);
-  const [originalColor, setOriginalColor] = useState(styleData.style.color); // Track original color
-  const [isHoverColorPickerOpen, setIsHoverColorPickerOpen] = useState(false);
-  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
   const [selectedHoverColor, setSelectedHoverColor] = useState(
     styleData.style.hover
   );
-  const [originalHoverColor, setOriginalHoverColor] = useState(
-    styleData.style.hover
-  );
-  const [isBackgroundColorPickerOpen, setIsBackgroundColorPickerOpen] =
-    useState(false);
   const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
     styleData.style.backgroundColor
   );
-  const [originalBackgroundColor, setOriginalBackgroundColor] = useState(
-    styleData.style.backgroundColor
-  );
-  const [effectAllElement, setEffectAllElement] = useState(
-    styleData.style.effectAll
-  ); // State for "Effect All" option
-
-  const toggleEffectAll = () => {
-    setEffectAllElement(!effectAllElement);
-  };
-
-  useEffect(() => {
-    // Update the effectAll value when the checkbox changes
-    setEditedStyle((prevStyle) => ({
-      ...prevStyle,
-      style: {
-        ...prevStyle.style,
-        effectAll: effectAllElement,
-      },
-    }));
-  }, [effectAllElement]);
-
-  // Track original background color
-  const toggleColorPicker = () => {
-    setIsColorPickerOpen(!isColorPickerOpen);
-    setIsBackgroundColorPickerOpen(false); // Close the background color picker
-  };
-
-  const toggleBackgroundColorPicker = () => {
-    setIsBackgroundColorPickerOpen(!isBackgroundColorPickerOpen);
-    setIsColorPickerOpen(false); // Close the color picker
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditedStyle((prevStyle) => ({
-      ...prevStyle,
-      [name]: value,
-    }));
-  };
-
-  const handleStyleChange = (property: string, value: string) => {
-    setEditedStyle((prevStyle) => ({
-      ...prevStyle,
-      style: {
-        ...prevStyle.style,
-        [property]: value,
-      },
-    }));
-  };
-
-  const handleClearColor = () => {
-    setSelectedColor(""); // Clear the color
-    handleStyleChange("color", "");
-    setIsColorPickerOpen(false); // Close the color picker
-  };
-
-  const handleClearBackgroundColor = () => {
-    setSelectedBackgroundColor(""); // Clear the background color
-    handleStyleChange("backgroundColor", "");
-    setIsBackgroundColorPickerOpen(false); // Close the background color picker
-  };
-  const handleColorChange = (color: any) => {
-    setSelectedColor(color.hex);
-  };
-
-  const handleBackgroundColorChange = (color: any) => {
-    setSelectedBackgroundColor(color.hex);
-  };
-
-  const handleFontFamilyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    handleStyleChange("fontFamily", value);
-  };
-  const handleConfirm = () => {
-    // Save the selected colors to the editedStyle and close the color pickers
-    handleStyleChange("color", selectedColor ?? "");
-    handleStyleChange("backgroundColor", selectedBackgroundColor ?? "");
-    setIsColorPickerOpen(false);
-    setIsBackgroundColorPickerOpen(false);
-  };
-
-  const handleCancel = () => {
-    // Close the color pickers without saving changes and reset the color values
-    setSelectedColor(originalColor);
-    setSelectedBackgroundColor(originalBackgroundColor);
-    setIsColorPickerOpen(false);
-    setIsBackgroundColorPickerOpen(false);
-  };
-  useEffect(() => {
-    // Update the original color values when styleData changes
-    setOriginalColor(styleData.style.color);
-    setOriginalBackgroundColor(styleData.style.backgroundColor);
-  }, [styleData]);
+  const { pageOptions } = useSelector((state: RootState) => state.twoPicture);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -252,7 +153,6 @@ function StyledModal({
       default:
         break;
     }
-    setEffectAllElement(true);
     onClose();
     window.location.reload();
   };
@@ -260,310 +160,150 @@ function StyledModal({
   const handleOutsideClick = () => {
     onClose();
   };
-  const toggleHoverColorPicker = () => {
-    setIsHoverColorPickerOpen(!isHoverColorPickerOpen);
+  const handleStyleChangeWrapper = (property: string, value: string | boolean) => {
+    if (property === "color") {
+      setSelectedColor(value as string);
+    } else if (property === "hover") {
+      setSelectedHoverColor(value as string);
+    } else if (property === "backgroundColor") {
+      setSelectedBackgroundColor(value as string);
+    } else if (property === "effectAll") {
+      setEditedStyle((prevStyle) => ({
+        ...prevStyle,
+        style: {
+          ...prevStyle.style,
+          effectAll: value as boolean,
+        },
+      }));
+      return;
+    }
+    setEditedStyle((prevStyle) => ({
+      ...prevStyle,
+      style: {
+        ...prevStyle.style,
+        [property]: value,
+      },
+    }));
   };
-
-  const handleHoverColorChange = (color: any) => {
-    setSelectedHoverColor(color.hex);
-  };
-
-  const handleClearColorHover = () => {
-    setSelectedHoverColor(""); // Clear the hover color
-    handleStyleChange("hover", "");
-    setIsHoverColorPickerOpen(false); // Close the hover color picker
-  };
-
-  const handleConfirmHover = () => {
-    // Save the selected hover color and close the hover color picker
-    handleStyleChange("hover", selectedHoverColor);
-    setIsHoverColorPickerOpen(false);
-  };
-
-  const colorPicker = (
-    <div className="absolute top-10 z-50 left-0">
-      <SketchPicker color={selectedColor} onChange={handleColorChange} />
-      <div className="flex justify-end mt-2">
-        <button
-          onClick={handleClearColor} // Clear the color and close the palette
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
-        >
-          Clear Color
-        </button>
-        <button
-          onClick={handleConfirm}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-        >
-          Confirm
-        </button>
-        <button
-          onClick={handleCancel}
-          className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
-
-  const backgroundColorPicker = (
-    <div className="absolute top-10 z-50 left-0">
-      <SketchPicker
-        color={selectedBackgroundColor}
-        onChange={handleBackgroundColorChange}
-      />
-      <div className="flex justify-end mt-2">
-        <button
-          onClick={handleClearBackgroundColor} // Clear the background color and close the palette
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
-        >
-          Clear Background Color
-        </button>
-        <button
-          onClick={handleConfirm}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-        >
-          Confirm
-        </button>
-        <button
-          onClick={handleCancel}
-          className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
-  const hoverColorPicker = (
-    <div className="absolute top-10 z-50 left-0">
-      <SketchPicker
-        color={selectedHoverColor}
-        onChange={handleHoverColorChange}
-      />
-      <div className="flex justify-end mt-2">
-        <button
-          onClick={handleClearColorHover} // Clear the hover color and close the palette
-          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
-        >
-          Clear Hover Color
-        </button>
-        <button
-          onClick={handleConfirmHover}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-        >
-          Confirm
-        </button>
-        <button
-          onClick={() => {
-            setIsHoverColorPickerOpen(false);
-            setSelectedHoverColor(originalHoverColor);
-          }}
-          className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
 
   return isOpen
     ? ReactDOM.createPortal(
-        <div className="fixed right-0 top-0 flex  z-40 ">
+        <div className="fixed right-0 top-0 flex z-40">
           <div
             className="fixed inset-0 bg-black opacity-50"
             onClick={handleOutsideClick}
           ></div>
           <div
-            className="bg-white p-4 rounded-lg z-10 min-h-screen"
-            style={{ maxHeight: "80vh", overflowY: "auto" }}
+            className="bg-white p-6 rounded-lg shadow-xl z-10 min-h-screen w-96"
+            style={{ maxHeight: "100vh", overflowY: "auto" }}
           >
-            <form onSubmit={handleSubmit}>
-              <h2 className="text-lg font-semibold mb-3 capitalize">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <h2 className="text-xl font-bold mb-6 pb-3 border-b border-gray-200 capitalize">
                 {contentType} Style
               </h2>
               {/* content part */}
               {isContentSend && (
-                <div className="mb-3">
-                  <label htmlFor="content" className="block text-gray-600">
-                    Content:
-                  </label>
-                  <input
-                    type="text"
-                    id="content"
-                    name="content"
-                    value={editedStyle.content}
-                    onChange={handleInputChange}
-                    className="border rounded px-2 py-1 w-full "
-                  />
-                </div>
+                <TextInput
+                  label="Content"
+                  type={InputTypes.TEXT}
+                  value={editedStyle.content}
+                  onChange={(value) => setEditedStyle({ ...editedStyle, content: value })}
+                />
               )}
               {contentType === "buttons" && (
-                <div className="mb-3">
-                  <select
-                    className="border-2 w-2/5 rounded-md"
-                    name="link"
-                    value={editedStyle.link}
-                    onChange={(e) => {
-                      setEditedStyle({
-                        ...editedStyle,
-                        link: e.target.value,
-                      });
-                    }}
-                  >
-                    <option value="">Select a page</option>
-                    {pageOptions.map((option, index) => (
-                      <option
-                        key={index}
-                        value={option.pageNameEN.toLowerCase()}
-                      >
-                        {option.pageNameEN}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectInput
+                  label="Link to Page"
+                  options={[
+                    { label: "Select a page", value: "" },
+                    ...pageOptions.map((option) => ({
+                      label: option.pageNameEN,
+                      value: option.pageNameEN.toLowerCase(),
+                    })),
+                  ]}
+                  value={{ value: editedStyle.link || "", label: pageOptions.find(opt => opt.pageNameEN.toLowerCase() === editedStyle.link)?.pageNameEN || "Select a page" }}
+                  onChange={(option) => {
+                    if (option && 'value' in option) {
+                      setEditedStyle({ ...editedStyle, link: String(option.value) });
+                    }
+                  }}
+                />
               )}
-              {/* Add "Effect  All" option */}
-              <div className="mb-3">
-                <label htmlFor="effectAll" className="block text-gray-600">
-                  Effect Style For All:
-                </label>
-                <input
-                  type="checkbox"
-                  id="effectAll"
-                  name="effectAll"
-                  checked={effectAllElement}
-                  onChange={toggleEffectAll}
-                  className="mr-2"
-                />
-                <span>Apply to all elements</span>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="color" className="block text-gray-600">
-                  Color:
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="color"
-                    name="style[color]"
-                    value={selectedColor}
-                    onClick={toggleColorPicker}
-                    className="border rounded px-2 py-1 w-full"
-                  />
-                  {isColorPickerOpen && colorPicker}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="hover" className="block text-gray-600">
-                  Hover Color:
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="hover"
-                    name="style[hover]"
-                    value={selectedHoverColor}
-                    onClick={toggleHoverColorPicker}
-                    className="border rounded px-2 py-1 w-full"
-                  />
-                  {isHoverColorPickerOpen && hoverColorPicker}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="fontFamily" className="block text-gray-600">
-                  Font Family:
-                </label>
-                <select
-                  id="fontFamily"
-                  name="style[fontFamily]"
-                  value={editedStyle.style["fontFamily"]}
-                  onChange={handleFontFamilyChange}
-                  className="border rounded px-2 py-1 w-full"
-                >
-                  <option value="Arial">Arial</option>
-                  <option value="Helvetica">Helvetica</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Georgia">Georgia</option>
-                  <option value="Verdana">Verdana</option>
-                  <option value="Comic Sans MS">Comic Sans</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="fontWeight" className="block text-gray-600">
-                  Font Weight:
-                </label>
-                <input
-                  type="text"
-                  id="fontWeight"
-                  name="style[fontWeight]"
-                  value={editedStyle.style["fontWeight"]}
-                  onChange={(e) =>
-                    handleStyleChange("fontWeight", e.target.value)
+              {/* Add "Effect All" option */}
+              <TextInput
+                label="Effect Style For All"
+                type={InputTypes.CHECKBOX}
+                value={editedStyle.style.effectAll}
+                onChange={(value) => handleStyleChangeWrapper("effectAll", value)}
+              />
+              <TextInput
+                label="Color"
+                type={InputTypes.COLOR}
+                value={selectedColor}
+                onChange={(color) => handleStyleChangeWrapper("color", color)}
+              />
+              <TextInput
+                label="Hover Color"
+                type={InputTypes.COLOR}
+                value={selectedHoverColor}
+                onChange={(color) => handleStyleChangeWrapper("hover", color)}
+              />
+              <SelectInput
+                label="Font Family"
+                options={[
+                  { label: "Arial", value: "Arial" },
+                  { label: "Helvetica", value: "Helvetica" },
+                  { label: "Times New Roman", value: "Times New Roman" },
+                  { label: "Georgia", value: "Georgia" },
+                  { label: "Verdana", value: "Verdana" },
+                  { label: "Comic Sans MS", value: "Comic Sans MS" },
+                ]}
+                value={{ value: editedStyle.style.fontFamily || "Arial", label: editedStyle.style.fontFamily || "Arial" }}
+                onChange={(option) => {
+                  if (option && 'value' in option) {
+                    handleStyleChangeWrapper("fontFamily", String(option.value));
                   }
-                  className="border rounded px-2 py-1 w-full"
-                />
-              </div>
-              <div className="mb-3">
-                <label
-                  htmlFor="backgroundColor"
-                  className="block text-gray-600"
-                >
-                  Background Color:
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="backgroundColor"
-                    name="style[backgroundColor]"
-                    value={selectedBackgroundColor}
-                    onClick={toggleBackgroundColorPicker}
-                    className="border rounded px-2 py-1 w-full"
-                  />
-                  {isBackgroundColorPickerOpen && backgroundColorPicker}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="padding" className="block text-gray-600">
-                  Padding:
-                </label>
-                <input
-                  type="text"
-                  id="padding"
-                  name="style[padding]"
-                  value={editedStyle.style.padding}
-                  onChange={(e) => handleStyleChange("padding", e.target.value)}
-                  className="border rounded px-2 py-1 w-full"
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="fontSize" className="block text-gray-600">
-                  Font Size:
-                </label>
-                <input
-                  type="text"
-                  id="fontSize"
-                  name="style[fontSize]"
-                  value={editedStyle.style["fontSize"]}
-                  onChange={(e) =>
-                    handleStyleChange("fontSize", e.target.value)
-                  }
-                  className="border rounded px-2 py-1 w-full"
-                />
-              </div>
-              <div className="flex justify-end">
-                <button
+                }}
+              />
+              <TextInput
+                label="Font Weight"
+                type={InputTypes.TEXT}
+                value={editedStyle.style.fontWeight}
+                onChange={(value) => handleStyleChangeWrapper("fontWeight", value)}
+              />
+              <TextInput
+                label="Background Color"
+                type={InputTypes.COLOR}
+                value={selectedBackgroundColor}
+                onChange={(color) => handleStyleChangeWrapper("backgroundColor", color)}
+              />
+              <TextInput
+                label="Padding"
+                type={InputTypes.TEXT}
+                value={editedStyle.style.padding}
+                onChange={(value) => handleStyleChangeWrapper("padding", value)}
+              />
+              <TextInput
+                label="Font Size"
+                type={InputTypes.TEXT}
+                value={editedStyle.style.fontSize}
+                onChange={(value) => handleStyleChangeWrapper("fontSize", value)}
+              />
+              <div className="flex justify-end gap-2 mt-6">
+                <GenericButton
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+                  variant="primary"
+                  size="md"
                 >
                   Save
-                </button>
-                <button
+                </GenericButton>
+                <GenericButton
                   type="button"
                   onClick={onClose}
-                  className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
+                  variant="secondary"
+                  size="md"
                 >
                   Cancel
-                </button>
+                </GenericButton>
               </div>
             </form>
           </div>

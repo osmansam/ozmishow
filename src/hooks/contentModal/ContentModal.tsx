@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { GenericButton } from "../../common/GenericButton";
 import {
   editExplanationBar,
   editResumeBox,
@@ -104,12 +105,12 @@ const ContentModal: React.FC<ContentModalProps> = ({
   };
 
   return isOpen ? (
-    <div className=" fixed inset-0 flex justify-center  items-center bg-gray-500 bg-opacity-75 z-40 ">
-      <div className="bg-white p-4 rounded-lg z-50 min-w-full ">
-        <h2 className="text-lg font-semibold mb-4 capitalize">
+    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-75 z-40">
+      <div className="bg-white p-6 rounded-lg shadow-xl z-50 w-full max-w-2xl mx-4">
+        <h2 className="text-xl font-bold mb-6 pb-3 border-b border-gray-200 capitalize">
           {contentType} Content
         </h2>
-        <div className="overflow-y-auto max-h-80">
+        <div className="overflow-y-auto max-h-96 space-y-3">
           {editedContent.content.map((paragraph, index) => (
             <textarea
               key={index}
@@ -128,19 +129,21 @@ const ContentModal: React.FC<ContentModalProps> = ({
             ></textarea>
           ))}
         </div>
-        <div className="flex justify-end mt-4">
-          <button
+        <div className="flex justify-end gap-2 mt-4">
+          <GenericButton
             onClick={handleSave}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+            variant="primary"
+            size="md"
           >
             Save
-          </button>
-          <button
+          </GenericButton>
+          <GenericButton
             onClick={onClose}
-            className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
+            variant="secondary"
+            size="md"
           >
             Cancel
-          </button>
+          </GenericButton>
         </div>
       </div>
     </div>

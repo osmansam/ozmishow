@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { SketchPicker } from "react-color";
-import ReactDOM from "react-dom"; // Import ReactDOM for createPortal
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { GenericButton } from "../../common/GenericButton";
+import TextInput from "../../common/TextInput";
+import { InputTypes } from "../../common/types";
 import { updatePageOptions } from "../../features/twoPicture/twoPictureSlice";
 import { PageStyleType } from "../../shared/types";
 import { useAppDispatch } from "../../store";
@@ -26,64 +28,18 @@ const PageStyleModal = ({
     backgroundSize: "cover",
   });
 
-  const [effectAllElement, setEffectAllElement] = useState(styleData.effectAll); //
   const [selectedBackgroundColor, setSelectedBackgroundColor] = useState(
     styleData.backgroundColor
   );
-  const [isBackgroundColorPickerOpen, setIsBackgroundColorPickerOpen] =
-    useState(false);
 
-  const toggleEffectAll = () => {
-    setEffectAllElement(!effectAllElement);
-  };
-
-  useEffect(() => {
-    // Update the effectAll value when the checkbox changes
-    setEditedStyle((prevStyle) => ({
-      ...prevStyle,
-      effectAll: effectAllElement,
-    }));
-  }, [effectAllElement]);
-  // Function to toggle the background color picker
-  const toggleBackgroundColorPicker = () => {
-    setIsBackgroundColorPickerOpen(!isBackgroundColorPickerOpen);
-  };
-
-  // Function to handle background color change
-  const handleBackgroundColorChange = (color: any) => {
-    setSelectedBackgroundColor(color.hex);
-    // Update the edited style's backgroundColor
-    setEditedStyle((prevEditedStyle) => ({
-      ...prevEditedStyle,
-      backgroundColor: color.hex,
-    }));
-  };
-  const handleStyleChange = (property: string, value: string) => {
+  const handleStyleChange = (property: string, value: string | boolean) => {
     setEditedStyle((prevStyle) => ({
       ...prevStyle,
       [property]: value,
     }));
-  };
-
-  // Function to clear the background color
-  const handleClearBackgroundColor = () => {
-    setSelectedBackgroundColor(""); // Clear the background color
-
-    // Update the edited style's backgroundColor
-    setEditedStyle((prevEditedStyle) => ({
-      ...prevEditedStyle,
-      backgroundColor: "",
-    }));
-  };
-  // Function to confirm the background color change
-  const handleConfirmBackgroundColor = () => {
-    // Save the selected background color and close the background color picker
-    setIsBackgroundColorPickerOpen(false);
-  };
-
-  // Function to cancel background color changes
-  const handleCancelBackgroundColor = () => {
-    setIsBackgroundColorPickerOpen(false); // Close the background color picker
+    if (property === "backgroundColor") {
+      setSelectedBackgroundColor(value as string);
+    }
   };
 
   // Function to handle form submission
@@ -111,113 +67,47 @@ const PageStyleModal = ({
             onClick={handleOutsideClick}
           ></div>
           <div
-            className="bg-white p-4 rounded-lg z-10 min-h-screen"
-            style={{ maxHeight: "80vh", overflowY: "auto" }}
+            className="bg-white p-6 rounded-lg shadow-xl z-10 min-h-screen w-96"
+            style={{ maxHeight: "100vh", overflowY: "auto" }}
           >
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label
-                  htmlFor="backgroundColor"
-                  className="block text-gray-600"
-                >
-                  Background Color:
-                </label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    id="backgroundColor"
-                    name="style[backgroundColor]"
-                    value={selectedBackgroundColor}
-                    onClick={toggleBackgroundColorPicker}
-                    className="border rounded px-2 py-1 w-full"
-                  />
-                  {isBackgroundColorPickerOpen && (
-                    <div className="absolute top-10 z-50 left-0">
-                      <SketchPicker
-                        color={selectedBackgroundColor}
-                        onChange={handleBackgroundColorChange}
-                      />
-                      <div className="flex justify-end mt-2">
-                        <button
-                          type="button"
-                          onClick={handleClearBackgroundColor}
-                          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 mr-2"
-                        >
-                          Clear Background Color
-                        </button>
-                        <button
-                          type="button"
-                          onClick={handleConfirmBackgroundColor} // Add this handler
-                          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
-                        >
-                          Confirm
-                        </button>
-                        <button
-                          type="button"
-                          onClick={handleCancelBackgroundColor}
-                          className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label
-                  htmlFor="backgroundImage"
-                  className="block text-gray-600"
-                >
-                  Background Image:
-                </label>
-                <input
-                  type="text"
-                  id="backgroundImage"
-                  name="backgroundImage"
-                  // value={editedStyle.backgroundImage?.replace(
-                  //   /url\((['"])?(.*?)\1\)/gi,
-                  //   "$2"
-                  // )}
-                  value={editedStyle.backgroundImage}
-                  onChange={(e) =>
-                    handleStyleChange(
-                      "backgroundImage",
-                      // `url("${e.target.value}")`
-                      e.target.value
-                    )
-                  }
-                  className="border rounded px-2 py-1 w-full"
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="effectAll" className="block text-gray-600">
-                  Effect Style For All:
-                </label>
-                <input
-                  type="checkbox"
-                  id="effectAll"
-                  name="effectAll"
-                  checked={effectAllElement}
-                  onChange={toggleEffectAll}
-                  className="mr-2"
-                />
-                <span>Apply to all elements</span>
-              </div>
-              <div className="flex justify-end">
-                <button
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <h2 className="text-xl font-bold mb-6 pb-3 border-b border-gray-200">
+                Page Style
+              </h2>
+              <TextInput
+                label="Background Color"
+                type={InputTypes.COLOR}
+                value={selectedBackgroundColor}
+                onChange={(color) => handleStyleChange("backgroundColor", color)}
+              />
+              <TextInput
+                label="Background Image"
+                type={InputTypes.TEXT}
+                value={editedStyle.backgroundImage}
+                onChange={(value) => handleStyleChange("backgroundImage", value)}
+              />
+              <TextInput
+                label="Effect Style For All"
+                type={InputTypes.CHECKBOX}
+                value={editedStyle.effectAll}
+                onChange={(value) => handleStyleChange("effectAll", value)}
+              />
+              <div className="flex justify-end gap-2 mt-6">
+                <GenericButton
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+                  variant="primary"
+                  size="md"
                 >
                   Save
-                </button>
-                <button
+                </GenericButton>
+                <GenericButton
                   type="button"
                   onClick={onClose}
-                  className="bg-gray-300 text-gray-600 px-4 py-2 rounded hover:bg-gray-400"
+                  variant="secondary"
+                  size="md"
                 >
                   Cancel
-                </button>
+                </GenericButton>
               </div>
             </form>
           </div>
