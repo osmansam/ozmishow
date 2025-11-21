@@ -1,6 +1,9 @@
 {
   "name": "hotel-1",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=16"
+  },
   "private": true,
   "dependencies": {
     "@headlessui/react": "^2.2.9",
