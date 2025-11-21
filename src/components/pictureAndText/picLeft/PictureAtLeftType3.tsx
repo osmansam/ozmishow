@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
-import { PictureWithStyleType } from "../../../shared/types";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+import { PictureWithStyleType } from "../../../shared/types";
 type Props = {};
 
 const PictureAtLeftType3 = ({
@@ -18,70 +16,79 @@ const PictureAtLeftType3 = ({
   _id,
 }: PictureWithStyleType) => {
   return (
-    <div className="flex flex-col gap-4 w-full  " style={componentStyle}>
-      {/* component Style button */}
-      <div className=" w-full flex justify-end pr-20 ">
-        <ComponentStyleModalContainer
-          styleData={componentStyle}
-          currentType={componentType ?? ""}
-          twoPictureId={_id ?? ""}
-          componentTypes={pictureAndTextTypes}
-          isComponentType={true}
-        />
-      </div>
+    <div className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-gray-50" style={componentStyle}>
+      <div className="max-w-6xl mx-auto">
+        <div className="flex justify-end mb-8">
+          <ComponentStyleModalContainer
+            styleData={componentStyle}
+            currentType={componentType ?? ""}
+            twoPictureId={_id ?? ""}
+            componentTypes={pictureAndTextTypes}
+            isComponentType={true}
+          />
+        </div>
 
-      {/* header */}
-      <div className="w-5/6 mx-auto">
-        <h1
-          className="w-fit px-4 py-1 gap-8 rounded-2xl font-[600] text-2xl flex flex-row "
-          style={header?.style}
-        >
-          {header?.content}
-          <StyleModalContainer
-            styleData={header}
-            twoPictureId={_id ?? ""}
-            componentId={""}
-            contentContainerType="header"
-            isContentSend={true}
-            type="twoPicture"
-          />
-        </h1>
-      </div>
-      {/* paragraphs */}
-      <div className="md:w-1/2 flex flex-col gap-2 w-full rounded-lg py-1 md:ml-auto ">
-        {paragraphs?.content?.map((paragraph, index) => (
-          <div key={index}>
-            <p
-              className=" font-[400] leading-6 rounded-lg px-4 py-1  text-[#333333] "
-              style={paragraphs?.style ? paragraphs?.style : {}}
-            >
-              {paragraph}
-            </p>
+        <div className="flex flex-col md:flex-row items-start relative">
+          {/* Content Card */}
+          <div className="w-full md:w-3/5 bg-white p-8 md:p-12 rounded-3xl shadow-xl z-10 relative">
+            <div className="mb-6">
+              <h2
+                className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight"
+                style={header?.style}
+              >
+                {header?.content}
+                <span className="inline-block ml-3 align-middle">
+                  <StyleModalContainer
+                    styleData={header}
+                    twoPictureId={_id ?? ""}
+                    componentId={""}
+                    contentContainerType="header"
+                    isContentSend={true}
+                    type="twoPicture"
+                  />
+                </span>
+              </h2>
+            </div>
+
+            <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
+              {paragraphs?.content?.map((paragraph, index) => (
+                <p key={index} style={paragraphs?.style}>
+                  {paragraph}
+                </p>
+              ))}
+              <div className="mt-2">
+                <ContentModalContainer
+                  content={paragraphs}
+                  twoPictureId={_id ?? ""}
+                  componentId={""}
+                  contentContainerType="paragraphs"
+                  type="twoPicture"
+                />
+              </div>
+            </div>
           </div>
-        ))}
-        <ContentModalContainer
-          content={paragraphs}
-          twoPictureId={_id ?? ""}
-          componentId={""}
-          contentContainerType="paragraphs"
-          type="twoPicture"
-        />
-      </div>
-      {/* img */}
-      <div className="w-5/6 md:w-3/4 mx-auto flex flex-col ">
-        <img
-          src={img?.content}
-          alt="img"
-          className="w-full h-[12rem] md:w-1/2 md:h-[20rem]  md:mt-[-5rem]  sm:py-5 md:py-0"
-          style={img?.style}
-        />
-        <div className="w-fit px-4 ">
-          <ImageStyleModalContainer
-            twoPictureId={_id ?? ""}
-            componentId={""}
-            type="twoPicture"
-            styleData={img}
-          />
+
+          {/* Image Section (Overlapping) */}
+          <div className="w-full md:w-1/2 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mt-8 md:mt-0 h-64 md:h-96">
+            <div className="w-full h-full relative group rounded-3xl overflow-hidden shadow-2xl">
+              <img
+                src={img?.content}
+                alt="img"
+                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                style={{ ...img?.style, width: "100%", height: "100%" }}
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
+              
+              <div className="absolute top-4 right-4">
+                <ImageStyleModalContainer
+                  twoPictureId={_id ?? ""}
+                  componentId={""}
+                  type="twoPicture"
+                  styleData={img}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

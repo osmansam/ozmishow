@@ -1,11 +1,10 @@
-import React from "react";
-import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
-import { PictureWithStyleType } from "../../../shared/types";
-import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
-import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ComponentStyleModalContainer from "../../../hooks/componentStyleModal/ComponentStyleModalContainer";
-import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+import ContentModalContainer from "../../../hooks/contentModal/ContentModalContainer";
 import ImageStyleModalContainer from "../../../hooks/imageStyle/ImageStyleModalContainer";
+import StyleModalContainer from "../../../hooks/styledModal/StyleModalContainer";
+import { pictureAndTextTypes } from "../../../shared/compenentTypes";
+import { PictureWithStyleType } from "../../../shared/types";
+import ButtonUnderline from "../../buttonUnderline/ButtonUnderline";
 
 const PictureAtRight = ({
   img,
@@ -17,99 +16,103 @@ const PictureAtRight = ({
   componentStyle,
 }: PictureWithStyleType) => {
   return (
-    <div
-      className="w-full h-full flex flex-col  lg:justify-center items-center mx-auto"
-      style={componentStyle}
-    >
-      <div className=" w-full justify-end pr-20 flex  ">
-        <ComponentStyleModalContainer
-          styleData={componentStyle}
-          currentType={componentType ?? ""}
-          twoPictureId={_id ?? ""}
-          componentTypes={pictureAndTextTypes}
-          isComponentType={true}
-        />
-      </div>
-      <div className="lg:flex  lg:justify-between h-full mx-auto py-10  px-8">
-        {/* left side */}
-        <div className="basis-1/2 px-4">
-          <div className="flex w-full lg:pr-28 gap-4 flex-col h-full ">
-            <h1
-              className="w-fit px-4 py-1 gap-8 rounded-2xl font-[700] text-4xl flex flex-row"
-              style={header?.style}
-            >
-              {header?.content}
-              <StyleModalContainer
-                styleData={header}
-                twoPictureId={_id ?? ""}
-                componentId={""}
-                contentContainerType="header"
-                isContentSend={true}
-                type="twoPicture"
-              />
-            </h1>
-            {/* paragraphs */}
-            <div className="flex flex-col gap-2 w-full rounded-lg py-1">
-              {paragraphs?.content?.map((paragraph, index) => (
-                <div key={index}>
-                  <p
-                    className="font-[400] leading-6 text-[#333333] rounded-lg px-4 py-1"
-                    style={paragraphs?.style}
-                  >
-                    {paragraph}
-                  </p>
-                </div>
-              ))}
-              <ContentModalContainer
-                content={paragraphs}
-                twoPictureId={_id ?? ""}
-                componentId={""}
-                contentContainerType="paragraphs"
-                type="twoPicture"
-              />
+    <div className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-white" style={componentStyle}>
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-end mb-4">
+          <ComponentStyleModalContainer
+            styleData={componentStyle}
+            currentType={componentType ?? ""}
+            twoPictureId={_id ?? ""}
+            componentTypes={pictureAndTextTypes}
+            isComponentType={true}
+          />
+        </div>
+
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          {/* Content Section (Left on desktop) */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-8 order-2 lg:order-1">
+            <div className="relative">
+              <h2
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight"
+                style={header?.style}
+              >
+                {header?.content}
+                <span className="inline-block ml-2 align-middle">
+                  <StyleModalContainer
+                    styleData={header}
+                    twoPictureId={_id ?? ""}
+                    componentId={""}
+                    contentContainerType="header"
+                    isContentSend={true}
+                    type="twoPicture"
+                  />
+                </span>
+              </h2>
             </div>
 
-            {/* buttons */}
-            <div className="w-full flex gap-8 flex-row">
-              {buttons &&
-                buttons.length > 0 &&
-                buttons.map((button, index) => (
-                  <div
-                    className=" px-4 flex flex-row w-fit items-center justify-center gap-2 "
-                    key={index}
-                    style={button.style}
-                  >
+            <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
+              {paragraphs?.content?.map((paragraph, index) => (
+                <p key={index} style={paragraphs?.style}>
+                  {paragraph}
+                </p>
+              ))}
+              <div className="mt-2">
+                <ContentModalContainer
+                  content={paragraphs}
+                  twoPictureId={_id ?? ""}
+                  componentId={""}
+                  contentContainerType="paragraphs"
+                  type="twoPicture"
+                />
+              </div>
+            </div>
+
+            {buttons && buttons.length > 0 && (
+              <div className="flex flex-wrap gap-4 pt-4">
+                {buttons.map((button, index) => (
+                  <div key={index} className="relative group" style={button.style}>
                     <ButtonUnderline
                       text={button.content}
                       buttonLink={button.link}
                     />
-                    <StyleModalContainer
-                      styleData={button}
-                      twoPictureId={_id ?? ""}
-                      componentId={""}
-                      contentContainerType="buttons"
-                      isContentSend={true}
-                      type="twoPicture"
-                    />
+                    <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <StyleModalContainer
+                        styleData={button}
+                        twoPictureId={_id ?? ""}
+                        componentId={""}
+                        contentContainerType="buttons"
+                        isContentSend={true}
+                        type="twoPicture"
+                        buttonIndex={index}
+                      />
+                    </div>
                   </div>
                 ))}
+              </div>
+            )}
+          </div>
+
+          {/* Image Section (Right on desktop) */}
+          <div className="w-full lg:w-1/2 relative group order-1 lg:order-2">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
+              <img
+                src={img?.content}
+                alt={header?.content}
+                className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                style={{ ...img?.style, width: "100%", height: "100%" }}
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300" />
+            </div>
+            <div className="absolute top-4 right-4">
+              <ImageStyleModalContainer
+                twoPictureId={_id ?? ""}
+                componentId={""}
+                type="twoPicture"
+                styleData={img}
+              />
             </div>
           </div>
         </div>
-        {/* right side */}
-
-        <img
-          src={img?.content}
-          alt={header?.content}
-          className="w-full lg:basis-1/2 lg:h-[25rem] max-w-[25rem] sm:h-[15rem] sm:py-5 md:py-0"
-          style={img?.style}
-        />
-        <ImageStyleModalContainer
-          twoPictureId={_id ?? ""}
-          componentId={""}
-          type="twoPicture"
-          styleData={img}
-        />
       </div>
     </div>
   );
