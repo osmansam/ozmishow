@@ -1,11 +1,11 @@
 import { lazy } from "react";
 import SliderType2 from "../../components/slider/SliderType2";
 import {
-  ContainerType,
-  ContentStyleType,
-  ImageContentStyleType,
-  PictureType,
-  PictureWithStyleType,
+    ContainerType,
+    ContentStyleType,
+    ImageContentStyleType,
+    PictureType,
+    PictureWithStyleType,
 } from "../../shared/types";
 const PictureAtLeft = lazy(
   () => import("../../components/pictureAndText/picLeft/PictureAtLeft")
@@ -95,7 +95,10 @@ const FreqAskedType2 = lazy(
 ////
 type Props = {};
 
-export const renderComponents = (newContainer: ContainerType[]) => {
+export const renderComponents = (
+  newContainer: ContainerType[],
+  isAdmin: boolean = false
+) => {
   return newContainer?.map((item, index) => {
     if (item && item.componentName) {
       const { mainHeader, twoPictureArray, style, componentType } = item;
@@ -108,7 +111,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "PictureAndText":
           if (componentType === "type1") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <PictureAtLeft
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
@@ -117,7 +127,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type2") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <PictureAtRight
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
@@ -126,7 +143,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type3") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <PictureAtLeftType3
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
@@ -135,7 +159,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type4") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <PicType4
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
@@ -144,7 +175,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type5") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <PicLeftType5
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
@@ -153,7 +191,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type6") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <PicLeftType6
                   {...(pictureItem as PictureWithStyleType)}
                   _id={item && item._id ? item._id : ""}
@@ -165,7 +210,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "TwoPictureContainer":
           if (componentType === "type1") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <TwoPictureContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={item.mainHeader}
@@ -177,7 +229,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type2") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <TwoPictureContainer2
                   id={item && item._id ? item._id : ""}
                   mainHeader={item.mainHeader}
@@ -193,7 +252,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "IconExplainContainer":
           if (componentType === "type1") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <IconExplainContainer
                   mainHeader={mainHeader}
                   componentType={componentType}
@@ -205,7 +271,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type2") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <IconExplainContainer2
                   mainHeader={mainHeader}
                   componentType={componentType}
@@ -242,7 +315,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "NewsContainer":
           if (componentType === "type1") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <NewsContainer
                   id={item && item._id ? item._id : ""}
                   mainHeader={mainHeader}
@@ -253,7 +333,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type2") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <NewsContainer2
                   id={item && item._id ? item._id : ""}
                   componentStyle={style}
@@ -278,7 +365,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "Slider":
           if (componentType === "type1") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <Slider
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
@@ -290,7 +384,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type2") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <SliderType2
                   id={item && item._id ? item._id : ""}
                   mainMainHeader={mainHeader}
@@ -339,7 +440,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
         case "FrequentlyAskedQuestions":
           if (componentType === "type1") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <FreqAsked
                   id={item && item._id ? item._id : ""}
                   componentStyle={style}
@@ -350,7 +458,14 @@ export const renderComponents = (newContainer: ContainerType[]) => {
             );
           } else if (componentType === "type2") {
             return (
-              <div key={index}>
+<div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
                 <FreqAskedType2
                   id={item && item._id ? item._id : ""}
                   componentStyle={style}

@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AdminEditButton from "../../common/AdminEditButton";
 import { imageStyle } from "../../shared/types";
 import { RootState } from "../../store";
 import ImageStyleModal from "./ImageStyleModal";
@@ -28,23 +28,22 @@ const ImageStyleModalContainer = ({
 
   const openModal = (styleData: any) => {
     setSelectedStyle(styleData);
-    setIsModalOpen(true);
+    React.startTransition(() => {
+      setIsModalOpen(true);
+    });
   };
   return (
     <div>
       {!isModalOpen && isAdmin && (
-        <div
-          className="flex flex-row gap-1  bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 items-center cursor-pointer"
-          onClick={() => {
+        <AdminEditButton
+          label="Image Style"
+          onClick={() =>
             openModal({
               style: styleData?.style,
               content: styleData?.content,
-            });
-          }}
-        >
-          <h2>Image Style</h2>
-          <AiOutlineDown className="text-lg justify-end" />
-        </div>
+            })
+          }
+        />
       )}
       {isModalOpen && (
         <ImageStyleModal

@@ -86,7 +86,7 @@ const TabInput: React.FC<TabInputProps> = ({
           : "flex-col"
       } gap-2 `}
     >
-      <H6 className="flex items-center gap-2">
+      <H6 className="flex items-center gap-2 text-gray-700 font-medium">
         <span>{label}</span>
         {requiredField && <span className="text-red-400">*</span>}
 

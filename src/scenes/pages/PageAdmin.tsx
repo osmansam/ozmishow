@@ -4,23 +4,23 @@ import Loading from "../../components/loading";
 import SliderType2 from "../../components/slider/SliderType2";
 import { setLanguage } from "../../features/context/contextSlice";
 import {
-  deleteTwoPicture,
-  getPageOptions,
-  getPageTwoPictures,
-  updatePageAndLanguage,
-  updateTwoPicture,
+    deleteTwoPicture,
+    getPageOptions,
+    getPageTwoPictures,
+    updatePageAndLanguage,
+    updateTwoPicture,
 } from "../../features/twoPicture/twoPictureSlice";
 import ConfirmationModal from "../../hooks/confirmation";
 import PageStyleModalContainer from "../../hooks/pageStyle/PageStyleModalContainer";
 import {
-  ContainerType,
-  ContentStyleType,
-  ImageContentStyleType,
-  LanguageOptions,
-  PageOptionsType,
-  pageStyle,
-  PictureType,
-  PictureWithStyleType,
+    ContainerType,
+    ContentStyleType,
+    ImageContentStyleType,
+    LanguageOptions,
+    PageOptionsType,
+    pageStyle,
+    PictureType,
+    PictureWithStyleType,
 } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 
@@ -328,7 +328,10 @@ const PageAdmin = ({ page }: Props) => {
           case "PictureAndText":
             if (componentType === "type1") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <PictureAtLeft
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
@@ -347,7 +350,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type2") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <PictureAtRight
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
@@ -365,7 +371,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type3") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <PictureAtLeftType3
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
@@ -383,7 +392,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type4") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <PicType4
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
@@ -401,7 +413,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type5") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <PicLeftType5
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
@@ -419,7 +434,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type6") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <PicLeftType6
                     {...(pictureItem as PictureWithStyleType)}
                     _id={item && item._id ? item._id : ""}
@@ -441,7 +459,10 @@ const PageAdmin = ({ page }: Props) => {
           case "TwoPictureContainer":
             if (componentType === "type1") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <TwoPictureContainer
                     mainHeader={item.mainHeader}
                     componentStyle={style}
@@ -462,7 +483,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type2") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <TwoPictureContainer2
                     mainHeader={item.mainHeader}
                     componentStyle={style}
@@ -503,7 +527,10 @@ const PageAdmin = ({ page }: Props) => {
           case "IconExplainContainer":
             if (componentType === "type1") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <IconExplainContainer
                     mainHeader={mainHeader}
                     componentType={componentType}
@@ -524,7 +551,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type2") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <IconExplainContainer2
                     mainHeader={mainHeader}
                     componentType={componentType}
@@ -587,7 +617,10 @@ const PageAdmin = ({ page }: Props) => {
           case "NewsContainer":
             if (componentType === "type1") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <NewsContainer
                     id={item && item._id ? item._id : ""}
                     mainHeader={mainHeader}
@@ -608,7 +641,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type2") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <NewsContainer2
                     id={item && item._id ? item._id : ""}
                     componentStyle={style}
@@ -716,7 +752,10 @@ const PageAdmin = ({ page }: Props) => {
           case "Slider":
             if (componentType === "type1") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <Slider
                     id={item && item._id ? item._id : ""}
                     mainMainHeader={mainHeader}
@@ -738,7 +777,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type2") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <SliderType2
                     id={item && item._id ? item._id : ""}
                     mainMainHeader={mainHeader}
@@ -843,7 +885,10 @@ const PageAdmin = ({ page }: Props) => {
           case "FrequentlyAskedQuestions":
             if (componentType === "type1") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <FreqAsked
                     id={item && item._id ? item._id : ""}
                     componentStyle={style}
@@ -864,7 +909,10 @@ const PageAdmin = ({ page }: Props) => {
               );
             } else if (componentType === "type2") {
               return (
-                <div key={index}>
+<div
+                  key={index}
+                  className="border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                >
                   <FreqAskedType2
                     id={item && item._id ? item._id : ""}
                     componentStyle={style}

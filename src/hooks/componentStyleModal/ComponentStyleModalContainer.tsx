@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AdminEditButton from "../../common/AdminEditButton";
 import { ComponentStyleType } from "../../shared/types";
 import { RootState } from "../../store";
 import ComponentStyleModal from "./ComponentStyleModal";
@@ -28,21 +28,18 @@ const ComponentStyleModalContainer = ({
 
   const openModal = (styleData: ComponentStyleType) => {
     setSelectedStyle(styleData);
-    setIsModalOpen(true);
+    React.startTransition(() => {
+      setIsModalOpen(true);
+    });
   };
 
   return (
     <div>
       {!isModalOpen && isAdmin && (
-        <div
-          className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 cursor-pointer items-center"
-          onClick={() => {
-            openModal(styleData);
-          }}
-        >
-          <h2>Component Style</h2>
-          <AiOutlineDown className="text-lg justify-end my-auto" />
-        </div>
+        <AdminEditButton
+          label="Component Style"
+          onClick={() => openModal(styleData)}
+        />
       )}
 
       {isModalOpen && (

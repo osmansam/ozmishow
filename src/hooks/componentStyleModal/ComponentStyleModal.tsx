@@ -78,11 +78,31 @@ function ComponentStyleModal({
                 value={selectedColor}
                 onChange={(color) => handleStyleChange("backgroundColor", color)}
               />
-              <TextInput
+              <SelectInput
                 label="Width"
-                type={InputTypes.TEXT}
-                value={editedStyle.width}
-                onChange={(value) => handleStyleChange("width", value)}
+                options={[
+                  { label: "100%", value: "100%" },
+                  { label: "90%", value: "90%" },
+                  { label: "80%", value: "80%" },
+                  { label: "75%", value: "75%" },
+                  { label: "66%", value: "66%" },
+                  { label: "50%", value: "50%" },
+                  { label: "33%", value: "33%" },
+                  { label: "25%", value: "25%" },
+                  { label: "Auto", value: "auto" },
+                  { label: "Max Content", value: "max-content" },
+                  { label: "Min Content", value: "min-content" },
+                  { label: "100vw", value: "100vw" },
+                ]}
+                value={{
+                  value: editedStyle.width || "100%",
+                  label: editedStyle.width || "100%",
+                }}
+                onChange={(option) => {
+                  if (option && "value" in option) {
+                    handleStyleChange("width", String(option.value));
+                  }
+                }}
               />
               <TextInput
                 label="Background Image"

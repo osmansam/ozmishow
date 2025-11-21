@@ -157,7 +157,7 @@ export default function DateInput({
       } gap-2 w-full`}
     >
       {label && (
-        <H6 className="min-w-10">
+        <H6 className="min-w-10 text-gray-700 font-medium">
           {label}
           {requiredField && <span className="text-red-400">*</span>}
         </H6>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Select from "react-select";
+import { H6 } from "./Typography";
 
 type HourInputProps = {
   label?: string;
@@ -42,9 +43,9 @@ const HourInput = ({
   return (
     <div className="flex flex-col gap-2 w-full">
       {label && (
-        <label className="text-sm font-medium">
+        <H6 className="text-gray-700 font-medium">
           {label} {requiredField && <span className="text-red-500">*</span>}
-        </label>
+        </H6>
       )}
       <div className="flex gap-2 items-center">
         {/* Hour Dropdown */}

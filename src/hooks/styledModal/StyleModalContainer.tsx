@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AdminEditButton from "../../common/AdminEditButton";
 import { RootState } from "../../store";
 import StyledModal from "./StyledModal";
 
@@ -34,14 +34,17 @@ const StyleModalContainer = ({
   return (
     <div>
       {!isModalOpen && isAdmin && (
-        <AiOutlineDown
-          className="text-lg justify-end cursor-pointer items-center"
+        <AdminEditButton
+          label="Edit"
+          size="sm"
           onClick={() => {
-            openModal({
-              style: styleData?.style,
-              content: styleData?.content,
+            React.startTransition(() => {
+              openModal({
+                style: styleData?.style,
+                content: styleData?.content,
+              });
+              setContentType(contentContainerType);
             });
-            setContentType(contentContainerType);
           }}
         />
       )}

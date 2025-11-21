@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import AdminEditButton from "../../common/AdminEditButton";
 import { style } from "../../shared/types";
 import { RootState } from "../../store";
 import StyledModal from "../styledModal/StyledModal";
@@ -32,7 +32,9 @@ const ContentModalContainer = ({
 
   const openModal = (styleData: any) => {
     setSelectedStyle(styleData);
-    setIsModalOpen(true);
+    React.startTransition(() => {
+      setIsModalOpen(true);
+    });
   };
   const openContentModal = (content: any, contentType: string) => {
     setContentToEdit(content);
@@ -56,8 +58,12 @@ const ContentModalContainer = ({
       {isAdmin && (
         <div className="flex flex-row justify-end gap-2 rounded-2xl py-2">
           {!isModalOpen && (
-            <button
-              className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
+            <AdminEditButton
+              label={
+                contentContainerType === "paragraphs"
+                  ? "Paragraph Style"
+                  : "Input Style"
+              }
               onClick={() => {
                 openModal({
                   style: content?.style,
@@ -65,23 +71,19 @@ const ContentModalContainer = ({
                 });
                 setContentType(contentContainerType);
               }}
-            >
-              {contentContainerType === "paragraphs"
-                ? "Paragraph Style"
-                : "Input Style"}
-              <AiOutlineDown className="my-auto" />
-            </button>
+              className="mr-2"
+            />
           )}
           {content?.content && (
-            <button
+            <AdminEditButton
+              label={
+                contentContainerType === "paragraphs"
+                  ? "Paragraph Edit"
+                  : "Input Edit"
+              }
               onClick={() => openContentModal(content, contentContainerType)}
-              className="flex flex-row gap-1 bg-blue-500 text-white px-2  rounded-2xl hover:bg-blue-700 mr-2"
-            >
-              {contentContainerType === "paragraphs"
-                ? "Paragraph Edit"
-                : "Input Edit"}
-              <AiOutlineDown className="my-auto" />
-            </button>
+              className="mr-2"
+            />
           )}
           {isModalOpen && contentType === contentContainerType && (
             <StyledModal

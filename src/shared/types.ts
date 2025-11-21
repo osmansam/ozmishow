@@ -150,6 +150,7 @@ export interface StyleType {
   fontFamily?: string;
   hover: string;
   effectAll?: boolean;
+  width?: string;
 }
 export interface ImageType {
   width?: string;
@@ -176,6 +177,7 @@ export const style = {
   fontFamily: "",
   hover: "",
   effectAll: false,
+  width: "",
 };
 export const componentStyle = {
   backgroundColor: "",
