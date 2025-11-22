@@ -37,8 +37,26 @@ const TwoPictureContainer = lazy(
 const TwoPictureContainer2 = lazy(
   () => import("../../components/twoPicture/type2/TwoPictureContainer2")
 );
+const TwoPictureContainer3 = lazy(
+  () => import("../../components/twoPicture/type3/TwoPictureContainer3")
+);
+const TwoPictureContainer4 = lazy(
+  () => import("../../components/twoPicture/type4/TwoPictureContainer4")
+);
 const MaximContainer = lazy(() => import("../../components/maxim"));
 const FreqAsked = lazy(() => import("../../components/freqAsked/FreqAsked"));
+const FreqAskedType2 = lazy(
+  () => import("../../components/freqAsked/FreqAskedType2")
+);
+const FreqAskedType3 = lazy(
+  () => import("../../components/freqAsked/FreqAskedType3")
+);
+const FreqAskedType4 = lazy(
+  () => import("../../components/freqAsked/FreqAskedType4")
+);
+const FreqAskedType5 = lazy(
+  () => import("../../components/freqAsked/FreqAskedType5")
+);
 const BorderBoxContainer = lazy(
   () => import("../../components/borderBox/BorderBoxContainer")
 );
@@ -50,6 +68,9 @@ const NewsContainer2 = lazy(
 );
 const ExplanationBar = lazy(() => import("../../components/ExplanationBar"));
 const PageBanner = lazy(() => import("../../components/PageBanner/PageBanner"));
+const PageBannerType2 = lazy(() => import("../../components/PageBanner/PageBannerType2"));
+const PageBannerType3 = lazy(() => import("../../components/PageBanner/PageBannerType3"));
+const PageBannerType4 = lazy(() => import("../../components/PageBanner/PageBannerType4"));
 const WorkTeamBar = lazy(
   () => import("../../components/WorkTeamBar/WorkTeamBar")
 );
@@ -89,9 +110,7 @@ const ResumeIcon = lazy(
 const SpeedReader = lazy(
   () => import("../../components/speedReader/SpeedReader")
 );
-const FreqAskedType2 = lazy(
-  () => import("../../components/freqAsked/FreqAskedType2")
-);
+
 ////
 type Props = {};
 
@@ -238,6 +257,44 @@ export const renderComponents = (
                 }
               >
                 <TwoPictureContainer2
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={item.mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                />
+              </div>
+            );
+          } else if (componentType === "type3") {
+            return (
+              <div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
+                <TwoPictureContainer3
+                  id={item && item._id ? item._id : ""}
+                  mainHeader={item.mainHeader}
+                  componentType={componentType}
+                  componentStyle={style}
+                  twoPictureArray={twoPictureArray as PictureWithStyleType[]}
+                />
+              </div>
+            );
+          } else if (componentType === "type4") {
+            return (
+              <div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
+                <TwoPictureContainer4
                   id={item && item._id ? item._id : ""}
                   mainHeader={item.mainHeader}
                   componentType={componentType}
@@ -429,14 +486,44 @@ export const renderComponents = (
             </div>
           );
         case "PageBanner":
-          return (
-            <div key={index}>
-              <PageBanner
-                {...(pictureItem as PictureWithStyleType)}
-                _id={item && item._id ? item._id : ""}
-              />
-            </div>
-          );
+          if (componentType === "type1") {
+            return (
+              <div key={index}>
+                <PageBanner
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type2") {
+            return (
+              <div key={index}>
+                <PageBannerType2
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type3") {
+            return (
+              <div key={index}>
+                <PageBannerType3
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          } else if (componentType === "type4") {
+            return (
+              <div key={index}>
+                <PageBannerType4
+                  {...(pictureItem as PictureWithStyleType)}
+                  _id={item && item._id ? item._id : ""}
+                />
+              </div>
+            );
+          }
+          break;
         case "FrequentlyAskedQuestions":
           if (componentType === "type1") {
             return (
@@ -470,6 +557,60 @@ export const renderComponents = (
                   id={item && item._id ? item._id : ""}
                   componentStyle={style}
                   freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                  componentType={componentType}
+                />
+              </div>
+            );
+          } else if (componentType === "type3") {
+            return (
+              <div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
+                <FreqAskedType3
+                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
+                  id={item && item._id ? item._id : ""}
+                  componentType={componentType}
+                />
+              </div>
+            );
+          } else if (componentType === "type4") {
+            return (
+              <div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
+                <FreqAskedType4
+                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
+                  id={item && item._id ? item._id : ""}
+                  componentType={componentType}
+                />
+              </div>
+            );
+          } else if (componentType === "type5") {
+            return (
+              <div
+                key={index}
+                className={
+                  isAdmin
+                    ? "border-2 border-dashed border-blue-300 p-2 relative my-4 mx-4 rounded-lg hover:border-blue-500 transition-colors"
+                    : ""
+                }
+              >
+                <FreqAskedType5
+                  freqAskedArray={twoPictureArray as PictureWithStyleType[]}
+                  componentStyle={style}
+                  id={item && item._id ? item._id : ""}
                   componentType={componentType}
                 />
               </div>

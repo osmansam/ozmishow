@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  getPageTwoPictures,
-  resetTwoPictureArray,
-  updateExplanationBar,
+    getPageTwoPictures,
+    resetTwoPictureArray,
+    updateExplanationBar,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import StyleModalContainer from "../../hooks/styledModal/StyleModalContainer";
@@ -18,6 +18,7 @@ const Carousel = ({
   componentStyle,
   id,
   page,
+  componentType,
 }: CarouselType) => {
   const dispatch = useAppDispatch();
   const [isAddCarousel, setIsAddCarousel] = useState(false);
@@ -40,9 +41,9 @@ const Carousel = ({
         <ComponentStyleModalContainer
           styleData={componentStyle}
           twoPictureId={id ?? ""}
-          // buraya componentTYpe gelecek
-          currentType="type1"
-          isComponentType={false}
+          currentType={componentType ?? "type1"}
+          isComponentType={true}
+          componentTypes={["type1", "type2", "type3", "type4", "type5"]}
         />
       </div>
       {/* mainHeader */}

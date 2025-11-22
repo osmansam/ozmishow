@@ -1,9 +1,9 @@
 import {
-    ContainerType,
-    ContentStyleType,
-    ImageContentStyleType,
-    PictureType,
-    PictureWithStyleType,
+  ContainerType,
+  ContentStyleType,
+  ImageContentStyleType,
+  PictureType,
+  PictureWithStyleType,
 } from "../../../shared/types";
 
 /**
@@ -103,12 +103,24 @@ export const buildSliderProps = (item: ContainerType, page: string) => {
   };
 };
 
+export const buildTestimonialSliderProps = (item: ContainerType, page: string) => {
+  return {
+    id: item._id ?? "",
+    mainMainHeader: item.mainHeader,
+    sliderArray: item.twoPictureArray as PictureWithStyleType[],
+    componentType: item.componentType,
+    componentStyle: item.style,
+    page,
+  };
+};
+
 export const buildCarouselProps = (item: ContainerType, page: string) => {
   return {
     id: item._id ?? "",
     mainMainHeader: item.mainHeader,
     componentStyle: item.style,
     carouselArray: item.twoPictureArray as PictureWithStyleType[],
+    componentType: item.componentType,
     page,
   };
 };

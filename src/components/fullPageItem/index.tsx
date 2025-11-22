@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {
-  getPageTwoPictures,
-  resetTwoPictureArray,
-  updateContainer,
+    getPageTwoPictures,
+    resetTwoPictureArray,
+    updateContainer,
 } from "../../features/twoPicture/twoPictureSlice";
 import ComponentStyleModalContainer from "../../hooks/componentStyleModal/ComponentStyleModalContainer";
 import ContentModalContainer from "../../hooks/contentModal/ContentModalContainer";
@@ -44,7 +44,17 @@ const FullPageItem = ({
           twoPictureId={id ?? ""}
           // buraya componentTYpe gelecek
           currentType="type1"
-          isComponentType={false}
+          isComponentType={true}
+          componentTypes={[
+            "type1",
+            "type2",
+            "type3",
+            "type4",
+            "type5",
+            "type6",
+            "type7",
+            "type8",
+          ]}
         />
       </div>
       <h1

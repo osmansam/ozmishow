@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import AddNewPage from "../../components/addNewPage/AddNewPage";
 import { setIsAdmin, setLanguage } from "../../features/context/contextSlice";
 import {
-  createNavbar,
-  createTwoPicture,
-  getPageTwoPictures,
-  resetTwoPictureArray,
+    createNavbar,
+    createTwoPicture,
+    getPageTwoPictures,
+    resetTwoPictureArray,
 } from "../../features/twoPicture/twoPictureSlice";
 import {
-  Components,
-  componentStyle,
-  LanguageOptions,
-  style,
+    Components,
+    componentStyle,
+    LanguageOptions,
+    style,
 } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
 import Deneme from "./adminPageOptions";
@@ -190,6 +190,7 @@ const ComponentContainer = () => {
         break;
       case Components.ExplanationBar.name:
       case Components.Slider.name:
+      case Components.TestimonialSlider.name:
       case Components.Carousel.name:
       case Components.YoutubeVideo.name:
         await dispatch(
@@ -247,6 +248,7 @@ const ComponentContainer = () => {
       case Components.PageBanner.name:
       case Components.MaximContainer.name:
       case Components.ContactContainer.name:
+      case Components.RestaurantMenu.name:
         await dispatch(
           createTwoPicture({
             page,

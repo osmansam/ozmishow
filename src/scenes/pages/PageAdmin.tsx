@@ -1,6 +1,7 @@
 import React, { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import Loading from "../../components/loading";
+import Navbar5 from "../../components/navbar/Navbar5";
 import {
   getPageOptions,
   getPageTwoPictures,
@@ -225,7 +226,7 @@ const PageAdmin = ({ page }: Props) => {
                 currentPage={currentPage ? currentPage.pageNameEN : ""}
               />
             )}
-            <Navbar2 currentPage={currentPage} />
+            <Navbar5 currentPage={currentPage} />
           </div>
         )}
         <div style={currentPage?.pageStyle}>

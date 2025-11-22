@@ -236,6 +236,7 @@ export interface CarouselType {
   carouselArray: Array<PictureWithStyleType>;
   componentStyle: ComponentStyleType;
   page?: string;
+  componentType?: string;
 }
 export interface SliderType {
   id: string;
@@ -382,6 +383,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
   },
+  TestimonialSlider: {
+    name: "TestimonialSlider",
+    pictureContainerNumber: 0,
+    isMainHeader: true,
+    isPictureContainerImage: false,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: false,
+  },
   Carousel: {
     name: "Carousel",
     pictureContainerNumber: 0,
@@ -445,6 +454,14 @@ export const Components: { [key: string]: ComponentType } = {
     isPictureContainerImage: false,
     isPictureContainerButton: false,
     isPictureContainerParagraph: false,
+  },
+  RestaurantMenu: {
+    name: "RestaurantMenu",
+    pictureContainerNumber: 1,
+    isMainHeader: true,
+    isPictureContainerImage: true,
+    isPictureContainerButton: false,
+    isPictureContainerParagraph: true,
   },
 };
 

@@ -33,10 +33,34 @@ const TwoPictureContainer = lazy(
 const TwoPictureContainer2 = lazy(
   () => import("../../../components/twoPicture/type2/TwoPictureContainer2")
 );
+const TwoPictureContainer3 = lazy(
+  () => import("../../../components/twoPicture/type3/TwoPictureContainer3")
+);
+const TwoPictureContainer4 = lazy(
+  () => import("../../../components/twoPicture/type4/TwoPictureContainer4")
+);
 const MaximContainer = lazy(() => import("../../../components/maxim"));
 const FreqAsked = lazy(() => import("../../../components/freqAsked/FreqAsked"));
 const BorderBoxContainer = lazy(
   () => import("../../../components/borderBox/BorderBoxContainer")
+);
+const BorderBoxContainerType2 = lazy(
+  () => import("../../../components/borderBox/type2/BorderBoxContainerType2")
+);
+const BorderBoxContainerType3 = lazy(
+  () => import("../../../components/borderBox/type3/BorderBoxContainerType3")
+);
+const BorderBoxContainerType4 = lazy(
+  () => import("../../../components/borderBox/type4/BorderBoxContainerType4")
+);
+const BorderBoxContainerType5 = lazy(
+  () => import("../../../components/borderBox/type5/BorderBoxContainerType5")
+);
+const BorderBoxContainerType6 = lazy(
+  () => import("../../../components/borderBox/type6/BorderBoxContainerType6")
+);
+const BorderBoxContainerType7 = lazy(
+  () => import("../../../components/borderBox/type7/BorderBoxContainerType7")
 );
 const NewsContainer = lazy(
   () => import("../../../components/news/newsType1/NewsContainer")
@@ -46,6 +70,10 @@ const NewsContainer2 = lazy(
 );
 const ExplanationBar = lazy(() => import("../../../components/ExplanationBar"));
 const PageBanner = lazy(() => import("../../../components/PageBanner/PageBanner"));
+const PageBannerType2 = lazy(() => import("../../../components/PageBanner/PageBannerType2"));
+const PageBannerType3 = lazy(() => import("../../../components/PageBanner/PageBannerType3"));
+const PageBannerType4 = lazy(() => import("../../../components/PageBanner/PageBannerType4"));
+// Trigger recompile
 const WorkTeamBar = lazy(
   () => import("../../../components/WorkTeamBar/WorkTeamBar")
 );
@@ -60,9 +88,27 @@ const ContactContainer = lazy(
 );
 const Map = lazy(() => import("../../../components/map"));
 const FullPageItem = lazy(() => import("../../../components/fullPageItem"));
+const FullPageItemType2 = lazy(() => import("../../../components/fullPageItem/FullPageItemType2"));
+const FullPageItemType3 = lazy(() => import("../../../components/fullPageItem/FullPageItemType3"));
+const FullPageItemType4 = lazy(() => import("../../../components/fullPageItem/FullPageItemType4"));
+const FullPageItemType5 = lazy(() => import("../../../components/fullPageItem/FullPageItemType5"));
+const FullPageItemType6 = lazy(() => import("../../../components/fullPageItem/FullPageItemType6"));
+const FullPageItemType7 = lazy(() => import("../../../components/fullPageItem/FullPageItemType7"));
+const FullPageItemType8 = lazy(() => import("../../../components/fullPageItem/FullPageItemType8"));
 const Slider = lazy(() => import("../../../components/slider/Slider"));
 const SliderType2 = lazy(() => import("../../../components/slider/SliderType2"));
+const TestimonialSliderType1 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType1"));
+const TestimonialSliderType2 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType2"));
+const TestimonialSliderType3 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType3"));
+const TestimonialSliderType4 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType4"));
+const TestimonialSliderType5 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType5"));
+const TestimonialSliderType6 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType6"));
+const TestimonialSliderType7 = lazy(() => import("../../../components/testimonialSlider/TestimonialSliderType7"));
 const Carousel = lazy(() => import("../../../components/carousel"));
+const CarouselType2 = lazy(() => import("../../../components/carousel/CarouselType2"));
+const CarouselType3 = lazy(() => import("../../../components/carousel/CarouselType3"));
+const CarouselType4 = lazy(() => import("../../../components/carousel/CarouselType4"));
+const CarouselType5 = lazy(() => import("../../../components/carousel/CarouselType5"));
 const YoutubeVideo = lazy(() => import("../../../components/youtube"));
 const ProgressBarContainer = lazy(
   () => import("../../../components/ProgressBar/ProgressBarContainer")
@@ -84,6 +130,18 @@ const SpeedReader = lazy(
 );
 const FreqAskedType2 = lazy(
   () => import("../../../components/freqAsked/FreqAskedType2")
+);
+const FreqAskedType3 = lazy(
+  () => import("../../../components/freqAsked/FreqAskedType3")
+);
+const FreqAskedType4 = lazy(
+  () => import("../../../components/freqAsked/FreqAskedType4")
+);
+const FreqAskedType5 = lazy(
+  () => import("../../../components/freqAsked/FreqAskedType5")
+);
+const RestaurantMenuContainer = lazy(
+  () => import("../../../components/restaurantMenu/RestaurantMenuContainer")
 );
 
 /**
@@ -150,6 +208,16 @@ const componentRegistry: Record<string, ComponentConfig> = {
     propBuilder: propBuilders.buildTwoPictureProps,
     showWrapper: true,
   },
+  "TwoPictureContainer:type3": {
+    component: TwoPictureContainer3,
+    propBuilder: propBuilders.buildTwoPictureProps,
+    showWrapper: true,
+  },
+  "TwoPictureContainer:type4": {
+    component: TwoPictureContainer4,
+    propBuilder: propBuilders.buildTwoPictureProps,
+    showWrapper: true,
+  },
 
   // IconExplainContainer variants
   "IconExplainContainer:type1": {
@@ -193,6 +261,43 @@ const componentRegistry: Record<string, ComponentConfig> = {
     showWrapper: true,
   },
 
+  // TestimonialSlider variants
+  "TestimonialSlider:type1": {
+    component: TestimonialSliderType1,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+  "TestimonialSlider:type2": {
+    component: TestimonialSliderType2,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+  "TestimonialSlider:type3": {
+    component: TestimonialSliderType3,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+  "TestimonialSlider:type4": {
+    component: TestimonialSliderType4,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+  "TestimonialSlider:type5": {
+    component: TestimonialSliderType5,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+  "TestimonialSlider:type6": {
+    component: TestimonialSliderType6,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+  "TestimonialSlider:type7": {
+    component: TestimonialSliderType7,
+    propBuilder: propBuilders.buildTestimonialSliderProps,
+    showWrapper: true,
+  },
+
   // FrequentlyAskedQuestions variants
   "FrequentlyAskedQuestions:type1": {
     component: FreqAsked,
@@ -201,6 +306,21 @@ const componentRegistry: Record<string, ComponentConfig> = {
   },
   "FrequentlyAskedQuestions:type2": {
     component: FreqAskedType2,
+    propBuilder: propBuilders.buildFreqAskedProps,
+    showWrapper: true,
+  },
+  "FrequentlyAskedQuestions:type3": {
+    component: FreqAskedType3,
+    propBuilder: propBuilders.buildFreqAskedProps,
+    showWrapper: true,
+  },
+  "FrequentlyAskedQuestions:type4": {
+    component: FreqAskedType4,
+    propBuilder: propBuilders.buildFreqAskedProps,
+    showWrapper: true,
+  },
+  "FrequentlyAskedQuestions:type5": {
+    component: FreqAskedType5,
     propBuilder: propBuilders.buildFreqAskedProps,
     showWrapper: true,
   },
@@ -230,6 +350,36 @@ const componentRegistry: Record<string, ComponentConfig> = {
   },
   "BorderBoxContainer:type1": {
     component: BorderBoxContainer,
+    propBuilder: propBuilders.buildBorderBoxProps,
+    showWrapper: false,
+  },
+  "BorderBoxContainer:type2": {
+    component: BorderBoxContainerType2,
+    propBuilder: propBuilders.buildBorderBoxProps,
+    showWrapper: false,
+  },
+  "BorderBoxContainer:type3": {
+    component: BorderBoxContainerType3,
+    propBuilder: propBuilders.buildBorderBoxProps,
+    showWrapper: false,
+  },
+  "BorderBoxContainer:type4": {
+    component: BorderBoxContainerType4,
+    propBuilder: propBuilders.buildBorderBoxProps,
+    showWrapper: false,
+  },
+  "BorderBoxContainer:type5": {
+    component: BorderBoxContainerType5,
+    propBuilder: propBuilders.buildBorderBoxProps,
+    showWrapper: false,
+  },
+  "BorderBoxContainer:type6": {
+    component: BorderBoxContainerType6,
+    propBuilder: propBuilders.buildBorderBoxProps,
+    showWrapper: false,
+  },
+  "BorderBoxContainer:type7": {
+    component: BorderBoxContainerType7,
     propBuilder: propBuilders.buildBorderBoxProps,
     showWrapper: false,
   },
@@ -287,6 +437,26 @@ const componentRegistry: Record<string, ComponentConfig> = {
     propBuilder: propBuilders.buildCarouselProps,
     showWrapper: false,
   },
+  "Carousel:type2": {
+    component: CarouselType2,
+    propBuilder: propBuilders.buildCarouselProps,
+    showWrapper: false,
+  },
+  "Carousel:type3": {
+    component: CarouselType3,
+    propBuilder: propBuilders.buildCarouselProps,
+    showWrapper: false,
+  },
+  "Carousel:type4": {
+    component: CarouselType4,
+    propBuilder: propBuilders.buildCarouselProps,
+    showWrapper: false,
+  },
+  "Carousel:type5": {
+    component: CarouselType5,
+    propBuilder: propBuilders.buildCarouselProps,
+    showWrapper: false,
+  },
   // ResumeIcon - support both with and without type
   ResumeIcon: {
     component: ResumeIcon,
@@ -317,6 +487,21 @@ const componentRegistry: Record<string, ComponentConfig> = {
   },
   "PageBanner:type1": {
     component: PageBanner,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "PageBanner:type2": {
+    component: PageBannerType2,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "PageBanner:type3": {
+    component: PageBannerType3,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "PageBanner:type4": {
+    component: PageBannerType4,
     propBuilder: propBuilders.buildPictureWithStyleProps,
     showWrapper: false,
   },
@@ -372,6 +557,76 @@ const componentRegistry: Record<string, ComponentConfig> = {
     component: FullPageItem,
     propBuilder: propBuilders.buildFullPageItemProps,
     showWrapper: false,
+  },
+  "FullPageItem:type2": {
+    component: FullPageItemType2,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  "FullPageItem:type3": {
+    component: FullPageItemType3,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  "FullPageItem:type4": {
+    component: FullPageItemType4,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  "FullPageItem:type5": {
+    component: FullPageItemType5,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  "FullPageItem:type6": {
+    component: FullPageItemType6,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  "FullPageItem:type7": {
+    component: FullPageItemType7,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  "FullPageItem:type8": {
+    component: FullPageItemType8,
+    propBuilder: propBuilders.buildFullPageItemProps,
+    showWrapper: false,
+  },
+  RestaurantMenu: {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
+  },
+  "RestaurantMenu:type1": {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
+  },
+  "RestaurantMenu:type2": {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
+  },
+  "RestaurantMenu:type3": {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
+  },
+  "RestaurantMenu:type4": {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
+  },
+  "RestaurantMenu:type5": {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
+  },
+  "RestaurantMenu:type6": {
+    component: RestaurantMenuContainer,
+    propBuilder: propBuilders.buildNewsProps,
+    showWrapper: true,
   },
 };
 

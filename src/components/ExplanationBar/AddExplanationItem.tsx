@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { setTwoPictureArray } from "../../features/twoPicture/twoPictureSlice";
 import { ButtonType, imageStyle, style } from "../../shared/types";
 import { RootState, useAppDispatch } from "../../store";
+
 type Props = {
   isPictureContainerImage: boolean;
   isPictureContainerButton: boolean;
@@ -30,9 +31,9 @@ const AddExplanationItem = ({
 
   const handleNumberSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setParagraphNumber(parseInt(e.currentTarget.paragraphNumber.value));
+    setParagraphNumber(parseInt(e.currentTarget.paragraphNumber?.value || "1"));
     if (isPictureContainerButton) {
-      setButtonNumber(parseInt(e.currentTarget.buttonNumber.value));
+      setButtonNumber(parseInt(e.currentTarget.buttonNumber?.value || "1"));
     }
     setReady(true);
   };
@@ -43,9 +44,11 @@ const AddExplanationItem = ({
     const newParagraphs = [];
     if (isPictureContainerParagraph) {
       for (let i = 0; i < paragraphNumber; i++) {
-        const newParagraph = e.currentTarget[`paragraph${i}`].value || "";
-        newParagraphs.push(newParagraph);
-        e.currentTarget[`paragraph${i}`].value = "";
+        const input = e.currentTarget[`paragraph${i}`] as HTMLTextAreaElement;
+        if (input) {
+          newParagraphs.push(input.value || "");
+          input.value = "";
+        }
       }
     }
 
@@ -53,17 +56,15 @@ const AddExplanationItem = ({
 
     if (isPictureContainerButton) {
       for (let i = 0; i < buttonNumber; i++) {
-        const buttonNameInput = e.currentTarget[
-          `buttonName${i}`
-        ] as HTMLInputElement;
-        const buttonLinkInput = e.currentTarget[
-          `buttonLink${i}`
-        ] as HTMLInputElement;
-        updatedButtons.push({
-          content: buttonNameInput.value,
-          style: style,
-          link: buttonLinkInput.value,
-        });
+        const buttonNameInput = e.currentTarget[`buttonName${i}`] as HTMLInputElement;
+        const buttonLinkInput = e.currentTarget[`buttonLink${i}`] as HTMLInputElement;
+        if (buttonNameInput && buttonLinkInput) {
+          updatedButtons.push({
+            content: buttonNameInput.value,
+            style: style,
+            link: buttonLinkInput.value,
+          });
+        }
       }
       setButtons(updatedButtons);
     }
@@ -88,7 +89,6 @@ const AddExplanationItem = ({
         style: style,
       })),
     };
-    console.log(newExplanationBar);
 
     dispatch(setTwoPictureArray(newExplanationBar));
     setImg("");
@@ -110,23 +110,23 @@ const AddExplanationItem = ({
       setButtonNumber(parseInt(e.currentTarget.value));
     }
   };
+
   if (!ready && (isPictureContainerButton || isPictureContainerParagraph)) {
     return (
-      <div className="w-full ">
+      <div className="w-full max-w-2xl mx-auto">
         <form
-          className="bg-white shadow-md rounded-lg w-5/6 mx-auto p-6 mt-6 border border-gray-200 flex flex-col justify-between gap-4 hover:shadow-lg transition duration-300 ease-in-out"
+          className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-6"
           onSubmit={handleNumberSubmit}
         >
+          <h3 className="text-lg font-semibold text-gray-900">Configuration</h3>
+          
           {isPictureContainerParagraph && (
-            <div className="flex gap-5 items-center w-full bg-white  rounded-lg p-4  transition duration-300 ease-in-out">
-              <label
-                className="w-40 text-gray-600 font-medium"
-                htmlFor="paragraphNumber"
-              >
-                Paragraph Number:
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="paragraphNumber">
+                Number of Paragraphs
               </label>
               <input
-                className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                 type="number"
                 name="paragraphNumber"
                 value={paragraphNumber}
@@ -135,162 +135,182 @@ const AddExplanationItem = ({
               />
             </div>
           )}
+          
           {isPictureContainerButton && (
-            <div className="flex gap-5 w-full ">
-              <label
-                className="w-40 text-gray-600 font-medium"
-                htmlFor="buttonNumber"
-              >
-                Button Number:
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="buttonNumber">
+                Number of Buttons
               </label>
               <input
-                className="border-2 w-16"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                 type="number"
                 name="buttonNumber"
                 value={buttonNumber}
                 onChange={handleChangeNumber}
+                min={1}
               />
             </div>
           )}
+          
           <button
             type="submit"
-            className="mx-auto mt-4 w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
+            className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm"
           >
-            Submit
+            Continue
           </button>
         </form>
       </div>
     );
-  } else if (allDone)
+  } else if (allDone) {
     return (
-      <div className="w-5/6 flex justify-between mx-auto px-4 pt-4 ">Done!</div>
+      <div className="w-full p-8 text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">Item Added!</h3>
+        <p className="text-gray-600">The new explanation item has been staged successfully.</p>
+      </div>
     );
+  }
 
   const paragraphInputs = [];
   const buttonInputs = [];
-  //setting the number of paragraphs
+
   for (let i = 0; i < paragraphNumber; i++) {
     paragraphInputs.push(
-      <div key={i} className="flex gap-5 h-20 w-full ">
-        <label
-          className="text-lg w-32 font-semibold flex justify-between"
-          htmlFor={`paragraph${i}`}
-        >
-          Paragraph {i + 1} <span>:</span>
+      <div key={i} className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700" htmlFor={`paragraph${i}`}>
+          Paragraph {i + 1}
         </label>
         <textarea
-          className="border-2 rounded-md w-4/5"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all min-h-[100px]"
           name={`paragraph${i}`}
+          placeholder="Enter paragraph text..."
         />
       </div>
     );
   }
-  //setting the links and buttonNumber
+
   for (let i = 0; i < buttonNumber; i++) {
     buttonInputs.push(
-      <div key={i} className="flex gap-5  w-full ">
-        <label
-          className="text-lg w-32 font-semibold flex justify-between"
-          htmlFor={`buttonName${i}`}
-        >
-          Button {i + 1} Name<span>:</span>
-        </label>
-        <input
-          className="border-2 w-2/5 rounded-md"
-          type="text"
-          name={`buttonName${i}`}
-        />
-        <select
-          className="border-2 w-2/5 rounded-md"
-          name={`buttonLink${i}`}
-          value={buttons[i]?.link}
-          onChange={(e) => {
-            const value = e.target.value.toLowerCase();
-            setButtons((prevButtons) => {
-              const updatedButtons = [...prevButtons];
-              updatedButtons[i] = {
-                ...updatedButtons[i],
-                link: value,
-              };
-              return updatedButtons;
-            });
-          }}
-        >
-          <option value="">Select a page</option>
-          {pageOptions.map((option, index) => (
-            <option key={index} value={option.pageNameEN.toLowerCase()}>
-              {option.pageNameEN}
-            </option>
-          ))}
-        </select>
+      <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-lg">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700" htmlFor={`buttonName${i}`}>
+            Button {i + 1} Label
+          </label>
+          <input
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            type="text"
+            name={`buttonName${i}`}
+            placeholder="e.g. Learn More"
+          />
+        </div>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700" htmlFor={`buttonLink${i}`}>
+            Link Destination
+          </label>
+          <select
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white"
+            name={`buttonLink${i}`}
+            value={buttons[i]?.link || ""}
+            onChange={(e) => {
+              const value = e.target.value.toLowerCase();
+              setButtons((prevButtons) => {
+                const updatedButtons = [...prevButtons];
+                updatedButtons[i] = {
+                  content: updatedButtons[i]?.content || "",
+                  style: style,
+                  link: value,
+                };
+                return updatedButtons;
+              });
+            }}
+          >
+            <option value="">Select a page</option>
+            {pageOptions.map((option, index) => (
+              <option key={index} value={option.pageNameEN.toLowerCase()}>
+                {option.pageNameEN}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full mt-4">
+    <div className="w-full max-w-4xl mx-auto">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded-lg w-5/6 mx-auto p-6 mt-6 border border-gray-200 flex flex-col justify-between gap-4 hover:shadow-lg transition duration-300 ease-in-out"
+        className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-6"
       >
-        {/* image */}
-        {isPictureContainerImage && (
-          <div className="flex items-center gap-5 w-full my-2">
-            <label
-              className="text-lg w-32 font-semibold flex justify-between"
-              htmlFor="img"
-            >
-              Image<span>:</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {isPictureContainerImage && (
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="img">
+                Image URL
+              </label>
+              <input
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                type="text"
+                name="img"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
+                placeholder="https://..."
+              />
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700" htmlFor="mainHeader">
+              Tab Title (Main Header)
             </label>
             <input
-              className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               type="text"
-              name="img"
-              value={img}
-              onChange={(e) => setImg(e.target.value)}
+              name="mainHeader"
+              value={mainHeader}
+              onChange={(e) => setMainHeader(e.target.value)}
+              placeholder="Title shown in tabs list"
             />
           </div>
-        )}
-
-        {/* MainHeader */}
-        <div className="flex gap-5 w-full ">
-          <label
-            className="text-lg w-32 font-semibold flex justify-between"
-            htmlFor="mainHeader"
-          >
-            Main Header <span>:</span>
-          </label>
-          <input
-            className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
-            type="text"
-            name="mainHeader"
-            value={mainHeader}
-            onChange={(e) => setMainHeader(e.target.value)}
-          />
         </div>
-        {/* header */}
-        <div className="flex gap-5 w-full ">
-          <label
-            className="text-lg w-32 font-semibold flex justify-between "
-            htmlFor="header"
-          >
-            Header <span>:</span>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700" htmlFor="header">
+            Content Header
           </label>
           <input
-            className="border p-2 rounded-lg focus:outline-none focus:border-indigo-500 transition duration-300 ease-in-out w-4/5"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
             type="text"
             name="header"
             value={header}
             onChange={(e) => setHeader(e.target.value)}
+            placeholder="Title shown above content"
           />
         </div>
-        {isPictureContainerParagraph ? paragraphInputs : null}
-        {isPictureContainerButton ? buttonInputs : null}
+
+        {isPictureContainerParagraph && (
+          <div className="space-y-4">
+            <h4 className="text-sm font-medium text-gray-900 border-b pb-2">Paragraphs</h4>
+            {paragraphInputs}
+          </div>
+        )}
+
+        {isPictureContainerButton && (
+          <div className="space-y-4">
+            <h4 className="text-sm font-medium text-gray-900 border-b pb-2">Buttons</h4>
+            {buttonInputs}
+          </div>
+        )}
+
         <button
           type="submit"
-          className="mx-auto w-fit capitalize border-2 border-blue-500 text-blue-500 py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-100"
+          className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-sm mt-6"
         >
-          Submit
+          Save Item
         </button>
       </form>
     </div>
