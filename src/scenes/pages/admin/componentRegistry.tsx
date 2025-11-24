@@ -40,6 +40,12 @@ const TwoPictureContainer4 = lazy(
   () => import("../../../components/twoPicture/type4/TwoPictureContainer4")
 );
 const MaximContainer = lazy(() => import("../../../components/maxim"));
+const MaximType2 = lazy(() => import("../../../components/maxim/MaximType2"));
+const MaximType3 = lazy(() => import("../../../components/maxim/MaximType3"));
+const MaximType4 = lazy(() => import("../../../components/maxim/MaximType4"));
+const MaximType5 = lazy(() => import("../../../components/maxim/MaximType5"));
+const MaximType6 = lazy(() => import("../../../components/maxim/MaximType6"));
+const MaximType7 = lazy(() => import("../../../components/maxim/MaximType7"));
 const FreqAsked = lazy(() => import("../../../components/freqAsked/FreqAsked"));
 const BorderBoxContainer = lazy(
   () => import("../../../components/borderBox/BorderBoxContainer")
@@ -339,6 +345,36 @@ const componentRegistry: Record<string, ComponentConfig> = {
   },
   "MaximContainer:type1": {
     component: MaximContainer,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "MaximContainer:type2": {
+    component: MaximType2,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "MaximContainer:type3": {
+    component: MaximType3,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "MaximContainer:type4": {
+    component: MaximType4,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "MaximContainer:type5": {
+    component: MaximType5,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "MaximContainer:type6": {
+    component: MaximType6,
+    propBuilder: propBuilders.buildPictureWithStyleProps,
+    showWrapper: false,
+  },
+  "MaximContainer:type7": {
+    component: MaximType7,
     propBuilder: propBuilders.buildPictureWithStyleProps,
     showWrapper: false,
   },
